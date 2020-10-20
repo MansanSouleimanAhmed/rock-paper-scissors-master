@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
-import Test from "./components/test";
+import Main from "./components/main";
 
 function App() {
   return (
     <Fragment>
-      <Test />
+      <Main />
     </Fragment>
   );
 }
