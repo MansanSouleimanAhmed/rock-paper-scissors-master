@@ -1,7 +1,9 @@
 body {
   padding: 0px;
   margin: 0px;
+  font-size: 10px;
   .main {
+    position: relative;
     height: 100vh;
     width: 100vw;
     background-image: radial-gradient(
@@ -9,6 +11,104 @@ body {
       hsl(214, 47%, 23%),
       hsl(237, 49%, 15%)
     );
+    nav {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      ul {
+        padding: 0px;
+        li {
+          padding-top: 30px;
+          list-style-type: none;
+          a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2.9em;
+          }
+        }
+      }
+    }
+    // Regular component
+    .regular {
+      padding-top: 40px;
+      padding-left: 5%;
+      padding-right: 5%;
+      .logo-score {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        padding-top: 35px;
+        padding-bottom: 35px;
+
+        border: solid 3px rgba(253, 253, 253, 0.3);
+        border-radius: 10px;
+        .logo {
+        }
+
+        .score {
+          height: 100px;
+          width: 100px;
+          border-radius: 20%;
+          background-color: #fff;
+        }
+      }
+      .bg-triangle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        .paper-icon {
+          bottom: 200px;
+          right: 190px;
+          background-image: radial-gradient(
+            #fff 40px,
+            hsl(230, 89%, 62%) 47px,
+            hsl(230, 89%, 65%) 58px
+          );
+        }
+        .rock-icon {
+          top: 157px;
+          left: 90px;
+          background-image: radial-gradient(
+            #fff 40px,
+            hsl(349, 71%, 52%) 47px,
+            hsl(349, 70%, 56%) 58px
+          );
+        }
+        .scissors-icon {
+          bottom: 200px;
+          left: 191px;
+          background-image: radial-gradient(
+            #fff 40px,
+            hsl(39, 89%, 49%) 47px,
+            hsl(40, 84%, 53%) 58px
+          );
+        }
+      }
+      .icon {
+        position: absolute;
+        height: 120px;
+        width: 120px;
+        border-radius: 50%;
+        box-shadow: inset 2px -5px 3px 0px rgba(0, 0, 0, 0.5);
+        svg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
+    .bonus {
+      .logo-bonus {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+      }
+    }
   }
 }
 
