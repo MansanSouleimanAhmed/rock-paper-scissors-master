@@ -2,6 +2,7 @@ body {
   padding: 0px;
   margin: 0px;
   font-size: 10px;
+  ///Main-page
   .main {
     position: relative;
     height: 100vh;
@@ -11,6 +12,7 @@ body {
       hsl(214, 47%, 23%),
       hsl(237, 49%, 15%)
     );
+
     nav {
       position: absolute;
       top: 50%;
@@ -29,8 +31,25 @@ body {
         }
       }
     }
+
+    ///End Main-page
+
+    /// Rock, paper, scissors =>  icons common style
+    .icon {
+      position: absolute;
+      height: 120px;
+      width: 120px;
+      border-radius: 50%;
+      box-shadow: inset 2px -5px 3px 0px rgba(0, 0, 0, 0.5);
+      svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
     // Regular component
-    .regular {
+    .common-style {
       padding-top: 40px;
       padding-left: 5%;
       padding-right: 5%;
@@ -53,6 +72,7 @@ body {
           background-color: #fff;
         }
       }
+      //Regular
       .bg-triangle {
         position: absolute;
         top: 50%;
@@ -87,17 +107,37 @@ body {
           );
         }
       }
-      .icon {
-        position: absolute;
-        height: 120px;
-        width: 120px;
-        border-radius: 50%;
-        box-shadow: inset 2px -5px 3px 0px rgba(0, 0, 0, 0.5);
-        svg {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
+      .bg-pentagone {
+        @extend .bg-triangle;
+        .paper-icon {
+          bottom: 130px;
+          left: 210px;
+        }
+        .rock-icon {
+          top: 240px;
+          left: 170px;
+        }
+        .scissors-icon {
+          bottom: 240px;
+          left: 90px;
+        }
+        .lizard-icon {
+          top: 240px;
+          left: 10px;
+          background-image: radial-gradient(
+            #fff 40px,
+            hsl(261, 73%, 60%) 47px,
+            hsl(261, 72%, 63%) 58px
+          );
+        }
+        .spock-icon {
+          bottom: 130px;
+          left: 0px;
+          background-image: radial-gradient(
+            #fff 40px,
+            hsl(189, 59%, 53%) 47px,
+            hsl(189, 58%, 57%) 58px
+          );
         }
       }
     }
@@ -112,19 +152,19 @@ body {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media (min-width: 400px) {
   body {
+    .main {
+      .common-style {
+        .bg-pentagone {
+          .spock-icon {
+            left: -30px;
+          }
+          .paper-icon {
+            left: 230px;
+          }
+        }
+      }
+    }
   }
-}
-@media screen and (max-width: 480px) {
-  body {
-  }
-}
-@media screen and (max-width: 640px) {
-}
-body {
-}
-@media screen and (max-width: 1366px) {
-}
-body {
 }

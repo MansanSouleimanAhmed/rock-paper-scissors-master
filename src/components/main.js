@@ -4,6 +4,9 @@ import Regular from "./regular";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function Main() {
+  //Send the pathname to the main page each time you reload the page.
+  window.history.replaceState(null, "Main", "/");
+  //////
   const [toggle, setToggle] = useState(true);
   const changeToggle = () => {
     setToggle((state) => !state);
@@ -57,6 +60,7 @@ export default function Main() {
   console.log("Computer Choice: " + computerChoice);
   console.log(ref.judge(userChoice, computerChoice)); */
   toggleFunction();
+
   return (
     <Fragment>
       <Router>

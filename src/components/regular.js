@@ -4,10 +4,14 @@ import BgTriangle from "./svg/bg-triangle";
 import IconRock from "./svg/icon-rock";
 import IconScissors from "./svg/icon-scissors";
 import IconPaper from "./svg/icon-paper";
+import RockIcon from "./buttons/rock-icon";
+import ScissorsIcon from "./buttons/scissors-icon";
+import PaperIcon from "./buttons/paper-icon";
+
 export default function Regular() {
   return (
     <Fragment>
-      <section className={"regular"}>
+      <section className={"common-style "}>
         <div className={"logo-score"}>
           <div className={"logo"}>
             <a href={"/"}>
@@ -18,15 +22,9 @@ export default function Regular() {
         </div>
         <div className={"bg-triangle "}>
           <BgTriangle />
-          <div className={"rock-icon icon"}>
-            <IconRock />
-          </div>
-          <div className={"scissors-icon icon"}>
-            <IconScissors />
-          </div>
-          <div className={"paper-icon icon"}>
-            <IconPaper />
-          </div>
+          <RockIcon />
+          <ScissorsIcon />
+          <PaperIcon />
         </div>
       </section>
     </Fragment>
