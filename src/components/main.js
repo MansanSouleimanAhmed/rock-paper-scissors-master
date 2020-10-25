@@ -1,14 +1,16 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Bonus from "./bonus";
 import Regular from "./regular";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import paperIcon from "./buttons/paper-icon";
 
 export default function Main() {
+  const [toggle, setToggle] = useState(true);
+  const [userChoice, setUserChoice] = useState("");
   //Send the pathname to the main page each time you reload the page.
   window.history.replaceState(null, "Main", "/");
   //////
-  const [toggle, setToggle] = useState(true);
-  const changeToggle = () => {
+  const changeToggle = (e) => {
     setToggle((state) => !state);
   };
   let display = {};
@@ -19,6 +21,9 @@ export default function Main() {
       return (display = { display: "none" });
     }
   };
+  toggleFunction();
+  ///Game logic
+
   function referee() {
     var training = {};
     function learn(winner, loser) {
@@ -59,7 +64,6 @@ export default function Main() {
   console.log("User Choice: " + userChoice);
   console.log("Computer Choice: " + computerChoice);
   console.log(ref.judge(userChoice, computerChoice)); */
-  toggleFunction();
 
   return (
     <Fragment>
@@ -92,7 +96,13 @@ export default function Main() {
           <Switch>
             <Route
               path={"/regular"}
-              render={() => <Regular toggle={toggle} onClick={changeToggle} />}
+              render={() => (
+                <Regular
+                  toggle={toggle}
+                  userchoice={userChoice}
+                  onClick={changeToggle}
+                />
+              )}
             />
             <Route
               path={"/bonus"}

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import IconPaper from "../svg/icon-paper";
 
-export default function PaperIcon() {
+function PaperIcon(props, ref) {
   return (
-    <div className={"paper-icon icon"}>
+    <div
+      className={"paper-icon icon"}
+      onClick={props.onClick}
+      id={"paper"}
+      ref={ref}
+    >
       <IconPaper />
     </div>
   );
 }
+export default React.forwardRef(PaperIcon);

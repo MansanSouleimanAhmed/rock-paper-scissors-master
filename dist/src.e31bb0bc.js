@@ -32438,19 +32438,30 @@ function IconPaper() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = PaperIcon;
+exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _iconPaper = _interopRequireDefault(require("../svg/icon-paper"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function PaperIcon() {
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function PaperIcon(props, ref) {
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "paper-icon icon"
+    className: "paper-icon icon",
+    onClick: props.onClick,
+    id: "paper",
+    ref: ref
   }, /*#__PURE__*/_react.default.createElement(_iconPaper.default, null));
 }
+
+var _default = _react.default.forwardRef(PaperIcon);
+
+exports.default = _default;
 },{"react":"../node_modules/react/index.js","../svg/icon-paper":"components/svg/icon-paper.js"}],"components/svg/icon-scissors.js":[function(require,module,exports) {
 "use strict";
 
@@ -32481,7 +32492,7 @@ function IconScissors() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = ScissorsIcon;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -32493,11 +32504,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function ScissorsIcon() {
+function ScissorsIcon(props, ref) {
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "scissors-icon icon"
+    className: "scissors-icon icon",
+    onClick: props.onClick,
+    id: "scissors",
+    ref: ref
   }, /*#__PURE__*/_react.default.createElement(_iconScissors.default, null)));
 }
+
+var _default = _react.default.forwardRef(ScissorsIcon);
+
+exports.default = _default;
 },{"react":"../node_modules/react/index.js","../svg/icon-scissors":"components/svg/icon-scissors.js"}],"components/svg/icon-rock.js":[function(require,module,exports) {
 "use strict";
 
@@ -32528,7 +32546,7 @@ function IconRock() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = RockIcon;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -32540,11 +32558,19 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function RockIcon() {
+function RockIcon(props, ref) {
+  /// console.log(props.toggleRegular);
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "rock-icon icon"
+    className: "rock-icon icon",
+    onClick: props.onClick,
+    id: "rock",
+    ref: ref
   }, /*#__PURE__*/_react.default.createElement(_iconRock.default, null)));
 }
+
+var _default = _react.default.forwardRef(RockIcon);
+
+exports.default = _default;
 },{"react":"../node_modules/react/index.js","../svg/icon-rock":"components/svg/icon-rock.js"}],"components/svg/icon-lizard.js":[function(require,module,exports) {
 "use strict";
 
@@ -32589,7 +32615,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function LizardIcon() {
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "lizard-icon icon"
+    className: "lizard-icon icon",
+    id: "lizard"
   }, /*#__PURE__*/_react.default.createElement(_iconLizard.default, null)));
 }
 },{"react":"../node_modules/react/index.js","../svg/icon-lizard":"components/svg/icon-lizard.js"}],"components/svg/icon-spock.js":[function(require,module,exports) {
@@ -32636,7 +32663,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function SpockIcon() {
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "spock-icon icon"
+    className: "spock-icon icon",
+    id: "spock"
   }, /*#__PURE__*/_react.default.createElement(_iconSpock.default, null)));
 }
 },{"react":"../node_modules/react/index.js","../svg/icon-spock":"components/svg/icon-spock.js"}],"components/bonus.js":[function(require,module,exports) {
@@ -32802,9 +32830,91 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function Regular() {
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function Regular(props) {
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      toggleRegular = _useState2[0],
+      setToggleRegular = _useState2[1];
+
+  var paper = (0, _react.useRef)(null);
+  var rock = (0, _react.useRef)(null);
+  var scissors = (0, _react.useRef)(null);
+
+  var changeToggleRegular = function changeToggleRegular(e) {
+    setToggleRegular(function (state) {
+      return !state;
+    });
+
+    switch (e.target.getAttribute("id")) {
+      case "paper":
+        scissors.current.style.zIndex = "0";
+        rock.current.style.zIndex = "0";
+        paper.current.style.zIndex = "3";
+        return;
+        break;
+
+      case "rock":
+        paper.current.style.zIndex = "0";
+        scissors.current.style.zIndex = "0";
+        rock.current.style.zIndex = "3";
+        break;
+
+      case "scissors":
+        paper.current.style.zIndex = "0";
+        rock.current.style.zIndex = "0";
+        scissors.current.style.zIndex = "3";
+        break;
+
+      default:
+        console.log("test");
+    }
+  };
+
+  console.log(props.userchoice);
+  var displayTriangle = {};
+
+  var bgTriangleFunction = function bgTriangleFunction() {
+    if (!toggleRegular) {
+      return displayTriangle = {
+        display: "block"
+      };
+    } else {
+      return displayTriangle = {
+        display: "none"
+      };
+    }
+  };
+
+  bgTriangleFunction();
+  var displayResult = {};
+
+  var resultFunction = function resultFunction() {
+    if (!toggleRegular) {
+      return displayResult = {
+        display: "none"
+      };
+    } else {
+      return displayResult = {
+        display: "block"
+      };
+    }
+  };
+
+  resultFunction();
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
-    className: "common-style "
+    className: "common-style"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "logo-score"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -32814,8 +32924,33 @@ function Regular() {
   }, /*#__PURE__*/_react.default.createElement(_logo.default, null))), /*#__PURE__*/_react.default.createElement("div", {
     className: "score"
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "bg-triangle "
-  }, /*#__PURE__*/_react.default.createElement(_bgTriangle.default, null), /*#__PURE__*/_react.default.createElement(_rockIcon.default, null), /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, null), /*#__PURE__*/_react.default.createElement(_paperIcon.default, null))));
+    className: "bg-triangle",
+    style: displayTriangle
+  }, /*#__PURE__*/_react.default.createElement(_bgTriangle.default, null), /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
+    toggleRegular: toggleRegular,
+    onClick: changeToggleRegular
+  }), /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, {
+    toggleRegular: toggleRegular,
+    onClick: changeToggleRegular
+  }), /*#__PURE__*/_react.default.createElement(_paperIcon.default, {
+    toggleRegular: toggleRegular,
+    onClick: changeToggleRegular
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "regular-result",
+    style: displayResult
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container-icons"
+  }, /*#__PURE__*/_react.default.createElement(_paperIcon.default, {
+    ref: paper
+  }), " ", /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
+    ref: rock
+  }), /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, {
+    ref: scissors
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "play-again"
+  }, /*#__PURE__*/_react.default.createElement("p", null, "YOU WIN"), /*#__PURE__*/_react.default.createElement("p", null, "YOU LOSE"), /*#__PURE__*/_react.default.createElement("p", {
+    onClick: changeToggleRegular
+  }, "Play again")))));
 }
 },{"react":"../node_modules/react/index.js","./svg/logo":"components/svg/logo.js","./svg/bg-triangle":"components/svg/bg-triangle.js","./svg/icon-rock":"components/svg/icon-rock.js","./svg/icon-scissors":"components/svg/icon-scissors.js","./svg/icon-paper":"components/svg/icon-paper.js","./buttons/rock-icon":"components/buttons/rock-icon.js","./buttons/scissors-icon":"components/buttons/scissors-icon.js","./buttons/paper-icon":"components/buttons/paper-icon.js"}],"components/main.js":[function(require,module,exports) {
 "use strict";
@@ -32832,6 +32967,8 @@ var _bonus = _interopRequireDefault(require("./bonus"));
 var _regular = _interopRequireDefault(require("./regular"));
 
 var _reactRouterDom = require("react-router-dom");
+
+var _paperIcon = _interopRequireDefault(require("./buttons/paper-icon"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32852,15 +32989,20 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Main() {
-  //Send the pathname to the main page each time you reload the page.
-  window.history.replaceState(null, "Main", "/"); //////
-
   var _useState = (0, _react.useState)(true),
       _useState2 = _slicedToArray(_useState, 2),
       toggle = _useState2[0],
       setToggle = _useState2[1];
 
-  var changeToggle = function changeToggle() {
+  var _useState3 = (0, _react.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      userChoice = _useState4[0],
+      setUserChoice = _useState4[1]; //Send the pathname to the main page each time you reload the page.
+
+
+  window.history.replaceState(null, "Main", "/"); //////
+
+  var changeToggle = function changeToggle(e) {
     setToggle(function (state) {
       return !state;
     });
@@ -32879,6 +33021,8 @@ function Main() {
       };
     }
   };
+
+  toggleFunction(); ///Game logic
 
   function referee() {
     var training = {};
@@ -32926,7 +33070,6 @@ function Main() {
   console.log("Computer Choice: " + computerChoice);
   console.log(ref.judge(userChoice, computerChoice)); */
 
-  toggleFunction();
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "main"
   }, /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
@@ -32950,6 +33093,7 @@ function Main() {
     render: function render() {
       return /*#__PURE__*/_react.default.createElement(_regular.default, {
         toggle: toggle,
+        userchoice: userChoice,
         onClick: changeToggle
       });
     }
@@ -32963,7 +33107,7 @@ function Main() {
     }
   })))));
 }
-},{"react":"../node_modules/react/index.js","./bonus":"components/bonus.js","./regular":"components/regular.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./bonus":"components/bonus.js","./regular":"components/regular.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./buttons/paper-icon":"components/buttons/paper-icon.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33042,7 +33186,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41209" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45453" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
