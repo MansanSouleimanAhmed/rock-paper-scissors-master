@@ -5,25 +5,13 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import paperIcon from "./buttons/paper-icon";
 
 export default function Main() {
-  const [toggle, setToggle] = useState(true);
   const [userChoice, setUserChoice] = useState("");
+  const [toggle, setToggle] = useState(true);
+
   //Send the pathname to the main page each time you reload the page.
   window.history.replaceState(null, "Main", "/");
   //////
-  const changeToggle = (e) => {
-    setToggle((state) => !state);
-  };
-  let display = {};
-  const toggleFunction = () => {
-    if (toggle) {
-      return (display = { display: "block" });
-    } else {
-      return (display = { display: "none" });
-    }
-  };
-  toggleFunction();
-  ///Game logic
-
+  let result = 0;
   function referee() {
     var training = {};
     function learn(winner, loser) {
@@ -35,6 +23,13 @@ export default function Main() {
         return "tie";
       }
       return (training[play1][play2] === 1 ? play1 : play2) + " wins!";
+
+      /*      if (training[play1][play2] === 1) {
+        return play1;
+      } else {
+        result = result + 1;
+        return play2;
+      } */
     }
     function validate(choice) {
       return choice in training;
@@ -49,23 +44,38 @@ export default function Main() {
       getChoices: choices,
     };
   }
+  console.log(">>>>>>>>>>> " + result);
 
   var ref = referee();
   ref.learn("rock", "scissors");
   ref.learn("paper", "rock");
   ref.learn("scissors", "paper");
-  //https://stackoverflow.com/questions/17976883/rock-paper-scissors-in-javascript
-  /*  do {
-    var userChoice = prompt("Do you choose rock, paper or scissors?");
-  } while (!ref.validAction(userChoice));
-  var choices = ref.getChoices(),
+
+  let choices = ref.getChoices(),
     computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
   console.log("User Choice: " + userChoice);
   console.log("Computer Choice: " + computerChoice);
-  console.log(ref.judge(userChoice, computerChoice)); */
+  function resultFunction() {
+    if (userChoice != "") {
+      console.log(">>>> " + ref.judge(userChoice, computerChoice));
+    }
+  }
+  resultFunction();
+  const changeToggle = (e) => {
+    setToggle((state) => !state);
+  };
+  let display = {};
+  const toggleFunction = () => {
+    if (toggle) {
+      return (display = { display: "block" });
+    } else {
+      return (display = { display: "none" });
+    }
+  };
+  toggleFunction();
 
-  return (
+  vtps: return (
     <Fragment>
       <Router>
         <div className={"main"}>
@@ -98,9 +108,11 @@ export default function Main() {
               path={"/regular"}
               render={() => (
                 <Regular
-                  toggle={toggle}
+                  setuserchoice={setUserChoice}
                   userchoice={userChoice}
+                  toggle={toggle}
                   onClick={changeToggle}
+                  computerchoice={computerChoice}
                 />
               )}
             />

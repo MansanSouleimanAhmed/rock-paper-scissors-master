@@ -32453,9 +32453,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function PaperIcon(props, ref) {
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "paper-icon icon",
-    onClick: props.onClick,
     id: "paper",
-    ref: ref
+    ref: ref,
+    onClick: props.paperchoice
   }, /*#__PURE__*/_react.default.createElement(_iconPaper.default, null));
 }
 
@@ -32507,9 +32507,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function ScissorsIcon(props, ref) {
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "scissors-icon icon",
-    onClick: props.onClick,
     id: "scissors",
-    ref: ref
+    ref: ref,
+    onClick: props.scissorschoice
   }, /*#__PURE__*/_react.default.createElement(_iconScissors.default, null)));
 }
 
@@ -32562,9 +32562,9 @@ function RockIcon(props, ref) {
   /// console.log(props.toggleRegular);
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "rock-icon icon",
-    onClick: props.onClick,
     id: "rock",
-    ref: ref
+    ref: ref,
+    onClick: props.rockchoice
   }, /*#__PURE__*/_react.default.createElement(_iconRock.default, null)));
 }
 
@@ -32798,7 +32798,62 @@ function BgTriangle() {
     opacity: ".2"
   })));
 }
-},{"react":"../node_modules/react/index.js"}],"components/regular.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"components/results-page/results-regular.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = ResultsRegular;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _rockIcon = _interopRequireDefault(require("../buttons/rock-icon"));
+
+var _paperIcon = _interopRequireDefault(require("../buttons/paper-icon"));
+
+var _scissorsIcon = _interopRequireDefault(require("../buttons/scissors-icon"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ResultsRegular(props) {
+  var paper;
+  var rock;
+  var scissors;
+
+  var returnPaper = function returnPaper() {
+    if (props.computerchoice === "paper") {
+      return paper = /*#__PURE__*/_react.default.createElement(_paperIcon.default, null);
+    } else if (props.computerchoice != "paper") {
+      return paper = null;
+    }
+  };
+
+  var returnRock = function returnRock() {
+    if (props.computerchoice === "rock") {
+      return rock = /*#__PURE__*/_react.default.createElement(_rockIcon.default, null);
+    } else if (props.computerchoice != "paper") {
+      return rock = null;
+    }
+  };
+
+  var returnScissors = function returnScissors() {
+    if (props.computerchoice === "scissors") {
+      return scissors = /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, null);
+    } else if (props.computerchoice != "scissors") {
+      return scissors = null;
+    }
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "results-regular"
+  }, returnPaper(), returnRock(), returnScissors()));
+}
+},{"react":"../node_modules/react/index.js","../buttons/rock-icon":"components/buttons/rock-icon.js","../buttons/paper-icon":"components/buttons/paper-icon.js","../buttons/scissors-icon":"components/buttons/scissors-icon.js"}],"components/regular.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32823,6 +32878,8 @@ var _rockIcon = _interopRequireDefault(require("./buttons/rock-icon"));
 var _scissorsIcon = _interopRequireDefault(require("./buttons/scissors-icon"));
 
 var _paperIcon = _interopRequireDefault(require("./buttons/paper-icon"));
+
+var _resultsRegular = _interopRequireDefault(require("./results-page/results-regular"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32851,39 +32908,44 @@ function Regular(props) {
   var paper = (0, _react.useRef)(null);
   var rock = (0, _react.useRef)(null);
   var scissors = (0, _react.useRef)(null);
+  var displayResult = {};
+  var displayTriangle = {};
 
-  var changeToggleRegular = function changeToggleRegular(e) {
+  var playAgain = function playAgain() {
     setToggleRegular(function (state) {
       return !state;
     });
-
-    switch (e.target.getAttribute("id")) {
-      case "paper":
-        scissors.current.style.zIndex = "0";
-        rock.current.style.zIndex = "0";
-        paper.current.style.zIndex = "3";
-        return;
-        break;
-
-      case "rock":
-        paper.current.style.zIndex = "0";
-        scissors.current.style.zIndex = "0";
-        rock.current.style.zIndex = "3";
-        break;
-
-      case "scissors":
-        paper.current.style.zIndex = "0";
-        rock.current.style.zIndex = "0";
-        scissors.current.style.zIndex = "3";
-        break;
-
-      default:
-        console.log("test");
-    }
   };
 
-  console.log(props.userchoice);
-  var displayTriangle = {};
+  var paperChoice = function paperChoice(e) {
+    setToggleRegular(function (state) {
+      return !state;
+    });
+    scissors.current.style.zIndex = "0";
+    rock.current.style.zIndex = "0";
+    paper.current.style.zIndex = "3";
+    props.setuserchoice("paper");
+  };
+
+  var rockChoice = function rockChoice(e) {
+    paper.current.style.zIndex = "0";
+    scissors.current.style.zIndex = "0";
+    rock.current.style.zIndex = "3";
+    setToggleRegular(function (state) {
+      return !state;
+    });
+    props.setuserchoice("rock");
+  };
+
+  var scissorsChoice = function scissorsChoice(e) {
+    setToggleRegular(function (state) {
+      return !state;
+    });
+    paper.current.style.zIndex = "0";
+    rock.current.style.zIndex = "0";
+    scissors.current.style.zIndex = "3";
+    props.setuserchoice("scissors");
+  };
 
   var bgTriangleFunction = function bgTriangleFunction() {
     if (!toggleRegular) {
@@ -32898,7 +32960,6 @@ function Regular(props) {
   };
 
   bgTriangleFunction();
-  var displayResult = {};
 
   var resultFunction = function resultFunction() {
     if (!toggleRegular) {
@@ -32927,32 +32988,36 @@ function Regular(props) {
     className: "bg-triangle",
     style: displayTriangle
   }, /*#__PURE__*/_react.default.createElement(_bgTriangle.default, null), /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
-    toggleRegular: toggleRegular,
-    onClick: changeToggleRegular
+    rockchoice: rockChoice,
+    toggleRegular: toggleRegular
   }), /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, {
-    toggleRegular: toggleRegular,
-    onClick: changeToggleRegular
+    scissorschoice: scissorsChoice,
+    toggleRegular: toggleRegular
   }), /*#__PURE__*/_react.default.createElement(_paperIcon.default, {
-    toggleRegular: toggleRegular,
-    onClick: changeToggleRegular
+    paperchoice: paperChoice,
+    toggleRegular: toggleRegular
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "regular-result",
     style: displayResult
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "container-icons"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "user-choice"
   }, /*#__PURE__*/_react.default.createElement(_paperIcon.default, {
     ref: paper
   }), " ", /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
     ref: rock
   }), /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, {
     ref: scissors
+  })), /*#__PURE__*/_react.default.createElement(_resultsRegular.default, {
+    computerchoice: props.computerchoice
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "play-again"
   }, /*#__PURE__*/_react.default.createElement("p", null, "YOU WIN"), /*#__PURE__*/_react.default.createElement("p", null, "YOU LOSE"), /*#__PURE__*/_react.default.createElement("p", {
-    onClick: changeToggleRegular
+    onClick: playAgain
   }, "Play again")))));
 }
-},{"react":"../node_modules/react/index.js","./svg/logo":"components/svg/logo.js","./svg/bg-triangle":"components/svg/bg-triangle.js","./svg/icon-rock":"components/svg/icon-rock.js","./svg/icon-scissors":"components/svg/icon-scissors.js","./svg/icon-paper":"components/svg/icon-paper.js","./buttons/rock-icon":"components/buttons/rock-icon.js","./buttons/scissors-icon":"components/buttons/scissors-icon.js","./buttons/paper-icon":"components/buttons/paper-icon.js"}],"components/main.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./svg/logo":"components/svg/logo.js","./svg/bg-triangle":"components/svg/bg-triangle.js","./svg/icon-rock":"components/svg/icon-rock.js","./svg/icon-scissors":"components/svg/icon-scissors.js","./svg/icon-paper":"components/svg/icon-paper.js","./buttons/rock-icon":"components/buttons/rock-icon.js","./buttons/scissors-icon":"components/buttons/scissors-icon.js","./buttons/paper-icon":"components/buttons/paper-icon.js","./results-page/results-regular":"components/results-page/results-regular.js"}],"components/main.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32989,18 +33054,76 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Main() {
-  var _useState = (0, _react.useState)(true),
+  var _useState = (0, _react.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
-      toggle = _useState2[0],
-      setToggle = _useState2[1];
+      userChoice = _useState2[0],
+      setUserChoice = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(""),
+  var _useState3 = (0, _react.useState)(true),
       _useState4 = _slicedToArray(_useState3, 2),
-      userChoice = _useState4[0],
-      setUserChoice = _useState4[1]; //Send the pathname to the main page each time you reload the page.
+      toggle = _useState4[0],
+      setToggle = _useState4[1]; //Send the pathname to the main page each time you reload the page.
 
 
   window.history.replaceState(null, "Main", "/"); //////
+
+  var result = 0;
+
+  function referee() {
+    var training = {};
+
+    function learn(winner, loser) {
+      if (!training[winner]) training[winner] = {};
+      training[winner][loser] = 1;
+    }
+
+    function judge(play1, play2) {
+      if (play1 === play2) {
+        return "tie";
+      }
+
+      return (training[play1][play2] === 1 ? play1 : play2) + " wins!";
+      /*      if (training[play1][play2] === 1) {
+        return play1;
+      } else {
+        result = result + 1;
+        return play2;
+      } */
+    }
+
+    function validate(choice) {
+      return choice in training;
+    }
+
+    function choices() {
+      return Object.keys(training);
+    }
+
+    return {
+      learn: learn,
+      judge: judge,
+      validAction: validate,
+      getChoices: choices
+    };
+  }
+
+  console.log(">>>>>>>>>>> " + result);
+  var ref = referee();
+  ref.learn("rock", "scissors");
+  ref.learn("paper", "rock");
+  ref.learn("scissors", "paper");
+  var choices = ref.getChoices(),
+      computerChoice = choices[Math.floor(Math.random() * choices.length)];
+  console.log("User Choice: " + userChoice);
+  console.log("Computer Choice: " + computerChoice);
+
+  function resultFunction() {
+    if (userChoice != "") {
+      console.log(">>>> " + ref.judge(userChoice, computerChoice));
+    }
+  }
+
+  resultFunction();
 
   var changeToggle = function changeToggle(e) {
     setToggle(function (state) {
@@ -33022,55 +33145,9 @@ function Main() {
     }
   };
 
-  toggleFunction(); ///Game logic
+  toggleFunction();
 
-  function referee() {
-    var training = {};
-
-    function learn(winner, loser) {
-      if (!training[winner]) training[winner] = {};
-      training[winner][loser] = 1;
-    }
-
-    function judge(play1, play2) {
-      if (play1 === play2) {
-        return "tie";
-      }
-
-      return (training[play1][play2] === 1 ? play1 : play2) + " wins!";
-    }
-
-    function validate(choice) {
-      return choice in training;
-    }
-
-    function choices() {
-      return Object.keys(training);
-    }
-
-    return {
-      learn: learn,
-      judge: judge,
-      validAction: validate,
-      getChoices: choices
-    };
-  }
-
-  var ref = referee();
-  ref.learn("rock", "scissors");
-  ref.learn("paper", "rock");
-  ref.learn("scissors", "paper"); //https://stackoverflow.com/questions/17976883/rock-paper-scissors-in-javascript
-
-  /*  do {
-    var userChoice = prompt("Do you choose rock, paper or scissors?");
-  } while (!ref.validAction(userChoice));
-  var choices = ref.getChoices(),
-    computerChoice = choices[Math.floor(Math.random() * choices.length)];
-   console.log("User Choice: " + userChoice);
-  console.log("Computer Choice: " + computerChoice);
-  console.log(ref.judge(userChoice, computerChoice)); */
-
-  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement("div", {
+  vtps: return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "main"
   }, /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
     style: display
@@ -33092,9 +33169,11 @@ function Main() {
     path: "/regular",
     render: function render() {
       return /*#__PURE__*/_react.default.createElement(_regular.default, {
-        toggle: toggle,
+        setuserchoice: setUserChoice,
         userchoice: userChoice,
-        onClick: changeToggle
+        toggle: toggle,
+        onClick: changeToggle,
+        computerchoice: computerChoice
       });
     }
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
@@ -33186,7 +33265,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45453" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41351" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

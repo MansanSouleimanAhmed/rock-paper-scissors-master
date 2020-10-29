@@ -7,9 +7,9 @@ function RockIcon(props, ref) {
     <Fragment>
       <div
         className={"rock-icon icon"}
-        onClick={props.onClick}
         id={"rock"}
         ref={ref}
+        onClick={props.rockchoice}
       >
         <IconRock />
       </div>

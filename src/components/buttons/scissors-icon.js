@@ -6,9 +6,9 @@ function ScissorsIcon(props, ref) {
     <Fragment>
       <div
         className={"scissors-icon icon"}
-        onClick={props.onClick}
         id={"scissors"}
         ref={ref}
+        onClick={props.scissorschoice}
       >
         <IconScissors />
       </div>

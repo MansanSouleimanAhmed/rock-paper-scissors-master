@@ -7,38 +7,42 @@ import IconPaper from "./svg/icon-paper";
 import RockIcon from "./buttons/rock-icon";
 import ScissorsIcon from "./buttons/scissors-icon";
 import PaperIcon from "./buttons/paper-icon";
+import ResultsRegular from "./results-page/results-regular";
 
 export default function Regular(props) {
   const [toggleRegular, setToggleRegular] = useState(false);
+
   const paper = useRef(null);
   const rock = useRef(null);
   const scissors = useRef(null);
-
-  const changeToggleRegular = (e) => {
-    setToggleRegular((state) => !state);
-    switch (e.target.getAttribute("id")) {
-      case "paper":
-        scissors.current.style.zIndex = "0";
-        rock.current.style.zIndex = "0";
-        paper.current.style.zIndex = "3";
-        return;
-        break;
-      case "rock":
-        paper.current.style.zIndex = "0";
-        scissors.current.style.zIndex = "0";
-        rock.current.style.zIndex = "3";
-        break;
-      case "scissors":
-        paper.current.style.zIndex = "0";
-        rock.current.style.zIndex = "0";
-        scissors.current.style.zIndex = "3";
-        break;
-      default:
-        console.log("test");
-    }
-  };
-  console.log(props.userchoice);
+  let displayResult = {};
   let displayTriangle = {};
+  const playAgain = () => {
+    setToggleRegular((state) => !state);
+  };
+
+  const paperChoice = (e) => {
+    setToggleRegular((state) => !state);
+    scissors.current.style.zIndex = "0";
+    rock.current.style.zIndex = "0";
+    paper.current.style.zIndex = "3";
+    props.setuserchoice("paper");
+  };
+  const rockChoice = (e) => {
+    paper.current.style.zIndex = "0";
+    scissors.current.style.zIndex = "0";
+    rock.current.style.zIndex = "3";
+    setToggleRegular((state) => !state);
+    props.setuserchoice("rock");
+  };
+  const scissorsChoice = (e) => {
+    setToggleRegular((state) => !state);
+    paper.current.style.zIndex = "0";
+    rock.current.style.zIndex = "0";
+    scissors.current.style.zIndex = "3";
+    props.setuserchoice("scissors");
+  };
+
   const bgTriangleFunction = () => {
     if (!toggleRegular) {
       return (displayTriangle = { display: "block" });
@@ -47,7 +51,7 @@ export default function Regular(props) {
     }
   };
   bgTriangleFunction();
-  let displayResult = {};
+
   const resultFunction = () => {
     if (!toggleRegular) {
       return (displayResult = { display: "none" });
@@ -55,7 +59,9 @@ export default function Regular(props) {
       return (displayResult = { display: "block" });
     }
   };
+
   resultFunction();
+
   return (
     <Fragment>
       <section className={"common-style"}>
@@ -69,28 +75,25 @@ export default function Regular(props) {
         </div>
         <div className={"bg-triangle"} style={displayTriangle}>
           <BgTriangle />
-          <RockIcon
-            toggleRegular={toggleRegular}
-            onClick={changeToggleRegular}
-          />
+          <RockIcon rockchoice={rockChoice} toggleRegular={toggleRegular} />
           <ScissorsIcon
+            scissorschoice={scissorsChoice}
             toggleRegular={toggleRegular}
-            onClick={changeToggleRegular}
           />
-          <PaperIcon
-            toggleRegular={toggleRegular}
-            onClick={changeToggleRegular}
-          />
+          <PaperIcon paperchoice={paperChoice} toggleRegular={toggleRegular} />
         </div>
         <div className={"regular-result"} style={displayResult}>
           <div className={"container-icons"}>
-            <PaperIcon ref={paper} /> <RockIcon ref={rock} />
-            <ScissorsIcon ref={scissors} />
+            <div className={"user-choice"}>
+              <PaperIcon ref={paper} /> <RockIcon ref={rock} />
+              <ScissorsIcon ref={scissors} />
+            </div>
+            <ResultsRegular computerchoice={props.computerchoice} />
           </div>
           <div className={"play-again"}>
             <p>{"YOU WIN"}</p>
             <p>{"YOU LOSE"}</p>
-            <p onClick={changeToggleRegular}>{"Play again"}</p>
+            <p onClick={playAgain}>{"Play again"}</p>
           </div>
         </div>
       </section>

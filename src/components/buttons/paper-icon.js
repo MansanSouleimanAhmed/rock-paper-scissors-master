@@ -5,9 +5,9 @@ function PaperIcon(props, ref) {
   return (
     <div
       className={"paper-icon icon"}
-      onClick={props.onClick}
       id={"paper"}
       ref={ref}
+      onClick={props.paperchoice}
     >
       <IconPaper />
     </div>
