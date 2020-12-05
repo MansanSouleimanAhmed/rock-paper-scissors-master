@@ -3,15 +3,44 @@ import Bonus from "./bonus";
 import Regular from "./regular";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import paperIcon from "./buttons/paper-icon";
+import {useDispatch,connect} from "react-redux";
+import SCORE_REGULAR from "../actions/score-regular"
+import axios from "axios";
+import { set } from "mongoose";
+import ResultsRegular from "./results-page/results-regular";
+import socketIOClient from "socket.io-client";
 
-export default function Main() {
-  const [userChoice, setUserChoice] = useState("");
-  const [toggle, setToggle] = useState(true);
+function Main({regular}) { 
+let dispatch = useDispatch()
+const [userChoice, setUserChoice] = useState("");
+const [toggle, setToggle] = useState(true);
+const [computerChoice, setComputerChoice]=useState("");
+const [response, setResponse] = useState("");
+const [request, setRequest ] = useState(false);
+const [allMessages, setAllMessages] = useState([])
 
+const ENDPOINT = 'http://127.0.0.1:5000';
+const io = socketIOClient(ENDPOINT)
+const [state, setStaet] = useState({ message: '', name: '' })
+const [chat, setChat] = useState([])
   //Send the pathname to the main page each time you reload the page.
-  window.history.replaceState(null, "Main", "/");
+  //window.history.replaceState(null, "Main", "/");
   //////
-  let result = 0;
+
+
+
+
+  let result;
+  let display = {};
+  useEffect(() =>{
+const a =() =>{  
+  io.on("hello", (arg) => {
+    console.log(arg); // world
+  });
+}
+a()
+ 
+  },[])
   function referee() {
     var training = {};
     function learn(winner, loser) {
@@ -22,14 +51,7 @@ export default function Main() {
       if (play1 === play2) {
         return "tie";
       }
-      return (training[play1][play2] === 1 ? play1 : play2) + " wins!";
-
-      /*      if (training[play1][play2] === 1) {
-        return play1;
-      } else {
-        result = result + 1;
-        return play2;
-      } */
+      return (training[play1][play2] === 1 ? 1: 2);
     }
     function validate(choice) {
       return choice in training;
@@ -44,28 +66,43 @@ export default function Main() {
       getChoices: choices,
     };
   }
-  console.log(">>>>>>>>>>> " + result);
-
   var ref = referee();
   ref.learn("rock", "scissors");
   ref.learn("paper", "rock");
   ref.learn("scissors", "paper");
-
-  let choices = ref.getChoices(),
-    computerChoice = choices[Math.floor(Math.random() * choices.length)];
-
-  console.log("User Choice: " + userChoice);
-  console.log("Computer Choice: " + computerChoice);
+  let a;
+ 
   function resultFunction() {
     if (userChoice != "") {
-      console.log(">>>> " + ref.judge(userChoice, computerChoice));
-    }
+    //  console.log("User Choice: " + userChoice);
+   //   console.log("Computer Choice: " + computerChoice);  
+      let regularResult = ref.judge(userChoice, computerChoice);
+      if(regularResult ===1){
+          var authOptions = {
+            method: 'post',
+            url: 'http://localhost:5000/api/',
+            data: JSON.stringify({"regular": 1}),
+            headers: {'Content-Type': 'application/json' },
+            json: true
+           };
+           axios(authOptions)
+           .then((response) => {
+          // console.log("response axios " + response.data);
+         
+               })
+           .catch((error) => {
+              alert(error)
+             })
+          }
+     }   
   }
-  resultFunction();
+  resultFunction()
+ // console.log('response ' +response)
+
   const changeToggle = (e) => {
     setToggle((state) => !state);
   };
-  let display = {};
+
   const toggleFunction = () => {
     if (toggle) {
       return (display = { display: "block" });
@@ -112,7 +149,9 @@ export default function Main() {
                   userchoice={userChoice}
                   toggle={toggle}
                   onClick={changeToggle}
-                  computerchoice={computerChoice}
+                  setcomputerchoice ={setComputerChoice}
+                  computerchoice ={computerChoice}
+                  referee={ref}
                 />
               )}
             />
@@ -126,3 +165,11 @@ export default function Main() {
     </Fragment>
   );
 }
+
+const mapStateToProps = state => ({
+  regular: state.score
+})
+const mapDispatchToProps = {
+        a : SCORE_REGULAR
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
