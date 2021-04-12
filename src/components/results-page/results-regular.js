@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import RockIcon from "../buttons/rock-icon";
-import PaperIcon from "../buttons/paper-icon";
-import ScissorsIcon from "../buttons/scissors-icon";
+import RockIcon from "../butons/rock-icon";
+import PaperIcon from "../butons/paper-icon";
+import ScissorsIcon from "../butons/scissors-icon";
 
 export default function ResultsRegular(props) {
   let paper;

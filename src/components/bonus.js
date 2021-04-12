@@ -3,11 +3,11 @@ import LogoBonus from "./svg/logo-bonus";
 
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import BgPentagon from "./svg/bg-pentagon";
-import PaperIcon from "./buttons/paper-icon";
-import ScissorsIcon from "./buttons/scissors-icon";
-import RockIcon from "./buttons/rock-icon";
-import LizardIcon from "./buttons/lizard-icon";
-import SpockIcon from "./buttons/spock-icon";
+import PaperIcon from "./butons/paper-icon";
+import ScissorsIcon from "./butons/scissors-icon";
+import RockIcon from "./butons/rock-icon";
+import LizardIcon from "./butons/lizard-icon";
+import SpockIcon from "./butons/spock-icon";
 const navDispear = { display: "none" };
 export default function Bonus(props) {
   return (

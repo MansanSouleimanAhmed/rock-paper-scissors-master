@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import Bonus from "./bonus";
 import Regular from "./regular";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import paperIcon from "./buttons/paper-icon";
+import paperIcon from "./butons/paper-icon";
 import {useDispatch,connect} from "react-redux";
 import SCORE_REGULAR from "../actions/score-regular"
 import axios from "axios";
@@ -16,31 +16,21 @@ const [userChoice, setUserChoice] = useState("");
 const [toggle, setToggle] = useState(true);
 const [computerChoice, setComputerChoice]=useState("");
 const [response, setResponse] = useState("");
-const [request, setRequest ] = useState(false);
-const [allMessages, setAllMessages] = useState([])
-
 const ENDPOINT = 'http://127.0.0.1:5000';
 const io = socketIOClient(ENDPOINT)
-const [state, setStaet] = useState({ message: '', name: '' })
-const [chat, setChat] = useState([])
-  //Send the pathname to the main page each time you reload the page.
-  //window.history.replaceState(null, "Main", "/");
-  //////
-
-
-
+window.history.replaceState(null, "Main", "/");
+window.addEventListener('popstate', (event) => {
+  location.reload();
+});
 
   let result;
   let display = {};
   useEffect(() =>{
-const a =() =>{  
-  io.on("hello", (arg) => {
+/*   io.on("hello", (arg) => {
     console.log(arg); // world
-  });
-}
-a()
- 
-  },[])
+  }); */
+//setToggle(true);
+  })
   function referee() {
     var training = {};
     function learn(winner, loser) {
@@ -88,7 +78,6 @@ a()
            axios(authOptions)
            .then((response) => {
           // console.log("response axios " + response.data);
-         
                })
            .catch((error) => {
               alert(error)

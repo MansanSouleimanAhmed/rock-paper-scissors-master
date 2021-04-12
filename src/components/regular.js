@@ -4,11 +4,13 @@ import BgTriangle from "./svg/bg-triangle";
 import IconRock from "./svg/icon-rock";
 import IconScissors from "./svg/icon-scissors";
 import IconPaper from "./svg/icon-paper";
-import RockIcon from "./buttons/rock-icon";
-import ScissorsIcon from "./buttons/scissors-icon";
-import PaperIcon from "./buttons/paper-icon";
+import RockIcon from "./butons/rock-icon";
+import ScissorsIcon from "./butons/scissors-icon";
+import PaperIcon from "./butons/paper-icon";
 import ResultsRegular from "./results-page/results-regular";
 import {connect} from "react-redux";
+import ButonRegular from "./butons/buton-regular";
+import ModalRegular from "./modals/modal-regular";
  function Regular(props) {
 
   const [toggleRegular, setToggleRegular] = useState(false);
@@ -104,6 +106,8 @@ const computerPlay = ()=>{
             <p onClick={playAgain}>{"Play again"}</p>
           </div>
         </div>
+        <ButonRegular/>
+        <ModalRegular/>
       </section>
     </Fragment>
   );
