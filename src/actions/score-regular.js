@@ -1,6 +1,6 @@
-const SCORE_REGULAR = () => {
+const scoreRegular = () => {
 	return {
 		type: 'SCORE_REGULAR',
 	};
 };
-export default SCORE_REGULAR;
+export default scoreRegular;

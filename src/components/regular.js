@@ -18,7 +18,7 @@ function Regular(props) {
 	const scissors = useRef(null);
 	let displayResult = {};
 	let displayTriangle = {};
-	let test = useSelector((state) => state.score);
+	let showResult = useSelector((state) => state.score);
 	const playAgain = () => {
 		setToggleRegular((state) => !state);
 	};
@@ -80,7 +80,7 @@ function Regular(props) {
 						</a>
 					</div>
 					<div className={'score'}>
-						<p>{test}</p>
+						<p>{showResult}</p>
 					</div>
 				</div>
 				<div className={'bg-triangle'} style={displayTriangle}>

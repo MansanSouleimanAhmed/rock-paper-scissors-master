@@ -35244,7 +35244,24 @@ var _shallowEqual = _interopRequireDefault(require("./utils/shallowEqual"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _batch.setBatch)(_reactBatchedUpdates.unstable_batchedUpdates);
-},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"../node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"../node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"../node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"../node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"../node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"../node_modules/react-redux/es/utils/shallowEqual.js"}],"components/butons/buton-regular.js":[function(require,module,exports) {
+},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"../node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"../node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"../node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"../node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"../node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"../node_modules/react-redux/es/utils/shallowEqual.js"}],"actions/modal-regular.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.MODAL_REGULAR = void 0;
+
+var MODAL_REGULAR = function MODAL_REGULAR() {
+  return {
+    type: 'MODAL_REGULAR'
+  };
+};
+
+exports.MODAL_REGULAR = MODAL_REGULAR;
+var _default = MODAL_REGULAR;
+exports.default = _default;
+},{}],"components/butons/buton-regular.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35254,20 +35271,32 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRedux = require("react-redux");
+
+var _modalRegular = _interopRequireDefault(require("../../actions/modal-regular"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-// import { Container } from './styles';
 function ButonRegular() {
+  var dispatch = (0, _reactRedux.useDispatch)();
+
+  var handleClick = function handleClick(event) {
+    dispatch((0, _modalRegular.default)());
+  };
+
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "buton-regular"
-  }, /*#__PURE__*/_react.default.createElement("p", null, "RULES")));
+    className: 'buton-regular',
+    onClick: handleClick
+  }, /*#__PURE__*/_react.default.createElement("p", null, 'RULES')));
 }
 
 var _default = ButonRegular;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"components/modals/style.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/modal-regular":"actions/modal-regular.js"}],"components/modals/style.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35359,6 +35388,10 @@ var _imageRules = _interopRequireDefault(require("../../mimified-img/image-rules
 
 var _iconClose = _interopRequireDefault(require("../../mimified-img/icon-close.svg"));
 
+var _reactRedux = require("react-redux");
+
+var _modalRegular = _interopRequireDefault(require("../../actions/modal-regular"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -35366,7 +35399,15 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ModalRegular() {
-  return null;
+  var dispatch = (0, _reactRedux.useDispatch)();
+  var hideModale = (0, _reactRedux.useSelector)(function (state) {
+    return state.regularModal;
+  });
+
+  if (hideModale === false) {
+    return null;
+  }
+
   return _reactDom.default.createPortal( /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     style: _style.style.MODAL_STYLE
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -35375,6 +35416,9 @@ function ModalRegular() {
     style: _style.style.IMG_REGULAR_STYLE,
     src: _imageRules.default
   }), /*#__PURE__*/_react.default.createElement("img", {
+    onClick: function onClick(event) {
+      dispatch((0, _modalRegular.default)());
+    },
     style: _style.style.IMG_REGULAR_CROSS,
     src: _iconClose.default
   })))), document.getElementById('modal-regular'));
@@ -35382,7 +35426,7 @@ function ModalRegular() {
 
 var _default = ModalRegular;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./style":"components/modals/style.js","../../mimified-img/image-rules.svg":"mimified-img/image-rules.svg","../../mimified-img/icon-close.svg":"mimified-img/icon-close.svg"}],"components/regular.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./style":"components/modals/style.js","../../mimified-img/image-rules.svg":"mimified-img/image-rules.svg","../../mimified-img/icon-close.svg":"mimified-img/icon-close.svg","react-redux":"../node_modules/react-redux/es/index.js","../../actions/modal-regular":"actions/modal-regular.js"}],"components/regular.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35445,7 +35489,7 @@ function Regular(props) {
   var scissors = (0, _react.useRef)(null);
   var displayResult = {};
   var displayTriangle = {};
-  var test = (0, _reactRedux.useSelector)(function (state) {
+  var showResult = (0, _reactRedux.useSelector)(function (state) {
     return state.score;
   });
 
@@ -35530,7 +35574,7 @@ function Regular(props) {
     href: '/'
   }, /*#__PURE__*/_react.default.createElement(_logo.default, null))), /*#__PURE__*/_react.default.createElement("div", {
     className: 'score'
-  }, /*#__PURE__*/_react.default.createElement("p", null, test))), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("p", null, showResult))), /*#__PURE__*/_react.default.createElement("div", {
     className: 'bg-triangle',
     style: displayTriangle
   }, /*#__PURE__*/_react.default.createElement(_bgTriangle.default, null), /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
@@ -35574,13 +35618,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var SCORE_REGULAR = function SCORE_REGULAR() {
+var scoreRegular = function scoreRegular() {
   return {
     type: 'SCORE_REGULAR'
   };
 };
 
-var _default = SCORE_REGULAR;
+var _default = scoreRegular;
 exports.default = _default;
 },{}],"../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
@@ -67666,7 +67710,66 @@ function App() {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./components/main":"components/main.js"}],"reducers/score-regular.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/main":"components/main.js"}],"reducers/regular-display.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loseDisplay = exports.winDisplay = void 0;
+
+var winDisplay = function winDisplay() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'WIN_DISPLAY':
+      return !state;
+
+    default:
+      return state;
+  }
+};
+
+exports.winDisplay = winDisplay;
+
+var loseDisplay = function loseDisplay() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'LOSE_DISPLAY':
+      return !state;
+
+    default:
+      return state;
+  }
+};
+
+exports.loseDisplay = loseDisplay;
+},{}],"reducers/modal-regular.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.regularModal = void 0;
+
+var regularModal = function regularModal() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'MODAL_REGULAR':
+      return !state;
+
+    default:
+      return state;
+  }
+};
+
+exports.regularModal = regularModal;
+},{}],"reducers/score-regular.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67699,16 +67802,23 @@ exports.default = void 0;
 
 var _redux = require("redux");
 
+var _regularDisplay = require("./regular-display");
+
+var _modalRegular = require("./modal-regular");
+
 var _scoreRegular = _interopRequireDefault(require("./score-regular"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var allReducers = (0, _redux.combineReducers)({
-  score: _scoreRegular.default
+  score: _scoreRegular.default,
+  regularWinDisplay: _regularDisplay.winDisplay,
+  regularLoseDisplay: _regularDisplay.loseDisplay,
+  regularModal: _modalRegular.regularModal
 });
 var _default = allReducers;
 exports.default = _default;
-},{"redux":"../node_modules/redux/es/redux.js","./score-regular":"reducers/score-regular.js"}],"index.js":[function(require,module,exports) {
+},{"redux":"../node_modules/redux/es/redux.js","./regular-display":"reducers/regular-display.js","./modal-regular":"reducers/modal-regular.js","./score-regular":"reducers/score-regular.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67773,7 +67883,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35083" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34533" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
