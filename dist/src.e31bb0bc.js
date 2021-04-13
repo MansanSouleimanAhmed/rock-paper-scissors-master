@@ -28312,7 +28312,7 @@ function getBundleURL() {
 }
 
 function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
 }
 
 exports.getBundleURL = getBundleURLCached;
@@ -28410,7 +28410,23 @@ function LogoBonus() {
     xlinkHref: "#b"
   }))));
 }
-},{"react":"../node_modules/react/index.js"}],"../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _setPrototypeOf;
+
+function _setPrototypeOf(o, p) {
+  exports.default = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+},{}],"../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28418,12 +28434,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _inheritsLoose;
 
+var _setPrototypeOf = _interopRequireDefault(require("./setPrototypeOf.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
+  (0, _setPrototypeOf.default)(subClass, superClass);
 }
-},{}],"../node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
+},{"./setPrototypeOf.js":"../node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js"}],"../node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
 /** @license React v16.13.1
  * react-is.development.js
  *
@@ -30614,7 +30634,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
 var index = _react.default.createContext || createReactContext;
 var _default = index;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","@babel/runtime/helpers/esm/inheritsLoose":"../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","prop-types":"../node_modules/prop-types/index.js","tiny-warning":"../node_modules/tiny-warning/dist/tiny-warning.esm.js"}],"../node_modules/isarray/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","@babel/runtime/helpers/esm/inheritsLoose":"../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","prop-types":"../node_modules/prop-types/index.js","tiny-warning":"../node_modules/tiny-warning/dist/tiny-warning.esm.js"}],"../node_modules/path-to-regexp/node_modules/isarray/index.js":[function(require,module,exports) {
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
@@ -31047,7 +31067,7 @@ function pathToRegexp (path, keys, options) {
   return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
 }
 
-},{"isarray":"../node_modules/isarray/index.js"}],"../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":[function(require,module,exports) {
+},{"isarray":"../node_modules/path-to-regexp/node_modules/isarray/index.js"}],"../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32559,10 +32579,9 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function RockIcon(props, ref) {
-  /// console.log(props.toggleRegular);
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "rock-icon icon",
-    id: "rock",
+    className: 'rock-icon icon',
+    id: 'rock',
     ref: ref,
     onClick: props.rockchoice
   }, /*#__PURE__*/_react.default.createElement(_iconRock.default, null)));
@@ -33033,7 +33052,27 @@ var Subscription = /*#__PURE__*/function () {
 }();
 
 exports.default = Subscription;
-},{"./batch":"../node_modules/react-redux/es/utils/batch.js"}],"../node_modules/react-redux/es/components/Provider.js":[function(require,module,exports) {
+},{"./batch":"../node_modules/react-redux/es/utils/batch.js"}],"../node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useIsomorphicLayoutEffect = void 0;
+
+var _react = require("react");
+
+// React currently throws a warning when using useLayoutEffect on the server.
+// To get around it, we can conditionally useEffect on the server (no-op) and
+// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
+// subscription callback always has the selector from the latest render commit
+// available, otherwise a store update may happen between render and the effect,
+// which may cause missed updates; we also must ensure the store subscription
+// is created synchronously, otherwise a store update may occur before the
+// subscription is created and an inconsistent state may be observed
+var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? _react.useLayoutEffect : _react.useEffect;
+exports.useIsomorphicLayoutEffect = useIsomorphicLayoutEffect;
+},{"react":"../node_modules/react/index.js"}],"../node_modules/react-redux/es/components/Provider.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33048,6 +33087,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _Context = require("./Context");
 
 var _Subscription = _interopRequireDefault(require("../utils/Subscription"));
+
+var _useIsomorphicLayoutEffect = require("../utils/useIsomorphicLayoutEffect");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33070,7 +33111,7 @@ function Provider(_ref) {
   var previousState = (0, _react.useMemo)(function () {
     return store.getState();
   }, [store]);
-  (0, _react.useEffect)(function () {
+  (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
     var subscription = contextValue.subscription;
     subscription.trySubscribe();
 
@@ -33103,27 +33144,7 @@ if ("development" !== 'production') {
 
 var _default = Provider;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./Context":"../node_modules/react-redux/es/components/Context.js","../utils/Subscription":"../node_modules/react-redux/es/utils/Subscription.js"}],"../node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.useIsomorphicLayoutEffect = void 0;
-
-var _react = require("react");
-
-// React currently throws a warning when using useLayoutEffect on the server.
-// To get around it, we can conditionally useEffect on the server (no-op) and
-// useLayoutEffect in the browser. We need useLayoutEffect to ensure the store
-// subscription callback always has the selector from the latest render commit
-// available, otherwise a store update may happen between render and the effect,
-// which may cause missed updates; we also must ensure the store subscription
-// is created synchronously, otherwise a store update may occur before the
-// subscription is created and an inconsistent state may be observed
-var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? _react.useLayoutEffect : _react.useEffect;
-exports.useIsomorphicLayoutEffect = useIsomorphicLayoutEffect;
-},{"react":"../node_modules/react/index.js"}],"../node_modules/react-redux/es/components/connectAdvanced.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./Context":"../node_modules/react-redux/es/components/Context.js","../utils/Subscription":"../node_modules/react-redux/es/utils/Subscription.js","../utils/useIsomorphicLayoutEffect":"../node_modules/react-redux/es/utils/useIsomorphicLayoutEffect.js"}],"../node_modules/react-redux/es/components/connectAdvanced.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33274,14 +33295,14 @@ function connectAdvanced(
 /*
   selectorFactory is a func that is responsible for returning the selector function used to
   compute new props from state, props, and dispatch. For example:
-     export default connectAdvanced((dispatch, options) => (state, props) => ({
+      export default connectAdvanced((dispatch, options) => (state, props) => ({
       thing: state.things[props.thingId],
       saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
     }))(YourComponent)
-   Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
+    Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
   outside of their selector as an optimization. Options passed to connectAdvanced are passed to
   the selectorFactory, along with displayName and WrappedComponent, as the second argument.
-   Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
+    Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
   props. Do not use connectAdvanced directly without memoizing results between calls to your
   selector, otherwise the Connect component will re-render on every state or props change.
 */
@@ -34992,7 +35013,13 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
 
   try {
     if (selector !== latestSelector.current || storeState !== latestStoreState.current || latestSubscriptionCallbackError.current) {
-      selectedState = selector(storeState);
+      var newSelectedState = selector(storeState); // ensure latest selected state is reused so that a custom equality function can result in identical references
+
+      if (latestSelectedState.current === undefined || !equalityFn(newSelectedState, latestSelectedState.current)) {
+        selectedState = newSelectedState;
+      } else {
+        selectedState = latestSelectedState.current;
+      }
     } else {
       selectedState = latestSelectedState.current;
     }
@@ -35013,13 +35040,13 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
   (0, _useIsomorphicLayoutEffect.useIsomorphicLayoutEffect)(function () {
     function checkForUpdates() {
       try {
-        var newSelectedState = latestSelector.current(store.getState());
+        var _newSelectedState = latestSelector.current(store.getState());
 
-        if (equalityFn(newSelectedState, latestSelectedState.current)) {
+        if (equalityFn(_newSelectedState, latestSelectedState.current)) {
           return;
         }
 
-        latestSelectedState.current = newSelectedState;
+        latestSelectedState.current = _newSelectedState;
       } catch (err) {
         // we ignore all errors here, since when the component
         // is re-rendered, the selectors are called again, and
@@ -35339,6 +35366,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ModalRegular() {
+  return null;
   return _reactDom.default.createPortal( /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     style: _style.style.MODAL_STYLE
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -35349,7 +35377,7 @@ function ModalRegular() {
   }), /*#__PURE__*/_react.default.createElement("img", {
     style: _style.style.IMG_REGULAR_CROSS,
     src: _iconClose.default
-  })))), document.getElementById("modal-regular"));
+  })))), document.getElementById('modal-regular'));
 }
 
 var _default = ModalRegular;
@@ -35417,6 +35445,9 @@ function Regular(props) {
   var scissors = (0, _react.useRef)(null);
   var displayResult = {};
   var displayTriangle = {};
+  var test = (0, _reactRedux.useSelector)(function (state) {
+    return state.score;
+  });
 
   var playAgain = function playAgain() {
     setToggleRegular(function (state) {
@@ -35433,21 +35464,21 @@ function Regular(props) {
     setToggleRegular(function (state) {
       return !state;
     });
-    scissors.current.style.zIndex = "0";
-    rock.current.style.zIndex = "0";
-    paper.current.style.zIndex = "3";
-    props.setuserchoice("paper");
+    scissors.current.style.zIndex = '0';
+    rock.current.style.zIndex = '0';
+    paper.current.style.zIndex = '3';
+    props.setuserchoice('paper');
     computerPlay();
   };
 
   var rockChoice = function rockChoice(e) {
-    paper.current.style.zIndex = "0";
-    scissors.current.style.zIndex = "0";
-    rock.current.style.zIndex = "3";
+    paper.current.style.zIndex = '0';
+    scissors.current.style.zIndex = '0';
+    rock.current.style.zIndex = '3';
     setToggleRegular(function (state) {
       return !state;
     });
-    props.setuserchoice("rock");
+    props.setuserchoice('rock');
     computerPlay();
   };
 
@@ -35455,21 +35486,21 @@ function Regular(props) {
     setToggleRegular(function (state) {
       return !state;
     });
-    paper.current.style.zIndex = "0";
-    rock.current.style.zIndex = "0";
-    scissors.current.style.zIndex = "3";
-    props.setuserchoice("scissors");
+    paper.current.style.zIndex = '0';
+    rock.current.style.zIndex = '0';
+    scissors.current.style.zIndex = '3';
+    props.setuserchoice('scissors');
     computerPlay();
   };
 
   var bgTriangleFunction = function bgTriangleFunction() {
     if (!toggleRegular) {
       return displayTriangle = {
-        display: "block"
+        display: 'block'
       };
     } else {
       return displayTriangle = {
-        display: "none"
+        display: 'none'
       };
     }
   };
@@ -35479,28 +35510,28 @@ function Regular(props) {
   var resultFunction = function resultFunction() {
     if (!toggleRegular) {
       return displayResult = {
-        display: "none"
+        display: 'none'
       };
     } else {
       return displayResult = {
-        display: "block"
+        display: 'block'
       };
     }
   };
 
   resultFunction();
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
-    className: "common-style"
+    className: 'common-style'
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "logo-score"
+    className: 'logo-score'
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "logo"
+    className: 'logo'
   }, /*#__PURE__*/_react.default.createElement("a", {
-    href: "/"
+    href: '/'
   }, /*#__PURE__*/_react.default.createElement(_logo.default, null))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "score"
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "bg-triangle",
+    className: 'score'
+  }, test)), /*#__PURE__*/_react.default.createElement("div", {
+    className: 'bg-triangle',
     style: displayTriangle
   }, /*#__PURE__*/_react.default.createElement(_bgTriangle.default, null), /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
     rockchoice: rockChoice,
@@ -35512,12 +35543,12 @@ function Regular(props) {
     paperchoice: paperChoice,
     toggleRegular: toggleRegular
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "regular-result",
+    className: 'regular-result',
     style: displayResult
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "container-icons"
+    className: 'container-icons'
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "user-choice"
+    className: 'user-choice'
   }, /*#__PURE__*/_react.default.createElement(_paperIcon.default, {
     ref: paper
   }), /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
@@ -35527,20 +35558,13 @@ function Regular(props) {
   })), /*#__PURE__*/_react.default.createElement(_resultsRegular.default, {
     computerchoice: props.computerchoice
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "play-again"
-  }, /*#__PURE__*/_react.default.createElement("p", null, "YOU WIN"), /*#__PURE__*/_react.default.createElement("p", null, "YOU LOSE"), /*#__PURE__*/_react.default.createElement("p", {
+    className: 'play-again'
+  }, /*#__PURE__*/_react.default.createElement("p", null, 'YOU WIN'), /*#__PURE__*/_react.default.createElement("p", null, 'YOU LOSE'), /*#__PURE__*/_react.default.createElement("p", {
     onClick: playAgain
-  }, "Play again"))), /*#__PURE__*/_react.default.createElement(_butonRegular.default, null), /*#__PURE__*/_react.default.createElement(_modalRegular.default, null)));
+  }, 'Play again'))), /*#__PURE__*/_react.default.createElement(_butonRegular.default, null), /*#__PURE__*/_react.default.createElement(_modalRegular.default, null)));
 }
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    regular: state.score
-  };
-};
-
-var _default = (0, _reactRedux.connect)(mapStateToProps)(Regular);
-
+var _default = Regular;
 exports.default = _default;
 },{"react":"../node_modules/react/index.js","./svg/logo":"components/svg/logo.js","./svg/bg-triangle":"components/svg/bg-triangle.js","./svg/icon-rock":"components/svg/icon-rock.js","./svg/icon-scissors":"components/svg/icon-scissors.js","./svg/icon-paper":"components/svg/icon-paper.js","./butons/rock-icon":"components/butons/rock-icon.js","./butons/scissors-icon":"components/butons/scissors-icon.js","./butons/paper-icon":"components/butons/paper-icon.js","./results-page/results-regular":"components/results-page/results-regular.js","react-redux":"../node_modules/react-redux/es/index.js","./butons/buton-regular":"components/butons/buton-regular.js","./modals/modal-regular":"components/modals/modal-regular.js"}],"actions/score-regular.js":[function(require,module,exports) {
 "use strict";
@@ -35552,7 +35576,7 @@ exports.default = void 0;
 
 var SCORE_REGULAR = function SCORE_REGULAR() {
   return {
-    type: "SCORE_REGULAR"
+    type: 'SCORE_REGULAR'
   };
 };
 
@@ -37285,6 +37309,19 @@ module.exports = function spread(callback) {
   };
 };
 
+},{}],"../node_modules/axios/lib/helpers/isAxiosError.js":[function(require,module,exports) {
+'use strict';
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+module.exports = function isAxiosError(payload) {
+  return (typeof payload === 'object') && (payload.isAxiosError === true);
+};
+
 },{}],"../node_modules/axios/lib/axios.js":[function(require,module,exports) {
 'use strict';
 
@@ -37335,12 +37372,15 @@ axios.all = function all(promises) {
 };
 axios.spread = require('./helpers/spread');
 
+// Expose isAxiosError
+axios.isAxiosError = require('./helpers/isAxiosError');
+
 module.exports = axios;
 
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
+},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../node_modules/axios/lib/helpers/isAxiosError.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 },{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"../node_modules/mongoose/dist/browser.umd.js":[function(require,module,exports) {
 var define;
@@ -37503,7 +37543,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           case "utf8":
           case "utf-8":
           case void 0:
-            return L(t).length;
+            return U(t).length;
 
           case "ucs2":
           case "ucs-2":
@@ -37515,10 +37555,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             return r >>> 1;
 
           case "base64":
-            return U(t).length;
+            return L(t).length;
 
           default:
-            if (n) return L(t).length;
+            if (n) return U(t).length;
             e = ("" + e).toLowerCase(), n = !0;
         }
       }
@@ -37535,23 +37575,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           case "utf8":
           case "utf-8":
-            return $(this, e, r);
+            return E(this, e, r);
 
           case "ascii":
-            return E(this, e, r);
+            return j(this, e, r);
 
           case "latin1":
           case "binary":
             return P(this, e, r);
 
           case "base64":
-            return j(this, e, r);
+            return $(this, e, r);
 
           case "ucs2":
           case "ucs-2":
           case "utf16le":
           case "utf-16le":
-            return N(this, e, r);
+            return T(this, e, r);
 
           default:
             if (n) throw new TypeError("Unknown encoding: " + t);
@@ -37631,7 +37671,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       function b(t, e, r, n) {
-        return V(L(e, t.length - r), t, r, n);
+        return V(U(e, t.length - r), t, r, n);
       }
 
       function w(t, e, r, n) {
@@ -37647,7 +37687,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       function S(t, e, r, n) {
-        return V(U(e), t, r, n);
+        return V(L(e), t, r, n);
       }
 
       function A(t, e, r, n) {
@@ -37658,11 +37698,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }(e, t.length - r), t, r, n);
       }
 
-      function j(t, e, r) {
+      function $(t, e, r) {
         return 0 === e && r === t.length ? n.fromByteArray(t) : n.fromByteArray(t.slice(e, r));
       }
 
-      function $(t, e, r) {
+      function E(t, e, r) {
         r = Math.min(t.length, r);
 
         for (var n = [], o = e; o < r;) {
@@ -37802,7 +37842,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return this;
       }, u.prototype.toString = function () {
         var t = 0 | this.length;
-        return 0 === t ? "" : 0 === arguments.length ? $(this, 0, t) : d.apply(this, arguments);
+        return 0 === t ? "" : 0 === arguments.length ? E(this, 0, t) : d.apply(this, arguments);
       }, u.prototype.equals = function (t) {
         if (!u.isBuffer(t)) throw new TypeError("Argument must be a Buffer");
         return this === t || 0 === u.compare(this, t);
@@ -37874,7 +37914,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         };
       };
 
-      function E(t, e, r) {
+      function j(t, e, r) {
         var n = "";
         r = Math.min(t.length, r);
 
@@ -37901,13 +37941,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return o;
       }
 
-      function N(t, e, r) {
+      function T(t, e, r) {
         for (var n = t.slice(e, r), o = "", i = 0; i < n.length; i += 2) o += String.fromCharCode(n[i] + 256 * n[i + 1]);
 
         return o;
       }
 
-      function T(t, e, r) {
+      function N(t, e, r) {
         if (t % 1 != 0 || t < 0) throw new RangeError("offset is not uint");
         if (t + e > r) throw new RangeError("Trying to access beyond buffer length");
       }
@@ -37918,13 +37958,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if (r + n > t.length) throw new RangeError("Index out of range");
       }
 
-      function C(t, e, r, n) {
+      function B(t, e, r, n) {
         e < 0 && (e = 65535 + e + 1);
 
         for (var o = 0, i = Math.min(t.length - r, 2); o < i; ++o) t[r + o] = (e & 255 << 8 * (n ? o : 1 - o)) >>> 8 * (n ? o : 1 - o);
       }
 
-      function D(t, e, r, n) {
+      function C(t, e, r, n) {
         e < 0 && (e = 4294967295 + e + 1);
 
         for (var o = 0, i = Math.min(t.length - r, 4); o < i; ++o) t[r + o] = e >>> 8 * (n ? o : 3 - o) & 255;
@@ -37935,7 +37975,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if (r < 0) throw new RangeError("Index out of range");
       }
 
-      function B(t, e, r, n, i) {
+      function D(t, e, r, n, i) {
         return i || R(t, 0, r, 4), o.write(t, e, r, n, 23, 4), r + 4;
       }
 
@@ -37954,61 +37994,61 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
         return r;
       }, u.prototype.readUIntLE = function (t, e, r) {
-        t |= 0, e |= 0, r || T(t, e, this.length);
+        t |= 0, e |= 0, r || N(t, e, this.length);
 
         for (var n = this[t], o = 1, i = 0; ++i < e && (o *= 256);) n += this[t + i] * o;
 
         return n;
       }, u.prototype.readUIntBE = function (t, e, r) {
-        t |= 0, e |= 0, r || T(t, e, this.length);
+        t |= 0, e |= 0, r || N(t, e, this.length);
 
         for (var n = this[t + --e], o = 1; e > 0 && (o *= 256);) n += this[t + --e] * o;
 
         return n;
       }, u.prototype.readUInt8 = function (t, e) {
-        return e || T(t, 1, this.length), this[t];
+        return e || N(t, 1, this.length), this[t];
       }, u.prototype.readUInt16LE = function (t, e) {
-        return e || T(t, 2, this.length), this[t] | this[t + 1] << 8;
+        return e || N(t, 2, this.length), this[t] | this[t + 1] << 8;
       }, u.prototype.readUInt16BE = function (t, e) {
-        return e || T(t, 2, this.length), this[t] << 8 | this[t + 1];
+        return e || N(t, 2, this.length), this[t] << 8 | this[t + 1];
       }, u.prototype.readUInt32LE = function (t, e) {
-        return e || T(t, 4, this.length), (this[t] | this[t + 1] << 8 | this[t + 2] << 16) + 16777216 * this[t + 3];
+        return e || N(t, 4, this.length), (this[t] | this[t + 1] << 8 | this[t + 2] << 16) + 16777216 * this[t + 3];
       }, u.prototype.readUInt32BE = function (t, e) {
-        return e || T(t, 4, this.length), 16777216 * this[t] + (this[t + 1] << 16 | this[t + 2] << 8 | this[t + 3]);
+        return e || N(t, 4, this.length), 16777216 * this[t] + (this[t + 1] << 16 | this[t + 2] << 8 | this[t + 3]);
       }, u.prototype.readIntLE = function (t, e, r) {
-        t |= 0, e |= 0, r || T(t, e, this.length);
+        t |= 0, e |= 0, r || N(t, e, this.length);
 
         for (var n = this[t], o = 1, i = 0; ++i < e && (o *= 256);) n += this[t + i] * o;
 
         return n >= (o *= 128) && (n -= Math.pow(2, 8 * e)), n;
       }, u.prototype.readIntBE = function (t, e, r) {
-        t |= 0, e |= 0, r || T(t, e, this.length);
+        t |= 0, e |= 0, r || N(t, e, this.length);
 
         for (var n = e, o = 1, i = this[t + --n]; n > 0 && (o *= 256);) i += this[t + --n] * o;
 
         return i >= (o *= 128) && (i -= Math.pow(2, 8 * e)), i;
       }, u.prototype.readInt8 = function (t, e) {
-        return e || T(t, 1, this.length), 128 & this[t] ? -1 * (255 - this[t] + 1) : this[t];
+        return e || N(t, 1, this.length), 128 & this[t] ? -1 * (255 - this[t] + 1) : this[t];
       }, u.prototype.readInt16LE = function (t, e) {
-        e || T(t, 2, this.length);
+        e || N(t, 2, this.length);
         var r = this[t] | this[t + 1] << 8;
         return 32768 & r ? 4294901760 | r : r;
       }, u.prototype.readInt16BE = function (t, e) {
-        e || T(t, 2, this.length);
+        e || N(t, 2, this.length);
         var r = this[t + 1] | this[t] << 8;
         return 32768 & r ? 4294901760 | r : r;
       }, u.prototype.readInt32LE = function (t, e) {
-        return e || T(t, 4, this.length), this[t] | this[t + 1] << 8 | this[t + 2] << 16 | this[t + 3] << 24;
+        return e || N(t, 4, this.length), this[t] | this[t + 1] << 8 | this[t + 2] << 16 | this[t + 3] << 24;
       }, u.prototype.readInt32BE = function (t, e) {
-        return e || T(t, 4, this.length), this[t] << 24 | this[t + 1] << 16 | this[t + 2] << 8 | this[t + 3];
+        return e || N(t, 4, this.length), this[t] << 24 | this[t + 1] << 16 | this[t + 2] << 8 | this[t + 3];
       }, u.prototype.readFloatLE = function (t, e) {
-        return e || T(t, 4, this.length), o.read(this, t, !0, 23, 4);
+        return e || N(t, 4, this.length), o.read(this, t, !0, 23, 4);
       }, u.prototype.readFloatBE = function (t, e) {
-        return e || T(t, 4, this.length), o.read(this, t, !1, 23, 4);
+        return e || N(t, 4, this.length), o.read(this, t, !1, 23, 4);
       }, u.prototype.readDoubleLE = function (t, e) {
-        return e || T(t, 8, this.length), o.read(this, t, !0, 52, 8);
+        return e || N(t, 8, this.length), o.read(this, t, !0, 52, 8);
       }, u.prototype.readDoubleBE = function (t, e) {
-        return e || T(t, 8, this.length), o.read(this, t, !1, 52, 8);
+        return e || N(t, 8, this.length), o.read(this, t, !1, 52, 8);
       }, u.prototype.writeUIntLE = function (t, e, r, n) {
         (t = +t, e |= 0, r |= 0, n) || k(this, t, e, r, Math.pow(2, 8 * r) - 1, 0);
         var o = 1,
@@ -38028,13 +38068,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }, u.prototype.writeUInt8 = function (t, e, r) {
         return t = +t, e |= 0, r || k(this, t, e, 1, 255, 0), u.TYPED_ARRAY_SUPPORT || (t = Math.floor(t)), this[e] = 255 & t, e + 1;
       }, u.prototype.writeUInt16LE = function (t, e, r) {
-        return t = +t, e |= 0, r || k(this, t, e, 2, 65535, 0), u.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8) : C(this, t, e, !0), e + 2;
+        return t = +t, e |= 0, r || k(this, t, e, 2, 65535, 0), u.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8) : B(this, t, e, !0), e + 2;
       }, u.prototype.writeUInt16BE = function (t, e, r) {
-        return t = +t, e |= 0, r || k(this, t, e, 2, 65535, 0), u.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 8, this[e + 1] = 255 & t) : C(this, t, e, !1), e + 2;
+        return t = +t, e |= 0, r || k(this, t, e, 2, 65535, 0), u.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 8, this[e + 1] = 255 & t) : B(this, t, e, !1), e + 2;
       }, u.prototype.writeUInt32LE = function (t, e, r) {
-        return t = +t, e |= 0, r || k(this, t, e, 4, 4294967295, 0), u.TYPED_ARRAY_SUPPORT ? (this[e + 3] = t >>> 24, this[e + 2] = t >>> 16, this[e + 1] = t >>> 8, this[e] = 255 & t) : D(this, t, e, !0), e + 4;
+        return t = +t, e |= 0, r || k(this, t, e, 4, 4294967295, 0), u.TYPED_ARRAY_SUPPORT ? (this[e + 3] = t >>> 24, this[e + 2] = t >>> 16, this[e + 1] = t >>> 8, this[e] = 255 & t) : C(this, t, e, !0), e + 4;
       }, u.prototype.writeUInt32BE = function (t, e, r) {
-        return t = +t, e |= 0, r || k(this, t, e, 4, 4294967295, 0), u.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 24, this[e + 1] = t >>> 16, this[e + 2] = t >>> 8, this[e + 3] = 255 & t) : D(this, t, e, !1), e + 4;
+        return t = +t, e |= 0, r || k(this, t, e, 4, 4294967295, 0), u.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 24, this[e + 1] = t >>> 16, this[e + 2] = t >>> 8, this[e + 3] = 255 & t) : C(this, t, e, !1), e + 4;
       }, u.prototype.writeIntLE = function (t, e, r, n) {
         if (t = +t, e |= 0, !n) {
           var o = Math.pow(2, 8 * r - 1);
@@ -38064,17 +38104,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }, u.prototype.writeInt8 = function (t, e, r) {
         return t = +t, e |= 0, r || k(this, t, e, 1, 127, -128), u.TYPED_ARRAY_SUPPORT || (t = Math.floor(t)), t < 0 && (t = 255 + t + 1), this[e] = 255 & t, e + 1;
       }, u.prototype.writeInt16LE = function (t, e, r) {
-        return t = +t, e |= 0, r || k(this, t, e, 2, 32767, -32768), u.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8) : C(this, t, e, !0), e + 2;
+        return t = +t, e |= 0, r || k(this, t, e, 2, 32767, -32768), u.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8) : B(this, t, e, !0), e + 2;
       }, u.prototype.writeInt16BE = function (t, e, r) {
-        return t = +t, e |= 0, r || k(this, t, e, 2, 32767, -32768), u.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 8, this[e + 1] = 255 & t) : C(this, t, e, !1), e + 2;
+        return t = +t, e |= 0, r || k(this, t, e, 2, 32767, -32768), u.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 8, this[e + 1] = 255 & t) : B(this, t, e, !1), e + 2;
       }, u.prototype.writeInt32LE = function (t, e, r) {
-        return t = +t, e |= 0, r || k(this, t, e, 4, 2147483647, -2147483648), u.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8, this[e + 2] = t >>> 16, this[e + 3] = t >>> 24) : D(this, t, e, !0), e + 4;
+        return t = +t, e |= 0, r || k(this, t, e, 4, 2147483647, -2147483648), u.TYPED_ARRAY_SUPPORT ? (this[e] = 255 & t, this[e + 1] = t >>> 8, this[e + 2] = t >>> 16, this[e + 3] = t >>> 24) : C(this, t, e, !0), e + 4;
       }, u.prototype.writeInt32BE = function (t, e, r) {
-        return t = +t, e |= 0, r || k(this, t, e, 4, 2147483647, -2147483648), t < 0 && (t = 4294967295 + t + 1), u.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 24, this[e + 1] = t >>> 16, this[e + 2] = t >>> 8, this[e + 3] = 255 & t) : D(this, t, e, !1), e + 4;
+        return t = +t, e |= 0, r || k(this, t, e, 4, 2147483647, -2147483648), t < 0 && (t = 4294967295 + t + 1), u.TYPED_ARRAY_SUPPORT ? (this[e] = t >>> 24, this[e + 1] = t >>> 16, this[e + 2] = t >>> 8, this[e + 3] = 255 & t) : C(this, t, e, !1), e + 4;
       }, u.prototype.writeFloatLE = function (t, e, r) {
-        return B(this, t, e, !0, r);
+        return D(this, t, e, !0, r);
       }, u.prototype.writeFloatBE = function (t, e, r) {
-        return B(this, t, e, !1, r);
+        return D(this, t, e, !1, r);
       }, u.prototype.writeDoubleLE = function (t, e, r) {
         return M(this, t, e, !0, r);
       }, u.prototype.writeDoubleBE = function (t, e, r) {
@@ -38105,7 +38145,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if (r <= e) return this;
         var i;
         if (e >>>= 0, r = void 0 === r ? this.length : r >>> 0, t || (t = 0), "number" == typeof t) for (i = e; i < r; ++i) this[i] = t;else {
-          var s = u.isBuffer(t) ? t : L(new u(t, n).toString()),
+          var s = u.isBuffer(t) ? t : U(new u(t, n).toString()),
               a = s.length;
 
           for (i = 0; i < r - e; ++i) this[i + e] = s[i % a];
@@ -38118,7 +38158,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return t < 16 ? "0" + t.toString(16) : t.toString(16);
       }
 
-      function L(t, e) {
+      function U(t, e) {
         var r;
         e = e || 1 / 0;
 
@@ -38166,7 +38206,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return i;
       }
 
-      function U(t) {
+      function L(t) {
         return n.toByteArray(function (t) {
           if ((t = function (t) {
             return t.trim ? t.trim() : t.replace(/^\s+|\s+$/g, "");
@@ -38274,7 +38314,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           c = r(62),
           l = r(63).Buffer,
           f = r(20),
-          p = r(13),
+          p = r(12),
           h = r(114),
           y = r(28),
           d = r(21),
@@ -38508,7 +38548,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         if (e.isPOJO(o)) {
-          for (var l in i = {}, o) b.has(l) || (i[l] = t(o[l]));
+          i = {};
+
+          for (var l = 0, f = Object.keys(o); l < f.length; l++) {
+            var p = f[l];
+            b.has(p) || (i[p] = t(o[p]));
+          }
 
           return i;
         }
@@ -39120,8 +39165,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var c,
             l = "",
             w = !1,
-            j = ["{", "}"];
-        (y(r) && (w = !0, j = ["[", "]"]), A(r)) && (l = " [Function" + (r.name ? ": " + r.name : "") + "]");
+            $ = ["{", "}"];
+        (y(r) && (w = !0, $ = ["[", "]"]), A(r)) && (l = " [Function" + (r.name ? ": " + r.name : "") + "]");
         return b(r) && (l = " " + RegExp.prototype.toString.call(r)), O(r) && (l = " " + Date.prototype.toUTCString.call(r)), S(r) && (l = " " + p(r)), 0 !== s.length || w && 0 != r.length ? n < 0 ? b(r) ? t.stylize(RegExp.prototype.toString.call(r), "regexp") : t.stylize("[Object]", "special") : (t.seen.push(r), c = w ? function (t, e, r, n, o) {
           for (var i = [], s = 0, a = e.length; s < a; ++s) x(e, String(s)) ? i.push(h(t, e, r, n, String(s), !0)) : i.push("");
 
@@ -39135,7 +39180,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             return e.indexOf("\n") >= 0 && 0, t + e.replace(/\u001b\[\d\d?m/g, "").length + 1;
           }, 0) > 60) return r[0] + ("" === e ? "" : e + "\n ") + " " + t.join(",\n  ") + " " + r[1];
           return r[0] + e + " " + t.join(", ") + " " + r[1];
-        }(c, l, j)) : j[0] + l + j[1];
+        }(c, l, $)) : $[0] + l + $[1];
       }
 
       function p(t) {
@@ -39184,7 +39229,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       function b(t) {
-        return w(t) && "[object RegExp]" === j(t);
+        return w(t) && "[object RegExp]" === $(t);
       }
 
       function w(t) {
@@ -39192,22 +39237,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       function O(t) {
-        return w(t) && "[object Date]" === j(t);
+        return w(t) && "[object Date]" === $(t);
       }
 
       function S(t) {
-        return w(t) && ("[object Error]" === j(t) || t instanceof Error);
+        return w(t) && ("[object Error]" === $(t) || t instanceof Error);
       }
 
       function A(t) {
         return "function" == typeof t;
       }
 
-      function j(t) {
+      function $(t) {
         return Object.prototype.toString.call(t);
       }
 
-      function $(t) {
+      function E(t) {
         return t < 10 ? "0" + t.toString(10) : t.toString(10);
       }
 
@@ -39251,12 +39296,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }, e.isUndefined = g, e.isRegExp = b, e.isObject = w, e.isDate = O, e.isError = S, e.isFunction = A, e.isPrimitive = function (t) {
         return null === t || "boolean" == typeof t || "number" == typeof t || "string" == typeof t || "symbol" === n(t) || void 0 === t;
       }, e.isBuffer = r(100);
-      var E = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      var j = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
       function P() {
         var t = new Date(),
-            e = [$(t.getHours()), $(t.getMinutes()), $(t.getSeconds())].join(":");
-        return [t.getDate(), E[t.getMonth()], e].join(" ");
+            e = [E(t.getHours()), E(t.getMinutes()), E(t.getSeconds())].join(":");
+        return [t.getDate(), j[t.getMonth()], e].join(" ");
       }
 
       function x(t, e) {
@@ -39272,9 +39317,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         return t;
       };
-      var N = "undefined" != typeof Symbol ? Symbol("util.promisify.custom") : void 0;
+      var T = "undefined" != typeof Symbol ? Symbol("util.promisify.custom") : void 0;
 
-      function T(t, e) {
+      function N(t, e) {
         if (!t) {
           var r = new Error("Promise was rejected with a falsy value");
           r.reason = t, t = r;
@@ -39286,10 +39331,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       e.promisify = function (t) {
         if ("function" != typeof t) throw new TypeError('The "original" argument must be of type Function');
 
-        if (N && t[N]) {
+        if (T && t[T]) {
           var e;
-          if ("function" != typeof (e = t[N])) throw new TypeError('The "util.promisify.custom" argument must be of type Function');
-          return Object.defineProperty(e, N, {
+          if ("function" != typeof (e = t[T])) throw new TypeError('The "util.promisify.custom" argument must be of type Function');
+          return Object.defineProperty(e, T, {
             value: e,
             enumerable: !1,
             writable: !1,
@@ -39315,13 +39360,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           return n;
         }
 
-        return Object.setPrototypeOf(e, Object.getPrototypeOf(t)), N && Object.defineProperty(e, N, {
+        return Object.setPrototypeOf(e, Object.getPrototypeOf(t)), T && Object.defineProperty(e, T, {
           value: e,
           enumerable: !1,
           writable: !1,
           configurable: !0
         }), Object.defineProperties(e, o(t));
-      }, e.promisify.custom = N, e.callbackify = function (e) {
+      }, e.promisify.custom = T, e.callbackify = function (e) {
         if ("function" != typeof e) throw new TypeError('The "original" argument must be of type Function');
 
         function r() {
@@ -39338,7 +39383,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           e.apply(this, r).then(function (e) {
             t.nextTick(s, null, e);
           }, function (e) {
-            t.nextTick(T, e, s);
+            t.nextTick(N, e, s);
           });
         }
 
@@ -39353,7 +39398,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
      * Module exports.
      */
 
-    t.exports = n, n.messages = r(127), n.Messages = n.messages, n.DocumentNotFoundError = r(128), n.CastError = r(12), n.ValidationError = r(31), n.ValidatorError = r(71), n.VersionError = r(129), n.ParallelSaveError = r(130), n.OverwriteModelError = r(131), n.MissingSchemaError = r(132), n.DivergentArrayError = r(133), n.StrictModeError = r(32);
+    t.exports = n, n.messages = r(127), n.Messages = n.messages, n.DocumentNotFoundError = r(128), n.CastError = r(13), n.ValidationError = r(31), n.ValidatorError = r(71), n.VersionError = r(129), n.ParallelSaveError = r(130), n.OverwriteModelError = r(131), n.MissingSchemaError = r(132), n.DivergentArrayError = r(133), n.StrictModeError = r(32);
   }, function (t, e, r) {
     "use strict";
 
@@ -39464,48 +39509,47 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           O = r(53),
           S = r(24),
           A = r(84),
-          j = r(57).compile,
-          $ = r(57).defineKey,
-          E = r(172).flatten,
+          $ = r(57).compile,
+          E = r(57).defineKey,
+          j = r(172).flatten,
           P = r(3),
           x = r(173),
-          N = r(88),
-          T = r(174),
+          T = r(88),
+          N = r(174),
           k = r(58),
-          C = r(175),
-          D = r(4).inspect,
+          B = r(175),
+          C = r(4).inspect,
           R = r(17).internalToObjectOptions,
-          B = r(46),
+          D = r(46),
           M = r(176),
           I = r(2),
           F = r(178),
-          L = I.clone,
-          U = I.deepEqual,
+          U = I.clone,
+          L = I.deepEqual,
           V = I.isMongooseObject,
           q = Symbol("mongoose.Array#atomicsBackup"),
           W = r(0).arrayAtomicsSymbol,
           H = r(0).documentArrayParent,
-          Y = r(0).documentIsSelected,
-          K = r(0).documentIsModified,
-          z = r(0).documentModifiedPaths,
-          Q = r(0).documentSchemaSymbol,
-          J = r(0).getSymbol,
-          G = r(0).populateModelSymbol,
-          X = r(0).scopeSymbol,
-          Z = I.specialProperties;
+          Y = r(0).documentIsModified,
+          K = r(0).documentModifiedPaths,
+          z = r(0).documentSchemaSymbol,
+          Q = r(0).getSymbol,
+          J = r(0).populateModelSymbol,
+          G = r(0).scopeSymbol,
+          X = I.specialProperties;
 
-      function tt(t, e, r, n) {
+      function Z(t, e, r, n) {
         var o = this;
         "object" === a(r) && null != r && (r = (n = r).skipId), n = Object.assign({}, n);
         var s = P(n, "defaults", !0);
 
-        if (n.defaults = s, null == this.schema) {
+        if (n.defaults = s, null == this.$__schema) {
           var u = I.isObject(e) && !e.instanceOfSchema ? new v(e) : e;
           this.$__setSchema(u), e = r, r = n, n = arguments[4] || {};
         }
 
         if (this.$__ = new p(), this.$__.emitter = new f(), this.isNew = !("isNew" in n) || n.isNew, this.errors = void 0, this.$__.$options = n || {}, this.$locals = {}, this.$op = null, null != t && "object" !== a(t)) throw new _(t, "obj", "Document");
-        var c = this.schema;
+        var c = this.$__schema;
         "boolean" == typeof e || "throw" === e ? (this.$__.strictMode = e, e = void 0) : (this.$__.strictMode = c.options.strict, this.$__.selected = e);
         var l,
             h = c.requiredPaths(!0),
@@ -39525,22 +39569,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         this.$__.emitter.setMaxListeners(0);
         var m = null;
-        I.isPOJO(e) && (m = C(e));
-        var g = !1 === m && e ? rt(e) : {};
+        I.isPOJO(e) && (m = B(e));
+        var g = !1 === m && e ? et(e) : {};
 
-        if (null == this._doc && (this.$__buildDoc(t, e, r, m, g, !1), s && nt(this, e, r, m, g, !0, {
+        if (null == this._doc && (this.$__buildDoc(t, e, r, m, g, !1), s && rt(this, e, r, m, g, !0, {
           isNew: this.isNew
-        })), t && (this.$__original_set ? this.$__original_set(t, void 0, !0) : this.$set(t, void 0, !0), t instanceof tt && (this.isNew = t.isNew)), n.willInit && s ? f.prototype.once.call(this, "init", function () {
-          nt(o, e, r, m, g, !1, n.skipDefaults, o.isNew);
-        }) : s && nt(this, e, r, m, g, !1, n.skipDefaults, this.isNew), this.$__._id = this._id, !this.$__.strictMode && t) {
+        })), t && (this.$__original_set ? this.$__original_set(t, void 0, !0) : this.$set(t, void 0, !0), t instanceof Z && (this.isNew = t.isNew)), n.willInit && s ? f.prototype.once.call(this, "init", function () {
+          rt(o, e, r, m, g, !1, n.skipDefaults, o.isNew);
+        }) : s && rt(this, e, r, m, g, !1, n.skipDefaults, this.isNew), this.$__._id = this._id, !this.$__.strictMode && t) {
           var b = this,
               w = Object.keys(this._doc);
           w.forEach(function (t) {
-            t in c.tree || $(t, null, b);
+            t in c.tree || E(t, null, b);
           });
         }
 
-        at(this);
+        st(this);
       }
       /*!
        * Document exposes the NodeJS event emitter API, so you can use
@@ -39548,17 +39592,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      for (var et in I.each(["on", "once", "emit", "listeners", "removeListener", "setMaxListeners", "removeAllListeners", "addListener"], function (t) {
-        tt.prototype[t] = function () {
+      for (var tt in I.each(["on", "once", "emit", "listeners", "removeListener", "setMaxListeners", "removeAllListeners", "addListener"], function (t) {
+        Z.prototype[t] = function () {
           return this.$__.emitter[t].apply(this.$__.emitter, arguments);
         };
-      }), tt.prototype.constructor = tt, f.prototype) tt[et] = f.prototype[et];
+      }), Z.prototype.constructor = Z, f.prototype) Z[tt] = f.prototype[tt];
       /*!
        * ignore
        */
 
 
-      function rt(t) {
+      function et(t) {
         for (var e = {}, r = 0, n = Object.keys(t); r < n.length; r++) {
           var o,
               s = [],
@@ -39583,12 +39627,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function nt(t, e, r, n, o, i, s) {
-        for (var a = Object.keys(t.schema.paths), u = a.length, c = 0; c < u; ++c) {
+      function rt(t, e, r, n, o, i, s) {
+        for (var a = Object.keys(t.$__schema.paths), u = a.length, c = 0; c < u; ++c) {
           var l = void 0,
               f = "",
               p = a[c];
-          if ("_id" !== p || !r) for (var h = t.schema.paths[p], y = -1 === p.indexOf(".") ? [p] : p.split("."), d = y.length, _ = !1, m = t._doc, v = 0; v < d && null != m; ++v) {
+          if ("_id" !== p || !r) for (var h = t.$__schema.paths[p], y = -1 === p.indexOf(".") ? [p] : p.split("."), d = y.length, _ = !1, m = t._doc, v = 0; v < d && null != m; ++v) {
             var g = y[v];
 
             if (f += (f.length ? "." : "") + g, !0 === n) {
@@ -39642,12 +39686,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
       }
 
-      function ot(t) {
+      function nt(t) {
         if (null == t) return !0;
         if ("object" !== a(t) || Array.isArray(t)) return !1;
 
         for (var e = 0, r = Object.keys(t); e < r.length; e++) {
-          if (!ot(t[r[e]])) return !1;
+          if (!nt(t[r[e]])) return !1;
         }
 
         return !0;
@@ -39657,7 +39701,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function it(t) {
+      function ot(t) {
         var e = {};
         !
         /*!
@@ -39665,12 +39709,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
          */
         function (t) {
           Object.keys(t.$__.activePaths.states.require).forEach(function (e) {
-            var r = t.schema.path(e);
+            var r = t.$__schema.path(e);
             null != r && "function" == typeof r.originalRequiredValue && (t.$__.cachedRequired[e] = r.originalRequiredValue.call(t, t));
           });
         }(t);
         var r = new Set(Object.keys(t.$__.activePaths.states.require).filter(function (e) {
-          return !(!t.isSelected(e) && !t.isModified(e)) && (!(e in t.$__.cachedRequired) || t.$__.cachedRequired[e]);
+          return !(!t.$__isSelected(e) && !t.isModified(e)) && (!(e in t.$__.cachedRequired) || t.$__.cachedRequired[e]);
         }));
 
         function n(t) {
@@ -39679,7 +39723,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         Object.keys(t.$__.activePaths.states.init).forEach(n), Object.keys(t.$__.activePaths.states.modify).forEach(n), Object.keys(t.$__.activePaths.states.default).forEach(n);
         var o,
-            s = t.$__getAllSubdocs(),
+            s = t.$getAllSubdocs(),
             a = t.modifiedPaths(),
             u = i(s);
 
@@ -39717,7 +39761,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         try {
           for (y.s(); !(h = y.n()).done;) {
             var d = h.value,
-                _ = t.schema.path(d);
+                _ = t.$__schema.path(d);
 
             if (_ && _.$isMongooseArray && (!_.$isMongooseDocumentArray || P(_, "schemaOptions.required"))) m(t.$__getValue(d), r, d);
           }
@@ -39741,12 +39785,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           for (b.s(); !(v = b.n()).done;) {
             var w = v.value;
 
-            if (t.schema.nested[w]) {
+            if (t.$__schema.nested[w]) {
               var O = t.$__getValue(w);
               V(O) && (O = O.toObject({
                 transform: !1
               }));
-              var S = E(O, w, g, t.schema);
+              var S = j(O, w, g, t.$__schema);
               Object.keys(S).forEach(n);
             }
           }
@@ -39757,25 +39801,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         var A,
-            j = i(r);
+            $ = i(r);
 
         try {
-          for (j.s(); !(A = j.n()).done;) {
-            var $ = A.value;
-            if (t.schema.singleNestedPaths.hasOwnProperty($)) r.delete($);else {
-              var x = t.schema.path($);
+          for ($.s(); !(A = $.n()).done;) {
+            var E = A.value;
+            if (t.$__schema.singleNestedPaths.hasOwnProperty(E)) r.delete(E);else {
+              var x = t.$__schema.path(E);
 
               if (x && x.$isSchemaMap) {
-                var N = t.$__getValue($);
+                var T = t.$__getValue(E);
 
-                if (null != N) {
-                  var T,
-                      k = i(N.keys());
+                if (null != T) {
+                  var N,
+                      k = i(T.keys());
 
                   try {
-                    for (k.s(); !(T = k.n()).done;) {
-                      var C = T.value;
-                      r.add($ + "." + C);
+                    for (k.s(); !(N = k.n()).done;) {
+                      var B = N.value;
+                      r.add(E + "." + B);
                     }
                   } catch (t) {
                     k.e(t);
@@ -39787,9 +39831,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             }
           }
         } catch (t) {
-          j.e(t);
+          $.e(t);
         } finally {
-          j.f();
+          $.f();
         }
 
         return [r = Array.from(r), e];
@@ -39803,7 +39847,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function st(t, e) {
+      function it(t, e) {
         var r,
             n = new Set(e),
             o = new Map([]),
@@ -39842,8 +39886,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function at(t) {
-        var e = t.schema && t.schema.callQueue;
+      function st(t) {
+        var e = t.$__schema && t.$__schema.callQueue;
 
         if (e.length) {
           var r,
@@ -39870,11 +39914,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function ut(t, e, r, n) {
+      function at(t, e, r, n) {
         var o,
             i,
             s,
-            a = t.schema,
+            a = t.$__schema,
             u = Object.keys(a.virtuals),
             c = u.length,
             l = c,
@@ -39890,7 +39934,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           var h = i.split(".");
 
-          if (void 0 !== (s = L(t.get(o), r))) {
+          if (void 0 !== (s = U(t.get(o), r))) {
             var y = h.length;
             f = e;
 
@@ -39911,7 +39955,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function ct(t, e) {
+      function ut(t, e) {
         if (F(e)) throw new Error("`transform` function must be synchronous, but the transform on path `" + t + "` returned a promise.");
       }
       /*!
@@ -39919,12 +39963,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      tt.prototype.schema, Object.defineProperty(tt.prototype, "$locals", {
+      Z.prototype.$__schema, Z.prototype.schema, Object.defineProperty(Z.prototype, "$locals", {
         configurable: !1,
         enumerable: !1,
         writable: !0
-      }), tt.prototype.isNew, tt.prototype.id, tt.prototype.errors, tt.prototype.$op, tt.prototype.$__buildDoc = function (t, e, r, n, o) {
-        for (var i = {}, s = Object.keys(this.schema.paths).filter(function (t) {
+      }), Z.prototype.isNew, Z.prototype.id, Z.prototype.errors, Z.prototype.$op, Z.prototype.$__buildDoc = function (t, e, r, n, o) {
+        for (var i = {}, s = Object.keys(this.$__schema.paths).filter(function (t) {
           return !t.includes("$*");
         }), a = s.length, u = 0; u < a; ++u) {
           var c = s[u];
@@ -39950,15 +39994,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       /*!
        * Converts to POJO when you use the document for querying
        */
-      tt.prototype.toBSON = function () {
+      Z.prototype.toBSON = function () {
         return this.toObject(R);
-      }, tt.prototype.init = function (t, e, r) {
+      }, Z.prototype.init = function (t, e, r) {
         return "function" == typeof e && (r = e, e = null), this.$__init(t, e), r && r(null, this), this;
       },
       /*!
        * ignore
        */
-      tt.prototype.$__init = function (t, e) {
+      Z.prototype.$__init = function (t, e) {
         if (this.isNew = !1, this.$init = !0, e = e || {}, null != t._id && e.populated && e.populated.length) {
           var r,
               n = String(t._id),
@@ -40012,7 +40056,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           for (; f < l;) p(f++);
 
           function p(l) {
-            if (u = c[l], a = i + u, s = e.schema.path(a), !e.schema.$isRootDiscriminator || e.isSelected(a)) if (!s && I.isPOJO(r[u])) n[u] || (n[u] = {}), t(e, r[u], n[u], o, a + ".");else if (s) {
+            if (u = c[l], a = i + u, s = e.$__schema.path(a), !e.$__schema.$isRootDiscriminator || e.$__isSelected(a)) if (!s && I.isPOJO(r[u])) n[u] || (n[u] = {}), t(e, r[u], n[u], o, a + ".");else if (s) {
               if (null === r[u]) n[u] = s._castNullish(null);else if (void 0 !== r[u]) {
                 var f = (r[u].$__ || {}).wasPopulated || null;
                 if (s && !f) try {
@@ -40066,34 +40110,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             o.f();
           }
         }(this, e.populated), this.emit("init", this), this.constructor.emit("init", this), this.$__._id = this._id, this;
-      }, tt.prototype.update = function () {
+      }, Z.prototype.update = function () {
         var t = I.args(arguments);
         t.unshift({
           _id: this._id
         });
         var e = this.constructor.update.apply(this.constructor, t);
         return null != this.$session() && ("session" in e.options || (e.options.session = this.$session())), e;
-      }, tt.prototype.updateOne = function (t, e, r) {
+      }, Z.prototype.updateOne = function (t, e, r) {
         var n = this,
             o = this.constructor.updateOne({
           _id: this._id
         }, t, e);
-        return o._pre(function (t) {
+        return o.pre(function (t) {
           n.constructor._middleware.execPre("updateOne", n, [n], t);
-        }), o._post(function (t) {
+        }), o.post(function (t) {
           n.constructor._middleware.execPost("updateOne", n, [n], {}, t);
         }), null != this.$session() && ("session" in o.options || (o.options.session = this.$session())), null != r ? o.exec(r) : o;
-      }, tt.prototype.replaceOne = function () {
+      }, Z.prototype.replaceOne = function () {
         var t = I.args(arguments);
         return t.unshift({
           _id: this._id
         }), this.constructor.replaceOne.apply(this.constructor, t);
-      }, tt.prototype.$session = function (t) {
+      }, Z.prototype.$session = function (t) {
         if (0 === arguments.length) return this.$__.session;
 
         if (this.$__.session = t, !this.ownerDocument) {
           var e,
-              r = this.$__getAllSubdocs(),
+              r = this.$getAllSubdocs(),
               n = i(r);
 
           try {
@@ -40109,14 +40153,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return t;
-      }, tt.prototype.overwrite = function (t) {
+      }, Z.prototype.overwrite = function (t) {
         for (var e = 0, r = Array.from(new Set(Object.keys(this._doc).concat(Object.keys(t)))); e < r.length; e++) {
           var n = r[e];
-          "_id" !== n && (this.schema.options.versionKey && n === this.schema.options.versionKey || this.schema.options.discriminatorKey && n === this.schema.options.discriminatorKey || this.$set(n, t[n]));
+          "_id" !== n && (this.$__schema.options.versionKey && n === this.$__schema.options.versionKey || this.$__schema.options.discriminatorKey && n === this.$__schema.options.discriminatorKey || this.$set(n, t[n]));
         }
 
         return this;
-      }, tt.prototype.$set = function (t, e, r, n) {
+      }, Z.prototype.$set = function (t, e, r, n) {
         var s = this;
         I.isPOJO(r) && (n = r, r = void 0);
 
@@ -40130,32 +40174,37 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             v = 0,
             b = "strict" in n ? n.strict : this.$__.strictMode;
 
-        if (_ && ((this.$__.adhocPaths || (this.$__.adhocPaths = {}))[t] = this.schema.interpretAsType(t, r, this.schema.options)), null == t) {
+        if (_ && ((this.$__.adhocPaths || (this.$__.adhocPaths = {}))[t] = this.$__schema.interpretAsType(t, r, this.$__schema.options)), null == t) {
           var w = t;
           t = e, e = w;
         } else {
           if ("string" != typeof t) {
-            t instanceof tt && (t = t.$__isNested ? t.toObject() : t._doc), f = e ? e + "." : "";
-            var O = (u = Object.keys(t)).length,
-                S = P(n, "_skipMinimizeTopLevel", !1);
-            if (0 === O && S) return delete n._skipMinimizeTopLevel, e && this.$set(e, {}), this;
+            if (t instanceof Z && (t = t.$__isNested ? t.toObject() : t._doc), null == t) {
+              var O = t;
+              t = e, e = O;
+            }
 
-            for (var j = 0; j < O; ++j) {
-              var $ = f + (l = u[j]);
-              if (c = this.schema.pathType($), !0 !== r || f || null == t[l] || "nested" !== c || null == this._doc[l] || 0 !== Object.keys(this._doc[l]).length || (delete this._doc[l], n = Object.assign({}, n, {
+            f = e ? e + "." : "";
+            var S = (u = Object.keys(t)).length,
+                $ = P(n, "_skipMinimizeTopLevel", !1);
+            if (0 === S && $) return delete n._skipMinimizeTopLevel, e && this.$set(e, {}), this;
+
+            for (var E = 0; E < S; ++E) {
+              var j = f + (l = u[E]);
+              if (c = this.$__schema.pathType(j), !0 !== r || f || null == t[l] || "nested" !== c || null == this._doc[l] || 0 !== Object.keys(this._doc[l]).length || (delete this._doc[l], n = Object.assign({}, n, {
                 _skipMinimizeTopLevel: !0
-              })), !("object" !== a(t[l]) || I.isNativeObject(t[l]) || I.isMongooseType(t[l]) || null == t[l] || "virtual" === c || "real" === c || "adhocOrUndefined" === c || this.$__path($) instanceof y || this.schema.paths[$] && this.schema.paths[$].options && this.schema.paths[$].options.ref)) this.$__.$setCalled.add(f + l), this.$set(t[l], f + l, m, n);else if (b) {
-                if (m && void 0 === t[l] && void 0 !== this.get($)) continue;
+              })), !("object" !== a(t[l]) || I.isNativeObject(t[l]) || I.isMongooseType(t[l]) || null == t[l] || "virtual" === c || "real" === c || "adhocOrUndefined" === c || this.$__path(j) instanceof y || this.$__schema.paths[j] && this.$__schema.paths[j].options && this.$__schema.paths[j].options.ref)) this.$__.$setCalled.add(f + l), this.$set(t[l], f + l, m, n);else if (b) {
+                if (m && void 0 === t[l] && void 0 !== this.get(j)) continue;
 
-                if ("adhocOrUndefined" === c && (c = x(this, $, {
+                if ("adhocOrUndefined" === c && (c = x(this, j, {
                   typeOnly: !0
                 })), "real" === c || "virtual" === c) {
-                  var E = t[l];
-                  this.schema.paths[$] && this.schema.paths[$].$isSingleNested && t[l] instanceof tt && (E = E.toObject({
+                  var N = t[l];
+                  this.$__schema.paths[j] && this.$__schema.paths[j].$isSingleNested && t[l] instanceof Z && (N = N.toObject({
                     virtuals: !1,
                     transform: !1
-                  })), this.$set(f + l, E, m, n);
-                } else if ("nested" === c && t[l] instanceof tt) this.$set(f + l, t[l].toObject({
+                  })), this.$set(f + l, N, m, n);
+                } else if ("nested" === c && t[l] instanceof Z) this.$set(f + l, t[l].toObject({
                   transform: !1
                 }), m, n);else if ("throw" === b) throw "nested" === c ? new d(l, t[l]) : new g(l);
               } else void 0 !== t[l] && this.$set(f + l, t[l], m, n);
@@ -40167,32 +40216,33 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           this.$__.$setCalled.add(t);
         }
 
-        var T,
-            k = this.schema.pathType(t);
+        var k,
+            B = this.$__schema.pathType(t);
 
-        if ("adhocOrUndefined" === k && (k = x(this, t, {
+        if ("adhocOrUndefined" === B && (B = x(this, t, {
           typeOnly: !0
-        })), e = N(e), "nested" === k && e) {
+        })), e = T(e), "nested" === B && e) {
           if ("object" === a(e) && null != e) {
             var C = null != this.$__.savedState && this.$__.savedState.hasOwnProperty(t);
 
             if (null != this.$__.savedState && !this.isNew && !this.$__.savedState.hasOwnProperty(t)) {
-              this.$__.savedState[t] = this.$__getValue(t);
+              var R = this.$__getValue(t);
+              this.$__.savedState[t] = R;
 
-              for (var D = 0, R = Object.keys(this.$__.savedState[t]); D < R.length; D++) {
-                var M = R[D];
-                this.$__.savedState[t + "." + M] = this.$__.savedState[t][M];
+              for (var M = 0, F = Object.keys(R || {}); M < F.length; M++) {
+                var U = F[M];
+                this.$__.savedState[t + "." + U] = R[U];
               }
             }
 
             if (p) return this.$set(e, t, m);
             this.$__setValue(t, null), A(this, t);
-            var F = Object.keys(e);
+            var L = Object.keys(e);
             this.$__setValue(t, {});
 
-            for (var L = 0, U = F; L < U.length; L++) {
-              var V = U[L];
-              this.$set(t + "." + V, e[V], m);
+            for (var V = 0, q = L; V < q.length; V++) {
+              var W = q[V];
+              this.$set(t + "." + W, e[W], m);
             }
 
             return C && I.deepEqual(this.$__.savedState[t], e) ? this.unmarkModified(t) : this.markModified(t), A(this, t, {
@@ -40203,54 +40253,54 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           return this.invalidate(t, new h.CastError("Object", e, t)), this;
         }
 
-        var q = -1 === t.indexOf(".") ? [t] : t.split(".");
+        var H = -1 === t.indexOf(".") ? [t] : t.split(".");
 
-        if ("string" == typeof this.schema.aliases[q[0]] && (q[0] = this.schema.aliases[q[0]]), "adhocOrUndefined" === k && b) {
-          var W;
+        if ("string" == typeof this.$__schema.aliases[H[0]] && (H[0] = this.$__schema.aliases[H[0]]), "adhocOrUndefined" === B && b) {
+          var Y;
 
-          for (v = 0; v < q.length; ++v) {
-            var H = q.slice(0, v + 1).join(".");
-            if (v + 1 < q.length && "virtual" === this.schema.pathType(H)) return B.set(t, e, this), this;
+          for (v = 0; v < H.length; ++v) {
+            var K = H.slice(0, v + 1).join(".");
+            if (v + 1 < H.length && "virtual" === this.$__schema.pathType(K)) return D.set(t, e, this), this;
 
-            if (null != (T = this.schema.path(H)) && T instanceof y) {
-              W = !0;
+            if (null != (k = this.$__schema.path(K)) && k instanceof y) {
+              Y = !0;
               break;
             }
           }
 
-          if (null == T && (T = x(this, t)), !W && !T) {
+          if (null == k && (k = x(this, t)), !Y && !k) {
             if ("throw" === b) throw new g(t);
             return this;
           }
         } else {
-          if ("virtual" === k) return (T = this.schema.virtualpath(t)).applySetters(e, this), this;
-          T = this.$__path(t);
+          if ("virtual" === B) return (k = this.$__schema.virtualpath(t)).applySetters(e, this), this;
+          k = this.$__path(t);
         }
 
-        var Y,
-            K = this._doc,
-            z = "";
+        var z,
+            Q = this._doc,
+            G = "";
 
-        for (v = 0; v < q.length - 1; ++v) K = K[q[v]], z += (z.length > 0 ? "." : "") + q[v], K || (this.$set(z, {}), this.isSelected(z) || this.unmarkModified(z), K = this.$__getValue(z));
+        for (v = 0; v < H.length - 1; ++v) Q = Q[H[v]], G += (G.length > 0 ? "." : "") + H[v], Q || (this.$set(G, {}), this.$__isSelected(G) || this.unmarkModified(G), Q = this.$__getValue(G));
 
-        if (q.length <= 1) Y = t;else {
-          for (v = 0; v < q.length; ++v) {
-            var Q = q.slice(0, v + 1).join(".");
+        if (H.length <= 1) z = t;else {
+          for (v = 0; v < H.length; ++v) {
+            var X = H.slice(0, v + 1).join(".");
 
-            if (null === this.get(Q, null, {
+            if (null === this.get(X, null, {
               getters: !1
             })) {
-              Y = Q;
+              z = X;
               break;
             }
           }
 
-          Y || (Y = t);
+          z || (z = t);
         }
-        var J = null != s.$__.$options.priorDoc ? s.$__.$options.priorDoc.$__getValue(t) : m ? void 0 : s.$__getValue(t);
-        if (!T) return this.$__set(Y, t, m, q, T, e, J), this;
+        var tt = null != s.$__.$options.priorDoc ? s.$__.$options.priorDoc.$__getValue(t) : m ? void 0 : s.$__getValue(t);
+        if (!k) return this.$__set(z, t, m, H, k, e, tt), this;
 
-        if ((T.$isSingleNested || T.$isMongooseArray) &&
+        if ((k.$isSingleNested || k.$isMongooseArray) &&
         /*!
          * ignore
          */
@@ -40267,38 +40317,38 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         /*!
          * ignore
          */
-        (this, t), T.$isSingleNested && null != e && p) {
-          e instanceof tt && (e = e.toObject({
+        (this, t), k.$isSingleNested && null != e && p) {
+          e instanceof Z && (e = e.toObject({
             virtuals: !1,
             transform: !1
           }));
 
-          for (var X = 0, Z = Object.keys(e); X < Z.length; X++) {
-            var et = Z[X];
-            this.$set(t + "." + et, e[et], m, n);
+          for (var et = 0, rt = Object.keys(e); et < rt.length; et++) {
+            var nt = rt[et];
+            this.$set(t + "." + nt, e[nt], m, n);
           }
 
           return this;
         }
 
-        var rt = !0;
+        var ot = !0;
 
         try {
-          var nt,
-              ot = function () {
-            if (null == T.options) return !1;
-            if (!(e instanceof tt)) return !1;
+          var it,
+              st = function () {
+            if (null == k.options) return !1;
+            if (!(e instanceof Z)) return !1;
             var t = e.constructor,
-                r = T.options.ref;
+                r = k.options.ref;
             if (null != r && (r === t.modelName || r === t.baseModelName)) return !0;
-            var n = T.options.refPath;
+            var n = k.options.refPath;
             if (null == n) return !1;
             var o = e.get(n);
             return o === t.modelName || o === t.baseModelName;
           }(),
-              it = !1;
+              at = !1;
 
-          if (ot && e instanceof tt && (this.populated(t, e._id, o({}, G, e.constructor)), it = !0), T.options && Array.isArray(T.options[this.schema.options.typeKey]) && T.options[this.schema.options.typeKey].length && T.options[this.schema.options.typeKey][0].ref &&
+          if (st && e instanceof Z && (this.populated(t, e._id, o({}, J, e.constructor)), e.$__.wasPopulated = !0, at = !0), k.options && Array.isArray(k.options[this.$__schema.options.typeKey]) && k.options[this.$__schema.options.typeKey].length && k.options[this.$__schema.options.typeKey][0].ref &&
           /*!
            * ignore
            */
@@ -40311,7 +40361,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             try {
               for (n.s(); !(r = n.n()).done;) {
                 var o = r.value;
-                if (!(o instanceof tt)) return !1;
+                if (!(o instanceof Z)) return !1;
                 if (null == o.constructor.modelName) return !1;
                 if (o.constructor.modelName != e && o.constructor.baseModelName != e) return !1;
               }
@@ -40322,27 +40372,45 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             }
 
             return !0;
-          }(e, T.options[this.schema.options.typeKey][0].ref) && (this.ownerDocument ? (nt = o({}, G, e[0].constructor), this.ownerDocument().populated(this.$__fullPath(t), e.map(function (t) {
-            return t._id;
-          }), nt)) : (nt = o({}, G, e[0].constructor), this.populated(t, e.map(function (t) {
-            return t._id;
-          }), nt)), it = !0), null == this.schema.singleNestedPaths[t] && (e = T.applySetters(e, this, !1, J)), T.$isMongooseDocumentArray && Array.isArray(e) && e.length > 0 && null != e[0] && null != e[0].$__ && null != e[0].$__.populated) {
-            for (var st = Object.keys(e[0].$__.populated), at = function () {
-              var r = ct[ut];
+          }(e, k.options[this.$__schema.options.typeKey][0].ref)) {
+            this.ownerDocument ? (it = o({}, J, e[0].constructor), this.ownerDocument().populated(this.$__fullPath(t), e.map(function (t) {
+              return t._id;
+            }), it)) : (it = o({}, J, e[0].constructor), this.populated(t, e.map(function (t) {
+              return t._id;
+            }), it));
+            var ut,
+                ct = i(e);
+
+            try {
+              for (ct.s(); !(ut = ct.n()).done;) {
+                ut.value.$__.wasPopulated = !0;
+              }
+            } catch (t) {
+              ct.e(t);
+            } finally {
+              ct.f();
+            }
+
+            at = !0;
+          }
+
+          if (null == this.$__schema.singleNestedPaths[t] && (e = k.applySetters(e, this, !1, tt)), k.$isMongooseDocumentArray && Array.isArray(e) && e.length > 0 && null != e[0] && null != e[0].$__ && null != e[0].$__.populated) {
+            for (var lt = Object.keys(e[0].$__.populated), ft = function () {
+              var r = ht[pt];
               s.populated(t + "." + r, e.map(function (t) {
                 return t.populated(r);
               }), e[0].$__.populated[r].options);
-            }, ut = 0, ct = st; ut < ct.length; ut++) at();
+            }, pt = 0, ht = lt; pt < ht.length; pt++) ft();
 
-            it = !0;
+            at = !0;
           }
 
-          if (!it && this.$__.populated) {
-            if (Array.isArray(e) && this.$__.populated[t]) for (var lt = 0; lt < e.length; ++lt) e[lt] instanceof tt && (e[lt] = e[lt]._id);
+          if (!at && this.$__.populated) {
+            if (Array.isArray(e) && this.$__.populated[t]) for (var yt = 0; yt < e.length; ++yt) e[yt] instanceof Z && (e[yt] = e[yt]._id);
             delete this.$__.populated[t];
           }
 
-          T.$isSingleNested && null != e && function (t, e, r) {
+          k.$isSingleNested && null != e && function (t, e, r) {
             var n = e.schema;
             if (null == n) return;
 
@@ -40355,15 +40423,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 a.$immutableSetter.call(t, u);
               }
             }
-          }(e, T, J), this.$markValid(t);
+          }(e, k, tt), this.$markValid(t);
         } catch (r) {
-          r instanceof h.StrictModeError && r.isImmutableError ? this.invalidate(t, r) : r instanceof h.CastError ? (this.invalidate(r.path, r), r.$originalErrorPath && this.invalidate(t, new h.CastError(T.instance, e, t, r.$originalErrorPath))) : this.invalidate(t, new h.CastError(T.instance, e, t, r)), rt = !1;
+          r instanceof h.StrictModeError && r.isImmutableError ? this.invalidate(t, r) : r instanceof h.CastError ? (this.invalidate(r.path, r), r.$originalErrorPath && this.invalidate(t, new h.CastError(k.instance, e, t, r.$originalErrorPath))) : this.invalidate(t, new h.CastError(k.instance, e, t, r)), ot = !1;
         }
 
-        return rt && (this.$__set(Y, t, m, q, T, e, J), null != this.$__.savedState && (this.isNew || this.$__.savedState.hasOwnProperty(t) ? this.$__.savedState.hasOwnProperty(t) && I.deepEqual(e, this.$__.savedState[t]) && this.unmarkModified(t) : this.$__.savedState[t] = J)), T.$isSingleNested && (this.isDirectModified(t) || null == e) && A(this, t), this;
-      }, tt.prototype.set = tt.prototype.$set, tt.prototype.$__shouldModify = function (t, e, r, n, o, i, s) {
-        return !!this.isNew || null == this.schema.singleNestedPaths[e] && (void 0 === i && !this.isSelected(e) || (void 0 !== i || !(e in this.$__.activePaths.states.default)) && !(this.populated(e) && i instanceof tt && U(i._id, s)) && (!U(i, s || I.getValue(e, this)) || !(r || null == i || !(e in this.$__.activePaths.states.default) || !U(i, o.getDefault(this, r)))));
-      }, tt.prototype.$__set = function (t, e, n, o, i, s, a) {
+        return ot && (this.$__set(z, t, m, H, k, e, tt), null != this.$__.savedState && (this.isNew || this.$__.savedState.hasOwnProperty(t) ? this.$__.savedState.hasOwnProperty(t) && I.deepEqual(e, this.$__.savedState[t]) && this.unmarkModified(t) : this.$__.savedState[t] = tt)), k.$isSingleNested && (this.isDirectModified(t) || null == e) && A(this, t), this;
+      }, Z.prototype.set = Z.prototype.$set, Z.prototype.$__shouldModify = function (t, e, r, n, o, i, s) {
+        return !!this.isNew || null == this.$__schema.singleNestedPaths[e] && (void 0 === i && !this.$__isSelected(e) || (void 0 !== i || !(e in this.$__.activePaths.states.default)) && !(this.populated(e) && i instanceof Z && L(i._id, s)) && (!L(i, s || I.getValue(e, this)) || !(r || null == i || !(e in this.$__.activePaths.states.default) || !L(i, o.getDefault(this, r)))));
+      }, Z.prototype.$__set = function (t, e, n, o, i, s, a) {
         l = l || r(26);
         var u = this.$__shouldModify(t, e, n, o, i, s, a),
             f = this;
@@ -40376,33 +40444,33 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         for (var p = this._doc, h = 0, y = o.length, d = ""; h < y; h++) {
           var _ = h + 1 === y;
 
-          if (d += d ? "." + o[h] : o[h], Z.has(o[h])) return;
+          if (d += d ? "." + o[h] : o[h], X.has(o[h])) return;
           _ ? p instanceof Map ? p.set(o[h], s) : p[o[h]] = s : (I.isPOJO(p[o[h]]) || p[o[h]] && p[o[h]] instanceof l || p[o[h]] && p[o[h]].$isSingleNested || p[o[h]] && Array.isArray(p[o[h]]) || (p[o[h]] = p[o[h]] || {}), p = p[o[h]]);
         }
-      }, tt.prototype.$__getValue = function (t) {
+      }, Z.prototype.$__getValue = function (t) {
         return I.getValue(t, this._doc);
-      }, tt.prototype.$__setValue = function (t, e) {
+      }, Z.prototype.$__setValue = function (t, e) {
         return I.setValue(t, e, this._doc), this;
-      }, tt.prototype.get = function (t, e, r) {
+      }, Z.prototype.get = function (t, e, r) {
         var n;
-        r = r || {}, e && (n = this.schema.interpretAsType(t, e, this.schema.options));
+        r = r || {}, e && (n = this.$__schema.interpretAsType(t, e, this.$__schema.options));
         var o = this.$__path(t);
 
-        if (null == o && (o = this.schema.virtualpath(t)), o instanceof y) {
-          var i = this.schema.virtualpath(t);
+        if (null == o && (o = this.$__schema.virtualpath(t)), o instanceof y) {
+          var i = this.$__schema.virtualpath(t);
           null != i && (o = i);
         }
 
         var s = t.split("."),
             a = this._doc;
         if (o instanceof O) return o.applyGetters(void 0, this);
-        "string" == typeof this.schema.aliases[s[0]] && (s[0] = this.schema.aliases[s[0]]);
+        "string" == typeof this.$__schema.aliases[s[0]] && (s[0] = this.$__schema.aliases[s[0]]);
 
         for (var u = 0, c = s.length; u < c; u++) a && a._doc && (a = a._doc), a = null == a ? void 0 : a instanceof Map ? a.get(s[u], {
           getters: !1
         }) : u === c - 1 ? I.getValue(s[u], a) : a[s[u]];
 
-        if (n && (a = n.cast(a)), null != o && !1 !== r.getters) a = o.applyGetters(a, this);else if (this.schema.nested[t] && r.virtuals) return ut(this, I.clone(a) || {}, {
+        if (n && (a = n.cast(a)), null != o && !1 !== r.getters) a = o.applyGetters(a, this);else if (this.$__schema.nested[t] && r.virtuals) return at(this, I.clone(a) || {}, {
           path: t
         });
         return a;
@@ -40410,19 +40478,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       /*!
        * ignore
        */
-      tt.prototype[J] = tt.prototype.get, tt.prototype.$__path = function (t) {
+      Z.prototype[Q] = Z.prototype.get, Z.prototype.$__path = function (t) {
         var e = this.$__.adhocPaths,
             r = e && e.hasOwnProperty(t) ? e[t] : null;
-        return r || this.schema.path(t);
-      }, tt.prototype.markModified = function (t, e) {
+        return r || this.$__schema.path(t);
+      }, Z.prototype.markModified = function (t, e) {
         this.$__.activePaths.modify(t), null == e || this.ownerDocument || (this.$__.pathsToScopes[t] = e);
-      }, tt.prototype.unmarkModified = function (t) {
+      }, Z.prototype.unmarkModified = function (t) {
         this.$__.activePaths.init(t), delete this.$__.pathsToScopes[t];
-      }, tt.prototype.$ignore = function (t) {
+      }, Z.prototype.$ignore = function (t) {
         this.$__.activePaths.ignore(t);
-      }, tt.prototype.directModifiedPaths = function () {
+      }, Z.prototype.directModifiedPaths = function () {
         return Object.keys(this.$__.activePaths.states.modify);
-      }, tt.prototype.$isEmpty = function (t) {
+      }, Z.prototype.$isEmpty = function (t) {
         var e = {
           minimize: !0,
           virtuals: !1,
@@ -40432,11 +40500,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         if (arguments.length > 0) {
           var r = this.get(t);
-          return null == r || "object" === a(r) && (I.isPOJO(r) ? ot(r) : 0 === Object.keys(r.toObject(e)).length);
+          return null == r || "object" === a(r) && (I.isPOJO(r) ? nt(r) : 0 === Object.keys(r.toObject(e)).length);
         }
 
         return 0 === Object.keys(this.toObject(e)).length;
-      }, tt.prototype.modifiedPaths = function (t) {
+      }, Z.prototype.modifiedPaths = function (t) {
         t = t || {};
         var e = Object.keys(this.$__.activePaths.states.modify),
             r = this;
@@ -40471,10 +40539,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           });
           return e;
         }, []);
-      }, tt.prototype[z] = tt.prototype.modifiedPaths, tt.prototype.isModified = function (t, e) {
+      }, Z.prototype[K] = Z.prototype.modifiedPaths, Z.prototype.isModified = function (t, e) {
         if (t) {
           Array.isArray(t) || (t = t.split(" "));
-          var r = e || this[z](),
+          var r = e || this[K](),
               n = Object.keys(this.$__.activePaths.states.modify);
           return t.some(function (t) {
             return !!~r.indexOf(t);
@@ -40486,7 +40554,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return this.$__.activePaths.some("modify");
-      }, tt.prototype[K] = tt.prototype.isModified, tt.prototype.$isDefault = function (t) {
+      }, Z.prototype[Y] = Z.prototype.isModified, Z.prototype.$isDefault = function (t) {
         var e = this;
         if (null == t) return this.$__.activePaths.some("default");
         if ("string" == typeof t && -1 === t.indexOf(" ")) return this.$__.activePaths.states.default.hasOwnProperty(t);
@@ -40494,9 +40562,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return Array.isArray(r) || (r = r.split(" ")), r.some(function (t) {
           return e.$__.activePaths.states.default.hasOwnProperty(t);
         });
-      }, tt.prototype.$isDeleted = function (t) {
+      }, Z.prototype.$isDeleted = function (t) {
         return 0 === arguments.length ? !!this.$__.isDeleted : (this.$__.isDeleted = !!t, this);
-      }, tt.prototype.isDirectModified = function (t) {
+      }, Z.prototype.isDirectModified = function (t) {
         var e = this;
         if (null == t) return this.$__.activePaths.some("modify");
         if ("string" == typeof t && -1 === t.indexOf(" ")) return this.$__.activePaths.states.modify.hasOwnProperty(t);
@@ -40504,7 +40572,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return Array.isArray(r) || (r = r.split(" ")), r.some(function (t) {
           return e.$__.activePaths.states.modify.hasOwnProperty(t);
         });
-      }, tt.prototype.isInit = function (t) {
+      }, Z.prototype.isInit = function (t) {
         var e = this;
         if (null == t) return this.$__.activePaths.some("init");
         if ("string" == typeof t && -1 === t.indexOf(" ")) return this.$__.activePaths.states.init.hasOwnProperty(t);
@@ -40512,12 +40580,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return Array.isArray(r) || (r = r.split(" ")), r.some(function (t) {
           return e.$__.activePaths.states.init.hasOwnProperty(t);
         });
-      }, tt.prototype.isSelected = function (t) {
+      }, Z.prototype.isSelected = function (t) {
         var e = this;
         if (null == this.$__.selected) return !0;
         if ("_id" === t) return 0 !== this.$__.selected._id;
         if (-1 !== t.indexOf(" ") && (t = t.split(" ")), Array.isArray(t)) return t.some(function (t) {
-          return e.isSelected(t);
+          return e.$__isSelected(t);
         });
         var r = Object.keys(this.$__.selected),
             n = null;
@@ -40545,7 +40613,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return !n;
-      }, tt.prototype[Y] = tt.prototype.isSelected, tt.prototype.isDirectSelected = function (t) {
+      }, Z.prototype.$__isSelected = Z.prototype.isSelected, Z.prototype.isDirectSelected = function (t) {
         var e = this;
         if (null == this.$__.selected) return !0;
         if ("_id" === t) return 0 !== this.$__.selected._id;
@@ -40566,7 +40634,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return null === n || (this.$__.selected.hasOwnProperty(t) ? n : !n);
-      }, tt.prototype.validate = function (t, e, r) {
+      }, Z.prototype.validate = function (t, e, r) {
         var n,
             o = this;
         return this.$op = "validate", null != this.ownerDocument || (this.$__.validating ? n = new m(this, {
@@ -40580,12 +40648,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             o.$op = null, r(t);
           });
         }, this.constructor.events);
-      }, tt.prototype.$__validate = function (t, r, n) {
+      }, Z.prototype.$__validate = function (t, r, n) {
         var o = this;
         "function" == typeof t ? (n = t, r = null, t = null) : "function" == typeof r && (n = r, r = null);
         var i,
             s = r && "object" === a(r) && "validateModifiedOnly" in r;
-        i = s ? !!r.validateModifiedOnly : this.schema.options.validateModifiedOnly;
+        i = s ? !!r.validateModifiedOnly : this.$__schema.options.validateModifiedOnly;
 
         var u = this,
             c = function () {
@@ -40606,15 +40674,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             return t;
           }
         },
-            l = it(this),
+            l = ot(this),
             f = i ? l[0].filter(function (t) {
           return o.isModified(t);
         }) : l[0],
             p = l[1];
 
-        if (Array.isArray(t) && (f = st(f, t)), 0 === f.length) return e.nextTick(function () {
+        if (Array.isArray(t) && (f = it(f, t)), 0 === f.length) return e.nextTick(function () {
           var t = c();
-          if (t) return u.schema.s.hooks.execPost("validate:error", u, [u], {
+          if (t) return u.$__schema.s.hooks.execPost("validate:error", u, [u], {
             error: t
           }, function (t) {
             n(t);
@@ -40624,7 +40692,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         for (var y = {}, d = 0, _ = function () {
           var t = c();
-          if (t) return u.schema.s.hooks.execPost("validate:error", u, [u], {
+          if (t) return u.$__schema.s.hooks.execPost("validate:error", u, [u], {
             error: t
           }, function (t) {
             n(t);
@@ -40632,7 +40700,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           n(null, u);
         }, m = function (t) {
           null == t || y[t] || (y[t] = !0, d++, e.nextTick(function () {
-            var e = u.schema.path(t);
+            var e = u.$__schema.path(t);
             if (!e) return --d || _();
 
             if (u.$isValid(t)) {
@@ -40640,9 +40708,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   n = u.$__getValue(t);
               null == n && (r = u.populated(t)) && (n = r);
               var o = (t in u.$__.pathsToScopes) ? u.$__.pathsToScopes[t] : u,
-                  i = {
+                  s = {
                 skipSchemaValidators: p[t],
-                path: t
+                path: t,
+                validateModifiedOnly: i
               };
               e.doValidate(n, function (r) {
                 if (r && (!e.$isMongooseDocumentArray || r.$isArrayValidatorError)) {
@@ -40651,59 +40720,61 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 }
 
                 --d || _();
-              }, o, i);
+              }, o, s);
             } else --d || _();
           }));
         }, v = f.length, g = 0; g < v; ++g) m(f[g]);
-      }, tt.prototype.validateSync = function (t, e) {
+      }, Z.prototype.validateSync = function (t, e) {
         var r,
             n = this,
-            o = this;
-        r = e && "object" === a(e) && "validateModifiedOnly" in e ? !!e.validateModifiedOnly : this.schema.options.validateModifiedOnly, "string" == typeof t && (t = t.split(" "));
-        var i = it(this),
-            s = r ? i[0].filter(function (t) {
+            o = this,
+            i = e && "object" === a(e) && "validateModifiedOnly" in e;
+        r = i ? !!e.validateModifiedOnly : this.$__schema.options.validateModifiedOnly, "string" == typeof t && (t = t.split(" "));
+        var s = ot(this),
+            u = r ? s[0].filter(function (t) {
           return n.isModified(t);
-        }) : i[0],
-            u = i[1];
-        Array.isArray(t) && (s = st(s, t));
-        var c = {};
-        s.forEach(function (t) {
-          if (!c[t]) {
-            c[t] = !0;
-            var e = o.schema.path(t);
+        }) : s[0],
+            c = s[1];
+        Array.isArray(t) && (u = it(u, t));
+        var l = {};
+        u.forEach(function (t) {
+          if (!l[t]) {
+            l[t] = !0;
+            var e = o.$__schema.path(t);
 
             if (e && o.$isValid(t)) {
-              var r = o.$__getValue(t),
-                  n = e.doValidateSync(r, o, {
-                skipSchemaValidators: u[t],
-                path: t
+              var n = o.$__getValue(t),
+                  i = e.doValidateSync(n, o, {
+                skipSchemaValidators: c[t],
+                path: t,
+                validateModifiedOnly: r
               });
 
-              if (n && (!e.$isMongooseDocumentArray || n.$isArrayValidatorError)) {
-                if (e.$isSingleNested && n instanceof b && !1 === e.schema.options.storeSubdocValidationError) return;
-                o.invalidate(t, n, void 0, !0);
+              if (i && (!e.$isMongooseDocumentArray || i.$isArrayValidatorError)) {
+                if (e.$isSingleNested && i instanceof b && !1 === e.schema.options.storeSubdocValidationError) return;
+                o.invalidate(t, i, void 0, !0);
               }
             }
           }
         });
-        var l = o.$__.validationError;
-        if (o.$__.validationError = void 0, o.emit("validate", o), o.constructor.emit("validate", o), l) for (var f in l.errors) l.errors[f] instanceof h.CastError && o.invalidate(f, l.errors[f]);
-        return l;
-      }, tt.prototype.invalidate = function (t, e, r, n) {
+        var f = o.$__.validationError;
+        if (o.$__.validationError = void 0, o.emit("validate", o), o.constructor.emit("validate", o), f) for (var p in f.errors) f.errors[p] instanceof h.CastError && o.invalidate(p, f.errors[p]);
+        return f;
+      }, Z.prototype.invalidate = function (t, e, r, n) {
         if (this.$__.validationError || (this.$__.validationError = new b(this)), !this.$__.validationError.errors[t]) return e && "string" != typeof e || (e = new w({
           path: t,
           message: e,
           type: n || "user defined",
           value: r
         })), this.$__.validationError === e || this.$__.validationError.addError(t, e), this.$__.validationError;
-      }, tt.prototype.$markValid = function (t) {
+      }, Z.prototype.$markValid = function (t) {
         this.$__.validationError && this.$__.validationError.errors[t] && (delete this.$__.validationError.errors[t], 0 === Object.keys(this.$__.validationError.errors).length && (this.$__.validationError = null));
-      }, tt.prototype.$isValid = function (t) {
+      }, Z.prototype.$isValid = function (t) {
         var e = this;
         return null == this.$__.validationError || 0 === Object.keys(this.$__.validationError.errors).length || null != t && (-1 !== t.indexOf(" ") && (t = t.split(" ")), Array.isArray(t) ? t.some(function (t) {
           return null == e.$__.validationError.errors[t];
         }) : null == this.$__.validationError.errors[t]);
-      }, tt.prototype.$__reset = function () {
+      }, Z.prototype.$__reset = function () {
         var t = this;
         return u || (u = r(18)), this.$__.activePaths.map("init", "modify", function (e) {
           return t.$__getValue(e);
@@ -40728,14 +40799,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }), this.$__.backup = {}, this.$__.backup.activePaths = {
           modify: Object.assign({}, this.$__.activePaths.states.modify),
           default: Object.assign({}, this.$__.activePaths.states.default)
-        }, this.$__.backup.validationError = this.$__.validationError, this.$__.backup.errors = this.errors, this.$__.activePaths.clear("modify"), this.$__.activePaths.clear("default"), this.$__.validationError = void 0, this.errors = void 0, t = this, this.schema.requiredPaths().forEach(function (e) {
+        }, this.$__.backup.validationError = this.$__.validationError, this.$__.backup.errors = this.errors, this.$__.activePaths.clear("modify"), this.$__.activePaths.clear("default"), this.$__.validationError = void 0, this.errors = void 0, t = this, this.$__schema.requiredPaths().forEach(function (e) {
           t.$__.activePaths.require(e);
         }), this;
       },
       /*!
        * ignore
        */
-      tt.prototype.$__undoReset = function () {
+      Z.prototype.$__undoReset = function () {
         if (null != this.$__.backup && null != this.$__.backup.activePaths) {
           this.$__.activePaths.states.modify = this.$__.backup.activePaths.modify, this.$__.activePaths.states.default = this.$__.backup.activePaths.default, this.$__.validationError = this.$__.backup.validationError, this.errors = this.$__.backup.errors;
           var t,
@@ -40753,7 +40824,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
 
           var n,
-              o = i(this.$__getAllSubdocs());
+              o = i(this.$getAllSubdocs());
 
           try {
             for (o.s(); !(n = o.n()).done;) {
@@ -40765,7 +40836,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             o.f();
           }
         }
-      }, tt.prototype.$__dirty = function () {
+      }, Z.prototype.$__dirty = function () {
         var t = this,
             e = this.$__.activePaths.map("modify", function (e) {
           return {
@@ -40789,10 +40860,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return e.forEach(function (t) {
           t && (null == r || 0 !== t.path.indexOf(r) ? (r = t.path + ".", o.push(t), n = t) : null != n && null != n.value && null != n.value[W] && n.value.hasAtomics() && (n.value[W] = {}, n.value[W].$set = n.value));
         }), n = r = null, o;
-      }, tt.prototype.$__setSchema = function (t) {
-        t.plugin(T, {
+      }, Z.prototype.$__setSchema = function (t) {
+        t.plugin(N, {
           deduplicate: !0
-        }), j(t.tree, this, void 0, t.options);
+        }), $(t.tree, this, void 0, t.options);
 
         for (var e = 0, r = Object.keys(t.virtuals); e < r.length; e++) {
           var n = r[e];
@@ -40800,8 +40871,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           t.virtuals[n]._applyDefaultGetters();
         }
 
-        this.schema = t, this[Q] = t;
-      }, tt.prototype.$__getArrayPathsToValidate = function () {
+        null == t.path("schema") && (this.schema = t), this.$__schema = t, this[z] = t;
+      }, Z.prototype.$__getArrayPathsToValidate = function () {
         return u || (u = r(18)), this.$__.activePaths.map("init", "modify", function (t) {
           return this.$__getValue(t);
         }.bind(this)).filter(function (t) {
@@ -40811,13 +40882,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, []).filter(function (t) {
           return t;
         });
-      }, tt.prototype.$__getAllSubdocs = function () {
+      }, Z.prototype.$getAllSubdocs = function () {
         u || (u = r(18)), l = l || r(26);
         var t = this;
         return Object.keys(this._doc).reduce(function (e, r) {
           return function t(e, r, n) {
             var o = e;
-            return n && (o = e instanceof tt && e[Q].paths[n] ? e._doc[n] : e[n]), o instanceof l ? r.push(o) : o instanceof Map ? r = Array.from(o.keys()).reduce(function (e, r) {
+            return n && (o = e instanceof Z && e[z].paths[n] ? e._doc[n] : e[n]), o instanceof l ? r.push(o) : o instanceof Map ? r = Array.from(o.keys()).reduce(function (e, r) {
               return t(o.get(r), e, null);
             }, r) : o && o.$isSingleNested ? (r = Object.keys(o._doc).reduce(function (e, r) {
               return t(o._doc, e, r);
@@ -40825,38 +40896,40 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               e && e._doc && (r = Object.keys(e._doc).reduce(function (r, n) {
                 return t(e._doc, r, n);
               }, r), e instanceof l && r.push(e));
-            }) : o instanceof tt && o.$__isNested && (r = Object.keys(o).reduce(function (e, r) {
+            }) : o instanceof Z && o.$__isNested && (r = Object.keys(o).reduce(function (e, r) {
               return t(o, e, r);
             }, r)), r;
           }(t, e, r);
         }, []);
-      }, tt.prototype.$__handleReject = function (t) {
+      }, Z.prototype.$__handleReject = function (t) {
         this.listeners("error").length ? this.emit("error", t) : this.constructor.listeners && this.constructor.listeners("error").length && this.constructor.emit("error", t);
-      }, tt.prototype.$toObject = function (t, e) {
+      }, Z.prototype.$toObject = function (t, e) {
         var r,
-            o = {
+            o,
+            i = {
           transform: !0,
           flattenDecimals: !0
         },
-            i = e ? "toJSON" : "toObject",
-            s = P(this, "constructor.base.options." + i, {}),
-            a = P(this, "schema.options", {});
-        o = I.options(o, L(s)), o = I.options(o, L(a[i] || {})), (t = I.isPOJO(t) ? L(t) : {})._calledWithOptions = t._calledWithOptions || L(t), "flattenMaps" in t || (t.flattenMaps = o.flattenMaps), r = null != t._calledWithOptions.minimize ? t.minimize : null != o.minimize ? o.minimize : a.minimize;
-        var u = Object.assign(I.clone(t), {
+            s = e ? "toJSON" : "toObject",
+            a = P(this, "constructor.base.options." + s, {}),
+            u = P(this, "$__schema.options", {});
+        i = I.options(i, U(a)), i = I.options(i, U(u[s] || {})), (t = I.isPOJO(t) ? U(t) : {})._calledWithOptions = t._calledWithOptions || U(t), r = null != t._calledWithOptions.minimize ? t.minimize : null != i.minimize ? i.minimize : u.minimize, o = null != t._calledWithOptions.flattenMaps ? t.flattenMaps : null != i.flattenMaps ? i.flattenMaps : u.flattenMaps;
+        var c = Object.assign(I.clone(t), {
           _isNested: !0,
           json: e,
-          minimize: r
+          minimize: r,
+          flattenMaps: o
         });
-        if (I.hasUserDefinedProperty(t, "getters") && (u.getters = t.getters), I.hasUserDefinedProperty(t, "virtuals") && (u.virtuals = t.virtuals), (t.depopulate || P(t, "_parentOptions.depopulate", !1)) && t._isNested && this.$__.wasPopulated) return L(this._id, u);
-        (t = I.options(o, t))._isNested = !0, t.json = e, t.minimize = r, u._parentOptions = t, u._skipSingleNestedGetters = !0;
-        var c = Object.assign({}, u);
-        c._skipSingleNestedGetters = !1;
-        var l = t.transform,
-            f = L(this._doc, u) || {};
+        if (I.hasUserDefinedProperty(t, "getters") && (c.getters = t.getters), I.hasUserDefinedProperty(t, "virtuals") && (c.virtuals = t.virtuals), (t.depopulate || P(t, "_parentOptions.depopulate", !1)) && t._isNested && this.$__.wasPopulated) return U(this._id, c);
+        (t = I.options(i, t))._isNested = !0, t.json = e, t.minimize = r, c._parentOptions = t, c._skipSingleNestedGetters = !0;
+        var l = Object.assign({}, c);
+        l._skipSingleNestedGetters = !1;
+        var f = t.transform,
+            p = U(this._doc, c) || {};
         t.getters && (!function (t, e, r) {
           var n,
               o,
-              i = t.schema,
+              i = t.$__schema,
               s = Object.keys(i.paths),
               a = s.length,
               u = t._doc;
@@ -40868,10 +40941,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 f = l - 1,
                 p = e,
                 h = void 0;
-            if (u = t._doc, t.isSelected(n)) for (var y = 0; y < l; ++y) {
+            if (u = t._doc, t.$__isSelected(n)) for (var y = 0; y < l; ++y) {
               if (h = c[y], o = u[h], y === f) {
                 var d = t.get(n);
-                p[h] = L(d, r);
+                p[h] = U(d, r);
               } else {
                 if (null == o) {
                   h in u && (p[h] = o);
@@ -40892,7 +40965,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
          * @param {Object} json
          * @return {Object} `json`
          */
-        (this, f, c), t.minimize && (f =
+        (this, p, l), t.minimize && (p =
         /*!
          * Minimizes an object, removing undefined values and empty objects
          *
@@ -40909,11 +40982,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           for (; a--;) o = s[a], i = e[o], I.isObject(i) && !n.isBuffer(i) && (e[o] = t(i)), void 0 !== e[o] ? r = !0 : delete e[o];
 
           return r ? e : void 0;
-        }(f) || {})), (t.virtuals || t.getters && !1 !== t.virtuals) && ut(this, f, c, t), !1 === t.versionKey && this.schema.options.versionKey && delete f[this.schema.options.versionKey];
-        var p = t.transform;
+        }(p) || {})), (t.virtuals || t.getters && !1 !== t.virtuals) && at(this, p, l, t), !1 === t.versionKey && this.$__schema.options.versionKey && delete p[this.$__schema.options.versionKey];
+        var h = t.transform;
 
-        if (p && function (t, e) {
-          var r = t.schema,
+        if (h && function (t, e) {
+          var r = t.$__schema,
               n = Object.keys(r.paths || {});
           if (!t._doc) return e;
 
@@ -40924,18 +40997,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             if ("function" == typeof a.options.transform) {
               var u = t.get(s),
                   c = a.options.transform.call(t, u);
-              ct(s, c), I.setValue(s, c, e);
+              ut(s, c), I.setValue(s, c, e);
             } else if (null != a.$embeddedSchemaType && "function" == typeof a.$embeddedSchemaType.options.transform) {
               for (var l = [].concat(t.get(s)), f = a.$embeddedSchemaType.options.transform, p = 0; p < l.length; ++p) {
                 var h = f.call(t, l[p]);
-                l[p] = h, ct(s, h);
+                l[p] = h, ut(s, h);
               }
 
               e[s] = l;
             }
           }
-        }(this, f), t.useProjection && function (t, e) {
-          var r = t.schema,
+        }(this, p), t.useProjection && function (t, e) {
+          var r = t.$__schema,
               n = Object.keys(r.paths || {});
           if (!t._doc) return e;
           var o = t.$__.selected;
@@ -40946,41 +41019,41 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             var a = s[i];
             null == o[a] || o[a] || delete e[a];
           }
-        }(this, f), !0 === p || a.toObject && p) {
-          var h = t.json ? a.toJSON : a.toObject;
-          h && (p = "function" == typeof t.transform ? t.transform : h.transform);
-        } else t.transform = l;
+        }(this, p), !0 === h || u.toObject && h) {
+          var y = t.json ? u.toJSON : u.toObject;
+          y && (h = "function" == typeof t.transform ? t.transform : y.transform);
+        } else t.transform = f;
 
-        if ("function" == typeof p) {
-          var y = p(this, f, t);
-          void 0 !== y && (f = y);
+        if ("function" == typeof h) {
+          var d = h(this, p, t);
+          void 0 !== d && (p = d);
         }
 
-        return f;
-      }, tt.prototype.toObject = function (t) {
+        return p;
+      }, Z.prototype.toObject = function (t) {
         return this.$toObject(t);
-      }, tt.prototype.toJSON = function (t) {
+      }, Z.prototype.toJSON = function (t) {
         return this.$toObject(t, !0);
-      }, tt.prototype.parent = function () {
+      }, Z.prototype.parent = function () {
         return this.$__.parent;
-      }, tt.prototype.$parent = tt.prototype.parent, tt.prototype.inspect = function (t) {
+      }, Z.prototype.$parent = Z.prototype.parent, Z.prototype.inspect = function (t) {
         var e;
         I.isPOJO(t) && ((e = t).minimize = !1);
         var r = this.toObject(e);
         return null == r ? "MongooseDocument { " + r + " }" : r;
-      }, D.custom && (
+      }, C.custom && (
       /*!
         * Avoid Node deprecation warning DEP0079
         */
-      tt.prototype[D.custom] = tt.prototype.inspect), tt.prototype.toString = function () {
+      Z.prototype[C.custom] = Z.prototype.inspect), Z.prototype.toString = function () {
         var t = this.inspect();
-        return "string" == typeof t ? t : D(t);
-      }, tt.prototype.equals = function (t) {
+        return "string" == typeof t ? t : C(t);
+      }, Z.prototype.equals = function (t) {
         if (!t) return !1;
         var e = this.$__getValue("_id"),
             r = null != t.$__ ? t.$__getValue("_id") : t;
-        return e || r ? e && e.equals ? e.equals(r) : e === r : U(this, t);
-      }, tt.prototype.populate = function () {
+        return e || r ? e && e.equals ? e.equals(r) : e === r : L(this, t);
+      }, Z.prototype.populate = function () {
         if (0 === arguments.length) return this;
         var t,
             e = this.$__.populate || (this.$__.populate = {}),
@@ -41009,7 +41082,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           var c = this.constructor;
 
           if (this.$__isNested) {
-            c = this.$__[X].constructor;
+            c = this.$__[G].constructor;
             var l = this.$__.nestedPath;
             u.forEach(function (t) {
               t.path = l + "." + t.path;
@@ -41029,13 +41102,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return this;
-      }, tt.prototype.execPopulate = function (t) {
+      }, Z.prototype.$getPopulatedDocs = function () {
+        for (var t = [], e = 0, r = Object.keys(this.$__.populated); e < r.length; e++) {
+          var n = r[e],
+              o = this.get(n);
+          Array.isArray(o) ? t = t.concat(o) : o instanceof Z && t.push(o);
+        }
+
+        return t;
+      }, Z.prototype.execPopulate = function (t) {
         var e = this,
             r = null != t && "function" != typeof t;
         return r ? this.populate.apply(this, arguments).execPopulate() : S(t, function (t) {
           e.populate(t);
         }, this.constructor.events);
-      }, tt.prototype.populated = function (t, e, r) {
+      }, Z.prototype.populated = function (t, e, r) {
         if (null == e) {
           if (!this.$__.populated) return;
           var n = this.$__.populated[t];
@@ -41064,7 +41145,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return e;
-      }, tt.prototype.depopulate = function (t) {
+      }, Z.prototype.depopulate = function (t) {
         var e;
         "string" == typeof t && (t = t.split(" "));
         var r = this.$$populatedVirtuals ? Object.keys(this.$$populatedVirtuals) : [],
@@ -41108,16 +41189,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return this;
-      }, tt.prototype.$__fullPath = function (t) {
+      }, Z.prototype.$__fullPath = function (t) {
         return t || "";
-      }, tt.prototype.getChanges = function () {
+      }, Z.prototype.getChanges = function () {
         var t = this.$__delta();
         return t ? t[1] : {};
       },
       /*!
        * Module exports.
        */
-      tt.ValidationError = b, t.exports = tt;
+      Z.ValidationError = b, t.exports = Z;
     }).call(this, r(8), r(1).Buffer);
   }, function (t, e, r) {
     "use strict";
@@ -41214,12 +41295,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           d = r(4),
           _ = r(2),
           m = r(0).validatorErrorSymbol,
-          v = r(0).documentIsSelected,
-          g = r(0).documentIsModified,
-          b = a.CastError,
-          w = a.ValidatorError;
+          v = r(0).documentIsModified,
+          g = a.CastError,
+          b = a.ValidatorError;
 
-      function O(t, e, r) {
+      function w(t, e, r) {
         this[y] = !0, this.path = t, this.instance = r, this.validators = [], this.getters = this.constructor.hasOwnProperty("getters") ? this.constructor.getters.slice() : [], this.setters = [], e = e || {};
 
         for (var n = this.constructor.defaultOptions || {}, o = 0, i = Object.keys(n); o < i.length; o++) {
@@ -41272,23 +41352,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         });
       }
       /*!
-       * ignore
+       * The class that Mongoose uses internally to instantiate this SchemaType's `options` property.
        */
 
 
-      O.prototype.OptionsConstructor = u, O.cast = function (t) {
+      w.prototype.OptionsConstructor = u, w.cast = function (t) {
         return 0 === arguments.length || (!1 === t && (t = function (t) {
           return t;
         }), this._cast = t), this._cast;
-      }, O.prototype.castFunction = function (t) {
+      }, w.prototype.castFunction = function (t) {
         return 0 === arguments.length || (!1 === t && (t = this.constructor._defaultCaster || function (t) {
           return t;
         }), this._castFunction = t), this._castFunction;
-      }, O.set = function (t, e) {
+      }, w.prototype.cast = function () {
+        throw new Error("Base SchemaType class does not implement a `cast()` function");
+      }, w.set = function (t, e) {
         this.hasOwnProperty("defaultOptions") || (this.defaultOptions = Object.assign({}, this.defaultOptions)), this.defaultOptions[t] = e;
-      }, O.get = function (t) {
+      }, w.get = function (t) {
         this.getters = this.hasOwnProperty("getters") ? this.getters : [], this.getters.push(t);
-      }, O.prototype.default = function (t) {
+      }, w.prototype.default = function (t) {
         if (1 === arguments.length) {
           if (void 0 === t) return void (this.defaultValue = void 0);
           if (null != t && t.instanceOfSchema) throw new a("Cannot set default value of path `" + this.path + "` to a mongoose Schema instance.");
@@ -41296,9 +41378,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return arguments.length > 1 && (this.defaultValue = _.args(arguments)), this.defaultValue;
-      }, O.prototype.index = function (t) {
+      }, w.prototype.index = function (t) {
         return this._index = t, _.expires(this._index), this;
-      }, O.prototype.unique = function (t) {
+      }, w.prototype.unique = function (t) {
         if (!1 === this._index) {
           if (!t) return;
           throw new Error('Path "' + this.path + '" may not have `index` set to false and `unique` set to true');
@@ -41307,7 +41389,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return null == this._index || !0 === this._index ? this._index = {} : "string" == typeof this._index && (this._index = {
           type: this._index
         }), this._index.unique = t, this;
-      }, O.prototype.text = function (t) {
+      }, w.prototype.text = function (t) {
         if (!1 === this._index) {
           if (!t) return;
           throw new Error('Path "' + this.path + '" may not have `index` set to false and `text` set to true');
@@ -41316,7 +41398,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return null === this._index || void 0 === this._index || "boolean" == typeof this._index ? this._index = {} : "string" == typeof this._index && (this._index = {
           type: this._index
         }), this._index.text = t, this;
-      }, O.prototype.sparse = function (t) {
+      }, w.prototype.sparse = function (t) {
         if (!1 === this._index) {
           if (!t) return;
           throw new Error('Path "' + this.path + '" may not have `index` set to false and `sparse` set to true');
@@ -41325,17 +41407,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return null == this._index || "boolean" == typeof this._index ? this._index = {} : "string" == typeof this._index && (this._index = {
           type: this._index
         }), this._index.sparse = t, this;
-      }, O.prototype.immutable = function (t) {
+      }, w.prototype.immutable = function (t) {
         return this.$immutable = t, p(this), this;
-      }, O.prototype.transform = function (t) {
+      }, w.prototype.transform = function (t) {
         return this.options.transform = t, this;
-      }, O.prototype.set = function (t) {
+      }, w.prototype.set = function (t) {
         if ("function" != typeof t) throw new TypeError("A setter must be a function.");
         return this.setters.push(t), this;
-      }, O.prototype.get = function (t) {
+      }, w.prototype.get = function (t) {
         if ("function" != typeof t) throw new TypeError("A getter must be a function.");
         return this.getters.push(t), this;
-      }, O.prototype.validate = function (t, e, r) {
+      }, w.prototype.validate = function (t, e, r) {
         var n, o, i, u;
         if ("function" == typeof t || t && "RegExp" === _.getFunctionName(t.constructor)) return "function" == typeof e ? (n = {
           validator: t,
@@ -41344,7 +41426,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           message: e,
           type: r,
           validator: t
-        }), n.isAsync && S(), this.validators.push(n), this;
+        }), n.isAsync && O(), this.validators.push(n), this;
 
         for (o = 0, i = arguments.length; o < i; o++) {
           if (u = arguments[o], !_.isPOJO(u)) {
@@ -41361,12 +41443,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        * ignore
        */
 
-      var S = d.deprecate(function () {}, "Mongoose: the `isAsync` option for custom validators is deprecated. Make your async validators return a promise instead: https://mongoosejs.com/docs/validation.html#async-custom-validators");
+      var O = d.deprecate(function () {}, "Mongoose: the `isAsync` option for custom validators is deprecated. Make your async validators return a promise instead: https://mongoosejs.com/docs/validation.html#async-custom-validators");
       /*!
        * ignore
        */
 
-      function A(t) {
+      function S(t) {
         return this.castForQuery(t);
       }
       /*!
@@ -41379,7 +41461,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function j(t) {
+      function A(t) {
         var e = this;
         return Array.isArray(t) ? t.map(function (t) {
           return Array.isArray(t) && 0 === t.length ? t : e.castForQuery(t);
@@ -41390,7 +41472,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      O.prototype.required = function (t, e) {
+      w.prototype.required = function (t, e) {
         var r = {};
         if (arguments.length > 0 && null == t) return this.validators = this.validators.filter(function (t) {
           return t.validator !== this.requiredValidator;
@@ -41401,7 +41483,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var n = this;
         this.isRequired = !0, this.requiredValidator = function (e) {
           var r = f(this, "$__.cachedRequired");
-          if (null != r && !this[v](n.path) && !this[g](n.path)) return !0;
+          if (null != r && !this.$__isSelected(n.path) && !this[v](n.path)) return !0;
 
           if (null != r && n.path in r) {
             var o = !r[n.path] || n.checkRequired(e, this);
@@ -41416,9 +41498,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           message: o,
           type: "required"
         })), this;
-      }, O.prototype.ref = function (t) {
+      }, w.prototype.ref = function (t) {
         return this.options.ref = t, this;
-      }, O.prototype.getDefault = function (t, e) {
+      }, w.prototype.getDefault = function (t, e) {
         var r = "function" == typeof this.defaultValue ? this.defaultValue.call(t) : this.defaultValue;
 
         if (null != r) {
@@ -41434,49 +41516,35 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        *
        * @api private
        */
-      O.prototype._applySetters = function (t, e, r, n) {
+      w.prototype._applySetters = function (t, e, r) {
+        var n = t;
+        if (r) return n;
         var i,
-            s = t,
-            u = this.setters,
-            c = this.caster,
-            l = o(_.clone(u).reverse());
+            s = this.setters,
+            a = o(_.clone(s).reverse());
 
         try {
-          for (l.s(); !(i = l.n()).done;) {
-            s = i.value.call(e, s, this);
+          for (a.s(); !(i = a.n()).done;) {
+            n = i.value.call(e, n, this);
           }
         } catch (t) {
-          l.e(t);
+          a.e(t);
         } finally {
-          l.f();
+          a.f();
         }
 
-        if (Array.isArray(s) && c && c.setters) {
-          for (var f = [], p = 0; p < s.length; ++p) {
-            var h = s[p];
-
-            try {
-              f.push(c.applySetters(h, e, r, n));
-            } catch (t) {
-              throw t instanceof a.CastError && (t.$originalErrorPath = t.path, t.path = t.path + "." + p), t;
-            }
-          }
-
-          s = f;
-        }
-
-        return s;
+        return n;
       },
       /*!
        * ignore
        */
-      O.prototype._castNullish = function (t) {
+      w.prototype._castNullish = function (t) {
         return t;
-      }, O.prototype.applySetters = function (t, e, r, n, o) {
+      }, w.prototype.applySetters = function (t, e, r, n, o) {
         var i = this._applySetters(t, e, r, n, o);
 
         return null == i ? this._castNullish(i) : i = this.cast(i, e, r, n, o);
-      }, O.prototype.applyGetters = function (t, e) {
+      }, w.prototype.applyGetters = function (t, e) {
         var r = t,
             n = this.getters,
             o = n.length;
@@ -41485,9 +41553,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         for (var i = 0; i < o; ++i) r = n[i].call(e, r, this);
 
         return r;
-      }, O.prototype.select = function (t) {
+      }, w.prototype.select = function (t) {
         return this.selected = !!t, this;
-      }, O.prototype.doValidate = function (t, e, r, n) {
+      }, w.prototype.doValidate = function (t, e, r, n) {
         var o = !1,
             i = this.path,
             a = this.validators.filter(function (t) {
@@ -41501,7 +41569,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (!o) if (void 0 === t || t) --u <= 0 && h(function () {
             e(null);
           });else {
-            var n = r.ErrorConstructor || w;
+            var n = r.ErrorConstructor || b;
             (o = new n(r))[m] = !0, h(function () {
               e(o);
             });
@@ -41545,7 +41613,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             } else l(!0, u);
           }
         });
-      }, O.prototype.doValidateSync = function (t, e, r) {
+      }, w.prototype.doValidateSync = function (t, e, r) {
         var n = this.path;
         if (!this.validators.length) return null;
         var o = this.validators;
@@ -41576,11 +41644,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         function a(t, e) {
           if (!i && void 0 !== t && !t) {
-            var r = e.ErrorConstructor || w;
+            var r = e.ErrorConstructor || b;
             (i = new r(e))[m] = !0;
           }
         }
-      }, O._isRef = function (t, e, r, o) {
+      }, w._isRef = function (t, e, r, o) {
         var i = o && t.options && (t.options.ref || t.options.refPath);
 
         if (!i && r && null != r.$__) {
@@ -41594,24 +41662,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return !1;
-      }, O.prototype.$conditionalHandlers = {
+      }, w.prototype.$conditionalHandlers = {
         $all: function (t) {
           var e = this;
           return Array.isArray(t) ? t.map(function (t) {
             return e.castForQuery(t);
           }) : [this.castForQuery(t)];
         },
-        $eq: A,
-        $in: j,
-        $ne: A,
-        $nin: j,
+        $eq: S,
+        $in: A,
+        $ne: S,
+        $nin: A,
         $exists: c,
         $type: l
       },
       /*!
        * Wraps `castForQuery` to handle context
        */
-      O.prototype.castForQueryWrapper = function (t) {
+      w.prototype.castForQueryWrapper = function (t) {
         if (this.$$context = t.context, "$conditional" in t) {
           var e = this.castForQuery(t.$conditional, t.val);
           return this.$$context = null, e;
@@ -41625,7 +41693,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         var n = this.castForQuery(t.val);
         return this.$$context = null, n;
-      }, O.prototype.castForQuery = function (t, e) {
+      }, w.prototype.castForQuery = function (t, e) {
         var r;
 
         if (2 === arguments.length) {
@@ -41640,17 +41708,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        *
        * @api private
        */
-      O.prototype._castForQuery = function (t) {
+      w.prototype._castForQuery = function (t) {
         return this.applySetters(t, this.$$context);
-      }, O.checkRequired = function (t) {
+      }, w.checkRequired = function (t) {
         return arguments.length > 0 && (this._checkRequired = t), this._checkRequired;
-      }, O.prototype.checkRequired = function (t) {
+      }, w.prototype.checkRequired = function (t) {
         return null != t;
       },
       /*!
        * ignore
        */
-      O.prototype.clone = function () {
+      w.prototype.clone = function () {
         var t = Object.assign({}, this.options),
             e = new this.constructor(this.path, t, this.instance);
         return e.validators = this.validators.slice(), void 0 !== this.requiredValidator && (e.requiredValidator = this.requiredValidator), void 0 !== this.defaultValue && (e.defaultValue = this.defaultValue), void 0 !== this.$immutable && void 0 === this.options.immutable && (e.$immutable = this.$immutable, p(e)), void 0 !== this._index && (e._index = this._index), void 0 !== this.selected && (e.selected = this.selected), void 0 !== this.isRequired && (e.isRequired = this.isRequired), void 0 !== this.originalRequiredValue && (e.originalRequiredValue = this.originalRequiredValue), e.getters = this.getters.slice(), e.setters = this.setters.slice(), e;
@@ -41658,7 +41726,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       /*!
        * Module exports.
        */
-      t.exports = e = O, e.CastError = b, e.ValidatorError = w;
+      t.exports = e = w, e.CastError = g, e.ValidatorError = b;
     }).call(this, r(1).Buffer);
   }, function (t, e) {
     var r,
@@ -41807,6 +41875,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     t.exports = n;
   }, function (t, e, r) {
     "use strict";
+
+    var n = r(15).get().ObjectId,
+        o = r(0).objectIdSymbol;
+    /*!
+     * Getter for convenience with populate, see gh-6115
+     */
+
+    Object.defineProperty(n.prototype, "_id", {
+      enumerable: !1,
+      configurable: !0,
+      get: function () {
+        return this;
+      }
+    }), n.prototype[o] = !0, t.exports = n;
+  }, function (t, e, r) {
+    "use strict";
     /*!
      * Module dependencies.
      */
@@ -41843,7 +41927,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -41972,22 +42056,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }), t.exports = h;
   }, function (t, e, r) {
     "use strict";
-
-    var n = r(15).get().ObjectId,
-        o = r(0).objectIdSymbol;
-    /*!
-     * Getter for convenience with populate, see gh-6115
-     */
-
-    Object.defineProperty(n.prototype, "_id", {
-      enumerable: !1,
-      configurable: !0,
-      get: function () {
-        return this;
-      }
-    }), n.prototype[o] = !0, t.exports = n;
-  }, function (t, e, r) {
-    "use strict";
     /*!
      * ignore
      */
@@ -42053,7 +42121,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       if ("function" == typeof Proxy) return !0;
 
       try {
-        return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+        return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
       } catch (t) {
         return !1;
       }
@@ -42275,7 +42343,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if ("function" == typeof Proxy) return !0;
 
           try {
-            return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+            return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
           } catch (t) {
             return !1;
           }
@@ -42309,7 +42377,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       var h = r(83),
           y = r(6),
-          d = r(13),
+          d = r(12),
           _ = r(86),
           m = r(34),
           v = r(17).internalToObjectOptions,
@@ -42319,9 +42387,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           O = r(0).arrayParentSymbol,
           S = r(0).arrayPathSymbol,
           A = r(0).arraySchemaSymbol,
-          j = r(0).documentArrayParent,
-          $ = Array.prototype.push,
-          E = function (t) {
+          $ = r(0).documentArrayParent,
+          E = Array.prototype.push,
+          j = function (t) {
         !function (t, e) {
           if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
           t.prototype = Object.create(e && e.prototype, {
@@ -42341,11 +42409,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return function (t, e, r) {
           e && a(t.prototype, e), r && a(t, r);
         }(n, [{
-          key: "toBSON",
-
+          key: "isMongooseDocumentArray",
+          get: function () {
+            return !0;
+          }
           /*!
                * ignore
                */
+
+        }, {
+          key: "toBSON",
           value: function () {
             return this.toObject(v);
           }
@@ -42364,7 +42437,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           value: function (t, r) {
             if (null == this[A]) return t;
             var n = this[A].casterConstructor;
-            if ((n.$isMongooseDocumentArray ? t && t.isMongooseDocumentArray : t instanceof n) || t && t.constructor && t.constructor.baseCasterConstructor === n) return t[j] && t.__parentArray || (t[j] = this[O], t.__parentArray = this), t.$setIndex(r), t;
+            if ((n.$isMongooseDocumentArray ? t && t.isMongooseDocumentArray : t instanceof n) || t && t.constructor && t.constructor.baseCasterConstructor === n) return t[$] && t.__parentArray || (t[$] = this[O], t.__parentArray = this), t.$setIndex(r), t;
             if (null == t) return null;
             if ((e.isBuffer(t) || t instanceof d || !b.isObject(t)) && (t = {
               _id: t
@@ -42477,9 +42550,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             };
           }
         }, {
-          key: "isMongooseDocumentArray",
-          get: function () {
-            return !0;
+          key: "_markModified",
+          value: function (t, e) {
+            var r,
+                n = this[O];
+
+            if (n) {
+              if (r = this[S], arguments.length) if (null != e) {
+                var o = t.__index;
+                r = r + "." + o + "." + e;
+              } else r = r + "." + t;
+              if (null != r && r.endsWith(".$")) return this;
+              n.markModified(r, arguments.length > 0 ? t : n);
+            }
+
+            return this;
           }
         }]), n;
       }(h);
@@ -42518,14 +42603,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
       }
 
-      g.inspect.custom && (E.prototype[g.inspect.custom] = E.prototype.inspect),
+      g.inspect.custom && (j.prototype[g.inspect.custom] = j.prototype.inspect),
       /*!
        * Module exports.
        */
       t.exports = function (t, e, r) {
-        var n = new E();
-        if (n[w] = {}, n[A] = void 0, Array.isArray(t) && (t instanceof E && t[S] === e && t[O] === r && (n[w] = Object.assign({}, t[w])), t.forEach(function (t) {
-          $.call(n, t);
+        var n = new j();
+        if (n[w] = {}, n[A] = void 0, Array.isArray(t) && (t[S] === e && t[O] === r && (n[w] = Object.assign({}, t[w])), t.forEach(function (t) {
+          E.call(n, t);
         })), n[S] = e, r && r instanceof y) for (n[O] = r, n[A] = r.schema.path(e); null != n && null != n[A] && n[A].$isMongooseArray && !n[A].$isMongooseDocumentArray;) n[A] = n[A].casterConstructor;
         return n;
       };
@@ -42562,14 +42647,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     t.exports = u, t.exports.once = function (t, e) {
       return new Promise(function (r, n) {
-        function o() {
-          void 0 !== i && t.removeListener("error", i), r([].slice.call(arguments));
+        function o(r) {
+          t.removeListener(e, i), n(r);
         }
 
-        var i;
-        "error" !== e && (i = function (r) {
-          t.removeListener(e, o), n(r);
-        }, t.once("error", i)), t.once(e, o);
+        function i() {
+          "function" == typeof t.removeListener && t.removeListener("error", o), r([].slice.call(arguments));
+        }
+
+        v(t, e, i, {
+          once: !0
+        }), "error" !== e && function (t, e, r) {
+          "function" == typeof t.on && v(t, "error", e, r);
+        }(t, o, {
+          once: !0
+        });
       });
     }, u.EventEmitter = u, u.prototype._events = void 0, u.prototype._eventsCount = 0, u.prototype._maxListeners = void 0;
     var c = 10;
@@ -42635,6 +42727,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       for (var r = new Array(e), n = 0; n < e; ++n) r[n] = t[n];
 
       return r;
+    }
+
+    function v(t, e, r, o) {
+      if ("function" == typeof t.on) o.once ? t.once(e, r) : t.on(e, r);else {
+        if ("function" != typeof t.addEventListener) throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + n(t));
+        t.addEventListener(e, function n(i) {
+          o.once && t.removeEventListener(e, n), r(i);
+        });
+      }
     }
 
     Object.defineProperty(u, "defaultMaxListeners", {
@@ -42971,6 +43072,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return this.low_;
     }, r.prototype.toNumber = function () {
       return this.high_ * r.TWO_PWR_32_DBL_ + this.getLowBitsUnsigned();
+    }, r.prototype.toBigInt = function () {
+      return BigInt(this.toString());
     }, r.prototype.toJSON = function () {
       return this.toString();
     }, r.prototype.toString = function (t) {
@@ -43151,6 +43254,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return -128 <= t && t < 128 && (r.INT_CACHE_[t] = n), n;
     }, r.fromNumber = function (t) {
       return isNaN(t) || !isFinite(t) ? r.ZERO : t <= -r.TWO_PWR_63_DBL_ ? r.MIN_VALUE : t + 1 >= r.TWO_PWR_63_DBL_ ? r.MAX_VALUE : t < 0 ? r.fromNumber(-t).negate() : new r(t % r.TWO_PWR_32_DBL_ | 0, t / r.TWO_PWR_32_DBL_ | 0);
+    }, r.fromBigInt = function (t) {
+      return r.fromString(t.toString(10), 10);
     }, r.fromBits = function (t, e) {
       return new r(t, e);
     }, r.fromString = function (t, e) {
@@ -43182,7 +43287,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       t.exports = function (t, r, i, s) {
         return "function" == typeof t ? r(function (r) {
           if (null == r) t.apply(this, arguments);else {
-            null != i && i.listeners("error").length > 0 && !r[o] && (r[o] = !0, i.emit("error", r));
+            null != i && null != i.listeners && i.listeners("error").length > 0 && !r[o] && (r[o] = !0, i.emit("error", r));
 
             try {
               t(r);
@@ -43194,7 +43299,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         }) : new (s = s || n.get())(function (t, e) {
           r(function (r, n) {
-            return null != r ? (null != i && i.listeners("error").length > 0 && !r[o] && (r[o] = !0, i.emit("error", r)), e(r)) : arguments.length > 2 ? t(Array.prototype.slice.call(arguments, 1)) : void t(n);
+            return null != r ? (null != i && null != i.listeners && i.listeners("error").length > 0 && !r[o] && (r[o] = !0, i.emit("error", r)), e(r)) : arguments.length > 2 ? t(Array.prototype.slice.call(arguments, 1)) : void t(n);
           });
         });
       };
@@ -43251,12 +43356,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         p = r(0).validatorErrorSymbol;
 
     function h(t, e, r, o, i) {
-      null != e && e.isMongooseDocumentArray ? (this.__parentArray = e, this[f] = e.$parent()) : (this.__parentArray = void 0, this[f] = void 0), this.$setIndex(i), this.$isDocumentArrayElement = !0, n.call(this, t, o, r);
-      var s = this;
+      var s = {};
+      null != e && e.isMongooseDocumentArray ? (this.__parentArray = e, this[f] = e.$parent()) : (this.__parentArray = void 0, this[f] = void 0), this.$setIndex(i), this.$isDocumentArrayElement = !0, null != this[f] && (s.defaults = this[f].$__.$options.defaults), n.call(this, t, o, r, s);
+      var a = this;
       this.on("isNew", function (t) {
-        s.isNew = t;
-      }), s.on("save", function () {
-        s.constructor.emit("save", s);
+        a.isNew = t;
+      }), a.on("save", function () {
+        a.constructor.emit("save", a);
       });
     }
     /*!
@@ -43280,7 +43386,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }, h.prototype.markModified = function (t) {
       if (this.$__.activePaths.modify(t), this.__parentArray) {
         var e = this.__parentArray.$path() + ".0." + t;
-        this.isNew && this.ownerDocument().isSelected(e) ? this.__parentArray._markModified() : this.__parentArray._markModified(this, t);
+        this.isNew && this.ownerDocument().$__isSelected(e) ? this.__parentArray._markModified() : this.__parentArray._markModified(this, t);
       }
     },
     /*!
@@ -43303,9 +43409,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
      * no-op for hooks
      */
     h.prototype.$__remove = function (t) {
-      return t(null, this);
+      if (null != t) return t(null, this);
     }, h.prototype.remove = function (t, e) {
-      if ("function" != typeof t || e || (e = t, t = void 0), !this.__parentArray || t && t.noop) return e && e(null), this;
+      if ("function" != typeof t || e || (e = t, t = void 0), !this.__parentArray || t && t.noop) return this.$__remove(e), this;
       var r;
 
       if (!this.willRemove) {
@@ -43331,7 +43437,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }(this);
       }
 
-      return e && e(null), this;
+      return this.$__remove(e), this;
     }, h.prototype.update = function () {
       throw new Error("The #update method is not available on EmbeddedDocuments");
     }, h.prototype.inspect = function () {
@@ -43573,7 +43679,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     var i = r(64),
         s = r(20),
-        a = r(13),
+        a = r(12),
         u = r(47),
         c = r(29),
         l = r(65),
@@ -43636,13 +43742,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
     function _(t, e, r) {
-      var n,
-          o = e && e.minimize,
-          i = {};
+      for (var n, o = e && e.minimize, i = {}, s = 0, a = Object.keys(t); s < a.length; s++) {
+        var c = a[s];
 
-      for (var s in t) if (!u.has(s)) {
-        var a = d(t[s], e);
-        o && void 0 === a || (!1 === o && void 0 === a ? delete i[s] : (n || (n = !0), i[s] = a));
+        if (!u.has(c)) {
+          var l = d(t[c], e);
+          o && void 0 === l || (!1 === o && void 0 === l ? delete i[c] : (n || (n = !0), i[c] = l));
+        }
       }
 
       return o && !r ? n && i : i;
@@ -43716,7 +43822,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -43820,6 +43926,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     f.prototype[l.inspect.custom] = f.prototype.inspect)
     /*!
      * Helper for JSON.stringify
+     * Ensure `name` and `message` show up in toJSON output re: gh-9847
      */
     , Object.defineProperty(f.prototype, "toJSON", {
       enumerable: !1,
@@ -43827,6 +43934,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       configurable: !0,
       value: function () {
         return Object.assign({}, this, {
+          name: this.name,
           message: this.message
         });
       }
@@ -43860,7 +43968,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -44430,100 +44538,100 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           O = [0],
           S = 0,
           A = 0,
-          j = 0,
           $ = 0,
           E = 0,
+          j = 0,
           P = 0,
           x = [0, 0],
-          N = [0, 0],
-          T = 0;
+          T = [0, 0],
+          N = 0;
 
       if ((t = t.trim()).length >= 7e3) throw new Error(t + " not a valid Decimal128 string");
       var k = t.match(o),
-          C = t.match(i),
-          D = t.match(s);
-      if (!k && !C && !D || 0 === t.length) throw new Error(t + " not a valid Decimal128 string");
+          B = t.match(i),
+          C = t.match(s);
+      if (!k && !B && !C || 0 === t.length) throw new Error(t + " not a valid Decimal128 string");
       if (k && k[4] && void 0 === k[2]) throw new Error(t + " not a valid Decimal128 string");
 
-      if ("+" !== t[T] && "-" !== t[T] || (r = "-" === t[T++]), !h(t[T]) && "." !== t[T]) {
-        if ("i" === t[T] || "I" === t[T]) return new d(p.toBuffer(r ? c : l));
-        if ("N" === t[T]) return new d(p.toBuffer(u));
+      if ("+" !== t[N] && "-" !== t[N] || (r = "-" === t[N++]), !h(t[N]) && "." !== t[N]) {
+        if ("i" === t[N] || "I" === t[N]) return new d(p.toBuffer(r ? c : l));
+        if ("N" === t[N]) return new d(p.toBuffer(u));
       }
 
-      for (; h(t[T]) || "." === t[T];) if ("." !== t[T]) S < 34 && ("0" !== t[T] || _) && (_ || (w = v), _ = !0, O[A++] = parseInt(t[T], 10), S += 1), _ && (g += 1), y && (b += 1), v += 1, T += 1;else {
+      for (; h(t[N]) || "." === t[N];) if ("." !== t[N]) S < 34 && ("0" !== t[N] || _) && (_ || (w = v), _ = !0, O[A++] = parseInt(t[N], 10), S += 1), _ && (g += 1), y && (b += 1), v += 1, N += 1;else {
         if (y) return new d(p.toBuffer(u));
-        y = !0, T += 1;
+        y = !0, N += 1;
       }
 
       if (y && !v) throw new Error(t + " not a valid Decimal128 string");
 
-      if ("e" === t[T] || "E" === t[T]) {
-        var R = t.substr(++T).match(f);
+      if ("e" === t[N] || "E" === t[N]) {
+        var R = t.substr(++N).match(f);
         if (!R || !R[2]) return new d(p.toBuffer(u));
-        E = parseInt(R[0], 10), T += R[0].length;
+        j = parseInt(R[0], 10), N += R[0].length;
       }
 
-      if (t[T]) return new d(p.toBuffer(u));
+      if (t[N]) return new d(p.toBuffer(u));
 
-      if (j = 0, S) {
-        if ($ = S - 1, m = g, 0 !== E && 1 !== m) for (; "0" === t[w + m - 1];) m -= 1;
-      } else j = 0, $ = 0, O[0] = 0, g = 1, S = 1, m = 0;
+      if ($ = 0, S) {
+        if (E = S - 1, m = g, 0 !== j && 1 !== m) for (; "0" === t[w + m - 1];) m -= 1;
+      } else $ = 0, E = 0, O[0] = 0, g = 1, S = 1, m = 0;
 
-      for (E <= b && b - E > 16384 ? E = -6176 : E -= b; E > 6111;) {
-        if (($ += 1) - j > 34) {
-          var B = O.join("");
+      for (j <= b && b - j > 16384 ? j = -6176 : j -= b; j > 6111;) {
+        if ((E += 1) - $ > 34) {
+          var D = O.join("");
 
-          if (B.match(/^0+$/)) {
-            E = 6111;
+          if (D.match(/^0+$/)) {
+            j = 6111;
             break;
           }
 
           return new d(p.toBuffer(r ? c : l));
         }
 
-        E -= 1;
+        j -= 1;
       }
 
-      for (; E < -6176 || S < g;) {
-        if (0 === $) {
-          E = -6176, m = 0;
+      for (; j < -6176 || S < g;) {
+        if (0 === E) {
+          j = -6176, m = 0;
           break;
         }
 
-        if (S < g ? g -= 1 : $ -= 1, !(E < 6111)) {
-          if ((B = O.join("")).match(/^0+$/)) {
-            E = 6111;
+        if (S < g ? g -= 1 : E -= 1, !(j < 6111)) {
+          if ((D = O.join("")).match(/^0+$/)) {
+            j = 6111;
             break;
           }
 
           return new d(p.toBuffer(r ? c : l));
         }
 
-        E += 1;
+        j += 1;
       }
 
-      if ($ - j + 1 < m && "0" !== t[m]) {
+      if (E - $ + 1 < m && "0" !== t[m]) {
         var M = v;
-        y && -6176 === E && (w += 1, M += 1);
-        var I = parseInt(t[w + $ + 1], 10),
+        y && -6176 === j && (w += 1, M += 1);
+        var I = parseInt(t[w + E + 1], 10),
             F = 0;
-        if (I >= 5 && (F = 1, 5 === I)) for (F = O[$] % 2 == 1, P = w + $ + 2; P < M; P++) if (parseInt(t[P], 10)) {
+        if (I >= 5 && (F = 1, 5 === I)) for (F = O[E] % 2 == 1, P = w + E + 2; P < M; P++) if (parseInt(t[P], 10)) {
           F = 1;
           break;
         }
-        if (F) for (var L = $; L >= 0 && ++O[L] > 9; L--) if (O[L] = 0, 0 === L) {
-          if (!(E < 6111)) return new d(p.toBuffer(r ? c : l));
-          E += 1, O[L] = 1;
+        if (F) for (var U = E; U >= 0 && ++O[U] > 9; U--) if (O[U] = 0, 0 === U) {
+          if (!(j < 6111)) return new d(p.toBuffer(r ? c : l));
+          j += 1, O[U] = 1;
         }
       }
 
-      if (x = n.fromNumber(0), N = n.fromNumber(0), 0 === m) x = n.fromNumber(0), N = n.fromNumber(0);else if ($ - j < 17) for (L = j, N = n.fromNumber(O[L++]), x = new n(0, 0); L <= $; L++) N = (N = N.multiply(n.fromNumber(10))).add(n.fromNumber(O[L]));else {
-        for (L = j, x = n.fromNumber(O[L++]); L <= $ - 17; L++) x = (x = x.multiply(n.fromNumber(10))).add(n.fromNumber(O[L]));
+      if (x = n.fromNumber(0), T = n.fromNumber(0), 0 === m) x = n.fromNumber(0), T = n.fromNumber(0);else if (E - $ < 17) for (U = $, T = n.fromNumber(O[U++]), x = new n(0, 0); U <= E; U++) T = (T = T.multiply(n.fromNumber(10))).add(n.fromNumber(O[U]));else {
+        for (U = $, x = n.fromNumber(O[U++]); U <= E - 17; U++) x = (x = x.multiply(n.fromNumber(10))).add(n.fromNumber(O[U]));
 
-        for (N = n.fromNumber(O[L++]); L <= $; L++) N = (N = N.multiply(n.fromNumber(10))).add(n.fromNumber(O[L]));
+        for (T = n.fromNumber(O[U++]); U <= E; U++) T = (T = T.multiply(n.fromNumber(10))).add(n.fromNumber(O[U]));
       }
 
-      var U,
+      var L,
           V,
           q,
           W,
@@ -44546,14 +44654,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         };
       }(x, n.fromString("100000000000000000"));
 
-      H.low = H.low.add(N), U = H.low, V = N, q = U.high_ >>> 0, W = V.high_ >>> 0, (q < W || q === W && U.low_ >>> 0 < V.low_ >>> 0) && (H.high = H.high.add(n.fromNumber(1))), e = E + a;
+      H.low = H.low.add(T), L = H.low, V = T, q = L.high_ >>> 0, W = V.high_ >>> 0, (q < W || q === W && L.low_ >>> 0 < V.low_ >>> 0) && (H.high = H.high.add(n.fromNumber(1))), e = j + a;
       var Y = {
         low: n.fromNumber(0),
         high: n.fromNumber(0)
       };
       H.high.shiftRightUnsigned(49).and(n.fromNumber(1)).equals(n.fromNumber) ? (Y.high = Y.high.or(n.fromNumber(3).shiftLeft(61)), Y.high = Y.high.or(n.fromNumber(e).and(n.fromNumber(16383).shiftLeft(47))), Y.high = Y.high.or(H.high.and(n.fromNumber(0x7fffffffffff)))) : (Y.high = Y.high.or(n.fromNumber(16383 & e).shiftLeft(49)), Y.high = Y.high.or(H.high.and(n.fromNumber(562949953421311)))), Y.low = H.low, r && (Y.high = Y.high.or(n.fromString("9223372036854775808")));
       var K = p.allocBuffer(16);
-      return T = 0, K[T++] = 255 & Y.low.low_, K[T++] = Y.low.low_ >> 8 & 255, K[T++] = Y.low.low_ >> 16 & 255, K[T++] = Y.low.low_ >> 24 & 255, K[T++] = 255 & Y.low.high_, K[T++] = Y.low.high_ >> 8 & 255, K[T++] = Y.low.high_ >> 16 & 255, K[T++] = Y.low.high_ >> 24 & 255, K[T++] = 255 & Y.high.low_, K[T++] = Y.high.low_ >> 8 & 255, K[T++] = Y.high.low_ >> 16 & 255, K[T++] = Y.high.low_ >> 24 & 255, K[T++] = 255 & Y.high.high_, K[T++] = Y.high.high_ >> 8 & 255, K[T++] = Y.high.high_ >> 16 & 255, K[T++] = Y.high.high_ >> 24 & 255, new d(K);
+      return N = 0, K[N++] = 255 & Y.low.low_, K[N++] = Y.low.low_ >> 8 & 255, K[N++] = Y.low.low_ >> 16 & 255, K[N++] = Y.low.low_ >> 24 & 255, K[N++] = 255 & Y.low.high_, K[N++] = Y.low.high_ >> 8 & 255, K[N++] = Y.low.high_ >> 16 & 255, K[N++] = Y.low.high_ >> 24 & 255, K[N++] = 255 & Y.high.low_, K[N++] = Y.high.low_ >> 8 & 255, K[N++] = Y.high.low_ >> 16 & 255, K[N++] = Y.high.low_ >> 24 & 255, K[N++] = 255 & Y.high.high_, K[N++] = Y.high.high_ >> 8 & 255, K[N++] = Y.high.high_ >> 16 & 255, K[N++] = Y.high.high_ >> 24 & 255, new d(K);
     };
 
     a = 6176, d.prototype.toString = function () {
@@ -44637,6 +44745,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       };
     }, t.exports = r, t.exports.DBRef = r;
   }, function (t, e, r) {
+    "use strict";
+
     t.exports = r(112);
   }, function (t, e, r) {
     "use strict";
@@ -44657,7 +44767,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }, function (t, e, r) {
     "use strict";
 
-    var n = r(12);
+    var n = r(13);
     /*!
      * Given a value, cast it to a boolean, or throw a `CastError` if the value
      * cannot be casted. `null` and `undefined` are considered valid.
@@ -44803,19 +44913,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           O = r(15).get().ReadPreference,
           S = r(141),
           A = r(4),
-          j = r(2),
-          $ = r(145),
-          E = r(146).middlewareFunctions,
+          $ = r(2),
+          E = r(145),
+          j = r(146).middlewareFunctions,
           P = r(76).middlewareFunctions,
-          x = E.concat(P).reduce(function (t, e) {
+          x = j.concat(P).reduce(function (t, e) {
         return t.add(e);
       }, new Set()),
-          N = 0;
+          T = 0;
 
-      function T(t, e) {
-        if (!(this instanceof T)) return new T(t, e);
+      function N(t, e) {
+        if (!(this instanceof N)) return new N(t, e);
 
-        if (this.obj = t, this.paths = {}, this.aliases = {}, this.subpaths = {}, this.virtuals = {}, this.singleNestedPaths = {}, this.nested = {}, this.inherits = {}, this.callQueue = [], this._indexes = [], this.methods = {}, this.methodOptions = {}, this.statics = {}, this.tree = {}, this.query = {}, this.childSchemas = [], this.plugins = [], this.$id = ++N, this.s = {
+        if (this.obj = t, this.paths = {}, this.aliases = {}, this.subpaths = {}, this.virtuals = {}, this.singleNestedPaths = {}, this.nested = {}, this.inherits = {}, this.callQueue = [], this._indexes = [], this.methods = {}, this.methodOptions = {}, this.statics = {}, this.tree = {}, this.query = {}, this.childSchemas = [], this.plugins = [], this.$id = ++T, this.s = {
           hooks: new l()
         }, this.options = this.defaultOptions(e), Array.isArray(t)) {
           var r,
@@ -44833,7 +44943,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         } else t && this.add(t);
 
-        var i = t && t._id && j.isObject(t._id);
+        var i = t && t._id && $.isObject(t._id);
         !this.paths._id && !this.options.noId && this.options._id && !i && _(this), this.setupTimestamp(this.options.timestamps);
       }
       /*!
@@ -44845,24 +44955,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      T.prototype = Object.create(c.prototype), T.prototype.constructor = T, T.prototype.instanceOfSchema = !0,
+      N.prototype = Object.create(c.prototype), N.prototype.constructor = N, N.prototype.instanceOfSchema = !0,
       /*!
        * ignore
        */
-      Object.defineProperty(T.prototype, "$schemaType", {
+      Object.defineProperty(N.prototype, "$schemaType", {
         configurable: !1,
         enumerable: !1,
         writable: !0
-      }), Object.defineProperty(T.prototype, "childSchemas", {
+      }), Object.defineProperty(N.prototype, "childSchemas", {
         configurable: !1,
         enumerable: !0,
         writable: !0
-      }), T.prototype.obj, T.prototype.paths, T.prototype.tree, T.prototype.clone = function () {
+      }), N.prototype.obj, N.prototype.paths, N.prototype.tree, N.prototype.clone = function () {
         var t = this,
-            e = new (null == this.base ? T : this.base.Schema)({}, this._userProvidedOptions);
-        return e.base = this.base, e.obj = this.obj, e.options = j.clone(this.options), e.callQueue = this.callQueue.map(function (t) {
+            e = new (null == this.base ? N : this.base.Schema)({}, this._userProvidedOptions);
+        return e.base = this.base, e.obj = this.obj, e.options = $.clone(this.options), e.callQueue = this.callQueue.map(function (t) {
           return t;
-        }), e.methods = j.clone(this.methods), e.methodOptions = j.clone(this.methodOptions), e.statics = j.clone(this.statics), e.query = j.clone(this.query), e.plugins = Array.prototype.slice.call(this.plugins), e._indexes = j.clone(this._indexes), e.s.hooks = this.s.hooks.clone(), e.tree = j.clone(this.tree), e.paths = j.clone(this.paths), e.nested = j.clone(this.nested), e.subpaths = j.clone(this.subpaths), e.singleNestedPaths = j.clone(this.singleNestedPaths), e.childSchemas =
+        }), e.methods = $.clone(this.methods), e.methodOptions = $.clone(this.methodOptions), e.statics = $.clone(this.statics), e.query = $.clone(this.query), e.plugins = Array.prototype.slice.call(this.plugins), e._indexes = $.clone(this._indexes), e.s.hooks = this.s.hooks.clone(), e.tree = $.clone(this.tree), e.paths = $.clone(this.paths), e.nested = $.clone(this.nested), e.subpaths = $.clone(this.subpaths), e.singleNestedPaths = $.clone(this.singleNestedPaths), e.childSchemas =
         /*!
          * ignore
          */
@@ -44881,11 +44991,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         /*!
          * ignore
          */
-        (e), e.virtuals = j.clone(this.virtuals), e.$globalPluginsApplied = this.$globalPluginsApplied, e.$isRootDiscriminator = this.$isRootDiscriminator, e.$implicitlyCreated = this.$implicitlyCreated, null != this.discriminatorMapping && (e.discriminatorMapping = Object.assign({}, this.discriminatorMapping)), null != this.discriminators && (e.discriminators = Object.assign({}, this.discriminators)), e.aliases = Object.assign({}, this.aliases), e.on("init", function (e) {
+        (e), e.virtuals = $.clone(this.virtuals), e.$globalPluginsApplied = this.$globalPluginsApplied, e.$isRootDiscriminator = this.$isRootDiscriminator, e.$implicitlyCreated = this.$implicitlyCreated, null != this.discriminatorMapping && (e.discriminatorMapping = Object.assign({}, this.discriminatorMapping)), null != this.discriminators && (e.discriminators = Object.assign({}, this.discriminators)), e.aliases = Object.assign({}, this.aliases), e.on("init", function (e) {
           return t.emit("init", e);
         }), e;
-      }, T.prototype.pick = function (t, e) {
-        var r = new T({}, e || this.options);
+      }, N.prototype.pick = function (t, e) {
+        var r = new N({}, e || this.options);
         if (!Array.isArray(t)) throw new f('Schema#pick() only accepts an array argument, got "' + i(t) + '"');
         var n,
             a = s(t);
@@ -44906,12 +45016,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return r;
-      }, T.prototype.defaultOptions = function (t) {
+      }, N.prototype.defaultOptions = function (t) {
         t && !1 === t.safe && (t.safe = {
           w: 0
-        }), t && t.safe && 0 === t.safe.w && (t.versionKey = !1), this._userProvidedOptions = null == t ? {} : j.clone(t);
+        }), t && t.safe && 0 === t.safe.w && (t.versionKey = !1), this._userProvidedOptions = null == t ? {} : $.clone(t);
         var e = v(this, "base.options", {});
-        if ((t = j.options({
+        if ((t = $.options({
           strict: !("strict" in e) || e.strict,
           strictQuery: "strictQuery" in e && e.strictQuery,
           bufferCommands: !0,
@@ -44930,11 +45040,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           id: !0,
           typeKey: "type",
           typePojoToMixed: !("typePojoToMixed" in e) || e.typePojoToMixed
-        }, j.clone(t))).read && (t.read = O(t.read)), t.optimisticConcurrency && !t.versionKey) throw new f("Must set `versionKey` if using `optimisticConcurrency`");
+        }, $.clone(t))).read && (t.read = O(t.read)), t.optimisticConcurrency && !t.versionKey) throw new f("Must set `versionKey` if using `optimisticConcurrency`");
         return t;
-      }, T.prototype.add = function (t, e) {
-        if (t instanceof T || null != t && t.instanceOfSchema) return b(this, t), this;
-        !1 === t._id && null == e && (this.options._id = !1), e = e || "";
+      }, N.prototype.add = function (t, e) {
+        if (t instanceof N || null != t && t.instanceOfSchema) return b(this, t), this;
+        if (!1 === t._id && null == e && (this.options._id = !1), "__proto__." === (e = e || "") || "constructor." === e || "prototype." === e) return this;
 
         for (var r = 0, n = Object.keys(t); r < n.length; r++) {
           var i = n[r],
@@ -44942,10 +45052,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (null == t[i]) throw new TypeError("Invalid value for schema path `" + a + '`, got value "' + t[i] + '"');
           if ("_id" !== i || !1 !== t[i]) if (t[i] instanceof d || "VirtualType" === v(t[i], "constructor.name", null)) this.virtual(t[i]);else {
             if (Array.isArray(t[i]) && 1 === t[i].length && null == t[i][0]) throw new TypeError("Invalid value for schema Array path `" + a + '`, got value "' + t[i][0] + '"');
-            if (j.isPOJO(t[i]) || t[i] instanceof h) {
-              if (Object.keys(t[i]).length < 1) e && (this.nested[e.substr(0, e.length - 1)] = !0), this.path(a, t[i]);else if (!t[i][this.options.typeKey] || "type" === this.options.typeKey && t[i].type.type) this.nested[a] = !0, this.add(t[i], a + ".");else if (!this.options.typePojoToMixed && j.isPOJO(t[i][this.options.typeKey])) {
+            if ($.isPOJO(t[i]) || t[i] instanceof h) {
+              if (Object.keys(t[i]).length < 1) e && (this.nested[e.substr(0, e.length - 1)] = !0), this.path(a, t[i]);else if (!t[i][this.options.typeKey] || "type" === this.options.typeKey && t[i].type.type) this.nested[a] = !0, this.add(t[i], a + ".");else if (!this.options.typePojoToMixed && $.isPOJO(t[i][this.options.typeKey])) {
                 e && (this.nested[e.substr(0, e.length - 1)] = !0);
-                var u = new T(t[i][this.options.typeKey], {
+                var u = new N(t[i][this.options.typeKey], {
                   typePojoToMixed: !1
                 }),
                     c = Object.assign({}, t[i], o({}, this.options.typeKey, u));
@@ -44990,13 +45100,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }(this, Object.keys(t).map(function (t) {
           return e ? e + t : t;
         })), this;
-      }, T.reserved = Object.create(null), T.prototype.reserved = T.reserved;
-      var k = T.reserved;
+      }, N.reserved = Object.create(null), N.prototype.reserved = N.reserved;
+      var k = N.reserved;
       /*!
        * ignore
        */
 
-      function C(t) {
+      function B(t) {
         return /\.\d+/.test(t) ? t.replace(/\.\d+\./g, ".$.").replace(/\.\d+$/, ".$") : t;
       }
       /*!
@@ -45004,7 +45114,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function D(t, e) {
+      function C(t, e) {
         for (var r = 0, n = Object.keys(t.paths); r < n.length; r++) {
           var o = n[r];
           if (o.includes(".$*")) if (new RegExp("^" + o.replace(/\.\$\*/g, "\\.[^.]+") + "$").test(e)) return t.paths[o];
@@ -45050,8 +45160,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      k.prototype = k.emit = k.listeners = k.on = k.removeListener = k.collection = k.errors = k.get = k.init = k.isModified = k.isNew = k.populated = k.remove = k.save = k.schema = k.toObject = k.validate = 1, T.prototype.path = function (t, e) {
-        var r = C(t);
+      k.prototype = k.emit = k.listeners = k.on = k.removeListener = k.collection = k.errors = k.get = k.init = k.isModified = k.isNew = k.populated = k.remove = k.save = k.toObject = k.validate = 1, N.prototype.path = function (t, e) {
+        var r = B(t);
 
         if (void 0 === e) {
           var n = function (t, e, r) {
@@ -45062,7 +45172,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }(this, t, r);
 
           if (null != n) return n;
-          var o = D(this, t);
+          var o = C(this, t);
           return null != o ? o : null != (n = this.hasMixedParent(r)) ? n : /\.\d+\.?.*$/.test(t) ? function (t, e) {
             return R(t, e), t.subpaths[e];
           }(this, t) : void 0;
@@ -45070,7 +45180,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         var a = t.split(".")[0];
         if (k[a]) throw new Error("`" + a + "` may not be used as a schema pathname");
-        "object" === i(e) && j.hasUserDefinedProperty(e, "ref") && $(e.ref, t);
+        "object" === i(e) && $.hasUserDefinedProperty(e, "ref") && E(e.ref, t);
         var u,
             c = t.split(/\./),
             l = c.pop(),
@@ -45096,7 +45206,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           y.f();
         }
 
-        f[l] = j.clone(e), this.paths[t] = this.interpretAsType(t, e, this.options);
+        f[l] = $.clone(e), this.paths[t] = this.interpretAsType(t, e, this.options);
         var m = this.paths[t];
 
         if (m.$isSchemaMap) {
@@ -45104,18 +45214,30 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               g = {
             type: {}
           };
-          if (j.hasUserDefinedProperty(e, "of")) g = j.isPOJO(e.of) && Object.keys(e.of).length > 0 && !j.hasUserDefinedProperty(e.of, this.options.typeKey) ? new T(e.of) : e.of;
+          if ($.hasUserDefinedProperty(e, "of")) g = $.isPOJO(e.of) && Object.keys(e.of).length > 0 && !$.hasUserDefinedProperty(e.of, this.options.typeKey) ? new N(e.of) : e.of;
           this.paths[v] = this.interpretAsType(v, g, this.options), m.$__schemaType = this.paths[v];
         }
 
         if (m.$isSingleNested) {
-          for (var b in m.schema.paths) this.singleNestedPaths[t + "." + b] = m.schema.paths[b];
+          for (var b = 0, w = Object.keys(m.schema.paths); b < w.length; b++) {
+            var O = w[b];
+            this.singleNestedPaths[t + "." + O] = m.schema.paths[O];
+          }
 
-          for (var w in m.schema.singleNestedPaths) this.singleNestedPaths[t + "." + w] = m.schema.singleNestedPaths[w];
+          for (var S = 0, A = Object.keys(m.schema.singleNestedPaths); S < A.length; S++) {
+            var j = A[S];
+            this.singleNestedPaths[t + "." + j] = m.schema.singleNestedPaths[j];
+          }
 
-          for (var O in m.schema.subpaths) this.singleNestedPaths[t + "." + O] = m.schema.subpaths[O];
+          for (var P = 0, x = Object.keys(m.schema.subpaths); P < x.length; P++) {
+            var T = x[P];
+            this.singleNestedPaths[t + "." + T] = m.schema.subpaths[T];
+          }
 
-          for (var S in m.schema.nested) this.singleNestedPaths[t + "." + S] = "nested";
+          for (var D = 0, M = Object.keys(m.schema.nested); D < M.length; D++) {
+            var I = M[D];
+            this.singleNestedPaths[t + "." + I] = "nested";
+          }
 
           Object.defineProperty(m.schema, "base", {
             configurable: !0,
@@ -45137,84 +45259,84 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }));
 
         if (m.$isMongooseArray && m.caster instanceof p) {
-          for (var A = t, E = m, P = []; E.$isMongooseArray;) A += ".$", E.$isMongooseDocumentArray ? (E.$embeddedSchemaType._arrayPath = A, E = E.$embeddedSchemaType.clone()) : (E.caster._arrayPath = A, E = E.caster.clone()), E.path = A, P.push(E);
+          for (var F = t, U = m, L = []; U.$isMongooseArray;) F += ".$", U.$isMongooseDocumentArray ? (U.$embeddedSchemaType._arrayPath = F, U.$embeddedSchemaType._arrayParentPath = t, U = U.$embeddedSchemaType.clone()) : (U.caster._arrayPath = F, U.caster._arrayParentPath = t, U = U.caster.clone()), U.path = F, L.push(U);
 
-          for (var x = 0, N = P; x < N.length; x++) {
-            var B = N[x];
-            this.subpaths[B.path] = B;
+          for (var V = 0, q = L; V < q.length; V++) {
+            var W = q[V];
+            this.subpaths[W.path] = W;
           }
         }
 
         if (m.$isMongooseDocumentArray) {
-          for (var M = 0, I = Object.keys(m.schema.paths); M < I.length; M++) {
-            var F = I[M];
-            this.subpaths[t + "." + F] = m.schema.paths[F], m.schema.paths[F].$isUnderneathDocArray = !0;
+          for (var H = 0, Y = Object.keys(m.schema.paths); H < Y.length; H++) {
+            var K = Y[H];
+            this.subpaths[t + "." + K] = m.schema.paths[K], m.schema.paths[K].$isUnderneathDocArray = !0;
           }
 
-          for (var L = 0, U = Object.keys(m.schema.subpaths); L < U.length; L++) {
-            var V = U[L];
-            this.subpaths[t + "." + V] = m.schema.subpaths[V], m.schema.subpaths[V].$isUnderneathDocArray = !0;
+          for (var z = 0, Q = Object.keys(m.schema.subpaths); z < Q.length; z++) {
+            var J = Q[z];
+            this.subpaths[t + "." + J] = m.schema.subpaths[J], m.schema.subpaths[J].$isUnderneathDocArray = !0;
           }
 
-          for (var q = 0, W = Object.keys(m.schema.singleNestedPaths); q < W.length; q++) {
-            var H = W[q];
-            "object" === i(m.schema.singleNestedPaths[r]) && (this.subpaths[t + "." + H] = m.schema.singleNestedPaths[H], m.schema.singleNestedPaths[H].$isUnderneathDocArray = !0);
+          for (var G = 0, X = Object.keys(m.schema.singleNestedPaths); G < X.length; G++) {
+            var Z = X[G];
+            "object" === i(m.schema.singleNestedPaths[r]) && (this.subpaths[t + "." + Z] = m.schema.singleNestedPaths[Z], m.schema.singleNestedPaths[Z].$isUnderneathDocArray = !0);
           }
         }
 
         return this;
-      }, Object.defineProperty(T.prototype, "base", {
+      }, Object.defineProperty(N.prototype, "base", {
         configurable: !0,
         enumerable: !1,
         writable: !0,
         value: null
-      }), T.prototype.interpretAsType = function (t, e, r) {
+      }), N.prototype.interpretAsType = function (t, e, r) {
         if (e instanceof p) {
           if (e.path === t) return e;
           var o = e.clone();
           return o.path = t, o;
         }
 
-        var s = null != this.base ? this.base.Schema.Types : T.Types;
+        var s = null != this.base ? this.base.Schema.Types : N.Types;
 
-        if (!(j.isPOJO(e) || e instanceof h) && "Object" !== j.getFunctionName(e.constructor)) {
+        if (!($.isPOJO(e) || e instanceof h) && "Object" !== $.getFunctionName(e.constructor)) {
           var a = e;
           (e = {})[r.typeKey] = a;
         }
 
         var u,
             c = !e[r.typeKey] || "type" === r.typeKey && e.type.type ? {} : e[r.typeKey];
-        if (j.isPOJO(c) || "mixed" === c) return new s.Mixed(t, e);
+        if ($.isPOJO(c) || "mixed" === c) return new s.Mixed(t, e);
 
         if (Array.isArray(c) || c === Array || "array" === c || c === s.Array) {
           var l = c === Array || "array" === c ? e.cast || e.of : c[0];
           if (l && l.instanceOfSchema) return new s.DocumentArray(t, l, e);
           if (l && l[r.typeKey] && l[r.typeKey].instanceOfSchema) return new s.DocumentArray(t, l[r.typeKey], e, l);
           if (Array.isArray(l)) return new s.Array(t, this.interpretAsType(t, l, r), e);
-          if ("string" == typeof l) l = s[l.charAt(0).toUpperCase() + l.substring(1)];else if (l && (!l[r.typeKey] || "type" === r.typeKey && l.type.type) && j.isPOJO(l)) {
+          if ("string" == typeof l) l = s[l.charAt(0).toUpperCase() + l.substring(1)];else if (l && (!l[r.typeKey] || "type" === r.typeKey && l.type.type) && $.isPOJO(l)) {
             if (Object.keys(l).length) {
               var f = {
                 minimize: r.minimize
               };
-              r.typeKey && (f.typeKey = r.typeKey), r.hasOwnProperty("strict") && (f.strict = r.strict), r.hasOwnProperty("typePojoToMixed") && (f.typePojoToMixed = r.typePojoToMixed), this._userProvidedOptions.hasOwnProperty("_id") ? f._id = this._userProvidedOptions._id : T.Types.DocumentArray.defaultOptions && null != T.Types.DocumentArray.defaultOptions._id && (f._id = T.Types.DocumentArray.defaultOptions._id);
-              var y = new T(l, f);
+              r.typeKey && (f.typeKey = r.typeKey), r.hasOwnProperty("strict") && (f.strict = r.strict), r.hasOwnProperty("typePojoToMixed") && (f.typePojoToMixed = r.typePojoToMixed), this._userProvidedOptions.hasOwnProperty("_id") ? f._id = this._userProvidedOptions._id : N.Types.DocumentArray.defaultOptions && null != N.Types.DocumentArray.defaultOptions._id && (f._id = N.Types.DocumentArray.defaultOptions._id);
+              var y = new N(l, f);
               return y.$implicitlyCreated = !0, new s.DocumentArray(t, y, e);
             }
 
             return new s.Array(t, s.Mixed, e);
           }
-          if (l && (u = "string" == typeof (c = !l[r.typeKey] || "type" === r.typeKey && l.type.type ? l : l[r.typeKey]) ? c : c.schemaName || j.getFunctionName(c), !s.hasOwnProperty(u))) throw new TypeError("Invalid schema configuration: " + "`".concat(u, "` is not a valid type within the array `").concat(t, "`.") + "See http://bit.ly/mongoose-schematypes for a list of valid schema types.");
+          if (l && (u = "string" == typeof (c = !l[r.typeKey] || "type" === r.typeKey && l.type.type ? l : l[r.typeKey]) ? c : c.schemaName || $.getFunctionName(c), !s.hasOwnProperty(u))) throw new TypeError("Invalid schema configuration: " + "`".concat(u, "` is not a valid type within the array `").concat(t, "`.") + "See http://bit.ly/mongoose-schematypes for a list of valid schema types.");
           return new s.Array(t, l || s.Mixed, e, r);
         }
 
         if (c && c.instanceOfSchema) return new s.Embedded(c, t, e);
-        if ((u = n.isBuffer(c) ? "Buffer" : "function" == typeof c || "object" === i(c) ? c.schemaName || j.getFunctionName(c) : null == c ? "" + c : c.toString()) && (u = u.charAt(0).toUpperCase() + u.substring(1)), "ObjectID" === u && (u = "ObjectId"), null == s[u]) throw new TypeError("Invalid schema configuration: `".concat(u, "` is not ") + "a valid type at path `".concat(t, "`. See ") + "http://bit.ly/mongoose-schematypes for a list of valid schema types.");
+        if ((u = n.isBuffer(c) ? "Buffer" : "function" == typeof c || "object" === i(c) ? c.schemaName || $.getFunctionName(c) : null == c ? "" + c : c.toString()) && (u = u.charAt(0).toUpperCase() + u.substring(1)), "ObjectID" === u && (u = "ObjectId"), null == s[u]) throw new TypeError("Invalid schema configuration: `".concat(u, "` is not ") + "a valid type at path `".concat(t, "`. See ") + "http://bit.ly/mongoose-schematypes for a list of valid schema types.");
         return new s[u](t, e);
-      }, T.prototype.eachPath = function (t) {
+      }, N.prototype.eachPath = function (t) {
         for (var e = Object.keys(this.paths), r = e.length, n = 0; n < r; ++n) t(e[n], this.paths[e[n]]);
 
         return this;
-      }, T.prototype.requiredPaths = function (t) {
+      }, N.prototype.requiredPaths = function (t) {
         if (this._requiredpaths && !t) return this._requiredpaths;
 
         for (var e = Object.keys(this.paths), r = e.length, n = []; r--;) {
@@ -45223,28 +45345,28 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return this._requiredpaths = n, this._requiredpaths;
-      }, T.prototype.indexedPaths = function () {
+      }, N.prototype.indexedPaths = function () {
         return this._indexedpaths || (this._indexedpaths = this.indexes()), this._indexedpaths;
-      }, T.prototype.pathType = function (t) {
-        var e = C(t);
+      }, N.prototype.pathType = function (t) {
+        var e = B(t);
         if (this.paths.hasOwnProperty(t)) return "real";
         if (this.virtuals.hasOwnProperty(t)) return "virtual";
         if (this.nested.hasOwnProperty(t)) return "nested";
         if (this.subpaths.hasOwnProperty(e) || this.subpaths.hasOwnProperty(t)) return "real";
         var r = this.singleNestedPaths.hasOwnProperty(e) || this.singleNestedPaths.hasOwnProperty(t);
-        return r ? "nested" === r ? "nested" : "real" : null != D(this, t) ? "real" : /\.\d+\.|\.\d+$/.test(t) ? R(this, t) : "adhocOrUndefined";
-      }, T.prototype.hasMixedParent = function (t) {
+        return r ? "nested" === r ? "nested" : "real" : null != C(this, t) ? "real" : /\.\d+\.|\.\d+$/.test(t) ? R(this, t) : "adhocOrUndefined";
+      }, N.prototype.hasMixedParent = function (t) {
         var e = t.split(/\./g);
         t = "";
 
-        for (var r = 0; r < e.length; ++r) if ((t = r > 0 ? t + "." + e[r] : e[r]) in this.paths && this.paths[t] instanceof u.Mixed) return this.paths[t];
+        for (var r = 0; r < e.length; ++r) if (t = r > 0 ? t + "." + e[r] : e[r], this.paths.hasOwnProperty(t) && this.paths[t] instanceof u.Mixed) return this.paths[t];
 
         return null;
-      }, T.prototype.setupTimestamp = function (t) {
+      }, N.prototype.setupTimestamp = function (t) {
         return S(this, t);
-      }, T.prototype.queue = function (t, e) {
+      }, N.prototype.queue = function (t, e) {
         return this.callQueue.push([t, e]), this;
-      }, T.prototype.pre = function (t) {
+      }, N.prototype.pre = function (t) {
         if (t instanceof RegExp) {
           var e,
               r = Array.prototype.slice.call(arguments, 1),
@@ -45284,7 +45406,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return this.s.hooks.pre.apply(this.s.hooks, arguments), this;
-      }, T.prototype.post = function (t) {
+      }, N.prototype.post = function (t) {
         if (t instanceof RegExp) {
           var e,
               r = Array.prototype.slice.call(arguments, 1),
@@ -45324,7 +45446,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return this.s.hooks.post.apply(this.s.hooks, arguments), this;
-      }, T.prototype.plugin = function (t, e) {
+      }, N.prototype.plugin = function (t, e) {
         if ("function" != typeof t) throw new Error('First param to `schema.plugin()` must be a function, got "' + i(t) + '"');
 
         if (e && e.deduplicate) {
@@ -45346,15 +45468,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           fn: t,
           opts: e
         }), t(this, e), this;
-      }, T.prototype.method = function (t, e, r) {
-        if ("string" != typeof t) for (var n in t) this.methods[n] = t[n], this.methodOptions[n] = j.clone(r);else this.methods[t] = e, this.methodOptions[t] = j.clone(r);
+      }, N.prototype.method = function (t, e, r) {
+        if ("string" != typeof t) for (var n in t) this.methods[n] = t[n], this.methodOptions[n] = $.clone(r);else this.methods[t] = e, this.methodOptions[t] = $.clone(r);
         return this;
-      }, T.prototype.static = function (t, e) {
+      }, N.prototype.static = function (t, e) {
         if ("string" != typeof t) for (var r in t) this.statics[r] = t[r];else this.statics[t] = e;
         return this;
-      }, T.prototype.index = function (t, e) {
-        return t || (t = {}), e || (e = {}), e.expires && j.expires(e), this._indexes.push([t, e]), this;
-      }, T.prototype.set = function (t, e, r) {
+      }, N.prototype.index = function (t, e) {
+        return t || (t = {}), e || (e = {}), e.expires && $.expires(e), this._indexes.push([t, e]), this;
+      }, N.prototype.set = function (t, e, r) {
         if (1 === arguments.length) return this.options[t];
 
         switch (t) {
@@ -45363,7 +45485,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             break;
 
           case "safe":
-            B(this.options, e), this._userProvidedOptions[t] = this.options[t];
+            D(this.options, e), this._userProvidedOptions[t] = this.options[t];
             break;
 
           case "timestamps":
@@ -45384,13 +45506,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        * ignore
        */
 
-      var B = A.deprecate(function (t, e) {
+      var D = A.deprecate(function (t, e) {
         t.safe = !1 === e ? {
           w: 0
         } : e;
       }, "Mongoose: The `safe` option for schemas is deprecated. Use the `writeConcern` option instead: http://bit.ly/mongoose-write-concern");
 
-      T.prototype.get = function (t) {
+      N.prototype.get = function (t) {
         return this.options[t];
       };
 
@@ -45431,20 +45553,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      Object.defineProperty(T, "indexTypes", {
+      Object.defineProperty(N, "indexTypes", {
         get: function () {
           return M;
         },
         set: function () {
           throw new Error("Cannot overwrite Schema.indexTypes");
         }
-      }), T.prototype.indexes = function () {
+      }), N.prototype.indexes = function () {
         return g(this);
-      }, T.prototype.virtual = function (t, e) {
+      }, N.prototype.virtual = function (t, e) {
         var r = this;
         if (t instanceof d || null != t && "VirtualType" === t.constructor.name) return this.virtual(t.path, t.options);
 
-        if (e = new y(e), j.hasUserDefinedProperty(e, ["ref", "refPath"])) {
+        if (e = new y(e), $.hasUserDefinedProperty(e, ["ref", "refPath"])) {
           if (null == e.localField) throw new Error("Reference virtuals require `localField` option");
           if (null == e.foreignField) throw new Error("Reference virtuals require `foreignField` option");
           this.pre("init", function (r) {
@@ -45481,9 +45603,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return o[t];
-      }, T.prototype.virtualpath = function (t) {
+      }, N.prototype.virtualpath = function (t) {
         return this.virtuals.hasOwnProperty(t) ? this.virtuals[t] : null;
-      }, T.prototype.remove = function (t) {
+      }, N.prototype.remove = function (t) {
         return "string" == typeof t && (t = [t]), Array.isArray(t) && t.forEach(function (t) {
           if (null != this.path(t) || this.nested[t]) {
             if (this.nested[t]) {
@@ -45507,8 +45629,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             delete this.paths[t], I(this, t);
           }
         }, this), this;
-      }, T.prototype.loadClass = function (t, e) {
-        return t === Object.prototype || t === Function.prototype || t.prototype.hasOwnProperty("$isMongooseModelPrototype") || (this.loadClass(Object.getPrototypeOf(t)), e || Object.getOwnPropertyNames(t).forEach(function (e) {
+      }, N.prototype.loadClass = function (t, e) {
+        return t === Object.prototype || t === Function.prototype || t.prototype.hasOwnProperty("$isMongooseModelPrototype") || (this.loadClass(Object.getPrototypeOf(t), e), e || Object.getOwnPropertyNames(t).forEach(function (e) {
           if (!e.match(/^(length|name|prototype)$/)) {
             var r = Object.getOwnPropertyDescriptor(t, e);
             "function" == typeof r.value && this.static(e, r.value);
@@ -45516,14 +45638,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, this), Object.getOwnPropertyNames(t.prototype).forEach(function (r) {
           if (!r.match(/^(constructor)$/)) {
             var n = Object.getOwnPropertyDescriptor(t.prototype, r);
-            e || "function" == typeof n.value && this.method(r, n.value), "function" == typeof n.get && this.virtual(r).get(n.get), "function" == typeof n.set && this.virtual(r).set(n.set);
+            e || "function" == typeof n.value && this.method(r, n.value), "function" == typeof n.get && (this.virtuals[r] && (this.virtuals[r].getters = []), this.virtual(r).get(n.get)), "function" == typeof n.set && (this.virtuals[r] && (this.virtuals[r].setters = []), this.virtual(r).set(n.set));
           }
         }, this)), this;
       },
       /*!
        * ignore
        */
-      T.prototype._getSchema = function (t) {
+      N.prototype._getSchema = function (t) {
         var e = this.path(t),
             r = [];
         if (e) return e.$fullPath = t, e;
@@ -45550,7 +45672,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       /*!
        * ignore
        */
-      T.prototype._getPathType = function (t) {
+      N.prototype._getPathType = function (t) {
         if (this.path(t)) return "real";
         return function t(e, r) {
           for (var n, o, i = e.length + 1; i--;) {
@@ -45578,7 +45700,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             pathType: "undefined"
           };
         }(t.split("."), this);
-      }, t.exports = e = T, T.Types = u = r(54),
+      }, t.exports = e = N, N.Types = u = r(54),
       /*!
        * ignore
        */
@@ -45738,7 +45860,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       if (o && o.typeKey && (u = o.typeKey), this.schemaOptions = o, e) {
         var c = {};
-        g.isPOJO(e) && (e[u] ? (delete (c = g.clone(e))[u], e = e[u]) : e = h), e === Object && (e = h);
+        g.isPOJO(e) && (e[u] ? (delete (c = g.clone(e))[u], e = e[u]) : e = h), null != n && null != n.ref && null == c.ref && (c.ref = n.ref), e === Object && (e = h);
         var l = "string" == typeof e ? e : g.getFunctionName(e),
             p = r(54),
             y = p.hasOwnProperty(l) ? p[l] : e;
@@ -45782,7 +45904,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var r = arguments;
       return !Array.isArray(arguments) && g.isObject(arguments) && (r = g.object.vals(r)), t.caster.enum.apply(t.caster, r), this;
     }, A.prototype.applyGetters = function (t, e) {
-      return this.caster.options && this.caster.options.ref ? t : f.prototype.applyGetters.call(this, t, e);
+      if (null != e && null != e.$__ && e.populated(this.path)) return t;
+      var r = f.prototype.applyGetters.call(this, t, e);
+      if (Array.isArray(r)) for (var n = r.length, o = 0; o < n; ++o) r[o] = this.caster.applyGetters(r[o], e);
+      return r;
     }, A.prototype._applySetters = function (t, e, r, n) {
       if (this.casterConstructor instanceof A && A.options.castNonArrays && !this[S]) {
         for (var o = 0, i = this; null != i && i instanceof A && !i.$isMongooseDocumentArray;) ++o, i = i.casterConstructor;
@@ -45813,15 +45938,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         }
 
-        if (t && t.isMongooseArray ? t && t.isMongooseArray && (t = i(t, this._arrayPath || this.path, e)) : t = i(t, this._arrayPath || this.path, e), null != e && null != e.$__ && e.populated(this.path)) return t;
-        if (this.caster && this.casterConstructor !== h) try {
-          for (a = 0, u = t.length; a < u; a++) {
-            if ("Number" === this.caster.instance && void 0 === t[a]) throw new c("Mongoose number arrays disallow storing undefined");
-            var _ = {};
-            null != s && null != s.arrayPath ? _.arrayPath = s.arrayPath + "." + a : null != this.caster._arrayPath && (_.arrayPath = this.caster._arrayPath.slice(0, -2) + "." + a), t[a] = this.caster.cast(t[a], e, n, void 0, _);
+        if (t && t.isMongooseArray ? t && t.isMongooseArray && (t = i(t, _(s, "path", null) || this._arrayPath || this.path, e, this)) : t = i(t, _(s, "path", null) || this._arrayPath || this.path, e, this), null != e && null != e.$__ && e.populated(this.path) && n) return t;
+        var m = this.caster;
+        if (m && this.casterConstructor !== h) try {
+          var g = t.length;
+
+          for (a = 0; a < g; a++) {
+            if ("Number" === m.instance && void 0 === t[a]) throw new c("Mongoose number arrays disallow storing undefined");
+            var b = {};
+            m.$isMongooseArray && (null != s && null != s.arrayPath ? b.arrayPath = s.arrayPath + "." + a : null != this.caster._arrayParentPath && (b.arrayPath = this.caster._arrayParentPath + "." + a)), t[a] = m.applySetters(t[a], e, n, void 0, b);
           }
         } catch (e) {
-          throw new p("[" + e.kind + "]", v.inspect(t), this.path, e, this);
+          throw new p("[" + e.kind + "]", v.inspect(t), this.path + "." + a, e, this);
         }
         return t;
       }
@@ -45872,9 +46000,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       return n;
     };
-    var j = A.prototype.$conditionalHandlers = {};
+    var $ = A.prototype.$conditionalHandlers = {};
 
-    function $(t) {
+    function E(t) {
       return function (e) {
         if (!Array.isArray(e)) throw new TypeError("conditional " + t + " requires an array");
         var r,
@@ -45896,7 +46024,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       };
     }
 
-    j.$all = function (t) {
+    $.$all = function (t) {
       return Array.isArray(t) || (t = [t]), t = t.map(function (t) {
         if (g.isObject(t)) {
           var e = {};
@@ -45905,7 +46033,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         return t;
       }, this), this.castForQuery(t);
-    }, j.$options = String, j.$elemMatch = function (t) {
+    }, $.$options = String, $.$elemMatch = function (t) {
       for (var e = Object.keys(t), r = e.length, n = 0; n < r; ++n) {
         var o = e[n],
             i = t[o];
@@ -45916,7 +46044,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           a = _(this, "casterConstructor.schema.discriminators", {});
 
       return null != s && null != t[s] && null != a[t[s]] ? d(a[t[s]], t) : d(this.casterConstructor.schema, t);
-    }, j.$geoIntersects = w.cast$geoIntersects, j.$or = $("$or"), j.$and = $("$and"), j.$nor = $("$nor"), j.$near = j.$nearSphere = w.cast$near, j.$within = j.$geoWithin = w.cast$within, j.$size = j.$minDistance = j.$maxDistance = b, j.$exists = a, j.$type = u, j.$eq = j.$gt = j.$gte = j.$lt = j.$lte = j.$ne = j.$regex = A.prototype.castForQuery, j.$nin = f.prototype.$conditionalHandlers.$nin, j.$in = f.prototype.$conditionalHandlers.$in,
+    }, $.$geoIntersects = w.cast$geoIntersects, $.$or = E("$or"), $.$and = E("$and"), $.$nor = E("$nor"), $.$near = $.$nearSphere = w.cast$near, $.$within = $.$geoWithin = w.cast$within, $.$size = $.$minDistance = $.$maxDistance = b, $.$exists = a, $.$type = u, $.$eq = $.$gt = $.$gte = $.$lt = $.$lte = $.$ne = $.$regex = A.prototype.castForQuery, $.$nin = f.prototype.$conditionalHandlers.$nin, $.$in = f.prototype.$conditionalHandlers.$in,
     /*!
      * Module exports.
      */
@@ -45927,7 +46055,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
      * Module exports.
      */
 
-    e.Array = r(82), e.Buffer = r(85), e.Document = e.Embedded = r(26), e.DocumentArray = r(18), e.Decimal128 = r(20), e.ObjectId = r(13), e.Map = r(87), e.Subdocument = r(89);
+    e.Array = r(82), e.Buffer = r(85), e.Document = e.Embedded = r(26), e.DocumentArray = r(18), e.Decimal128 = r(20), e.ObjectId = r(12), e.Map = r(87), e.Subdocument = r(89);
   }, function (t, e, r) {
     "use strict";
 
@@ -45970,6 +46098,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               r[e] = Object.getOwnPropertyDescriptor(t, e), r[e].get ? delete r[e] : r[e].enumerable = -1 === ["isNew", "$__", "errors", "_doc", "$locals", "$op", "__parentArray", "__index", "$isDocumentArrayElement"].indexOf(e);
             }), r));
             p || (u.$__[c] = this), u.$__.nestedPath = d, Object.defineProperty(u, "schema", {
+              enumerable: !1,
+              configurable: !0,
+              writable: !1,
+              value: f.schema
+            }), Object.defineProperty(u, "$__schema", {
               enumerable: !1,
               configurable: !0,
               writable: !1,
@@ -46300,7 +46433,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       var i = r(118).Buffer,
           s = r(64),
-          a = e.clone = function t(r, n) {
+          a = ["__proto__", "constructor", "prototype"],
+          u = e.clone = function t(r, n) {
         if (null == r) return r;
         if (Array.isArray(r)) return e.cloneArray(r, n);
 
@@ -46313,7 +46447,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if ("Buffer" === r.constructor.name) return e.cloneBuffer(r);
         }
 
-        return c(r) ? e.cloneObject(r, n) : r.valueOf ? r.valueOf() : void 0;
+        return l(r) ? e.cloneObject(r, n) : r.valueOf ? r.valueOf() : void 0;
       };
       /*!
        * ignore
@@ -46321,30 +46455,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
       e.cloneObject = function (t, e) {
-        var r,
-            n,
-            o,
-            i = e && e.minimize,
-            s = {};
+        for (var r, n, o = e && e.minimize, i = {}, s = 0, c = Object.keys(t); s < c.length; s++) {
+          var l = c[s];
+          -1 === a.indexOf(l) && (n = u(t[l], e), o && void 0 === n || (r || (r = !0), i[l] = n));
+        }
 
-        for (o in t) n = a(t[o], e), i && void 0 === n || (r || (r = !0), s[o] = n);
-
-        return i ? r && s : s;
+        return o ? r && i : i;
       }, e.cloneArray = function (t, e) {
-        for (var r = [], n = 0, o = t.length; n < o; n++) r.push(a(t[n], e));
+        for (var r = [], n = 0, o = t.length; n < o; n++) r.push(u(t[n], e));
 
         return r;
       }, e.tick = function (t) {
         if ("function" == typeof t) return function () {
           var e = arguments;
-          l(function () {
+          f(function () {
             t.apply(this, e);
           });
         };
       }, e.merge = function t(r, n) {
-        for (var o, i = Object.keys(n), s = i.length; s--;) void 0 === r[o = i[s]] ? r[o] = n[o] : e.isObject(n[o]) ? t(r[o], n[o]) : r[o] = n[o];
+        for (var o, i = Object.keys(n), s = i.length; s--;) o = i[s], -1 === a.indexOf(o) && (void 0 === r[o] ? r[o] = n[o] : e.isObject(n[o]) ? t(r[o], n[o]) : r[o] = n[o]);
       }, e.mergeClone = function t(r, n) {
-        for (var o, i = Object.keys(n), s = i.length; s--;) void 0 === r[o = i[s]] ? r[o] = a(n[o]) : e.isObject(n[o]) ? t(r[o], n[o]) : r[o] = a(n[o]);
+        for (var o, i = Object.keys(n), s = i.length; s--;) o = i[s], -1 === a.indexOf(o) && (void 0 === r[o] ? r[o] = u(n[o]) : e.isObject(n[o]) ? t(r[o], n[o]) : r[o] = u(n[o]));
       }, e.readPref = function (t) {
         switch (t) {
           case "p":
@@ -46398,25 +46529,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         return t;
       };
-      var u = Object.prototype.toString;
+      var c = Object.prototype.toString;
 
       e.toString = function (t) {
-        return u.call(t);
+        return c.call(t);
       };
 
-      var c = e.isObject = function (t) {
+      var l = e.isObject = function (t) {
         return "[object Object]" == e.toString(t);
       };
 
       e.isArray = function (t) {
         return Array.isArray(t) || "object" == o(t) && "[object Array]" == e.toString(t);
-      }, e.keys = Object.keys || function (t) {
-        var e = [];
-
-        for (var r in t) t.hasOwnProperty(r) && e.push(r);
-
-        return e;
-      }, e.create = "function" == typeof Object.create ? Object.create : function (t) {
+      }, e.keys = Object.keys, e.create = "function" == typeof Object.create ? Object.create : function (t) {
         if (arguments.length > 1) throw new Error("Adding properties is not supported");
 
         function e() {}
@@ -46425,7 +46550,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }, e.inherits = function (t, r) {
         t.prototype = e.create(r.prototype), t.prototype.constructor = t;
       };
-      var l = e.soon = "function" == typeof t ? t : n.nextTick;
+      var f = e.soon = "function" == typeof t ? t : n.nextTick;
       e.cloneBuffer = function (t) {
         var e = i.alloc(t.length);
         return t.copy(e, 0, 0, t.length), e;
@@ -46510,7 +46635,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -46672,7 +46797,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -46814,7 +46939,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       for (var O = Object.keys(e.methods), S = Object.assign({}, s, {
         checkForPromise: !0
       }), A = function () {
-        var e = $[j];
+        var e = E[$];
         if (!_.hasHooks(e)) return "continue";
         var r = a[e];
         a[e] = function () {
@@ -46826,7 +46951,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             return r["$__".concat(e)].apply(r, s.concat([t]));
           }, t.events);
         }, a["$__".concat(e)] = _.createWrapper(e, r, null, S);
-      }, j = 0, $ = O; j < $.length; j++) A();
+      }, $ = 0, E = O; $ < E.length; $++) A();
     }
     /*!
      * ignore
@@ -46841,7 +46966,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }, function (t, e, r) {
     "use strict";
 
-    var n = r(12);
+    var n = r(13);
     /*!
      * Given a value, cast it to a string, or throw a `CastError` if the value
      * cannot be casted. `null` and `undefined` are considered valid.
@@ -47013,7 +47138,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       /*!
        * Module requirements.
        */
-      var n = r(12);
+      var n = r(13);
       /*!
        * ignore
        */
@@ -47119,16 +47244,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
      * Module exports.
      */
 
-    t.exports = function (t, e, r) {
-      var l = new n();
+    t.exports = function (t, e, r, l) {
+      var f = new n();
 
-      if (l[i] = {}, Array.isArray(t)) {
-        for (var f = t.length, p = 0; p < f; ++p) c.call(l, t[p]);
+      if (f[i] = {}, Array.isArray(t)) {
+        for (var p = t.length, h = 0; h < p; ++h) c.call(f, t[h]);
 
-        l[i] = t[i] || {};
+        null != t[i] && (f[i] = t[i]);
       }
 
-      return l[a] = e, l[u] = void 0, r && r instanceof o && (l[s] = r, l[u] = r.schema.path(e)), l;
+      return f[a] = e, f[u] = void 0, r && r instanceof o && (f[s] = r, f[u] = l || r.schema.path(e)), f;
     };
   }, function (t, e, r) {
     "use strict";
@@ -47286,7 +47411,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -47307,20 +47432,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var d = r(6),
           _ = r(26),
           m = r(14),
-          v = r(13),
+          v = r(12),
           g = r(84),
           b = r(3),
           w = r(17).internalToObjectOptions,
           O = r(2),
           S = r(4),
           A = r(0).arrayAtomicsSymbol,
-          j = r(0).arrayParentSymbol,
-          $ = r(0).arrayPathSymbol,
-          E = r(0).arraySchemaSymbol,
+          $ = r(0).arrayParentSymbol,
+          E = r(0).arrayPathSymbol,
+          j = r(0).arraySchemaSymbol,
           P = r(0).populateModelSymbol,
           x = Symbol("mongoose#Array#sliced"),
-          N = Array.prototype.push,
-          T = Symbol("mongoose#MongooseCoreArray#validators"),
+          T = Array.prototype.push,
+          N = Symbol("mongoose#MongooseCoreArray#validators"),
           k = function (t) {
         !function (t, e) {
           if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
@@ -47354,10 +47479,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
 
         return o = S, (i = [{
+          key: "isMongooseArray",
+          get: function () {
+            return !0;
+          }
+        }, {
+          key: "validators",
+          get: function () {
+            return this[N];
+          },
+          set: function (t) {
+            this[N] = t;
+          }
+        }, {
           key: "$__getAtomics",
           value: function () {
             var t = [],
-                e = Object.keys(this[A]),
+                e = Object.keys(this[A] || {}),
                 r = e.length,
                 n = Object.assign({}, w, {
               _isNested: !0
@@ -47390,7 +47528,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, {
           key: "$parent",
           value: function () {
-            return this[j];
+            return this[$];
           }
           /*!
                * ignore
@@ -47399,7 +47537,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, {
           key: "$path",
           value: function () {
-            return this[$];
+            return this[E];
           }
         }, {
           key: "$shift",
@@ -47418,16 +47556,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, {
           key: "$schema",
           value: function () {
-            return this[E];
+            return this[j];
           }
         }, {
           key: "_cast",
           value: function (t) {
             var r,
                 n = !1;
-            return this[j] && (n = this[j].populated(this[$], !0)), n && null != t ? (r = n.options[P], (e.isBuffer(t) || t instanceof v || !O.isObject(t)) && (t = {
+            return this[$] && (n = this[$].populated(this[E], !0)), n && null != t ? (r = n.options[P], (e.isBuffer(t) || t instanceof v || !O.isObject(t)) && (t = {
               _id: t
-            }), t.schema && t.schema.discriminatorMapping && void 0 !== t.schema.discriminatorMapping.key || (t = new r(t)), this[E].caster.applySetters(t, this[j], !0)) : this[E].caster.applySetters(t, this[j], !1);
+            }), t.$__schema && t.$__schema.discriminatorMapping && void 0 !== t.$__schema.discriminatorMapping.key || (t = new r(t)), this[j].caster.applySetters(t, this[$], !0)) : this[j].caster.applySetters(t, this[$], !1);
           }
         }, {
           key: "_mapCast",
@@ -47436,13 +47574,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         }, {
           key: "_markModified",
-          value: function (t, e) {
-            var r,
-                n = this[j];
+          value: function (t) {
+            var e,
+                r = this[$];
 
-            if (n) {
-              if (r = this[$], arguments.length && (r = null != e ? r + "." + this.indexOf(t) + "." + e : r + "." + t), null != r && r.endsWith(".$")) return this;
-              n.markModified(r, arguments.length > 0 ? t : n);
+            if (r) {
+              if (e = this[E], arguments.length && (e = e + "." + t), null != e && e.endsWith(".$")) return this;
+              r.markModified(e, arguments.length > 0 ? t : r);
             }
 
             return this;
@@ -47453,13 +47591,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             if (!this[x]) {
               if ("$set" === t) return this[A] = {
                 $set: e
-              }, g(this[j], this[$]), this._markModified(), this;
+              }, g(this[$], this[E]), this._markModified(), this;
               var r,
                   n = this[A];
 
               if ("$pop" === t && !("$pop" in n)) {
                 var o = this;
-                this[j].once("save", function () {
+                this[$].once("save", function () {
                   o._popped = o._shifted = null;
                 });
               }
@@ -47486,9 +47624,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, {
           key: "addToSet",
           value: function () {
-            C(this, arguments);
+            B(this, arguments);
             var t = [].map.call(arguments, this._mapCast, this);
-            t = this[E].applySetters(t, this[j]);
+            t = this[j].applySetters(t, this[$]);
             var e = [],
                 r = "";
             return t[0] instanceof _ ? r = "doc" : t[0] instanceof Date && (r = "date"), t.forEach(function (t) {
@@ -47555,7 +47693,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }, {
           key: "pull",
           value: function () {
-            for (var t, e = [].map.call(arguments, this._cast, this), r = this[j].get(this[$]), n = r.length; n--;) if ((t = r[n]) instanceof d) {
+            for (var t, e = [].map.call(arguments, this._cast, this), r = this[$].get(this[E]), n = r.length; n--;) if ((t = r[n]) instanceof d) {
               var o = e.some(function (e) {
                 return t.equals(e);
               });
@@ -47564,7 +47702,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             return e[0] instanceof _ ? this._registerAtomic("$pullDocs", e.map(function (t) {
               return t.$__getValue("_id") || t;
-            })) : this._registerAtomic("$pullAll", e), this._markModified(), g(this[j], this[$]) > 0 && this._registerAtomic("$set", this), this;
+            })) : this._registerAtomic("$pullAll", e), this._markModified(), g(this[$], this[E]) > 0 && this._registerAtomic("$set", this), this;
           }
         }, {
           key: "push",
@@ -47572,11 +47710,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             var t = arguments,
                 e = t,
                 r = null != t[0] && O.hasUserDefinedProperty(t[0], "$each");
-            if (r && (e = t[0], t = t[0].$each), null == this[E]) return N.apply(this, t);
-            C(this, t);
+            if (r && (e = t[0], t = t[0].$each), null == this[j]) return T.apply(this, t);
+            B(this, t);
             var n,
-                o = this[j];
-            t = [].map.call(t, this._mapCast, this), t = this[E].applySetters(t, o, void 0, void 0, {
+                o = this[$];
+            t = [].map.call(t, this._mapCast, this), t = this[j].applySetters(t, o, void 0, void 0, {
               skipDocumentArrayCast: !0
             });
             var i = this[A];
@@ -47620,9 +47758,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           value: function () {
             var t;
 
-            if (C(this, Array.prototype.slice.call(arguments, 2)), arguments.length) {
+            if (B(this, Array.prototype.slice.call(arguments, 2)), arguments.length) {
               var e;
-              if (null == this[E]) e = arguments;else {
+              if (null == this[j]) e = arguments;else {
                 e = [];
 
                 for (var r = 0; r < arguments.length; ++r) e[r] = r < 2 ? arguments[r] : this._cast(arguments[r], arguments[0] + (r - 2));
@@ -47640,7 +47778,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           key: "slice",
           value: function () {
             var t = u(y(S.prototype), "slice", this).apply(this, arguments);
-            return t[j] = this[j], t[E] = this[E], t[A] = this[A], t[x] = !0, t;
+            return t[$] = this[$], t[j] = this[j], t[A] = this[A], t[E] = this[E], t[x] = !0, t;
+          }
+          /*!
+               * ignore
+               */
+
+        }, {
+          key: "filter",
+          value: function () {
+            var t = u(y(S.prototype), "filter", this).apply(this, arguments);
+            return t[$] = this[$], t[j] = this[j], t[A] = this[A], t[E] = this[E], t;
           }
           /*!
                * ignore
@@ -47662,20 +47810,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           key: "unshift",
           value: function () {
             var t;
-            return C(this, arguments), null == this[E] ? t = arguments : (t = [].map.call(arguments, this._cast, this), t = this[E].applySetters(t, this[j])), [].unshift.apply(this, t), this._registerAtomic("$set", this), this._markModified(), this.length;
-          }
-        }, {
-          key: "isMongooseArray",
-          get: function () {
-            return !0;
-          }
-        }, {
-          key: "validators",
-          get: function () {
-            return this[T];
-          },
-          set: function (t) {
-            this[T] = t;
+            return B(this, arguments), null == this[j] ? t = arguments : (t = [].map.call(arguments, this._cast, this), t = this[j].applySetters(t, this[$])), [].unshift.apply(this, t), this._registerAtomic("$set", this), this._markModified(), this.length;
           }
         }]) && a(o.prototype, i), l && a(o, l), S;
       }(l(Array));
@@ -47684,11 +47819,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
        */
 
 
-      function C(t, e) {
+      function B(t, e) {
         var r,
             n,
             i,
-            s = null == t ? null : b(t[E], "caster.options.ref", null);
+            s = null == t ? null : b(t[j], "caster.options.ref", null);
         0 === t.length && e.length > 0 &&
         /*!
          * ignore
@@ -47712,7 +47847,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
 
           return !0;
-        }(e, s) && t[j].populated(t[$], [], (r = {}, n = P, i = e[0].constructor, n in r ? Object.defineProperty(r, n, {
+        }(e, s) && t[$].populated(t[E], [], (r = {}, n = P, i = e[0].constructor, n in r ? Object.defineProperty(r, n, {
           value: i,
           enumerable: !0,
           configurable: !0,
@@ -47737,7 +47872,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var a = s[i];
 
         if (n) {
-          var u = t.schema.path(a);
+          var u = t.$__schema.path(a);
           if (u && u.$isMongooseDocumentArray) continue;
         }
 
@@ -47984,7 +48119,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       if ("function" == typeof Proxy) return !0;
 
       try {
-        return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+        return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
       } catch (t) {
         return !1;
       }
@@ -48003,13 +48138,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }
 
     var y = r(25),
-        d = r(2).deepEqual,
-        _ = r(3),
-        m = r(88),
-        v = r(4),
-        g = r(47),
-        b = r(0).populateModelSymbol,
-        w = function (t) {
+        d = r(12),
+        _ = r(2).deepEqual,
+        m = r(3),
+        v = r(88),
+        g = r(4),
+        b = r(47),
+        w = r(0).populateModelSymbol,
+        O = function (t) {
       !function (t, e) {
         if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
         t.prototype = Object.create(e && e.prototype, {
@@ -48019,13 +48155,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             configurable: !0
           }
         }), e && p(t, e);
-      }(v, t);
+      }(g, t);
       var e,
           r,
           n,
           i,
           c,
-          l = (e = v, r = f(), function () {
+          l = (e = g, r = f(), function () {
         var t,
             n = h(e);
 
@@ -48037,61 +48173,63 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return u(this, t);
       });
 
-      function v(t, e, r, n) {
+      function g(t, e, r, n) {
         var o;
         return function (t, e) {
           if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-        }(this, v), null != t && "Object" === t.constructor.name && (t = Object.keys(t).reduce(function (e, r) {
+        }(this, g), null != t && "Object" === t.constructor.name && (t = Object.keys(t).reduce(function (e, r) {
           return e.concat([[r, t[r]]]);
         }, [])), (o = l.call(this, t)).$__parent = null != r && null != r.$__ ? r : null, o.$__path = e, o.$__schemaType = null == n ? new y(e) : n, o.$__runDeferred(), o;
       }
 
-      return n = v, (i = [{
+      return n = g, (i = [{
         key: "$init",
         value: function (t, e) {
-          O(t), a(h(v.prototype), "set", this).call(this, t, e), null != e && e.$isSingleNested && (e.$basePath = this.$__path + "." + t);
+          S(t), a(h(g.prototype), "set", this).call(this, t, e), null != e && e.$isSingleNested && (e.$basePath = this.$__path + "." + t);
         }
       }, {
         key: "$__set",
         value: function (t, e) {
-          a(h(v.prototype), "set", this).call(this, t, e);
+          a(h(g.prototype), "set", this).call(this, t, e);
         }
       }, {
         key: "get",
         value: function (t, e) {
-          return !1 === (e = e || {}).getters ? a(h(v.prototype), "get", this).call(this, t) : this.$__schemaType.applyGetters(a(h(v.prototype), "get", this).call(this, t), this.$__parent);
+          return t instanceof d && (t = t.toString()), !1 === (e = e || {}).getters ? a(h(g.prototype), "get", this).call(this, t) : this.$__schemaType.applyGetters(a(h(g.prototype), "get", this).call(this, t), this.$__parent);
         }
       }, {
         key: "set",
         value: function (t, e) {
-          if (O(t), e = m(e), null == this.$__schemaType) return this.$__deferred = this.$__deferred || [], void this.$__deferred.push({
+          if (t instanceof d && (t = t.toString()), S(t), e = v(e), null == this.$__schemaType) return this.$__deferred = this.$__deferred || [], void this.$__deferred.push({
             key: t,
             value: e
           });
           var r = this.$__path + "." + t,
               n = null != this.$__parent && this.$__parent.$__ ? this.$__parent.populated(r) || this.$__parent.populated(this.$__path) : null,
               o = this.get(t);
-          if (null != n) null == e.$__ && (e = new n.options[b](e)), e.$__.wasPopulated = !0;else try {
-            e = this.$__schemaType.applySetters(e, this.$__parent, !1, this.get(t));
+          if (null != n) null == e.$__ && (e = new n.options[w](e)), e.$__.wasPopulated = !0;else try {
+            e = this.$__schemaType.applySetters(e, this.$__parent, !1, this.get(t), {
+              path: r
+            });
           } catch (t) {
             if (null != this.$__parent && null != this.$__parent.$__) return void this.$__parent.invalidate(r, t);
             throw t;
           }
-          a(h(v.prototype), "set", this).call(this, t, e), null != e && e.$isSingleNested && (e.$basePath = this.$__path + "." + t);
+          a(h(g.prototype), "set", this).call(this, t, e), null != e && e.$isSingleNested && (e.$basePath = this.$__path + "." + t);
           var i = this.$__parent;
-          null == i || null == i.$__ || d(e, o) || i.markModified(this.$__path + "." + t);
+          null == i || null == i.$__ || _(e, o) || i.markModified(this.$__path + "." + t);
         }
       }, {
         key: "clear",
         value: function () {
-          a(h(v.prototype), "clear", this).call(this);
+          a(h(g.prototype), "clear", this).call(this);
           var t = this.$__parent;
           null != t && t.markModified(this.$__path);
         }
       }, {
         key: "delete",
         value: function (t) {
-          this.set(t, void 0), a(h(v.prototype), "delete", this).call(this, t);
+          t instanceof d && (t = t.toString()), this.set(t, void 0), a(h(g.prototype), "delete", this).call(this, t);
         }
       }, {
         key: "toBSON",
@@ -48101,7 +48239,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }, {
         key: "toObject",
         value: function (t) {
-          if (_(t, "flattenMaps")) {
+          if (m(t, "flattenMaps")) {
             var e,
                 r = {},
                 n = o(this.keys());
@@ -48168,7 +48306,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             this.$__deferred = null;
           }
         }
-      }]) && s(n.prototype, i), c && s(n, c), v;
+      }]) && s(n.prototype, i), c && s(n, c), g;
     }(c(Map));
     /*!
      * Since maps are stored as objects under the hood, keys must be strings
@@ -48176,46 +48314,46 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
      */
 
 
-    function O(t) {
+    function S(t) {
       var e = n(t);
       if ("string" !== e) throw new TypeError("Mongoose maps only support string keys, got ".concat(e));
       if (t.startsWith("$")) throw new Error('Mongoose maps do not support keys that start with "$", got "'.concat(t, '"'));
       if (t.includes(".")) throw new Error('Mongoose maps do not support keys that contain ".", got "'.concat(t, '"'));
-      if (g.has(t)) throw new Error('Mongoose maps do not support reserved key name "'.concat(t, '"'));
+      if (b.has(t)) throw new Error('Mongoose maps do not support reserved key name "'.concat(t, '"'));
     }
 
-    v.inspect.custom && Object.defineProperty(w.prototype, v.inspect.custom, {
+    g.inspect.custom && Object.defineProperty(O.prototype, g.inspect.custom, {
       enumerable: !1,
       writable: !1,
       configurable: !1,
-      value: w.prototype.inspect
-    }), Object.defineProperty(w.prototype, "$__set", {
+      value: O.prototype.inspect
+    }), Object.defineProperty(O.prototype, "$__set", {
       enumerable: !1,
       writable: !0,
       configurable: !1
-    }), Object.defineProperty(w.prototype, "$__parent", {
+    }), Object.defineProperty(O.prototype, "$__parent", {
       enumerable: !1,
       writable: !0,
       configurable: !1
-    }), Object.defineProperty(w.prototype, "$__path", {
+    }), Object.defineProperty(O.prototype, "$__path", {
       enumerable: !1,
       writable: !0,
       configurable: !1
-    }), Object.defineProperty(w.prototype, "$__schemaType", {
+    }), Object.defineProperty(O.prototype, "$__schemaType", {
       enumerable: !1,
       writable: !0,
       configurable: !1
-    }), Object.defineProperty(w.prototype, "$isMongooseMap", {
-      enumerable: !1,
-      writable: !1,
-      configurable: !1,
-      value: !0
-    }), Object.defineProperty(w.prototype, "$__deferredCalls", {
+    }), Object.defineProperty(O.prototype, "$isMongooseMap", {
       enumerable: !1,
       writable: !1,
       configurable: !1,
       value: !0
-    }), t.exports = w;
+    }), Object.defineProperty(O.prototype, "$__deferredCalls", {
+      enumerable: !1,
+      writable: !1,
+      configurable: !1,
+      value: !0
+    }), t.exports = O;
   }, function (t, e, r) {
     "use strict";
 
@@ -48304,12 +48442,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     function l(t, e, r, o, s) {
       var a = this;
-      this.$isSingleNested = !0;
+      this.$isSingleNested = !0, null != s && null != s.path && (this.$basePath = s.path);
       var u = null != s && s.priorDoc,
           c = null;
 
-      if (u && (this._doc = Object.assign({}, s.priorDoc._doc), delete this._doc[this.schema.options.discriminatorKey], c = Object.keys(s.priorDoc._doc || {}).filter(function (t) {
-        return t !== a.schema.options.discriminatorKey;
+      if (u && (this._doc = Object.assign({}, s.priorDoc._doc), delete this._doc[this.$__schema.options.discriminatorKey], c = Object.keys(s.priorDoc._doc || {}).filter(function (t) {
+        return t !== a.$__schema.options.discriminatorKey;
       })), null != r && (s = Object.assign({}, s, {
         isNew: r.isNew,
         defaults: r.$__.$options.defaults
@@ -48322,7 +48460,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             var p = l.value;
 
             if (!this.$__.activePaths.states.modify[p] && !this.$__.activePaths.states.default[p] && !this.$__.$setCalled.has(p)) {
-              var h = this.schema.path(p),
+              var h = this.$__schema.path(p),
                   y = null == h ? void 0 : h.getDefault(this);
               void 0 === y ? delete this._doc[p] : (this._doc[p] = y, this.$__.activePaths.default(p));
             }
@@ -48586,12 +48724,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var O = e.options.toJSON,
             S = e.options.toObject,
             A = e.options._id,
-            j = e.options.id,
-            $ = Object.keys(e.options);
+            $ = e.options.id,
+            E = Object.keys(e.options);
         e.options.discriminatorKey = r.options.discriminatorKey;
 
-        for (var E = 0, P = $; E < P.length; E++) {
-          var x = P[E];
+        for (var j = 0, P = E; j < P.length; j++) {
+          var x = P[j];
 
           if (!c[x]) {
             if ("pluralization" === x && 1 == e.options[x] && null == r.options[x]) continue;
@@ -48599,7 +48737,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         }
 
-        e.options = u.clone(r.options), O && (e.options.toJSON = O), S && (e.options.toObject = S), void 0 !== A && (e.options._id = A), e.options.id = j, e.s.hooks = t.schema.s.hooks.merge(e.s.hooks), e.plugins = Array.prototype.slice.call(r.plugins), e.callQueue = r.callQueue.concat(e.callQueue), delete e._requiredpaths;
+        e.options = u.clone(r.options), O && (e.options.toJSON = O), S && (e.options.toObject = S), void 0 !== A && (e.options._id = A), e.options.id = $, e.s.hooks = t.schema.s.hooks.merge(e.s.hooks), e.plugins = Array.prototype.slice.call(r.plugins), e.callQueue = r.callQueue.concat(e.callQueue), delete e._requiredpaths;
       }(r, t.schema), t.discriminators || (t.discriminators = {}), t.schema.discriminatorMapping || (t.schema.discriminatorMapping = {
         key: p,
         value: null,
@@ -48660,7 +48798,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if ("function" == typeof Proxy) return !0;
 
           try {
-            return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+            return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
           } catch (t) {
             return !1;
           }
@@ -48936,68 +49074,68 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           e.copy(S, 0, r, r + 12), m[w] = new ObjectID(S), r += 12;
         } else if (g === BSON.BSON_DATA_INT && !1 === y) m[w] = new Int32(e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24);else if (g === BSON.BSON_DATA_INT) m[w] = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24;else if (g === BSON.BSON_DATA_NUMBER && !1 === y) m[w] = new Double(e.readDoubleLE(r)), r += 8;else if (g === BSON.BSON_DATA_NUMBER) m[w] = e.readDoubleLE(r), r += 8;else if (g === BSON.BSON_DATA_DATE) {
           var A = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24,
-              j = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24;
-          m[w] = new Date(new Long(A, j).toNumber());
+              $ = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24;
+          m[w] = new Date(new Long(A, $).toNumber());
         } else if (g === BSON.BSON_DATA_BOOLEAN) {
           if (0 !== e[r] && 1 !== e[r]) throw new Error("illegal boolean type value");
           m[w] = 1 === e[r++];
         } else if (g === BSON.BSON_DATA_OBJECT) {
-          var $ = r,
-              E = e[r] | e[r + 1] << 8 | e[r + 2] << 16 | e[r + 3] << 24;
-          if (E <= 0 || E > e.length - r) throw new Error("bad embedded document length in bson");
-          m[w] = l ? e.slice(r, r + E) : t(e, $, n, !1), r += E;
+          var E = r,
+              j = e[r] | e[r + 1] << 8 | e[r + 2] << 16 | e[r + 3] << 24;
+          if (j <= 0 || j > e.length - r) throw new Error("bad embedded document length in bson");
+          m[w] = l ? e.slice(r, r + j) : t(e, E, n, !1), r += j;
         } else if (g === BSON.BSON_DATA_ARRAY) {
-          $ = r;
+          E = r;
           var P = n,
-              x = r + (E = e[r] | e[r + 1] << 8 | e[r + 2] << 16 | e[r + 3] << 24);
+              x = r + (j = e[r] | e[r + 1] << 8 | e[r + 2] << 16 | e[r + 3] << 24);
 
           if (c && c[w]) {
-            for (var N in P = {}, n) P[N] = n[N];
+            for (var T in P = {}, n) P[T] = n[T];
 
             P.raw = !0;
           }
 
-          if (m[w] = t(e, $, P, !0), 0 !== e[(r += E) - 1]) throw new Error("invalid array terminator byte");
+          if (m[w] = t(e, E, P, !0), 0 !== e[(r += j) - 1]) throw new Error("invalid array terminator byte");
           if (r !== x) throw new Error("corrupted array bson");
         } else if (g === BSON.BSON_DATA_UNDEFINED) m[w] = void 0;else if (g === BSON.BSON_DATA_NULL) m[w] = null;else if (g === BSON.BSON_DATA_LONG) {
-          A = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24, j = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24;
-          var T = new Long(A, j);
-          m[w] = h && !0 === y && T.lessThanOrEqual(JS_INT_MAX_LONG) && T.greaterThanOrEqual(JS_INT_MIN_LONG) ? T.toNumber() : T;
+          A = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24, $ = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24;
+          var N = new Long(A, $);
+          m[w] = h && !0 === y && N.lessThanOrEqual(JS_INT_MAX_LONG) && N.greaterThanOrEqual(JS_INT_MIN_LONG) ? N.toNumber() : N;
         } else if (g === BSON.BSON_DATA_DECIMAL128) {
           var k = utils.allocBuffer(16);
           e.copy(k, 0, r, r + 16), r += 16;
-          var C = new Decimal128(k);
-          m[w] = C.toObject ? C.toObject() : C;
+          var B = new Decimal128(k);
+          m[w] = B.toObject ? B.toObject() : B;
         } else if (g === BSON.BSON_DATA_BINARY) {
-          var D = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24,
-              R = D,
-              B = e[r++];
-          if (D < 0) throw new Error("Negative binary type element size found");
-          if (D > e.length) throw new Error("Binary type size larger than document size");
+          var C = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24,
+              R = C,
+              D = e[r++];
+          if (C < 0) throw new Error("Negative binary type element size found");
+          if (C > e.length) throw new Error("Binary type size larger than document size");
 
           if (null != e.slice) {
-            if (B === Binary.SUBTYPE_BYTE_ARRAY) {
-              if ((D = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24) < 0) throw new Error("Negative binary type element size found for subtype 0x02");
-              if (D > R - 4) throw new Error("Binary type with subtype 0x02 contains to long binary size");
-              if (D < R - 4) throw new Error("Binary type with subtype 0x02 contains to short binary size");
+            if (D === Binary.SUBTYPE_BYTE_ARRAY) {
+              if ((C = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24) < 0) throw new Error("Negative binary type element size found for subtype 0x02");
+              if (C > R - 4) throw new Error("Binary type with subtype 0x02 contains to long binary size");
+              if (C < R - 4) throw new Error("Binary type with subtype 0x02 contains to short binary size");
             }
 
-            m[w] = p && y ? e.slice(r, r + D) : new Binary(e.slice(r, r + D), B);
+            m[w] = p && y ? e.slice(r, r + C) : new Binary(e.slice(r, r + C), D);
           } else {
-            var M = "undefined" != typeof Uint8Array ? new Uint8Array(new ArrayBuffer(D)) : new Array(D);
+            var M = "undefined" != typeof Uint8Array ? new Uint8Array(new ArrayBuffer(C)) : new Array(C);
 
-            if (B === Binary.SUBTYPE_BYTE_ARRAY) {
-              if ((D = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24) < 0) throw new Error("Negative binary type element size found for subtype 0x02");
-              if (D > R - 4) throw new Error("Binary type with subtype 0x02 contains to long binary size");
-              if (D < R - 4) throw new Error("Binary type with subtype 0x02 contains to short binary size");
+            if (D === Binary.SUBTYPE_BYTE_ARRAY) {
+              if ((C = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24) < 0) throw new Error("Negative binary type element size found for subtype 0x02");
+              if (C > R - 4) throw new Error("Binary type with subtype 0x02 contains to long binary size");
+              if (C < R - 4) throw new Error("Binary type with subtype 0x02 contains to short binary size");
             }
 
-            for (b = 0; b < D; b++) M[b] = e[r + b];
+            for (b = 0; b < C; b++) M[b] = e[r + b];
 
-            m[w] = p && y ? M : new Binary(M, B);
+            m[w] = p && y ? M : new Binary(M, D);
           }
 
-          r += D;
+          r += C;
         } else if (g === BSON.BSON_DATA_REGEXP && !1 === f) {
           for (b = r; 0 !== e[b] && b < e.length;) b++;
 
@@ -49009,22 +49147,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (b >= e.length) throw new Error("Bad BSON Document: illegal CString");
           var F = e.toString("utf8", r, b);
           r = b + 1;
-          var L = new Array(F.length);
+          var U = new Array(F.length);
 
           for (b = 0; b < F.length; b++) switch (F[b]) {
             case "m":
-              L[b] = "m";
+              U[b] = "m";
               break;
 
             case "s":
-              L[b] = "g";
+              U[b] = "g";
               break;
 
             case "i":
-              L[b] = "i";
+              U[b] = "i";
           }
 
-          m[w] = new RegExp(I, L.join(""));
+          m[w] = new RegExp(I, U.join(""));
         } else if (g === BSON.BSON_DATA_REGEXP && !0 === f) {
           for (b = r; 0 !== e[b] && b < e.length;) b++;
 
@@ -49037,25 +49175,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         } else if (g === BSON.BSON_DATA_SYMBOL) {
           if ((O = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24) <= 0 || O > e.length - r || 0 !== e[r + O - 1]) throw new Error("bad string length in bson");
           m[w] = new _Symbol(e.toString("utf8", r, r + O - 1)), r += O;
-        } else if (g === BSON.BSON_DATA_TIMESTAMP) A = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24, j = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24, m[w] = new Timestamp(A, j);else if (g === BSON.BSON_DATA_MIN_KEY) m[w] = new MinKey();else if (g === BSON.BSON_DATA_MAX_KEY) m[w] = new MaxKey();else if (g === BSON.BSON_DATA_CODE) {
+        } else if (g === BSON.BSON_DATA_TIMESTAMP) A = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24, $ = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24, m[w] = new Timestamp(A, $);else if (g === BSON.BSON_DATA_MIN_KEY) m[w] = new MinKey();else if (g === BSON.BSON_DATA_MAX_KEY) m[w] = new MaxKey();else if (g === BSON.BSON_DATA_CODE) {
           if ((O = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24) <= 0 || O > e.length - r || 0 !== e[r + O - 1]) throw new Error("bad string length in bson");
-          var U = e.toString("utf8", r, r + O - 1);
+          var L = e.toString("utf8", r, r + O - 1);
           if (i) {
             if (s) {
-              var V = a ? u(U) : U;
-              m[w] = isolateEvalWithHash(functionCache, V, U, m);
-            } else m[w] = isolateEval(U);
-          } else m[w] = new Code(U);
+              var V = a ? u(L) : L;
+              m[w] = isolateEvalWithHash(functionCache, V, L, m);
+            } else m[w] = isolateEval(L);
+          } else m[w] = new Code(L);
           r += O;
         } else if (g === BSON.BSON_DATA_CODE_W_SCOPE) {
           var q = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24;
           if (q < 13) throw new Error("code_w_scope total size shorter minimum expected length");
           if ((O = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24) <= 0 || O > e.length - r || 0 !== e[r + O - 1]) throw new Error("bad string length in bson");
-          U = e.toString("utf8", r, r + O - 1), $ = r += O, E = e[r] | e[r + 1] << 8 | e[r + 2] << 16 | e[r + 3] << 24;
-          var W = t(e, $, n, !1);
-          if (r += E, q < 8 + E + O) throw new Error("code_w_scope total size is to short, truncating scope");
-          if (q > 8 + E + O) throw new Error("code_w_scope total size is to long, clips outer document");
-          i ? (s ? (V = a ? u(U) : U, m[w] = isolateEvalWithHash(functionCache, V, U, m)) : m[w] = isolateEval(U), m[w].scope = W) : m[w] = new Code(U, W);
+          L = e.toString("utf8", r, r + O - 1), E = r += O, j = e[r] | e[r + 1] << 8 | e[r + 2] << 16 | e[r + 3] << 24;
+          var W = t(e, E, n, !1);
+          if (r += j, q < 8 + j + O) throw new Error("code_w_scope total size is to short, truncating scope");
+          if (q > 8 + j + O) throw new Error("code_w_scope total size is to long, clips outer document");
+          i ? (s ? (V = a ? u(L) : L, m[w] = isolateEvalWithHash(functionCache, V, L, m)) : m[w] = isolateEval(L), m[w].scope = W) : m[w] = new Code(L, W);
         } else {
           if (g !== BSON.BSON_DATA_DBPOINTER) throw new Error("Detected unknown BSON type " + g.toString(16) + ' for fieldname "' + w + '", are you using the latest BSON parser');
           if ((O = e[r++] | e[r++] << 8 | e[r++] << 16 | e[r++] << 24) <= 0 || O > e.length - r || 0 !== e[r + O - 1]) throw new Error("bad string length in bson");
@@ -49118,95 +49256,95 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return "[object RegExp]" === Object.prototype.toString.call(t);
       },
           h = function (t, e, r, n, o) {
-        t[n++] = D.BSON_DATA_STRING;
+        t[n++] = C.BSON_DATA_STRING;
         var i = o ? t.write(e, n, "ascii") : t.write(e, n, "utf8");
         t[(n = n + i + 1) - 1] = 0;
         var s = t.write(r, n + 4, "utf8");
         return t[n + 3] = s + 1 >> 24 & 255, t[n + 2] = s + 1 >> 16 & 255, t[n + 1] = s + 1 >> 8 & 255, t[n] = s + 1 & 255, n = n + 4 + s, t[n++] = 0, n;
       },
           y = function (t, e, r, n, s) {
-        if (Math.floor(r) === r && r >= D.JS_INT_MIN && r <= D.JS_INT_MAX) {
-          if (r >= D.BSON_INT32_MIN && r <= D.BSON_INT32_MAX) {
-            t[n++] = D.BSON_DATA_INT;
+        if (Math.floor(r) === r && r >= C.JS_INT_MIN && r <= C.JS_INT_MAX) {
+          if (r >= C.BSON_INT32_MIN && r <= C.BSON_INT32_MAX) {
+            t[n++] = C.BSON_DATA_INT;
             var a = s ? t.write(e, n, "ascii") : t.write(e, n, "utf8");
             n += a, t[n++] = 0, t[n++] = 255 & r, t[n++] = r >> 8 & 255, t[n++] = r >> 16 & 255, t[n++] = r >> 24 & 255;
-          } else if (r >= D.JS_INT_MIN && r <= D.JS_INT_MAX) t[n++] = D.BSON_DATA_NUMBER, n += a = s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, o(t, r, n, "little", 52, 8), n += 8;else {
-            t[n++] = D.BSON_DATA_LONG, n += a = s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+          } else if (r >= C.JS_INT_MIN && r <= C.JS_INT_MAX) t[n++] = C.BSON_DATA_NUMBER, n += a = s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, o(t, r, n, "little", 52, 8), n += 8;else {
+            t[n++] = C.BSON_DATA_LONG, n += a = s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
             var u = i.fromNumber(r),
                 c = u.getLowBits(),
                 l = u.getHighBits();
             t[n++] = 255 & c, t[n++] = c >> 8 & 255, t[n++] = c >> 16 & 255, t[n++] = c >> 24 & 255, t[n++] = 255 & l, t[n++] = l >> 8 & 255, t[n++] = l >> 16 & 255, t[n++] = l >> 24 & 255;
           }
-        } else t[n++] = D.BSON_DATA_NUMBER, n += a = s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, o(t, r, n, "little", 52, 8), n += 8;
+        } else t[n++] = C.BSON_DATA_NUMBER, n += a = s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, o(t, r, n, "little", 52, 8), n += 8;
         return n;
       },
           d = function (t, e, r, n, o) {
-        return t[n++] = D.BSON_DATA_NULL, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, n;
+        return t[n++] = C.BSON_DATA_NULL, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, n;
       },
           _ = function (t, e, r, n, o) {
-        return t[n++] = D.BSON_DATA_BOOLEAN, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, t[n++] = r ? 1 : 0, n;
+        return t[n++] = C.BSON_DATA_BOOLEAN, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, t[n++] = r ? 1 : 0, n;
       },
           m = function (t, e, r, n, o) {
-        t[n++] = D.BSON_DATA_DATE, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+        t[n++] = C.BSON_DATA_DATE, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
         var s = i.fromNumber(r.getTime()),
             a = s.getLowBits(),
             u = s.getHighBits();
         return t[n++] = 255 & a, t[n++] = a >> 8 & 255, t[n++] = a >> 16 & 255, t[n++] = a >> 24 & 255, t[n++] = 255 & u, t[n++] = u >> 8 & 255, t[n++] = u >> 16 & 255, t[n++] = u >> 24 & 255, n;
       },
           v = function (t, e, r, n, o) {
-        if (t[n++] = D.BSON_DATA_REGEXP, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, r.source && null != r.source.match(c)) throw Error("value " + r.source + " must not contain null bytes");
+        if (t[n++] = C.BSON_DATA_REGEXP, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, r.source && null != r.source.match(c)) throw Error("value " + r.source + " must not contain null bytes");
         return n += t.write(r.source, n, "utf8"), t[n++] = 0, r.global && (t[n++] = 115), r.ignoreCase && (t[n++] = 105), r.multiline && (t[n++] = 109), t[n++] = 0, n;
       },
           g = function (t, e, r, n, o) {
-        if (t[n++] = D.BSON_DATA_REGEXP, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, null != r.pattern.match(c)) throw Error("pattern " + r.pattern + " must not contain null bytes");
+        if (t[n++] = C.BSON_DATA_REGEXP, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, null != r.pattern.match(c)) throw Error("pattern " + r.pattern + " must not contain null bytes");
         return n += t.write(r.pattern, n, "utf8"), t[n++] = 0, n += t.write(r.options.split("").sort().join(""), n, "utf8"), t[n++] = 0, n;
       },
           b = function (t, e, r, n, o) {
-        return null === r ? t[n++] = D.BSON_DATA_NULL : "MinKey" === r._bsontype ? t[n++] = D.BSON_DATA_MIN_KEY : t[n++] = D.BSON_DATA_MAX_KEY, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, n;
+        return null === r ? t[n++] = C.BSON_DATA_NULL : "MinKey" === r._bsontype ? t[n++] = C.BSON_DATA_MIN_KEY : t[n++] = C.BSON_DATA_MAX_KEY, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, n;
       },
           w = function (t, e, r, n, o) {
-        if (t[n++] = D.BSON_DATA_OID, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, "string" == typeof r.id) t.write(r.id, n, "binary");else {
+        if (t[n++] = C.BSON_DATA_OID, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, "string" == typeof r.id) t.write(r.id, n, "binary");else {
           if (!r.id || !r.id.copy) throw new Error("object [" + JSON.stringify(r) + "] is not a valid ObjectId");
           r.id.copy(t, n, 0, 12);
         }
         return n + 12;
       },
           O = function (t, e, r, n, o) {
-        t[n++] = D.BSON_DATA_BINARY, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+        t[n++] = C.BSON_DATA_BINARY, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
         var i = r.length;
-        return t[n++] = 255 & i, t[n++] = i >> 8 & 255, t[n++] = i >> 16 & 255, t[n++] = i >> 24 & 255, t[n++] = D.BSON_BINARY_SUBTYPE_DEFAULT, r.copy(t, n, 0, i), n += i;
+        return t[n++] = 255 & i, t[n++] = i >> 8 & 255, t[n++] = i >> 16 & 255, t[n++] = i >> 24 & 255, t[n++] = C.BSON_BINARY_SUBTYPE_DEFAULT, r.copy(t, n, 0, i), n += i;
       },
           S = function (t, e, r, n, o, i, s, a, u, c) {
         for (var l = 0; l < c.length; l++) if (c[l] === r) throw new Error("cyclic dependency detected");
 
-        c.push(r), t[n++] = Array.isArray(r) ? D.BSON_DATA_ARRAY : D.BSON_DATA_OBJECT, n += u ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
-        var f = C(t, r, o, n, i + 1, s, a, c);
+        c.push(r), t[n++] = Array.isArray(r) ? C.BSON_DATA_ARRAY : C.BSON_DATA_OBJECT, n += u ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+        var f = B(t, r, o, n, i + 1, s, a, c);
         return c.pop(), f;
       },
           A = function (t, e, r, n, o) {
-        return t[n++] = D.BSON_DATA_DECIMAL128, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, r.bytes.copy(t, n, 0, 16), n + 16;
+        return t[n++] = C.BSON_DATA_DECIMAL128, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, r.bytes.copy(t, n, 0, 16), n + 16;
       },
-          j = function (t, e, r, n, o) {
-        t[n++] = "Long" === r._bsontype ? D.BSON_DATA_LONG : D.BSON_DATA_TIMESTAMP, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+          $ = function (t, e, r, n, o) {
+        t[n++] = "Long" === r._bsontype ? C.BSON_DATA_LONG : C.BSON_DATA_TIMESTAMP, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
         var i = r.getLowBits(),
             s = r.getHighBits();
         return t[n++] = 255 & i, t[n++] = i >> 8 & 255, t[n++] = i >> 16 & 255, t[n++] = i >> 24 & 255, t[n++] = 255 & s, t[n++] = s >> 8 & 255, t[n++] = s >> 16 & 255, t[n++] = s >> 24 & 255, n;
       },
-          $ = function (t, e, r, n, o) {
-        return t[n++] = D.BSON_DATA_INT, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, t[n++] = 255 & r, t[n++] = r >> 8 & 255, t[n++] = r >> 16 & 255, t[n++] = r >> 24 & 255, n;
+          E = function (t, e, r, n, o) {
+        return t[n++] = C.BSON_DATA_INT, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, t[n++] = 255 & r, t[n++] = r >> 8 & 255, t[n++] = r >> 16 & 255, t[n++] = r >> 24 & 255, n;
       },
-          E = function (t, e, r, n, i) {
-        return t[n++] = D.BSON_DATA_NUMBER, n += i ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, o(t, r, n, "little", 52, 8), n += 8;
+          j = function (t, e, r, n, i) {
+        return t[n++] = C.BSON_DATA_NUMBER, n += i ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0, o(t, r, n, "little", 52, 8), n += 8;
       },
           P = function (t, e, r, n, o, i, s) {
-        t[n++] = D.BSON_DATA_CODE, n += s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+        t[n++] = C.BSON_DATA_CODE, n += s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
         var a = u(r),
             c = t.write(a, n + 4, "utf8") + 1;
         return t[n] = 255 & c, t[n + 1] = c >> 8 & 255, t[n + 2] = c >> 16 & 255, t[n + 3] = c >> 24 & 255, n = n + 4 + c - 1, t[n++] = 0, n;
       },
           x = function (t, e, r, o, i, s, a, u, c) {
         if (r.scope && "object" === n(r.scope)) {
-          t[o++] = D.BSON_DATA_CODE_W_SCOPE;
+          t[o++] = C.BSON_DATA_CODE_W_SCOPE;
           var l = c ? t.write(e, o, "ascii") : t.write(e, o, "utf8");
           o += l, t[o++] = 0;
           var f = o,
@@ -49214,12 +49352,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           o += 4;
           var h = t.write(p, o + 4, "utf8") + 1;
           t[o] = 255 & h, t[o + 1] = h >> 8 & 255, t[o + 2] = h >> 16 & 255, t[o + 3] = h >> 24 & 255, t[o + 4 + h - 1] = 0, o = o + h + 4;
-          var y = C(t, r.scope, i, o, s + 1, a, u);
+          var y = B(t, r.scope, i, o, s + 1, a, u);
           o = y - 1;
           var d = y - f;
           t[f++] = 255 & d, t[f++] = d >> 8 & 255, t[f++] = d >> 16 & 255, t[f++] = d >> 24 & 255, t[o++] = 0;
         } else {
-          t[o++] = D.BSON_DATA_CODE, o += l = c ? t.write(e, o, "ascii") : t.write(e, o, "utf8"), t[o++] = 0, p = r.code.toString();
+          t[o++] = C.BSON_DATA_CODE, o += l = c ? t.write(e, o, "ascii") : t.write(e, o, "utf8"), t[o++] = 0, p = r.code.toString();
 
           var _ = t.write(p, o + 4, "utf8") + 1;
 
@@ -49228,37 +49366,37 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         return o;
       },
-          N = function (t, e, r, n, o) {
-        t[n++] = D.BSON_DATA_BINARY, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+          T = function (t, e, r, n, o) {
+        t[n++] = C.BSON_DATA_BINARY, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
         var i = r.value(!0),
             s = r.position;
         return r.sub_type === a.SUBTYPE_BYTE_ARRAY && (s += 4), t[n++] = 255 & s, t[n++] = s >> 8 & 255, t[n++] = s >> 16 & 255, t[n++] = s >> 24 & 255, t[n++] = r.sub_type, r.sub_type === a.SUBTYPE_BYTE_ARRAY && (s -= 4, t[n++] = 255 & s, t[n++] = s >> 8 & 255, t[n++] = s >> 16 & 255, t[n++] = s >> 24 & 255), i.copy(t, n, 0, r.position), n += r.position;
       },
-          T = function (t, e, r, n, o) {
-        t[n++] = D.BSON_DATA_SYMBOL, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+          N = function (t, e, r, n, o) {
+        t[n++] = C.BSON_DATA_SYMBOL, n += o ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
         var i = t.write(r.value, n + 4, "utf8") + 1;
         return t[n] = 255 & i, t[n + 1] = i >> 8 & 255, t[n + 2] = i >> 16 & 255, t[n + 3] = i >> 24 & 255, n = n + 4 + i - 1, t[n++] = 0, n;
       },
           k = function (t, e, r, n, o, i, s) {
-        t[n++] = D.BSON_DATA_OBJECT, n += s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
+        t[n++] = C.BSON_DATA_OBJECT, n += s ? t.write(e, n, "ascii") : t.write(e, n, "utf8"), t[n++] = 0;
         var a,
             u = n,
-            c = (a = null != r.db ? C(t, {
+            c = (a = null != r.db ? B(t, {
           $ref: r.namespace,
           $id: r.oid,
           $db: r.db
-        }, !1, n, o + 1, i) : C(t, {
+        }, !1, n, o + 1, i) : B(t, {
           $ref: r.namespace,
           $id: r.oid
         }, !1, n, o + 1, i)) - u;
         return t[u++] = 255 & c, t[u++] = c >> 8 & 255, t[u++] = c >> 16 & 255, t[u++] = c >> 24 & 255, a;
       },
-          C = function (t, r, o, i, a, u, C, D) {
-        i = i || 0, (D = D || []).push(r);
+          B = function (t, r, o, i, a, u, B, C) {
+        i = i || 0, (C = C || []).push(r);
         var R = i + 4;
-        if (Array.isArray(r)) for (var B = 0; B < r.length; B++) {
-          var M = "" + B,
-              I = r[B];
+        if (Array.isArray(r)) for (var D = 0; D < r.length; D++) {
+          var M = "" + D,
+              I = r[D];
 
           if (I && I.toBSON) {
             if ("function" != typeof I.toBSON) throw new Error("toBSON is not a function");
@@ -49266,11 +49404,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
 
           var F = n(I);
-          if ("string" === F) R = h(t, M, I, R, !0);else if ("number" === F) R = y(t, M, I, R, !0);else if ("boolean" === F) R = _(t, M, I, R, !0);else if (I instanceof Date || f(I)) R = m(t, M, I, R, !0);else if (void 0 === I) R = d(t, M, 0, R, !0);else if (null === I) R = d(t, M, 0, R, !0);else if ("ObjectID" === I._bsontype || "ObjectId" === I._bsontype) R = w(t, M, I, R, !0);else if (e.isBuffer(I)) R = O(t, M, I, R, !0);else if (I instanceof RegExp || p(I)) R = v(t, M, I, R, !0);else if ("object" === F && null == I._bsontype) R = S(t, M, I, R, o, a, u, C, !0, D);else if ("object" === F && "Decimal128" === I._bsontype) R = A(t, M, I, R, !0);else if ("Long" === I._bsontype || "Timestamp" === I._bsontype) R = j(t, M, I, R, !0);else if ("Double" === I._bsontype) R = E(t, M, I, R, !0);else if ("function" == typeof I && u) R = P(t, M, I, R, 0, 0, u);else if ("Code" === I._bsontype) R = x(t, M, I, R, o, a, u, C, !0);else if ("Binary" === I._bsontype) R = N(t, M, I, R, !0);else if ("Symbol" === I._bsontype) R = T(t, M, I, R, !0);else if ("DBRef" === I._bsontype) R = k(t, M, I, R, a, u, !0);else if ("BSONRegExp" === I._bsontype) R = g(t, M, I, R, !0);else if ("Int32" === I._bsontype) R = $(t, M, I, R, !0);else if ("MinKey" === I._bsontype || "MaxKey" === I._bsontype) R = b(t, M, I, R, !0);else if (void 0 !== I._bsontype) throw new TypeError("Unrecognized or invalid _bsontype: " + I._bsontype);
-        } else if (r instanceof s) for (var L = r.entries(), U = !1; !U;) {
-          var V = L.next();
+          if ("string" === F) R = h(t, M, I, R, !0);else if ("number" === F) R = y(t, M, I, R, !0);else {
+            if ("bigint" === F) throw new TypeError("Unsupported type BigInt, please use Decimal128");
+            if ("boolean" === F) R = _(t, M, I, R, !0);else if (I instanceof Date || f(I)) R = m(t, M, I, R, !0);else if (void 0 === I) R = d(t, M, 0, R, !0);else if (null === I) R = d(t, M, 0, R, !0);else if ("ObjectID" === I._bsontype || "ObjectId" === I._bsontype) R = w(t, M, I, R, !0);else if (e.isBuffer(I)) R = O(t, M, I, R, !0);else if (I instanceof RegExp || p(I)) R = v(t, M, I, R, !0);else if ("object" === F && null == I._bsontype) R = S(t, M, I, R, o, a, u, B, !0, C);else if ("object" === F && "Decimal128" === I._bsontype) R = A(t, M, I, R, !0);else if ("Long" === I._bsontype || "Timestamp" === I._bsontype) R = $(t, M, I, R, !0);else if ("Double" === I._bsontype) R = j(t, M, I, R, !0);else if ("function" == typeof I && u) R = P(t, M, I, R, 0, 0, u);else if ("Code" === I._bsontype) R = x(t, M, I, R, o, a, u, B, !0);else if ("Binary" === I._bsontype) R = T(t, M, I, R, !0);else if ("Symbol" === I._bsontype) R = N(t, M, I, R, !0);else if ("DBRef" === I._bsontype) R = k(t, M, I, R, a, u, !0);else if ("BSONRegExp" === I._bsontype) R = g(t, M, I, R, !0);else if ("Int32" === I._bsontype) R = E(t, M, I, R, !0);else if ("MinKey" === I._bsontype || "MaxKey" === I._bsontype) R = b(t, M, I, R, !0);else if (void 0 !== I._bsontype) throw new TypeError("Unrecognized or invalid _bsontype: " + I._bsontype);
+          }
+        } else if (r instanceof s) for (var U = r.entries(), L = !1; !L;) {
+          var V = U.next();
 
-          if (!(U = V.done)) {
+          if (!(L = V.done)) {
             if (M = V.value[0], F = n(I = V.value[1]), "string" == typeof M && -1 === l.indexOf(M)) {
               if (null != M.match(c)) throw Error("key " + M + " must not contain null bytes");
 
@@ -49280,7 +49421,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
             }
 
-            if ("string" === F) R = h(t, M, I, R);else if ("number" === F) R = y(t, M, I, R);else if ("boolean" === F) R = _(t, M, I, R);else if (I instanceof Date || f(I)) R = m(t, M, I, R);else if (null === I || void 0 === I && !1 === C) R = d(t, M, 0, R);else if ("ObjectID" === I._bsontype || "ObjectId" === I._bsontype) R = w(t, M, I, R);else if (e.isBuffer(I)) R = O(t, M, I, R);else if (I instanceof RegExp || p(I)) R = v(t, M, I, R);else if ("object" === F && null == I._bsontype) R = S(t, M, I, R, o, a, u, C, !1, D);else if ("object" === F && "Decimal128" === I._bsontype) R = A(t, M, I, R);else if ("Long" === I._bsontype || "Timestamp" === I._bsontype) R = j(t, M, I, R);else if ("Double" === I._bsontype) R = E(t, M, I, R);else if ("Code" === I._bsontype) R = x(t, M, I, R, o, a, u, C);else if ("function" == typeof I && u) R = P(t, M, I, R, 0, 0, u);else if ("Binary" === I._bsontype) R = N(t, M, I, R);else if ("Symbol" === I._bsontype) R = T(t, M, I, R);else if ("DBRef" === I._bsontype) R = k(t, M, I, R, a, u);else if ("BSONRegExp" === I._bsontype) R = g(t, M, I, R);else if ("Int32" === I._bsontype) R = $(t, M, I, R);else if ("MinKey" === I._bsontype || "MaxKey" === I._bsontype) R = b(t, M, I, R);else if (void 0 !== I._bsontype) throw new TypeError("Unrecognized or invalid _bsontype: " + I._bsontype);
+            if ("string" === F) R = h(t, M, I, R);else if ("number" === F) R = y(t, M, I, R);else {
+              if ("bigint" === F) throw new TypeError("Unsupported type BigInt, please use Decimal128");
+              if ("boolean" === F) R = _(t, M, I, R);else if (I instanceof Date || f(I)) R = m(t, M, I, R);else if (null === I || void 0 === I && !1 === B) R = d(t, M, 0, R);else if ("ObjectID" === I._bsontype || "ObjectId" === I._bsontype) R = w(t, M, I, R);else if (e.isBuffer(I)) R = O(t, M, I, R);else if (I instanceof RegExp || p(I)) R = v(t, M, I, R);else if ("object" === F && null == I._bsontype) R = S(t, M, I, R, o, a, u, B, !1, C);else if ("object" === F && "Decimal128" === I._bsontype) R = A(t, M, I, R);else if ("Long" === I._bsontype || "Timestamp" === I._bsontype) R = $(t, M, I, R);else if ("Double" === I._bsontype) R = j(t, M, I, R);else if ("Code" === I._bsontype) R = x(t, M, I, R, o, a, u, B);else if ("function" == typeof I && u) R = P(t, M, I, R, 0, 0, u);else if ("Binary" === I._bsontype) R = T(t, M, I, R);else if ("Symbol" === I._bsontype) R = N(t, M, I, R);else if ("DBRef" === I._bsontype) R = k(t, M, I, R, a, u);else if ("BSONRegExp" === I._bsontype) R = g(t, M, I, R);else if ("Int32" === I._bsontype) R = E(t, M, I, R);else if ("MinKey" === I._bsontype || "MaxKey" === I._bsontype) R = b(t, M, I, R);else if (void 0 !== I._bsontype) throw new TypeError("Unrecognized or invalid _bsontype: " + I._bsontype);
+            }
           }
         } else {
           if (r.toBSON) {
@@ -49303,14 +49447,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
             }
 
-            if ("string" === F) R = h(t, M, I, R);else if ("number" === F) R = y(t, M, I, R);else if ("boolean" === F) R = _(t, M, I, R);else if (I instanceof Date || f(I)) R = m(t, M, I, R);else if (void 0 === I) !1 === C && (R = d(t, M, 0, R));else if (null === I) R = d(t, M, 0, R);else if ("ObjectID" === I._bsontype || "ObjectId" === I._bsontype) R = w(t, M, I, R);else if (e.isBuffer(I)) R = O(t, M, I, R);else if (I instanceof RegExp || p(I)) R = v(t, M, I, R);else if ("object" === F && null == I._bsontype) R = S(t, M, I, R, o, a, u, C, !1, D);else if ("object" === F && "Decimal128" === I._bsontype) R = A(t, M, I, R);else if ("Long" === I._bsontype || "Timestamp" === I._bsontype) R = j(t, M, I, R);else if ("Double" === I._bsontype) R = E(t, M, I, R);else if ("Code" === I._bsontype) R = x(t, M, I, R, o, a, u, C);else if ("function" == typeof I && u) R = P(t, M, I, R, 0, 0, u);else if ("Binary" === I._bsontype) R = N(t, M, I, R);else if ("Symbol" === I._bsontype) R = T(t, M, I, R);else if ("DBRef" === I._bsontype) R = k(t, M, I, R, a, u);else if ("BSONRegExp" === I._bsontype) R = g(t, M, I, R);else if ("Int32" === I._bsontype) R = $(t, M, I, R);else if ("MinKey" === I._bsontype || "MaxKey" === I._bsontype) R = b(t, M, I, R);else if (void 0 !== I._bsontype) throw new TypeError("Unrecognized or invalid _bsontype: " + I._bsontype);
+            if ("string" === F) R = h(t, M, I, R);else if ("number" === F) R = y(t, M, I, R);else {
+              if ("bigint" === F) throw new TypeError("Unsupported type BigInt, please use Decimal128");
+              if ("boolean" === F) R = _(t, M, I, R);else if (I instanceof Date || f(I)) R = m(t, M, I, R);else if (void 0 === I) !1 === B && (R = d(t, M, 0, R));else if (null === I) R = d(t, M, 0, R);else if ("ObjectID" === I._bsontype || "ObjectId" === I._bsontype) R = w(t, M, I, R);else if (e.isBuffer(I)) R = O(t, M, I, R);else if (I instanceof RegExp || p(I)) R = v(t, M, I, R);else if ("object" === F && null == I._bsontype) R = S(t, M, I, R, o, a, u, B, !1, C);else if ("object" === F && "Decimal128" === I._bsontype) R = A(t, M, I, R);else if ("Long" === I._bsontype || "Timestamp" === I._bsontype) R = $(t, M, I, R);else if ("Double" === I._bsontype) R = j(t, M, I, R);else if ("Code" === I._bsontype) R = x(t, M, I, R, o, a, u, B);else if ("function" == typeof I && u) R = P(t, M, I, R, 0, 0, u);else if ("Binary" === I._bsontype) R = T(t, M, I, R);else if ("Symbol" === I._bsontype) R = N(t, M, I, R);else if ("DBRef" === I._bsontype) R = k(t, M, I, R, a, u);else if ("BSONRegExp" === I._bsontype) R = g(t, M, I, R);else if ("Int32" === I._bsontype) R = E(t, M, I, R);else if ("MinKey" === I._bsontype || "MaxKey" === I._bsontype) R = b(t, M, I, R);else if (void 0 !== I._bsontype) throw new TypeError("Unrecognized or invalid _bsontype: " + I._bsontype);
+            }
           }
         }
-        D.pop(), t[R++] = 0;
+        C.pop(), t[R++] = 0;
         var q = R - i;
         return t[i++] = 255 & q, t[i++] = q >> 8 & 255, t[i++] = q >> 16 & 255, t[i++] = q >> 24 & 255, R;
       },
-          D = {
+          C = {
         BSON_DATA_NUMBER: 1,
         BSON_DATA_STRING: 2,
         BSON_DATA_OBJECT: 3,
@@ -49341,7 +49488,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         BSON_INT32_MIN: -2147483648
       };
 
-      D.BSON_INT64_MAX = Math.pow(2, 63) - 1, D.BSON_INT64_MIN = -Math.pow(2, 63), D.JS_INT_MAX = 9007199254740992, D.JS_INT_MIN = -9007199254740992, t.exports = C;
+      C.BSON_INT64_MAX = Math.pow(2, 63) - 1, C.BSON_INT64_MIN = -Math.pow(2, 63), C.JS_INT_MAX = 9007199254740992, C.JS_INT_MIN = -9007199254740992, t.exports = B;
     }).call(this, r(1).Buffer);
   }, function (t, e) {
     e.readIEEE754 = function (t, e, r, n, o) {
@@ -49838,7 +49985,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
            */
           function t(e, r, n, o, i, s) {
             for (var a, u = 0; u < e.length && u < r.length; ++u) a = e[u], Array.isArray(a) && Array.isArray(r[u]) ? t(a, r[u], n, o, i, s) : a && (o ? o(a, n, s(r[u])) : (a[i] && (a = a[i]), a[n] = s(r[u])));
-          }(d, r, h, l, a, u);else for (v = 0; v < d.length; ++v) item = d[v], item && (l ? l(item, h, u(r)) : (item[a] && (item = item[a]), item[h] = u(r)));
+          }(d, r, h, l, a, u);else for (v = 0; v < d.length; ++v) {
+            var b = d[v];
+            b && (l ? l(b, h, u(r)) : (b[a] && (b = b[a]), b[h] = u(r)));
+          }
         } else l ? l(d, h, u(r)) : d instanceof Map ? d.set(h, u(r)) : d[h] = u(r);
       }
     };
@@ -49846,12 +49996,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     "use strict";
 
     t.exports = function (t) {
-      for (var e = [], r = "", n = !1, o = 0; o < t.length; ++o) {
-        if (n && !/\d/.test(t[o]) && "]" !== t[o]) throw new Error('Can only use numbers in square bracket path notation, got character "' + t[o] + '" in path "' + t + '"');
-        "." === t[o] || "[" === t[o] || "]" === t[o] ? ("[" === t[o] ? n = !0 : "]" === t[o] && (n = !1), r.length > 0 && e.push(r), r = "") : r += t[o];
-      }
+      for (var e = [], r = "", n = "DEFAULT", o = 0; o < t.length; ++o) "IN_SQUARE_BRACKETS" !== n || /\d/.test(t[o]) || "]" === t[o] || (n = "DEFAULT", r = e[e.length - 1] + "[" + r, e.splice(e.length - 1, 1)), "[" === t[o] ? ("IMMEDIATELY_AFTER_SQUARE_BRACKETS" !== n && (e.push(r), r = ""), n = "IN_SQUARE_BRACKETS") : "]" === t[o] ? "IN_SQUARE_BRACKETS" === n ? (n = "IMMEDIATELY_AFTER_SQUARE_BRACKETS", e.push(r), r = "") : (n = "DEFAULT", r += t[o]) : "." === t[o] ? ("IMMEDIATELY_AFTER_SQUARE_BRACKETS" !== n && (e.push(r), r = ""), n = "DEFAULT") : r += t[o];
 
-      return r.length > 0 && e.push(r), e;
+      return "IMMEDIATELY_AFTER_SQUARE_BRACKETS" !== n && e.push(r), e;
     };
   }, function (t, e, r) {
     "use strict";
@@ -51617,7 +51764,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }, e.prototype._isRejectionUnhandled = function () {
                 return (1048576 & this._bitField) > 0;
               }, e.prototype._warn = function (t, e, r) {
-                return L(t, e, r || this);
+                return U(t, e, r || this);
               }, e.onPossiblyUnhandledRejection = function (t) {
                 var e = a();
                 i = "function" == typeof t ? null === e ? t : f.domainBind(e, t) : void 0;
@@ -51671,7 +51818,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   return !1;
                 };
               }(),
-                  j = f.isNode ? function () {
+                  $ = f.isNode ? function () {
                 return r.emit.apply(r, arguments);
               } : f.global ? function (t) {
                 var e = "on" + t.toLowerCase(),
@@ -51681,18 +51828,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 return !1;
               };
 
-              function $(t, e) {
+              function E(t, e) {
                 return {
                   promise: e
                 };
               }
 
-              var E = {
-                promiseCreated: $,
-                promiseFulfilled: $,
-                promiseRejected: $,
-                promiseResolved: $,
-                promiseCancelled: $,
+              var j = {
+                promiseCreated: E,
+                promiseFulfilled: E,
+                promiseRejected: E,
+                promiseResolved: E,
+                promiseCancelled: E,
                 promiseChained: function (t, e, r) {
                   return {
                     promise: e,
@@ -51710,13 +51857,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                     promise: r
                   };
                 },
-                rejectionHandled: $
+                rejectionHandled: E
               },
                   P = function (t) {
                 var e = !1;
 
                 try {
-                  e = j.apply(null, arguments);
+                  e = $.apply(null, arguments);
                 } catch (t) {
                   u.throwLater(t), e = !0;
                 }
@@ -51724,7 +51871,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 var r = !1;
 
                 try {
-                  r = A(t, E[t].apply(null, arguments));
+                  r = A(t, j[t].apply(null, arguments));
                 } catch (t) {
                   u.throwLater(t), r = !0;
                 }
@@ -51736,7 +51883,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 return !1;
               }
 
-              function N(t, e, r) {
+              function T(t, e, r) {
                 var n = this;
 
                 try {
@@ -51750,7 +51897,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 }
               }
 
-              function T(t) {
+              function N(t) {
                 if (!this._isCancellable()) return this;
 
                 var e = this._onCancel();
@@ -51762,11 +51909,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 return this._onCancelField;
               }
 
-              function C(t) {
+              function B(t) {
                 this._onCancelField = t;
               }
 
-              function D() {
+              function C() {
                 this._cancellationParent = void 0, this._onCancelField = void 0;
               }
 
@@ -51788,7 +51935,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                 if ("cancellation" in t && t.cancellation && !X.cancellation) {
                   if (u.haveItemsQueued()) throw new Error("cannot enable cancellation after promises are in use");
-                  e.prototype._clearCancellationData = D, e.prototype._propagateFrom = R, e.prototype._onCancel = k, e.prototype._setOnCancel = C, e.prototype._attachCancellationCallback = T, e.prototype._execute = N, B = R, X.cancellation = !0;
+                  e.prototype._clearCancellationData = C, e.prototype._propagateFrom = R, e.prototype._onCancel = k, e.prototype._setOnCancel = B, e.prototype._attachCancellationCallback = N, e.prototype._execute = T, D = R, X.cancellation = !0;
                 }
 
                 return "monitoring" in t && (t.monitoring && !X.monitoring ? (X.monitoring = !0, e.prototype._fireEvent = P) : !t.monitoring && X.monitoring && (X.monitoring = !1, e.prototype._fireEvent = x)), e;
@@ -51800,7 +51947,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 }
               }, e.prototype._onCancel = function () {}, e.prototype._setOnCancel = function (t) {}, e.prototype._attachCancellationCallback = function (t) {}, e.prototype._captureStackTrace = function () {}, e.prototype._attachExtraTrace = function () {}, e.prototype._clearCancellationData = function () {}, e.prototype._propagateFrom = function (t, e) {};
 
-              var B = function (t, e) {
+              var D = function (t, e) {
                 0 != (2 & e) && t._isBound() && this._setBoundTo(t._boundTo);
               };
 
@@ -51823,7 +51970,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 }
               }
 
-              function L(t, r, n) {
+              function U(t, r, n) {
                 if (X.warnings) {
                   var o,
                       i = new l(t);
@@ -51835,7 +51982,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 }
               }
 
-              function U(t) {
+              function L(t) {
                 for (var e = [], r = 0; r < t.length; ++r) {
                   var n = t[r],
                       o = "    (No stack trace)" === n || _.test(n),
@@ -51859,7 +52006,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   return r > 0 && "SyntaxError" != t.name && (e = e.slice(r)), e;
                 }(t) : ["    (No stack trace)"], {
                   message: r,
-                  stack: "SyntaxError" == t.name ? e : U(e)
+                  stack: "SyntaxError" == t.name ? e : L(e)
                 };
               }
 
@@ -51953,7 +52100,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 if (!t.__stackCleaned__) {
                   this.uncycle();
 
-                  for (var e = V(t), r = e.message, n = [e.stack], o = this; void 0 !== o;) n.push(U(o.stack.split("\n"))), o = o._parent;
+                  for (var e = V(t), r = e.message, n = [e.stack], o = this; void 0 !== o;) n.push(L(o.stack.split("\n"))), o = o._parent;
 
                   !function (t) {
                     for (var e = t[0], r = 1; r < t.length; ++r) {
@@ -52051,7 +52198,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   return X.monitoring;
                 },
                 propagateFromFunction: function () {
-                  return B;
+                  return D;
                 },
                 boundValueFunction: function () {
                   return M;
@@ -52065,7 +52212,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                         s = "";
 
                     if (e._trace) {
-                      for (var a = e._trace.stack.split("\n"), u = U(a), c = u.length - 1; c >= 0; --c) {
+                      for (var a = e._trace.stack.split("\n"), u = L(a), c = u.length - 1; c >= 0; --c) {
                         var l = u[c];
 
                         if (!y.test(l)) {
@@ -52113,14 +52260,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                     });
                   }
                 },
-                warn: L,
+                warn: U,
                 deprecated: function (t, e) {
                   var r = t + " is deprecated and will be removed in a future version.";
-                  return e && (r += " Use " + e + " instead."), L(r);
+                  return e && (r += " Use " + e + " instead."), U(r);
                 },
                 CapturedTrace: J,
                 fireDomEvent: A,
-                fireGlobalEvent: j
+                fireGlobalEvent: $
               };
             };
           }, {
@@ -52845,9 +52992,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   O = w.create,
                   S = t("./debuggability")(x, w),
                   A = (S.CapturedTrace, t("./finally")(x, g, v)),
-                  j = t("./catch_filter")(v),
-                  $ = t("./nodeback"),
-                  E = c.errorObj,
+                  $ = t("./catch_filter")(v),
+                  E = t("./nodeback"),
+                  j = c.errorObj,
                   P = c.tryCatch;
 
               function x(t) {
@@ -52857,11 +53004,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 }(this, t), this._bitField = 0, this._fulfillmentHandler0 = void 0, this._rejectionHandler0 = void 0, this._promise0 = void 0, this._receiver0 = void 0, this._resolveFromExecutor(t), this._promiseCreated(), this._fireEvent("promiseCreated", this);
               }
 
-              function N(t) {
+              function T(t) {
                 this.promise._resolveCallback(t);
               }
 
-              function T(t) {
+              function N(t) {
                 this.promise._rejectCallback(t, !1);
               }
 
@@ -52886,7 +53033,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                     n[o++] = s;
                   }
 
-                  return n.length = o, t = arguments[r], this.then(void 0, j(n, t, this));
+                  return n.length = o, t = arguments[r], this.then(void 0, $(n, t, this));
                 }
 
                 return this.then(void 0, t);
@@ -52923,8 +53070,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 e._captureStackTrace();
 
                 var r = arguments.length > 1 && !!Object(arguments[1]).multiArgs,
-                    n = P(t)($(e, r));
-                return n === E && e._rejectCallback(n.e, !0), e._isFateSealed() || e._setAsyncGuaranteed(), e;
+                    n = P(t)(E(e, r));
+                return n === j && e._rejectCallback(n.e, !0), e._isFateSealed() || e._setAsyncGuaranteed(), e;
               }, x.all = function (t) {
                 return new b(t).promise();
               }, x.cast = function (t) {
@@ -53075,11 +53222,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                 if (0 == (65536 & o)) {
                   var i;
-                  n._pushContext(), e === m ? r && "number" == typeof r.length ? i = P(t).apply(this._boundValue(), r) : (i = E).e = new y("cannot .spread() a non-array: " + c.classString(r)) : i = P(t).call(e, r);
+                  n._pushContext(), e === m ? r && "number" == typeof r.length ? i = P(t).apply(this._boundValue(), r) : (i = j).e = new y("cannot .spread() a non-array: " + c.classString(r)) : i = P(t).call(e, r);
 
                   var s = n._popContext();
 
-                  0 == (65536 & (o = n._bitField)) && (i === v ? n._reject(r) : i === E ? n._rejectCallback(i.e, !1) : (S.checkForgottenReturns(i, s, "", n, this), n._resolveCallback(i)));
+                  0 == (65536 & (o = n._bitField)) && (i === v ? n._reject(r) : i === j ? n._rejectCallback(i.e, !1) : (S.checkForgottenReturns(i, s, "", n, this), n._resolveCallback(i)));
                 }
               }, x.prototype._target = function () {
                 for (var t = this; t._isFollowing();) t = t._followee();
@@ -53093,7 +53240,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 var i = t instanceof x,
                     a = this._bitField,
                     u = 0 != (134217728 & a);
-                0 != (65536 & a) ? (i && t._invokeInternalOnCancel(), r instanceof A && r.isFinallyHandler() ? (r.cancelPromise = t, P(e).call(r, n) === E && t._reject(E.e)) : e === o ? t._fulfill(o.call(r)) : r instanceof s ? r._promiseCancelled(t) : i || t instanceof b ? t._cancel() : r.cancel()) : "function" == typeof e ? i ? (u && t._setAsyncGuaranteed(), this._settlePromiseFromHandler(e, r, n, t)) : e.call(r, n, t) : r instanceof s ? r._isResolved() || (0 != (33554432 & a) ? r._promiseFulfilled(n, t) : r._promiseRejected(n, t)) : i && (u && t._setAsyncGuaranteed(), 0 != (33554432 & a) ? t._fulfill(n) : t._reject(n));
+                0 != (65536 & a) ? (i && t._invokeInternalOnCancel(), r instanceof A && r.isFinallyHandler() ? (r.cancelPromise = t, P(e).call(r, n) === j && t._reject(j.e)) : e === o ? t._fulfill(o.call(r)) : r instanceof s ? r._promiseCancelled(t) : i || t instanceof b ? t._cancel() : r.cancel()) : "function" == typeof e ? i ? (u && t._setAsyncGuaranteed(), this._settlePromiseFromHandler(e, r, n, t)) : e.call(r, n, t) : r instanceof s ? r._isResolved() || (0 != (33554432 & a) ? r._promiseFulfilled(n, t) : r._promiseRejected(n, t)) : i && (u && t._setAsyncGuaranteed(), 0 != (33554432 & a) ? t._fulfill(n) : t._reject(n));
               }, x.prototype._settlePromiseLateCancellationObserver = function (t) {
                 var e = t.handler,
                     r = t.promise,
@@ -53167,8 +53314,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }, x.defer = x.pending = function () {
                 return S.deprecated("Promise.defer", "new Promise"), {
                   promise: new x(_),
-                  resolve: N,
-                  reject: T
+                  resolve: T,
+                  reject: N
                 };
               }, c.notEnumerableProp(x, "_makeSelfResolutionError", n), t("./method")(x, _, g, i, S), t("./bind")(x, _, g, S), t("./cancel")(x, b, i, S), t("./direct_resolve")(x), t("./synchronous_inspection")(x), t("./join")(x, b, g, _, p, a), x.Promise = x, x.version = "3.5.1", t("./map.js")(x, b, i, g, _, S), t("./call_get.js")(x), t("./using.js")(x, i, g, O, _, S), t("./timers.js")(x, _, S), t("./generators.js")(x, i, _, g, s, S), t("./nodeify.js")(x), t("./promisify.js")(x, _), t("./props.js")(x, b, g, i), t("./race.js")(x, _, g, i), t("./reduce.js")(x, b, i, g, _, S), t("./settle.js")(x, b, S), t("./some.js")(x, b, i), t("./filter.js")(x, _), t("./each.js")(x, _), t("./any.js")(x), c.toFastProperties(x), c.toFastProperties(x.prototype), k({
                 a: 1
@@ -54264,13 +54411,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               return t;
             }
 
-            var j = /^[a-z$_][a-z$_0-9]*$/i;
+            var $ = /^[a-z$_][a-z$_0-9]*$/i;
 
-            function $(t) {
-              return j.test(t);
+            function E(t) {
+              return $.test(t);
             }
 
-            function E(t, e, r) {
+            function j(t, e, r) {
               for (var n = new Array(t), o = 0; o < t; ++o) n[o] = e + o + r;
 
               return n;
@@ -54288,13 +54435,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               return t instanceof Error || null !== t && "object" === c(t) && "string" == typeof t.message && "string" == typeof t.name;
             }
 
-            function N(t) {
+            function T(t) {
               try {
                 g(t, "isOperational", !0);
               } catch (t) {}
             }
 
-            function T(t) {
+            function N(t) {
               return null != t && (t instanceof Error.__BluebirdErrorTypes__.OperationalError || !0 === t.isOperational);
             }
 
@@ -54302,7 +54449,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               return x(t) && i.propertyIsWritable(t, "stack");
             }
 
-            var C = "stack" in new Error() ? function (t) {
+            var B = "stack" in new Error() ? function (t) {
               return k(t) ? t : new Error(P(t));
             } : function (t) {
               if (k(t)) return t;
@@ -54314,7 +54461,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
             };
 
-            function D(t) {
+            function C(t) {
               return {}.toString.call(t);
             }
 
@@ -54327,7 +54474,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
             }
 
-            var B = function (t) {
+            var D = function (t) {
               return i.isArray(t) ? t : null;
             };
 
@@ -54340,19 +54487,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 return r;
               };
 
-              B = function (t) {
+              D = function (t) {
                 return i.isArray(t) ? t : null != t && "function" == typeof t[Symbol.iterator] ? M(t) : null;
               };
             }
 
-            var I = void 0 !== r && "[object process]" === D(r).toLowerCase(),
+            var I = void 0 !== r && "[object process]" === C(r).toLowerCase(),
                 F = void 0 !== r && void 0 !== r.env;
 
-            function L(t) {
+            function U(t) {
               return F ? r.env[t] : void 0;
             }
 
-            function U() {
+            function L() {
               if ("function" == typeof Promise) try {
                 var t = new Promise(function () {});
                 if ("[object Promise]" === {}.toString.call(t)) return Promise;
@@ -54365,12 +54512,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             var q = {
               isClass: S,
-              isIdentifier: $,
+              isIdentifier: E,
               inheritedDataKeys: w,
               getDataPropertyOrDefault: v,
               thrower: b,
               isArray: i.isArray,
-              asArray: B,
+              asArray: D,
               notEnumerableProp: g,
               isPrimitive: y,
               isObject: d,
@@ -54382,20 +54529,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               withAppended: m,
               maybeWrapAsError: _,
               toFastProperties: A,
-              filledRange: E,
+              filledRange: j,
               toString: P,
               canAttachTrace: k,
-              ensureErrorObject: C,
-              originatesFromRejection: T,
-              markAsOriginatingFromRejection: N,
-              classString: D,
+              ensureErrorObject: B,
+              originatesFromRejection: N,
+              markAsOriginatingFromRejection: T,
+              classString: C,
               copyDescriptors: R,
               hasDevTools: "undefined" != typeof chrome && chrome && "function" == typeof chrome.loadTimes,
               isNode: I,
               hasEnvVariables: F,
-              env: L,
+              env: U,
               global: l,
-              getNativePromise: U,
+              getNativePromise: L,
               domainBind: V
             },
                 W;
@@ -54446,7 +54593,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -54542,7 +54689,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -54633,7 +54780,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -54722,7 +54869,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -54814,7 +54961,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -54908,7 +55055,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -55023,7 +55170,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -55107,7 +55254,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -55336,24 +55483,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
               u(n.fn, r, a, a[0]);
             } else {
-              var v = null,
-                  g = null;
+              var v = null;
 
               try {
-                g = n.fn.call(r);
+                v = n.fn.call(r);
               } catch (t) {
-                v = t;
+                if (null != t) return o(t);
               }
 
-              if (c(g)) g.then(function () {
+              if (c(v)) v.then(function () {
                 return m();
               }, function (t) {
                 return m(t);
               });else {
                 if (++p >= s) return h > 0 ? void 0 : e.nextTick(function () {
-                  o(v);
+                  o(null);
                 });
-                t(v);
+                t();
               }
             }
           }
@@ -55666,12 +55812,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   S = O ? b : {},
                   A = "string" == typeof b ? b : !!O && b.type;
               if (A && -1 !== i.indexOf(A)) w[u + h] = A;else if (S.text) w[u + h] = "text", delete S.text;else {
-                var j = -1 === Number(b);
-                w[u + h] = j ? -1 : 1;
+                var $ = -1 === Number(b);
+                w[u + h] = $ ? -1 : 1;
               }
               delete S.type, "background" in S || (S.background = !0), null != a.options.autoIndex && (S._autoIndex = a.options.autoIndex);
-              var $ = S && S.name;
-              "string" == typeof $ && s.has($) ? Object.assign(s.get($), w) : (e.push([w, S]), s.set($, w));
+              var E = S && S.name;
+              "string" == typeof E && s.has(E) ? Object.assign(s.get(E), w) : (e.push([w, S]), s.set(E, w));
             }
           }
         }
@@ -55748,7 +55894,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               o = null != l ? l() : (this.ownerDocument ? this.ownerDocument() : this).constructor.base.now(),
               s = this._id && this._id.auto;
 
-          if (!n && u && !this.get(u) && this.isSelected(u) && this.$set(u, s ? this._id.getTimestamp() : o), !r && c && (this.isNew || this.isModified())) {
+          if (!n && u && !this.get(u) && this.$__isSelected(u) && this.$set(u, s ? this._id.getTimestamp() : o), !r && c && (this.isNew || this.isModified())) {
             var a = o;
             this.isNew && (null != u ? a = this.$__getValue(u) : s && (a = this._id.getTimestamp())), this.$set(c, a);
           }
@@ -55762,12 +55908,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           query: !0,
           model: !1
         };
-        t.pre("findOneAndUpdate", p, h), t.pre("replaceOne", p, h), t.pre("update", p, h), t.pre("updateOne", p, h), t.pre("updateMany", p, h);
+        t.pre("findOneAndReplace", p, h), t.pre("findOneAndUpdate", p, h), t.pre("replaceOne", p, h), t.pre("update", p, h), t.pre("updateOne", p, h), t.pre("updateMany", p, h);
       }
 
       function h(t) {
         var e = null != l ? l() : this.model.base.now();
-        o(e, u, c, this.getUpdate(), this.options, this.schema), n(e, this.getUpdate(), this.model.schema), t();
+        "findOneAndReplace" === this.op && null == this.getUpdate() && this.setUpdate({}), o(e, u, c, this.getUpdate(), this.options, this.schema), n(e, this.getUpdate(), this.model.schema), t();
       }
     };
   }, function (t, e, r) {
@@ -55942,9 +56088,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         } else if (null != c.schema && c.schema != t && r[e]) {
           var S = c.schema.options.timestamps,
               A = s(S, "createdAt"),
-              j = s(S, "updatedAt");
+              $ = s(S, "updatedAt");
           if (!S) return;
-          null != j && (r[e][j] = o), null != A && (r[e][A] = o);
+          null != $ && (r[e][$] = o), null != A && (r[e][A] = o);
         }
       }
     }
@@ -55954,7 +56100,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     "use strict";
 
     t.exports = function (t) {
-      return t.replace(/\.\$(\[[^\]]*\])?\./g, ".0.").replace(/\.(\[[^\]]*\])?\$$/g, ".0");
+      return t.replace(/\.\$(\[[^\]]*\])?(?=\.)/g, ".0").replace(/\.\$(\[[^\]]*\])?$/g, ".0");
     };
   }, function (t, e, r) {
     "use strict";
@@ -56372,7 +56518,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -56458,7 +56604,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -56540,7 +56686,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
      * Module dependencies.
      */
 
-    var n = r(12),
+    var n = r(13),
         o = r(7),
         i = r(49),
         s = r(2);
@@ -56618,7 +56764,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     var n,
         o,
         i = r(55),
-        s = r(12),
+        s = r(13),
         a = r(19).EventEmitter,
         u = r(158),
         c = r(7),
@@ -56735,36 +56881,38 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 y = t[p] = new d(y, t, void 0, void 0, p);
               }
 
-              y.$__validate(f);
+              null == s || !s.validateModifiedOnly || y.isModified() ? y.$__validate(f) : --c || e(u);
             } else --c || e(u);
           }
         }, i);
       } catch (t) {
         return t.$isArrayValidatorError = !0, e(t);
       }
-    }, g.prototype.doValidateSync = function (t, e) {
-      var r = c.prototype.doValidateSync.call(this, t, e);
-      if (null != r) return r.$isArrayValidatorError = !0, r;
-      var n = t && t.length,
-          i = null;
+    }, g.prototype.doValidateSync = function (t, e, r) {
+      var n = c.prototype.doValidateSync.call(this, t, e);
+      if (null != n) return n.$isArrayValidatorError = !0, n;
+      var i = t && t.length,
+          s = null;
 
-      if (n) {
-        for (var s = 0, a = n; s < a; ++s) {
-          var u = t[s];
+      if (i) {
+        for (var a = 0, u = i; a < u; ++a) {
+          var l = t[a];
 
-          if (u) {
-            if (!(u instanceof o)) {
-              var l = _(this.casterConstructor, t[s]);
+          if (l) {
+            if (!(l instanceof o)) {
+              var f = _(this.casterConstructor, t[a]);
 
-              u = t[s] = new l(u, t, void 0, void 0, s);
+              l = t[a] = new f(l, t, void 0, void 0, a);
             }
 
-            var f = u.validateSync();
-            f && null == i && (i = f);
+            if (null == r || !r.validateModifiedOnly || l.isModified()) {
+              var p = l.validateSync();
+              p && null == s && (s = p);
+            }
           }
         }
 
-        return i;
+        return s;
       }
     },
     /*!
@@ -56823,6 +56971,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var t = Object.assign({}, this.options),
           e = new this.constructor(this.path, this.schema, t, this.schemaOptions);
       return e.validators = this.validators.slice(), void 0 !== this.requiredValidator && (e.requiredValidator = this.requiredValidator), e.Constructor.discriminators = Object.assign({}, this.Constructor.discriminators), e;
+    },
+    /*!
+     * ignore
+     */
+    g.prototype.applyGetters = function (t, e) {
+      return c.prototype.applyGetters.call(this, t, e);
     }, g.defaultOptions = {}, g.set = c.set,
     /*!
      * Module exports.
@@ -56856,7 +57010,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -57019,7 +57173,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       })(t);
     }
 
-    var s = r(12),
+    var s = r(13),
         a = r(32),
         u = r(54),
         c = r(156),
@@ -57058,15 +57212,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           O,
           S,
           A,
-          j = Object.keys(r),
-          $ = j.length;
+          $ = Object.keys(r),
+          E = $.length;
 
-      for (o = o || {}; $--;) if (A = r[O = j[$]], "$or" === O || "$nor" === O || "$and" === O) {
+      for (o = o || {}; E--;) if (A = r[O = $[E]], "$or" === O || "$nor" === O || "$and" === O) {
         if (!Array.isArray(A)) throw new s("Array", A, O);
 
-        for (var E = 0; E < A.length; ++E) {
-          if (null == A[E] || "object" !== i(A[E])) throw new s("Object", A[E], O + "." + E);
-          A[E] = t(e, A[E], o, v);
+        for (var j = 0; j < A.length; ++j) {
+          if (null == A[j] || "object" !== i(A[j])) throw new s("Object", A[j], O + "." + j);
+          A[j] = t(e, A[j], o, v);
         }
       } else {
         if ("$where" === O) {
@@ -57078,14 +57232,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("$elemMatch" === O) A = t(e, A, o, v);else if ("$text" === O) A = c(A, O);else {
           if (!e) continue;
           if (!(b = e.path(O))) for (var P = O.split("."), x = P.length; x--;) {
-            var N = P.slice(0, x).join("."),
-                T = P.slice(x).join("."),
-                k = e.path(N),
-                C = l(k, "schema.options.discriminatorKey");
+            var T = P.slice(0, x).join("."),
+                N = P.slice(x).join("."),
+                k = e.path(T),
+                B = l(k, "schema.options.discriminatorKey");
 
-            if (null != k && null != l(k, "schema.discriminators") && null != C && T !== C) {
-              var D = l(r, N + "." + C);
-              null != D && (b = k.schema.discriminators[D].path(T));
+            if (null != k && null != l(k, "schema.discriminators") && null != B && N !== B) {
+              var C = l(r, T + "." + B);
+              null != C && (b = k.schema.discriminators[C].path(N));
             }
           }
 
@@ -57093,14 +57247,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             if (null == A) continue;
             if ("Object" === A.constructor.name) {
               if (Object.keys(A).some(p)) {
-                for (var R = Object.keys(A), B = void 0, M = R.length; M--;) if (w = A[B = R[M]], "$not" === B) {
+                for (var R = Object.keys(A), D = void 0, M = R.length; M--;) if (w = A[D = R[M]], "$not" === D) {
                   if (w && b && !b.caster) {
                     if ((g = Object.keys(w)).length && p(g[0])) for (var I in w) w[I] = b.castForQueryWrapper({
                       $conditional: I,
                       val: w[I],
                       context: v
-                    });else A[B] = b.castForQueryWrapper({
-                      $conditional: B,
+                    });else A[D] = b.castForQueryWrapper({
+                      $conditional: D,
                       val: w,
                       context: v
                     });
@@ -57108,8 +57262,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   }
 
                   t(b.caster ? b.caster.schema : e, w, o, v);
-                } else A[B] = b.castForQueryWrapper({
-                  $conditional: B,
+                } else A[D] = b.castForQueryWrapper({
+                  $conditional: D,
                   val: w,
                   context: v
                 });
@@ -57119,25 +57273,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               });
             } else if (Array.isArray(A) && -1 === ["Buffer", "Array"].indexOf(b.instance)) {
               var F,
-                  L = [],
-                  U = n(A);
+                  U = [],
+                  L = n(A);
 
               try {
-                for (U.s(); !(F = U.n()).done;) {
+                for (L.s(); !(F = L.n()).done;) {
                   var V = F.value;
-                  L.push(b.castForQueryWrapper({
+                  U.push(b.castForQueryWrapper({
                     val: V,
                     context: v
                   }));
                 }
               } catch (t) {
-                U.e(t);
+                L.e(t);
               } finally {
-                U.f();
+                L.f();
               }
 
               r[O] = {
-                $in: L
+                $in: U
               };
             } else r[O] = b.castForQueryWrapper({
               val: A,
@@ -57219,7 +57373,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       })(t);
     }
 
-    var o = r(12),
+    var o = r(13),
         i = r(49),
         s = r(77);
     /*!
@@ -57285,7 +57439,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -57358,7 +57512,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }
 
     var o,
-        i = r(12),
+        i = r(13),
         s = r(19).EventEmitter,
         a = r(73),
         u = r(160),
@@ -57425,21 +57579,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     /*!
      * ignore
      */
-    v.prototype.$conditionalHandlers.$near = v.prototype.$conditionalHandlers.$nearSphere = h.cast$near, v.prototype.$conditionalHandlers.$within = v.prototype.$conditionalHandlers.$geoWithin = h.cast$within, v.prototype.$conditionalHandlers.$geoIntersects = h.cast$geoIntersects, v.prototype.$conditionalHandlers.$minDistance = f, v.prototype.$conditionalHandlers.$maxDistance = f, v.prototype.$conditionalHandlers.$exists = l, v.prototype.cast = function (t, e, r, o) {
+    v.prototype.$conditionalHandlers.$near = v.prototype.$conditionalHandlers.$nearSphere = h.cast$near, v.prototype.$conditionalHandlers.$within = v.prototype.$conditionalHandlers.$geoWithin = h.cast$within, v.prototype.$conditionalHandlers.$geoIntersects = h.cast$geoIntersects, v.prototype.$conditionalHandlers.$minDistance = f, v.prototype.$conditionalHandlers.$maxDistance = f, v.prototype.$conditionalHandlers.$exists = l, v.prototype.cast = function (t, e, r, o, i) {
       if (t && t.$isSingleNested && t.parent === e) return t;
       if (null != t && ("object" !== n(t) || Array.isArray(t))) throw new a(this.path, t);
-      var i,
-          s = d(this.caster, t),
-          u = y(e, "$__.selected", {}),
-          c = this.path,
-          l = Object.keys(u).reduce(function (t, e) {
-        return e.startsWith(c + ".") && (t[e.substr(c.length + 1)] = u[e]), t;
+      var s,
+          u = d(this.caster, t),
+          c = y(e, "$__.selected", {}),
+          l = this.path,
+          f = Object.keys(c).reduce(function (t, e) {
+        return e.startsWith(l + ".") && (t[e.substr(l.length + 1)] = c[e]), t;
       }, {});
-      return r ? ((i = new s(void 0, l, e)).init(t), i) : 0 === Object.keys(t).length ? new s({}, l, e, void 0, {
+      return i = Object.assign({}, i, {
         priorDoc: o
-      }) : new s(t, l, e, void 0, {
-        priorDoc: o
-      });
+      }), r ? ((s = new u(void 0, f, e)).init(t), s) : 0 === Object.keys(t).length ? new u({}, f, e, void 0, i) : new u(t, f, e, void 0, i);
     }, v.prototype.castForQuery = function (t, e, r) {
       var n;
 
@@ -57513,7 +57665,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -57701,7 +57853,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -57907,7 +58059,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -57985,7 +58137,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           o = r(167),
           i = r(7),
           s = r(86),
-          a = r(13),
+          a = r(12),
           u = r(2),
           c = r(0).populateModelSymbol,
           l = i.CastError;
@@ -58112,7 +58264,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -58391,7 +58543,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if ("function" == typeof Proxy) return !0;
 
           try {
-            return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+            return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
           } catch (t) {
             return !1;
           }
@@ -58458,33 +58610,40 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           key: "cast",
           value: function (t, r, n) {
             if (t instanceof p) return t;
+            var i = this.path;
 
             if (n) {
-              var i = new p({}, this.path, r, this.$__schemaType);
+              var s = new p({}, i, r, this.$__schemaType);
 
               if (t instanceof e.Map) {
-                var s,
-                    a = o(t.keys());
+                var a,
+                    u = o(t.keys());
 
                 try {
-                  for (a.s(); !(s = a.n()).done;) {
-                    var u = s.value;
-                    i.$init(u, i.$__schemaType.cast(t.get(u), r, !0));
+                  for (u.s(); !(a = u.n()).done;) {
+                    var c = a.value,
+                        l = t.get(c);
+                    l = null == l ? s.$__schemaType._castNullish(l) : s.$__schemaType.cast(l, r, !0, null, {
+                      path: i + "." + c
+                    }), s.$init(c, l);
                   }
                 } catch (t) {
-                  a.e(t);
+                  u.e(t);
                 } finally {
-                  a.f();
+                  u.f();
                 }
-              } else for (var c = 0, l = Object.keys(t); c < l.length; c++) {
-                var f = l[c];
-                i.$init(f, i.$__schemaType.cast(t[f], r, !0));
+              } else for (var f = 0, h = Object.keys(t); f < h.length; f++) {
+                var y = h[f],
+                    d = t[y];
+                d = null == d ? s.$__schemaType._castNullish(d) : s.$__schemaType.cast(d, r, !0, null, {
+                  path: i + "." + y
+                }), s.$init(y, d);
               }
 
-              return i;
+              return s;
             }
 
-            return new p(t, this.path, r, this.$__schemaType);
+            return new p(t, i, r, this.$__schemaType);
           }
         }, {
           key: "clone",
@@ -58525,7 +58684,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("function" == typeof Proxy) return !0;
 
         try {
-          return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0;
+          return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})), !0;
         } catch (t) {
           return !1;
         }
@@ -58596,7 +58755,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       var o = r(15).get().Binary,
           i = r(20),
-          s = r(13),
+          s = r(12),
           a = r(29);
       /*!
        * ignore
@@ -58721,6 +58880,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
      */
 
     t.exports = function (t) {
+      if (null == t) return null;
       var e = Object.keys(t),
           r = e.length,
           o = null;
@@ -58826,7 +58986,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     function f(t) {
       return function (e) {
-        e.options || (e.options = {}), e.options.lean = t;
+        e.options || (e.options = {}), null != t && Array.isArray(t.virtuals) && ((t = Object.assign({}, t)).virtuals = t.virtuals.filter(function (t) {
+          return "string" == typeof t && t.startsWith(e.path + ".");
+        }).map(function (t) {
+          return t.slice(e.path.length + 1);
+        })), e.options.lean = t;
       };
     }
     /*!
@@ -58928,37 +59092,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           p = [],
           h = [];
 
-      switch (function e(o, u) {
-        if (u || (u = ""), -1 !== h.indexOf(o)) return [];
-        h.push(o);
-        var c = [];
-        return o.eachPath(function (o, l) {
-          u && (o = u + "." + o);
+      switch (function e(n, o) {
+        if (o || (o = ""), -1 !== h.indexOf(n)) return [];
+        h.push(n);
+        var i = [];
+        return n.eachPath(function (n, a) {
+          o && (n = o + "." + n);
+          var u = E(n, a);
 
-          var h = function (e, o) {
-            var s = "+" + e,
-                u = t && s in t;
-            u && delete t[s];
-            if ("boolean" != typeof o.selected) return;
-            if (u) return delete t[s], void (!1 === r && i.length > 1 && !~i.indexOf(e) && (t[e] = 1));
-
-            for (var c = e.split("."), l = "", h = 0; h < c.length; ++h) if (l += l.length ? "." + c[h] : c[h], -1 !== p.indexOf(l)) return;
-
-            if (!r && a(o, "options.$skipDiscriminatorCheck", !1)) for (var y = "", d = 0; d < c.length; ++d) {
-              y += (0 === y.length ? "" : ".") + c[d];
-
-              var _ = a(t, y, !1) || a(t, y + ".$", !1);
-
-              if (_ && "object" !== n(_)) return;
-            }
-            return (o.selected ? f : p).push(e), e;
-          }(o, l);
-
-          if (null != h && c.push(h), l.schema) {
-            var y = e(l.schema, o);
-            !1 === r && s(t, o, l.schema, f, y);
+          if (null == u && a.$isMongooseArray && !a.$isMongooseDocumentArray && (u = E(n, a.caster)), null != u && i.push(u), a.schema) {
+            var c = e(a.schema, n);
+            !1 === r && s(t, n, a.schema, f, c);
           }
-        }), h.pop(), c;
+        }), h.pop(), i;
       }(e), r) {
         case !0:
           var y,
@@ -59008,8 +59154,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           try {
             for (A.s(); !(S = A.n()).done;) {
-              var j = S.value;
-              t[j] = 0;
+              var $ = S.value;
+              t[$] = 0;
             }
           } catch (t) {
             A.e(t);
@@ -59017,6 +59163,26 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             A.f();
           }
 
+      }
+
+      function E(e, o) {
+        var s = "+" + e,
+            u = t && s in t;
+
+        if (u && delete t[s], "boolean" == typeof o.selected) {
+          if (u) return delete t[s], void (!1 === r && i.length > 1 && !~i.indexOf(e) && (t[e] = 1));
+
+          for (var c = e.split("."), l = "", h = 0; h < c.length; ++h) if (l += l.length ? "." + c[h] : c[h], -1 !== p.indexOf(l)) return;
+
+          if (!r && a(o, "options.$skipDiscriminatorCheck", !1)) for (var y = "", d = 0; d < c.length; ++d) {
+            y += (0 === y.length ? "" : ".") + c[d];
+
+            var _ = a(t, y, !1) || a(t, y + ".$", !1);
+
+            if (_ && "object" !== n(_)) return;
+          }
+          return (o.selected ? f : p).push(e), e;
+        }
       }
     }, e.handleDeleteWriteOpResult = function (t) {
       return function (e, r) {
@@ -59059,7 +59225,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         o = r(19).EventEmitter,
         i = r(5),
         s = r(52),
-        a = r(13),
+        a = r(12),
         u = i.ValidationError,
         c = r(76),
         l = r(21);
@@ -59333,273 +59499,280 @@ function plural(ms, msAbs, n, name) {
 }
 
 },{}],"../node_modules/socket.io-client/node_modules/debug/src/common.js":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 /**
  * This is the common logic for both the Node.js and web browser
  * implementations of `debug()`.
  */
-
 function setup(env) {
-	createDebug.debug = createDebug;
-	createDebug.default = createDebug;
-	createDebug.coerce = coerce;
-	createDebug.disable = disable;
-	createDebug.enable = enable;
-	createDebug.enabled = enabled;
-	createDebug.humanize = require('ms');
+  createDebug.debug = createDebug;
+  createDebug.default = createDebug;
+  createDebug.coerce = coerce;
+  createDebug.disable = disable;
+  createDebug.enable = enable;
+  createDebug.enabled = enabled;
+  createDebug.humanize = require('ms');
+  createDebug.destroy = destroy;
+  Object.keys(env).forEach(function (key) {
+    createDebug[key] = env[key];
+  });
+  /**
+  * The currently active debug mode names, and names to skip.
+  */
 
-	Object.keys(env).forEach(key => {
-		createDebug[key] = env[key];
-	});
+  createDebug.names = [];
+  createDebug.skips = [];
+  /**
+  * Map of special "%n" handling functions, for the debug "format" argument.
+  *
+  * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+  */
 
-	/**
-	* Active `debug` instances.
-	*/
-	createDebug.instances = [];
+  createDebug.formatters = {};
+  /**
+  * Selects a color for a debug namespace
+  * @param {String} namespace The namespace string for the for the debug instance to be colored
+  * @return {Number|String} An ANSI color code for the given namespace
+  * @api private
+  */
 
-	/**
-	* The currently active debug mode names, and names to skip.
-	*/
+  function selectColor(namespace) {
+    var hash = 0;
 
-	createDebug.names = [];
-	createDebug.skips = [];
+    for (var i = 0; i < namespace.length; i++) {
+      hash = (hash << 5) - hash + namespace.charCodeAt(i);
+      hash |= 0; // Convert to 32bit integer
+    }
 
-	/**
-	* Map of special "%n" handling functions, for the debug "format" argument.
-	*
-	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
-	*/
-	createDebug.formatters = {};
+    return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+  }
 
-	/**
-	* Selects a color for a debug namespace
-	* @param {String} namespace The namespace string for the for the debug instance to be colored
-	* @return {Number|String} An ANSI color code for the given namespace
-	* @api private
-	*/
-	function selectColor(namespace) {
-		let hash = 0;
+  createDebug.selectColor = selectColor;
+  /**
+  * Create a debugger with the given `namespace`.
+  *
+  * @param {String} namespace
+  * @return {Function}
+  * @api public
+  */
 
-		for (let i = 0; i < namespace.length; i++) {
-			hash = ((hash << 5) - hash) + namespace.charCodeAt(i);
-			hash |= 0; // Convert to 32bit integer
-		}
+  function createDebug(namespace) {
+    var prevTime;
+    var enableOverride = null;
 
-		return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
-	}
-	createDebug.selectColor = selectColor;
+    function debug() {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
 
-	/**
-	* Create a debugger with the given `namespace`.
-	*
-	* @param {String} namespace
-	* @return {Function}
-	* @api public
-	*/
-	function createDebug(namespace) {
-		let prevTime;
+      // Disabled?
+      if (!debug.enabled) {
+        return;
+      }
 
-		function debug(...args) {
-			// Disabled?
-			if (!debug.enabled) {
-				return;
-			}
+      var self = debug; // Set `diff` timestamp
 
-			const self = debug;
+      var curr = Number(new Date());
+      var ms = curr - (prevTime || curr);
+      self.diff = ms;
+      self.prev = prevTime;
+      self.curr = curr;
+      prevTime = curr;
+      args[0] = createDebug.coerce(args[0]);
 
-			// Set `diff` timestamp
-			const curr = Number(new Date());
-			const ms = curr - (prevTime || curr);
-			self.diff = ms;
-			self.prev = prevTime;
-			self.curr = curr;
-			prevTime = curr;
+      if (typeof args[0] !== 'string') {
+        // Anything else let's inspect with %O
+        args.unshift('%O');
+      } // Apply any `formatters` transformations
 
-			args[0] = createDebug.coerce(args[0]);
 
-			if (typeof args[0] !== 'string') {
-				// Anything else let's inspect with %O
-				args.unshift('%O');
-			}
+      var index = 0;
+      args[0] = args[0].replace(/%([a-zA-Z%])/g, function (match, format) {
+        // If we encounter an escaped % then don't increase the array index
+        if (match === '%%') {
+          return '%';
+        }
 
-			// Apply any `formatters` transformations
-			let index = 0;
-			args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
-				// If we encounter an escaped % then don't increase the array index
-				if (match === '%%') {
-					return match;
-				}
-				index++;
-				const formatter = createDebug.formatters[format];
-				if (typeof formatter === 'function') {
-					const val = args[index];
-					match = formatter.call(self, val);
+        index++;
+        var formatter = createDebug.formatters[format];
 
-					// Now we need to remove `args[index]` since it's inlined in the `format`
-					args.splice(index, 1);
-					index--;
-				}
-				return match;
-			});
+        if (typeof formatter === 'function') {
+          var val = args[index];
+          match = formatter.call(self, val); // Now we need to remove `args[index]` since it's inlined in the `format`
 
-			// Apply env-specific formatting (colors, etc.)
-			createDebug.formatArgs.call(self, args);
+          args.splice(index, 1);
+          index--;
+        }
 
-			const logFn = self.log || createDebug.log;
-			logFn.apply(self, args);
-		}
+        return match;
+      }); // Apply env-specific formatting (colors, etc.)
 
-		debug.namespace = namespace;
-		debug.enabled = createDebug.enabled(namespace);
-		debug.useColors = createDebug.useColors();
-		debug.color = selectColor(namespace);
-		debug.destroy = destroy;
-		debug.extend = extend;
-		// Debug.formatArgs = formatArgs;
-		// debug.rawLog = rawLog;
+      createDebug.formatArgs.call(self, args);
+      var logFn = self.log || createDebug.log;
+      logFn.apply(self, args);
+    }
 
-		// env-specific initialization logic for debug instances
-		if (typeof createDebug.init === 'function') {
-			createDebug.init(debug);
-		}
+    debug.namespace = namespace;
+    debug.useColors = createDebug.useColors();
+    debug.color = createDebug.selectColor(namespace);
+    debug.extend = extend;
+    debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
 
-		createDebug.instances.push(debug);
+    Object.defineProperty(debug, 'enabled', {
+      enumerable: true,
+      configurable: false,
+      get: function () {
+        return enableOverride === null ? createDebug.enabled(namespace) : enableOverride;
+      },
+      set: function (v) {
+        enableOverride = v;
+      }
+    }); // Env-specific initialization logic for debug instances
 
-		return debug;
-	}
+    if (typeof createDebug.init === 'function') {
+      createDebug.init(debug);
+    }
 
-	function destroy() {
-		const index = createDebug.instances.indexOf(this);
-		if (index !== -1) {
-			createDebug.instances.splice(index, 1);
-			return true;
-		}
-		return false;
-	}
+    return debug;
+  }
 
-	function extend(namespace, delimiter) {
-		const newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
-		newDebug.log = this.log;
-		return newDebug;
-	}
+  function extend(namespace, delimiter) {
+    var newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+    newDebug.log = this.log;
+    return newDebug;
+  }
+  /**
+  * Enables a debug mode by namespaces. This can include modes
+  * separated by a colon and wildcards.
+  *
+  * @param {String} namespaces
+  * @api public
+  */
 
-	/**
-	* Enables a debug mode by namespaces. This can include modes
-	* separated by a colon and wildcards.
-	*
-	* @param {String} namespaces
-	* @api public
-	*/
-	function enable(namespaces) {
-		createDebug.save(namespaces);
 
-		createDebug.names = [];
-		createDebug.skips = [];
+  function enable(namespaces) {
+    createDebug.save(namespaces);
+    createDebug.names = [];
+    createDebug.skips = [];
+    var i;
+    var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+    var len = split.length;
 
-		let i;
-		const split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
-		const len = split.length;
+    for (i = 0; i < len; i++) {
+      if (!split[i]) {
+        // ignore empty strings
+        continue;
+      }
 
-		for (i = 0; i < len; i++) {
-			if (!split[i]) {
-				// ignore empty strings
-				continue;
-			}
+      namespaces = split[i].replace(/\*/g, '.*?');
 
-			namespaces = split[i].replace(/\*/g, '.*?');
+      if (namespaces[0] === '-') {
+        createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+      } else {
+        createDebug.names.push(new RegExp('^' + namespaces + '$'));
+      }
+    }
+  }
+  /**
+  * Disable debug output.
+  *
+  * @return {String} namespaces
+  * @api public
+  */
 
-			if (namespaces[0] === '-') {
-				createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
-			} else {
-				createDebug.names.push(new RegExp('^' + namespaces + '$'));
-			}
-		}
 
-		for (i = 0; i < createDebug.instances.length; i++) {
-			const instance = createDebug.instances[i];
-			instance.enabled = createDebug.enabled(instance.namespace);
-		}
-	}
+  function disable() {
+    var namespaces = [].concat(_toConsumableArray(createDebug.names.map(toNamespace)), _toConsumableArray(createDebug.skips.map(toNamespace).map(function (namespace) {
+      return '-' + namespace;
+    }))).join(',');
+    createDebug.enable('');
+    return namespaces;
+  }
+  /**
+  * Returns true if the given mode name is enabled, false otherwise.
+  *
+  * @param {String} name
+  * @return {Boolean}
+  * @api public
+  */
 
-	/**
-	* Disable debug output.
-	*
-	* @return {String} namespaces
-	* @api public
-	*/
-	function disable() {
-		const namespaces = [
-			...createDebug.names.map(toNamespace),
-			...createDebug.skips.map(toNamespace).map(namespace => '-' + namespace)
-		].join(',');
-		createDebug.enable('');
-		return namespaces;
-	}
 
-	/**
-	* Returns true if the given mode name is enabled, false otherwise.
-	*
-	* @param {String} name
-	* @return {Boolean}
-	* @api public
-	*/
-	function enabled(name) {
-		if (name[name.length - 1] === '*') {
-			return true;
-		}
+  function enabled(name) {
+    if (name[name.length - 1] === '*') {
+      return true;
+    }
 
-		let i;
-		let len;
+    var i;
+    var len;
 
-		for (i = 0, len = createDebug.skips.length; i < len; i++) {
-			if (createDebug.skips[i].test(name)) {
-				return false;
-			}
-		}
+    for (i = 0, len = createDebug.skips.length; i < len; i++) {
+      if (createDebug.skips[i].test(name)) {
+        return false;
+      }
+    }
 
-		for (i = 0, len = createDebug.names.length; i < len; i++) {
-			if (createDebug.names[i].test(name)) {
-				return true;
-			}
-		}
+    for (i = 0, len = createDebug.names.length; i < len; i++) {
+      if (createDebug.names[i].test(name)) {
+        return true;
+      }
+    }
 
-		return false;
-	}
+    return false;
+  }
+  /**
+  * Convert regexp to namespace
+  *
+  * @param {RegExp} regxep
+  * @return {String} namespace
+  * @api private
+  */
 
-	/**
-	* Convert regexp to namespace
-	*
-	* @param {RegExp} regxep
-	* @return {String} namespace
-	* @api private
-	*/
-	function toNamespace(regexp) {
-		return regexp.toString()
-			.substring(2, regexp.toString().length - 2)
-			.replace(/\.\*\?$/, '*');
-	}
 
-	/**
-	* Coerce `val`.
-	*
-	* @param {Mixed} val
-	* @return {Mixed}
-	* @api private
-	*/
-	function coerce(val) {
-		if (val instanceof Error) {
-			return val.stack || val.message;
-		}
-		return val;
-	}
+  function toNamespace(regexp) {
+    return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, '*');
+  }
+  /**
+  * Coerce `val`.
+  *
+  * @param {Mixed} val
+  * @return {Mixed}
+  * @api private
+  */
 
-	createDebug.enable(createDebug.load());
 
-	return createDebug;
+  function coerce(val) {
+    if (val instanceof Error) {
+      return val.stack || val.message;
+    }
+
+    return val;
+  }
+  /**
+  * XXX DO NOT USE. This is a temporary stub function.
+  * XXX It WILL be removed in the next major release.
+  */
+
+
+  function destroy() {
+    console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+  }
+
+  createDebug.enable(createDebug.load());
+  return createDebug;
 }
 
 module.exports = setup;
-
 },{"ms":"../node_modules/ms/index.js"}],"../node_modules/socket.io-client/node_modules/debug/src/browser.js":[function(require,module,exports) {
 var process = require("process");
 /* eslint-env browser */
@@ -59607,15 +59780,25 @@ var process = require("process");
 /**
  * This is the web browser implementation of `debug()`.
  */
-exports.log = log;
 exports.formatArgs = formatArgs;
 exports.save = save;
 exports.load = load;
 exports.useColors = useColors;
 exports.storage = localstorage();
+
+exports.destroy = function () {
+  var warned = false;
+  return function () {
+    if (!warned) {
+      warned = true;
+      console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+    }
+  };
+}();
 /**
  * Colors.
  */
+
 
 exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066FF', '#0099CC', '#0099FF', '#00CC00', '#00CC33', '#00CC66', '#00CC99', '#00CCCC', '#00CCFF', '#3300CC', '#3300FF', '#3333CC', '#3333FF', '#3366CC', '#3366FF', '#3399CC', '#3399FF', '#33CC00', '#33CC33', '#33CC66', '#33CC99', '#33CCCC', '#33CCFF', '#6600CC', '#6600FF', '#6633CC', '#6633FF', '#66CC00', '#66CC33', '#9900CC', '#9900FF', '#9933CC', '#9933FF', '#99CC00', '#99CC33', '#CC0000', '#CC0033', '#CC0066', '#CC0099', '#CC00CC', '#CC00FF', '#CC3300', '#CC3333', '#CC3366', '#CC3399', '#CC33CC', '#CC33FF', '#CC6600', '#CC6633', '#CC9900', '#CC9933', '#CCCC00', '#CCCC33', '#FF0000', '#FF0033', '#FF0066', '#FF0099', '#FF00CC', '#FF00FF', '#FF3300', '#FF3333', '#FF3366', '#FF3399', '#FF33CC', '#FF33FF', '#FF6600', '#FF6633', '#FF9900', '#FF9933', '#FFCC00', '#FFCC33'];
 /**
@@ -59662,14 +59845,14 @@ function formatArgs(args) {
     return;
   }
 
-  const c = 'color: ' + this.color;
+  var c = 'color: ' + this.color;
   args.splice(1, 0, c, 'color: inherit'); // The final "%c" is somewhat tricky, because there could be other
   // arguments passed either before or after the %c, so we need to
   // figure out the correct index to insert the CSS into
 
-  let index = 0;
-  let lastC = 0;
-  args[0].replace(/%[a-zA-Z%]/g, match => {
+  var index = 0;
+  var lastC = 0;
+  args[0].replace(/%[a-zA-Z%]/g, function (match) {
     if (match === '%%') {
       return;
     }
@@ -59685,18 +59868,16 @@ function formatArgs(args) {
   args.splice(lastC, 0, c);
 }
 /**
- * Invokes `console.log()` when available.
- * No-op when `console.log` is not a "function".
+ * Invokes `console.debug()` when available.
+ * No-op when `console.debug` is not a "function".
+ * If `console.debug` is not available, falls back
+ * to `console.log`.
  *
  * @api public
  */
 
 
-function log(...args) {
-  // This hackery is required for IE8/9, where
-  // the `console.log` function doesn't have 'apply'
-  return typeof console === 'object' && console.log && console.log(...args);
-}
+exports.log = console.debug || console.log || function () {};
 /**
  * Save `namespaces`.
  *
@@ -59725,7 +59906,7 @@ function save(namespaces) {
 
 
 function load() {
-  let r;
+  var r;
 
   try {
     r = exports.storage.getItem('debug');
@@ -59763,8 +59944,8 @@ function localstorage() {
 }
 
 module.exports = require('./common')(exports);
-const {
-  formatters
+var {
+  formatters: formatters
 } = module.exports;
 /**
  * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
@@ -59791,20 +59972,23 @@ var debug = require("debug")("socket.io-client:url");
 /**
  * URL parser.
  *
- * @param {String} uri - url
- * @param {Object} loc - An object meant to mimic window.location.
- *                 Defaults to window.location.
+ * @param uri - url
+ * @param path - the request path of the connection
+ * @param loc - An object meant to mimic window.location.
+ *        Defaults to window.location.
  * @public
  */
 
 
-function url(uri, loc) {
+function url(uri) {
+  var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+  var loc = arguments.length > 2 ? arguments[2] : undefined;
   var obj = uri; // default to window.location
 
   loc = loc || typeof location !== "undefined" && location;
   if (null == uri) uri = loc.protocol + "//" + loc.host; // relative path support
 
-  if ("string" === typeof uri) {
+  if (typeof uri === "string") {
     if ("/" === uri.charAt(0)) {
       if ("/" === uri.charAt(1)) {
         uri = loc.protocol + uri;
@@ -59841,7 +60025,7 @@ function url(uri, loc) {
   var ipv6 = obj.host.indexOf(":") !== -1;
   var host = ipv6 ? "[" + obj.host + "]" : obj.host; // define unique id
 
-  obj.id = obj.protocol + "://" + host + ":" + obj.port; // define href
+  obj.id = obj.protocol + "://" + host + ":" + obj.port + path; // define href
 
   obj.href = obj.protocol + "://" + host + (loc && loc.port === obj.port ? "" : ":" + obj.port);
   return obj;
@@ -60347,9 +60531,470 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-},{}],"../node_modules/engine.io-client/lib/transport.js":[function(require,module,exports) {
+},{}],"../node_modules/engine.io-client/node_modules/debug/src/common.js":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ */
+function setup(env) {
+  createDebug.debug = createDebug;
+  createDebug.default = createDebug;
+  createDebug.coerce = coerce;
+  createDebug.disable = disable;
+  createDebug.enable = enable;
+  createDebug.enabled = enabled;
+  createDebug.humanize = require('ms');
+  createDebug.destroy = destroy;
+  Object.keys(env).forEach(function (key) {
+    createDebug[key] = env[key];
+  });
+  /**
+  * The currently active debug mode names, and names to skip.
+  */
+
+  createDebug.names = [];
+  createDebug.skips = [];
+  /**
+  * Map of special "%n" handling functions, for the debug "format" argument.
+  *
+  * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+  */
+
+  createDebug.formatters = {};
+  /**
+  * Selects a color for a debug namespace
+  * @param {String} namespace The namespace string for the for the debug instance to be colored
+  * @return {Number|String} An ANSI color code for the given namespace
+  * @api private
+  */
+
+  function selectColor(namespace) {
+    var hash = 0;
+
+    for (var i = 0; i < namespace.length; i++) {
+      hash = (hash << 5) - hash + namespace.charCodeAt(i);
+      hash |= 0; // Convert to 32bit integer
+    }
+
+    return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+  }
+
+  createDebug.selectColor = selectColor;
+  /**
+  * Create a debugger with the given `namespace`.
+  *
+  * @param {String} namespace
+  * @return {Function}
+  * @api public
+  */
+
+  function createDebug(namespace) {
+    var prevTime;
+    var enableOverride = null;
+
+    function debug() {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      // Disabled?
+      if (!debug.enabled) {
+        return;
+      }
+
+      var self = debug; // Set `diff` timestamp
+
+      var curr = Number(new Date());
+      var ms = curr - (prevTime || curr);
+      self.diff = ms;
+      self.prev = prevTime;
+      self.curr = curr;
+      prevTime = curr;
+      args[0] = createDebug.coerce(args[0]);
+
+      if (typeof args[0] !== 'string') {
+        // Anything else let's inspect with %O
+        args.unshift('%O');
+      } // Apply any `formatters` transformations
+
+
+      var index = 0;
+      args[0] = args[0].replace(/%([a-zA-Z%])/g, function (match, format) {
+        // If we encounter an escaped % then don't increase the array index
+        if (match === '%%') {
+          return '%';
+        }
+
+        index++;
+        var formatter = createDebug.formatters[format];
+
+        if (typeof formatter === 'function') {
+          var val = args[index];
+          match = formatter.call(self, val); // Now we need to remove `args[index]` since it's inlined in the `format`
+
+          args.splice(index, 1);
+          index--;
+        }
+
+        return match;
+      }); // Apply env-specific formatting (colors, etc.)
+
+      createDebug.formatArgs.call(self, args);
+      var logFn = self.log || createDebug.log;
+      logFn.apply(self, args);
+    }
+
+    debug.namespace = namespace;
+    debug.useColors = createDebug.useColors();
+    debug.color = createDebug.selectColor(namespace);
+    debug.extend = extend;
+    debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
+
+    Object.defineProperty(debug, 'enabled', {
+      enumerable: true,
+      configurable: false,
+      get: function () {
+        return enableOverride === null ? createDebug.enabled(namespace) : enableOverride;
+      },
+      set: function (v) {
+        enableOverride = v;
+      }
+    }); // Env-specific initialization logic for debug instances
+
+    if (typeof createDebug.init === 'function') {
+      createDebug.init(debug);
+    }
+
+    return debug;
+  }
+
+  function extend(namespace, delimiter) {
+    var newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+    newDebug.log = this.log;
+    return newDebug;
+  }
+  /**
+  * Enables a debug mode by namespaces. This can include modes
+  * separated by a colon and wildcards.
+  *
+  * @param {String} namespaces
+  * @api public
+  */
+
+
+  function enable(namespaces) {
+    createDebug.save(namespaces);
+    createDebug.names = [];
+    createDebug.skips = [];
+    var i;
+    var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+    var len = split.length;
+
+    for (i = 0; i < len; i++) {
+      if (!split[i]) {
+        // ignore empty strings
+        continue;
+      }
+
+      namespaces = split[i].replace(/\*/g, '.*?');
+
+      if (namespaces[0] === '-') {
+        createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+      } else {
+        createDebug.names.push(new RegExp('^' + namespaces + '$'));
+      }
+    }
+  }
+  /**
+  * Disable debug output.
+  *
+  * @return {String} namespaces
+  * @api public
+  */
+
+
+  function disable() {
+    var namespaces = [].concat(_toConsumableArray(createDebug.names.map(toNamespace)), _toConsumableArray(createDebug.skips.map(toNamespace).map(function (namespace) {
+      return '-' + namespace;
+    }))).join(',');
+    createDebug.enable('');
+    return namespaces;
+  }
+  /**
+  * Returns true if the given mode name is enabled, false otherwise.
+  *
+  * @param {String} name
+  * @return {Boolean}
+  * @api public
+  */
+
+
+  function enabled(name) {
+    if (name[name.length - 1] === '*') {
+      return true;
+    }
+
+    var i;
+    var len;
+
+    for (i = 0, len = createDebug.skips.length; i < len; i++) {
+      if (createDebug.skips[i].test(name)) {
+        return false;
+      }
+    }
+
+    for (i = 0, len = createDebug.names.length; i < len; i++) {
+      if (createDebug.names[i].test(name)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+  /**
+  * Convert regexp to namespace
+  *
+  * @param {RegExp} regxep
+  * @return {String} namespace
+  * @api private
+  */
+
+
+  function toNamespace(regexp) {
+    return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, '*');
+  }
+  /**
+  * Coerce `val`.
+  *
+  * @param {Mixed} val
+  * @return {Mixed}
+  * @api private
+  */
+
+
+  function coerce(val) {
+    if (val instanceof Error) {
+      return val.stack || val.message;
+    }
+
+    return val;
+  }
+  /**
+  * XXX DO NOT USE. This is a temporary stub function.
+  * XXX It WILL be removed in the next major release.
+  */
+
+
+  function destroy() {
+    console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+  }
+
+  createDebug.enable(createDebug.load());
+  return createDebug;
+}
+
+module.exports = setup;
+},{"ms":"../node_modules/ms/index.js"}],"../node_modules/engine.io-client/node_modules/debug/src/browser.js":[function(require,module,exports) {
+var process = require("process");
+/* eslint-env browser */
+
+/**
+ * This is the web browser implementation of `debug()`.
+ */
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+exports.storage = localstorage();
+
+exports.destroy = function () {
+  var warned = false;
+  return function () {
+    if (!warned) {
+      warned = true;
+      console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+    }
+  };
+}();
+/**
+ * Colors.
+ */
+
+
+exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066FF', '#0099CC', '#0099FF', '#00CC00', '#00CC33', '#00CC66', '#00CC99', '#00CCCC', '#00CCFF', '#3300CC', '#3300FF', '#3333CC', '#3333FF', '#3366CC', '#3366FF', '#3399CC', '#3399FF', '#33CC00', '#33CC33', '#33CC66', '#33CC99', '#33CCCC', '#33CCFF', '#6600CC', '#6600FF', '#6633CC', '#6633FF', '#66CC00', '#66CC33', '#9900CC', '#9900FF', '#9933CC', '#9933FF', '#99CC00', '#99CC33', '#CC0000', '#CC0033', '#CC0066', '#CC0099', '#CC00CC', '#CC00FF', '#CC3300', '#CC3333', '#CC3366', '#CC3399', '#CC33CC', '#CC33FF', '#CC6600', '#CC6633', '#CC9900', '#CC9933', '#CCCC00', '#CCCC33', '#FF0000', '#FF0033', '#FF0066', '#FF0099', '#FF00CC', '#FF00FF', '#FF3300', '#FF3333', '#FF3366', '#FF3399', '#FF33CC', '#FF33FF', '#FF6600', '#FF6633', '#FF9900', '#FF9933', '#FFCC00', '#FFCC33'];
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
+// eslint-disable-next-line complexity
+
+function useColors() {
+  // NB: In an Electron preload script, document will be defined but not fully
+  // initialized. Since we know we're in Chrome, we'll just detect this case
+  // explicitly
+  if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
+    return true;
+  } // Internet Explorer and Edge do not support colors.
+
+
+  if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+    return false;
+  } // Is webkit? http://stackoverflow.com/a/16459606/376773
+  // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+
+
+  return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || // Is firebug? http://stackoverflow.com/a/398120/376773
+  typeof window !== 'undefined' && window.console && (window.console.firebug || window.console.exception && window.console.table) || // Is firefox >= v31?
+  // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+  typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || // Double check webkit in userAgent just in case we are in a worker
+  typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+}
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+
+function formatArgs(args) {
+  args[0] = (this.useColors ? '%c' : '') + this.namespace + (this.useColors ? ' %c' : ' ') + args[0] + (this.useColors ? '%c ' : ' ') + '+' + module.exports.humanize(this.diff);
+
+  if (!this.useColors) {
+    return;
+  }
+
+  var c = 'color: ' + this.color;
+  args.splice(1, 0, c, 'color: inherit'); // The final "%c" is somewhat tricky, because there could be other
+  // arguments passed either before or after the %c, so we need to
+  // figure out the correct index to insert the CSS into
+
+  var index = 0;
+  var lastC = 0;
+  args[0].replace(/%[a-zA-Z%]/g, function (match) {
+    if (match === '%%') {
+      return;
+    }
+
+    index++;
+
+    if (match === '%c') {
+      // We only are interested in the *last* %c
+      // (the user may have provided their own)
+      lastC = index;
+    }
+  });
+  args.splice(lastC, 0, c);
+}
+/**
+ * Invokes `console.debug()` when available.
+ * No-op when `console.debug` is not a "function".
+ * If `console.debug` is not available, falls back
+ * to `console.log`.
+ *
+ * @api public
+ */
+
+
+exports.log = console.debug || console.log || function () {};
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+
+
+function save(namespaces) {
+  try {
+    if (namespaces) {
+      exports.storage.setItem('debug', namespaces);
+    } else {
+      exports.storage.removeItem('debug');
+    }
+  } catch (error) {// Swallow
+    // XXX (@Qix-) should we be logging these?
+  }
+}
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+
+
+function load() {
+  var r;
+
+  try {
+    r = exports.storage.getItem('debug');
+  } catch (error) {// Swallow
+    // XXX (@Qix-) should we be logging these?
+  } // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+
+
+  if (!r && typeof process !== 'undefined' && 'env' in process) {
+    r = undefined;
+  }
+
+  return r;
+}
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+
+function localstorage() {
+  try {
+    // TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+    // The Browser also has localStorage in the global context.
+    return localStorage;
+  } catch (error) {// Swallow
+    // XXX (@Qix-) should we be logging these?
+  }
+}
+
+module.exports = require('./common')(exports);
+var {
+  formatters: formatters
+} = module.exports;
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
+
+formatters.j = function (v) {
+  try {
+    return JSON.stringify(v);
+  } catch (error) {
+    return '[UnexpectedJSONParseError]: ' + error.message;
+  }
+};
+},{"./common":"../node_modules/engine.io-client/node_modules/debug/src/common.js","process":"../node_modules/process/browser.js"}],"../node_modules/engine.io-client/lib/transport.js":[function(require,module,exports) {
 const parser = require("engine.io-parser");
 const Emitter = require("component-emitter");
+const debug = require("debug")("engine.io-client:transport");
 
 class Transport extends Emitter {
   /**
@@ -60420,7 +61065,8 @@ class Transport extends Emitter {
     if ("open" === this.readyState) {
       this.write(packets);
     } else {
-      throw new Error("Transport not open");
+      // this might happen if the transport was silently closed in the beforeunload event handler
+      debug("transport is not open, discarding packets");
     }
   }
 
@@ -60466,7 +61112,7 @@ class Transport extends Emitter {
 
 module.exports = Transport;
 
-},{"engine.io-parser":"../node_modules/engine.io-parser/lib/index.js","component-emitter":"../node_modules/component-emitter/index.js"}],"../node_modules/parseqs/index.js":[function(require,module,exports) {
+},{"engine.io-parser":"../node_modules/engine.io-parser/lib/index.js","component-emitter":"../node_modules/component-emitter/index.js","debug":"../node_modules/engine.io-client/node_modules/debug/src/browser.js"}],"../node_modules/parseqs/index.js":[function(require,module,exports) {
 /**
  * Compiles a querystring
  * Returns string representation of the object
@@ -60575,452 +61221,7 @@ yeast.encode = encode;
 yeast.decode = decode;
 module.exports = yeast;
 
-},{}],"../node_modules/engine.io-client/node_modules/debug/src/common.js":[function(require,module,exports) {
-
-/**
- * This is the common logic for both the Node.js and web browser
- * implementations of `debug()`.
- */
-
-function setup(env) {
-	createDebug.debug = createDebug;
-	createDebug.default = createDebug;
-	createDebug.coerce = coerce;
-	createDebug.disable = disable;
-	createDebug.enable = enable;
-	createDebug.enabled = enabled;
-	createDebug.humanize = require('ms');
-
-	Object.keys(env).forEach(key => {
-		createDebug[key] = env[key];
-	});
-
-	/**
-	* Active `debug` instances.
-	*/
-	createDebug.instances = [];
-
-	/**
-	* The currently active debug mode names, and names to skip.
-	*/
-
-	createDebug.names = [];
-	createDebug.skips = [];
-
-	/**
-	* Map of special "%n" handling functions, for the debug "format" argument.
-	*
-	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
-	*/
-	createDebug.formatters = {};
-
-	/**
-	* Selects a color for a debug namespace
-	* @param {String} namespace The namespace string for the for the debug instance to be colored
-	* @return {Number|String} An ANSI color code for the given namespace
-	* @api private
-	*/
-	function selectColor(namespace) {
-		let hash = 0;
-
-		for (let i = 0; i < namespace.length; i++) {
-			hash = ((hash << 5) - hash) + namespace.charCodeAt(i);
-			hash |= 0; // Convert to 32bit integer
-		}
-
-		return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
-	}
-	createDebug.selectColor = selectColor;
-
-	/**
-	* Create a debugger with the given `namespace`.
-	*
-	* @param {String} namespace
-	* @return {Function}
-	* @api public
-	*/
-	function createDebug(namespace) {
-		let prevTime;
-
-		function debug(...args) {
-			// Disabled?
-			if (!debug.enabled) {
-				return;
-			}
-
-			const self = debug;
-
-			// Set `diff` timestamp
-			const curr = Number(new Date());
-			const ms = curr - (prevTime || curr);
-			self.diff = ms;
-			self.prev = prevTime;
-			self.curr = curr;
-			prevTime = curr;
-
-			args[0] = createDebug.coerce(args[0]);
-
-			if (typeof args[0] !== 'string') {
-				// Anything else let's inspect with %O
-				args.unshift('%O');
-			}
-
-			// Apply any `formatters` transformations
-			let index = 0;
-			args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
-				// If we encounter an escaped % then don't increase the array index
-				if (match === '%%') {
-					return match;
-				}
-				index++;
-				const formatter = createDebug.formatters[format];
-				if (typeof formatter === 'function') {
-					const val = args[index];
-					match = formatter.call(self, val);
-
-					// Now we need to remove `args[index]` since it's inlined in the `format`
-					args.splice(index, 1);
-					index--;
-				}
-				return match;
-			});
-
-			// Apply env-specific formatting (colors, etc.)
-			createDebug.formatArgs.call(self, args);
-
-			const logFn = self.log || createDebug.log;
-			logFn.apply(self, args);
-		}
-
-		debug.namespace = namespace;
-		debug.enabled = createDebug.enabled(namespace);
-		debug.useColors = createDebug.useColors();
-		debug.color = selectColor(namespace);
-		debug.destroy = destroy;
-		debug.extend = extend;
-		// Debug.formatArgs = formatArgs;
-		// debug.rawLog = rawLog;
-
-		// env-specific initialization logic for debug instances
-		if (typeof createDebug.init === 'function') {
-			createDebug.init(debug);
-		}
-
-		createDebug.instances.push(debug);
-
-		return debug;
-	}
-
-	function destroy() {
-		const index = createDebug.instances.indexOf(this);
-		if (index !== -1) {
-			createDebug.instances.splice(index, 1);
-			return true;
-		}
-		return false;
-	}
-
-	function extend(namespace, delimiter) {
-		const newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
-		newDebug.log = this.log;
-		return newDebug;
-	}
-
-	/**
-	* Enables a debug mode by namespaces. This can include modes
-	* separated by a colon and wildcards.
-	*
-	* @param {String} namespaces
-	* @api public
-	*/
-	function enable(namespaces) {
-		createDebug.save(namespaces);
-
-		createDebug.names = [];
-		createDebug.skips = [];
-
-		let i;
-		const split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
-		const len = split.length;
-
-		for (i = 0; i < len; i++) {
-			if (!split[i]) {
-				// ignore empty strings
-				continue;
-			}
-
-			namespaces = split[i].replace(/\*/g, '.*?');
-
-			if (namespaces[0] === '-') {
-				createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
-			} else {
-				createDebug.names.push(new RegExp('^' + namespaces + '$'));
-			}
-		}
-
-		for (i = 0; i < createDebug.instances.length; i++) {
-			const instance = createDebug.instances[i];
-			instance.enabled = createDebug.enabled(instance.namespace);
-		}
-	}
-
-	/**
-	* Disable debug output.
-	*
-	* @return {String} namespaces
-	* @api public
-	*/
-	function disable() {
-		const namespaces = [
-			...createDebug.names.map(toNamespace),
-			...createDebug.skips.map(toNamespace).map(namespace => '-' + namespace)
-		].join(',');
-		createDebug.enable('');
-		return namespaces;
-	}
-
-	/**
-	* Returns true if the given mode name is enabled, false otherwise.
-	*
-	* @param {String} name
-	* @return {Boolean}
-	* @api public
-	*/
-	function enabled(name) {
-		if (name[name.length - 1] === '*') {
-			return true;
-		}
-
-		let i;
-		let len;
-
-		for (i = 0, len = createDebug.skips.length; i < len; i++) {
-			if (createDebug.skips[i].test(name)) {
-				return false;
-			}
-		}
-
-		for (i = 0, len = createDebug.names.length; i < len; i++) {
-			if (createDebug.names[i].test(name)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	* Convert regexp to namespace
-	*
-	* @param {RegExp} regxep
-	* @return {String} namespace
-	* @api private
-	*/
-	function toNamespace(regexp) {
-		return regexp.toString()
-			.substring(2, regexp.toString().length - 2)
-			.replace(/\.\*\?$/, '*');
-	}
-
-	/**
-	* Coerce `val`.
-	*
-	* @param {Mixed} val
-	* @return {Mixed}
-	* @api private
-	*/
-	function coerce(val) {
-		if (val instanceof Error) {
-			return val.stack || val.message;
-		}
-		return val;
-	}
-
-	createDebug.enable(createDebug.load());
-
-	return createDebug;
-}
-
-module.exports = setup;
-
-},{"ms":"../node_modules/ms/index.js"}],"../node_modules/engine.io-client/node_modules/debug/src/browser.js":[function(require,module,exports) {
-var process = require("process");
-/* eslint-env browser */
-
-/**
- * This is the web browser implementation of `debug()`.
- */
-exports.log = log;
-exports.formatArgs = formatArgs;
-exports.save = save;
-exports.load = load;
-exports.useColors = useColors;
-exports.storage = localstorage();
-/**
- * Colors.
- */
-
-exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066FF', '#0099CC', '#0099FF', '#00CC00', '#00CC33', '#00CC66', '#00CC99', '#00CCCC', '#00CCFF', '#3300CC', '#3300FF', '#3333CC', '#3333FF', '#3366CC', '#3366FF', '#3399CC', '#3399FF', '#33CC00', '#33CC33', '#33CC66', '#33CC99', '#33CCCC', '#33CCFF', '#6600CC', '#6600FF', '#6633CC', '#6633FF', '#66CC00', '#66CC33', '#9900CC', '#9900FF', '#9933CC', '#9933FF', '#99CC00', '#99CC33', '#CC0000', '#CC0033', '#CC0066', '#CC0099', '#CC00CC', '#CC00FF', '#CC3300', '#CC3333', '#CC3366', '#CC3399', '#CC33CC', '#CC33FF', '#CC6600', '#CC6633', '#CC9900', '#CC9933', '#CCCC00', '#CCCC33', '#FF0000', '#FF0033', '#FF0066', '#FF0099', '#FF00CC', '#FF00FF', '#FF3300', '#FF3333', '#FF3366', '#FF3399', '#FF33CC', '#FF33FF', '#FF6600', '#FF6633', '#FF9900', '#FF9933', '#FFCC00', '#FFCC33'];
-/**
- * Currently only WebKit-based Web Inspectors, Firefox >= v31,
- * and the Firebug extension (any Firefox version) are known
- * to support "%c" CSS customizations.
- *
- * TODO: add a `localStorage` variable to explicitly enable/disable colors
- */
-// eslint-disable-next-line complexity
-
-function useColors() {
-  // NB: In an Electron preload script, document will be defined but not fully
-  // initialized. Since we know we're in Chrome, we'll just detect this case
-  // explicitly
-  if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
-    return true;
-  } // Internet Explorer and Edge do not support colors.
-
-
-  if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
-    return false;
-  } // Is webkit? http://stackoverflow.com/a/16459606/376773
-  // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
-
-
-  return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || // Is firebug? http://stackoverflow.com/a/398120/376773
-  typeof window !== 'undefined' && window.console && (window.console.firebug || window.console.exception && window.console.table) || // Is firefox >= v31?
-  // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
-  typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || // Double check webkit in userAgent just in case we are in a worker
-  typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
-}
-/**
- * Colorize log arguments if enabled.
- *
- * @api public
- */
-
-
-function formatArgs(args) {
-  args[0] = (this.useColors ? '%c' : '') + this.namespace + (this.useColors ? ' %c' : ' ') + args[0] + (this.useColors ? '%c ' : ' ') + '+' + module.exports.humanize(this.diff);
-
-  if (!this.useColors) {
-    return;
-  }
-
-  const c = 'color: ' + this.color;
-  args.splice(1, 0, c, 'color: inherit'); // The final "%c" is somewhat tricky, because there could be other
-  // arguments passed either before or after the %c, so we need to
-  // figure out the correct index to insert the CSS into
-
-  let index = 0;
-  let lastC = 0;
-  args[0].replace(/%[a-zA-Z%]/g, match => {
-    if (match === '%%') {
-      return;
-    }
-
-    index++;
-
-    if (match === '%c') {
-      // We only are interested in the *last* %c
-      // (the user may have provided their own)
-      lastC = index;
-    }
-  });
-  args.splice(lastC, 0, c);
-}
-/**
- * Invokes `console.log()` when available.
- * No-op when `console.log` is not a "function".
- *
- * @api public
- */
-
-
-function log(...args) {
-  // This hackery is required for IE8/9, where
-  // the `console.log` function doesn't have 'apply'
-  return typeof console === 'object' && console.log && console.log(...args);
-}
-/**
- * Save `namespaces`.
- *
- * @param {String} namespaces
- * @api private
- */
-
-
-function save(namespaces) {
-  try {
-    if (namespaces) {
-      exports.storage.setItem('debug', namespaces);
-    } else {
-      exports.storage.removeItem('debug');
-    }
-  } catch (error) {// Swallow
-    // XXX (@Qix-) should we be logging these?
-  }
-}
-/**
- * Load `namespaces`.
- *
- * @return {String} returns the previously persisted debug modes
- * @api private
- */
-
-
-function load() {
-  let r;
-
-  try {
-    r = exports.storage.getItem('debug');
-  } catch (error) {// Swallow
-    // XXX (@Qix-) should we be logging these?
-  } // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
-
-
-  if (!r && typeof process !== 'undefined' && 'env' in process) {
-    r = undefined;
-  }
-
-  return r;
-}
-/**
- * Localstorage attempts to return the localstorage.
- *
- * This is necessary because safari throws
- * when a user disables cookies/localstorage
- * and you attempt to access it.
- *
- * @return {LocalStorage}
- * @api private
- */
-
-
-function localstorage() {
-  try {
-    // TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
-    // The Browser also has localStorage in the global context.
-    return localStorage;
-  } catch (error) {// Swallow
-    // XXX (@Qix-) should we be logging these?
-  }
-}
-
-module.exports = require('./common')(exports);
-const {
-  formatters
-} = module.exports;
-/**
- * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
- */
-
-formatters.j = function (v) {
-  try {
-    return JSON.stringify(v);
-  } catch (error) {
-    return '[UnexpectedJSONParseError]: ' + error.message;
-  }
-};
-},{"./common":"../node_modules/engine.io-client/node_modules/debug/src/common.js","process":"../node_modules/process/browser.js"}],"../node_modules/engine.io-client/lib/transports/polling.js":[function(require,module,exports) {
+},{}],"../node_modules/engine.io-client/lib/transports/polling.js":[function(require,module,exports) {
 const Transport = require("../transport");
 const parseqs = require("parseqs");
 const parser = require("engine.io-parser");
@@ -61235,7 +61436,9 @@ module.exports = Polling;
 },{"../transport":"../node_modules/engine.io-client/lib/transport.js","parseqs":"../node_modules/parseqs/index.js","engine.io-parser":"../node_modules/engine.io-parser/lib/index.js","yeast":"../node_modules/yeast/index.js","debug":"../node_modules/engine.io-client/node_modules/debug/src/browser.js"}],"../node_modules/engine.io-client/lib/util.js":[function(require,module,exports) {
 module.exports.pick = (obj, ...attr) => {
   return attr.reduce((acc, k) => {
-    acc[k] = obj[k];
+    if (obj.hasOwnProperty(k)) {
+      acc[k] = obj[k];
+    }
     return acc;
   }, {});
 };
@@ -61258,7 +61461,6 @@ const debug = require("debug")("engine.io-client:polling-xhr");
 function empty() {}
 
 const hasXHR2 = (function() {
-  const XMLHttpRequest = require("xmlhttprequest-ssl");
   const xhr = new XMLHttpRequest({ xdomain: false });
   return null != xhr.responseType;
 })();
@@ -61592,12 +61794,6 @@ const rEscapedNewline = /\\n/g;
 
 let callbacks;
 
-/**
- * Noop.
- */
-
-function empty() {}
-
 class JSONPPolling extends Polling {
   /**
    * JSONP Polling constructor.
@@ -61628,17 +61824,6 @@ class JSONPPolling extends Polling {
 
     // append to query string
     this.query.j = this.index;
-
-    // prevent spurious errors from being emitted when the window is unloaded
-    if (typeof addEventListener === "function") {
-      addEventListener(
-        "beforeunload",
-        function() {
-          if (self.script) self.script.onerror = empty;
-        },
-        false
-      );
-    }
   }
 
   /**
@@ -61655,6 +61840,8 @@ class JSONPPolling extends Polling {
    */
   doClose() {
     if (this.script) {
+      // prevent spurious errors from being emitted when the window is unloaded
+      this.script.onerror = () => {};
       this.script.parentNode.removeChild(this.script);
       this.script = null;
     }
@@ -62044,7 +62231,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],"../node_modules/node-libs-browser/node_modules/isarray/index.js":[function(require,module,exports) {
+},{}],"../node_modules/isarray/index.js":[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
@@ -63844,7 +64031,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":"../node_modules/base64-js/index.js","ieee754":"../node_modules/ieee754/index.js","isarray":"../node_modules/node-libs-browser/node_modules/isarray/index.js","buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"../node_modules/engine.io-client/lib/transports/websocket.js":[function(require,module,exports) {
+},{"base64-js":"../node_modules/base64-js/index.js","ieee754":"../node_modules/ieee754/index.js","isarray":"../node_modules/isarray/index.js","buffer":"../node_modules/node-libs-browser/node_modules/buffer/index.js"}],"../node_modules/engine.io-client/lib/transports/websocket.js":[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 const Transport = require("../transport");
 const parser = require("engine.io-parser");
@@ -63915,7 +64102,12 @@ class WS extends Transport {
           "ca",
           "ciphers",
           "rejectUnauthorized",
-          "localAddress"
+          "localAddress",
+          "protocolVersion",
+          "origin",
+          "maxPayload",
+          "family",
+          "checkServerIdentity"
         );
 
     if (this.opts.extraHeaders) {
@@ -64044,6 +64236,7 @@ class WS extends Transport {
   doClose() {
     if (typeof this.ws !== "undefined") {
       this.ws.close();
+      this.ws = null;
     }
   }
 
@@ -64225,7 +64418,6 @@ class Socket extends Emitter {
         upgrade: true,
         jsonp: true,
         timestampParam: "t",
-        policyPort: 843,
         rememberUpgrade: false,
         rejectUnauthorized: true,
         perMessageDeflate: {
@@ -64250,6 +64442,20 @@ class Socket extends Emitter {
 
     // set on heartbeat
     this.pingTimeoutTimer = null;
+
+    if (typeof addEventListener === "function") {
+      addEventListener(
+        "beforeunload",
+        () => {
+          if (this.transport) {
+            // silently close the transport
+            this.transport.removeAllListeners();
+            this.transport.close();
+          }
+        },
+        false
+      );
+    }
 
     this.open();
   }
@@ -65011,273 +65217,280 @@ function _reconstructPacket(data, buffers) {
   return data;
 }
 },{"./is-binary":"../node_modules/socket.io-parser/dist/is-binary.js"}],"../node_modules/socket.io-parser/node_modules/debug/src/common.js":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 /**
  * This is the common logic for both the Node.js and web browser
  * implementations of `debug()`.
  */
-
 function setup(env) {
-	createDebug.debug = createDebug;
-	createDebug.default = createDebug;
-	createDebug.coerce = coerce;
-	createDebug.disable = disable;
-	createDebug.enable = enable;
-	createDebug.enabled = enabled;
-	createDebug.humanize = require('ms');
+  createDebug.debug = createDebug;
+  createDebug.default = createDebug;
+  createDebug.coerce = coerce;
+  createDebug.disable = disable;
+  createDebug.enable = enable;
+  createDebug.enabled = enabled;
+  createDebug.humanize = require('ms');
+  createDebug.destroy = destroy;
+  Object.keys(env).forEach(function (key) {
+    createDebug[key] = env[key];
+  });
+  /**
+  * The currently active debug mode names, and names to skip.
+  */
 
-	Object.keys(env).forEach(key => {
-		createDebug[key] = env[key];
-	});
+  createDebug.names = [];
+  createDebug.skips = [];
+  /**
+  * Map of special "%n" handling functions, for the debug "format" argument.
+  *
+  * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+  */
 
-	/**
-	* Active `debug` instances.
-	*/
-	createDebug.instances = [];
+  createDebug.formatters = {};
+  /**
+  * Selects a color for a debug namespace
+  * @param {String} namespace The namespace string for the for the debug instance to be colored
+  * @return {Number|String} An ANSI color code for the given namespace
+  * @api private
+  */
 
-	/**
-	* The currently active debug mode names, and names to skip.
-	*/
+  function selectColor(namespace) {
+    var hash = 0;
 
-	createDebug.names = [];
-	createDebug.skips = [];
+    for (var i = 0; i < namespace.length; i++) {
+      hash = (hash << 5) - hash + namespace.charCodeAt(i);
+      hash |= 0; // Convert to 32bit integer
+    }
 
-	/**
-	* Map of special "%n" handling functions, for the debug "format" argument.
-	*
-	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
-	*/
-	createDebug.formatters = {};
+    return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+  }
 
-	/**
-	* Selects a color for a debug namespace
-	* @param {String} namespace The namespace string for the for the debug instance to be colored
-	* @return {Number|String} An ANSI color code for the given namespace
-	* @api private
-	*/
-	function selectColor(namespace) {
-		let hash = 0;
+  createDebug.selectColor = selectColor;
+  /**
+  * Create a debugger with the given `namespace`.
+  *
+  * @param {String} namespace
+  * @return {Function}
+  * @api public
+  */
 
-		for (let i = 0; i < namespace.length; i++) {
-			hash = ((hash << 5) - hash) + namespace.charCodeAt(i);
-			hash |= 0; // Convert to 32bit integer
-		}
+  function createDebug(namespace) {
+    var prevTime;
+    var enableOverride = null;
 
-		return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
-	}
-	createDebug.selectColor = selectColor;
+    function debug() {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
 
-	/**
-	* Create a debugger with the given `namespace`.
-	*
-	* @param {String} namespace
-	* @return {Function}
-	* @api public
-	*/
-	function createDebug(namespace) {
-		let prevTime;
+      // Disabled?
+      if (!debug.enabled) {
+        return;
+      }
 
-		function debug(...args) {
-			// Disabled?
-			if (!debug.enabled) {
-				return;
-			}
+      var self = debug; // Set `diff` timestamp
 
-			const self = debug;
+      var curr = Number(new Date());
+      var ms = curr - (prevTime || curr);
+      self.diff = ms;
+      self.prev = prevTime;
+      self.curr = curr;
+      prevTime = curr;
+      args[0] = createDebug.coerce(args[0]);
 
-			// Set `diff` timestamp
-			const curr = Number(new Date());
-			const ms = curr - (prevTime || curr);
-			self.diff = ms;
-			self.prev = prevTime;
-			self.curr = curr;
-			prevTime = curr;
+      if (typeof args[0] !== 'string') {
+        // Anything else let's inspect with %O
+        args.unshift('%O');
+      } // Apply any `formatters` transformations
 
-			args[0] = createDebug.coerce(args[0]);
 
-			if (typeof args[0] !== 'string') {
-				// Anything else let's inspect with %O
-				args.unshift('%O');
-			}
+      var index = 0;
+      args[0] = args[0].replace(/%([a-zA-Z%])/g, function (match, format) {
+        // If we encounter an escaped % then don't increase the array index
+        if (match === '%%') {
+          return '%';
+        }
 
-			// Apply any `formatters` transformations
-			let index = 0;
-			args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
-				// If we encounter an escaped % then don't increase the array index
-				if (match === '%%') {
-					return match;
-				}
-				index++;
-				const formatter = createDebug.formatters[format];
-				if (typeof formatter === 'function') {
-					const val = args[index];
-					match = formatter.call(self, val);
+        index++;
+        var formatter = createDebug.formatters[format];
 
-					// Now we need to remove `args[index]` since it's inlined in the `format`
-					args.splice(index, 1);
-					index--;
-				}
-				return match;
-			});
+        if (typeof formatter === 'function') {
+          var val = args[index];
+          match = formatter.call(self, val); // Now we need to remove `args[index]` since it's inlined in the `format`
 
-			// Apply env-specific formatting (colors, etc.)
-			createDebug.formatArgs.call(self, args);
+          args.splice(index, 1);
+          index--;
+        }
 
-			const logFn = self.log || createDebug.log;
-			logFn.apply(self, args);
-		}
+        return match;
+      }); // Apply env-specific formatting (colors, etc.)
 
-		debug.namespace = namespace;
-		debug.enabled = createDebug.enabled(namespace);
-		debug.useColors = createDebug.useColors();
-		debug.color = selectColor(namespace);
-		debug.destroy = destroy;
-		debug.extend = extend;
-		// Debug.formatArgs = formatArgs;
-		// debug.rawLog = rawLog;
+      createDebug.formatArgs.call(self, args);
+      var logFn = self.log || createDebug.log;
+      logFn.apply(self, args);
+    }
 
-		// env-specific initialization logic for debug instances
-		if (typeof createDebug.init === 'function') {
-			createDebug.init(debug);
-		}
+    debug.namespace = namespace;
+    debug.useColors = createDebug.useColors();
+    debug.color = createDebug.selectColor(namespace);
+    debug.extend = extend;
+    debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
 
-		createDebug.instances.push(debug);
+    Object.defineProperty(debug, 'enabled', {
+      enumerable: true,
+      configurable: false,
+      get: function () {
+        return enableOverride === null ? createDebug.enabled(namespace) : enableOverride;
+      },
+      set: function (v) {
+        enableOverride = v;
+      }
+    }); // Env-specific initialization logic for debug instances
 
-		return debug;
-	}
+    if (typeof createDebug.init === 'function') {
+      createDebug.init(debug);
+    }
 
-	function destroy() {
-		const index = createDebug.instances.indexOf(this);
-		if (index !== -1) {
-			createDebug.instances.splice(index, 1);
-			return true;
-		}
-		return false;
-	}
+    return debug;
+  }
 
-	function extend(namespace, delimiter) {
-		const newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
-		newDebug.log = this.log;
-		return newDebug;
-	}
+  function extend(namespace, delimiter) {
+    var newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+    newDebug.log = this.log;
+    return newDebug;
+  }
+  /**
+  * Enables a debug mode by namespaces. This can include modes
+  * separated by a colon and wildcards.
+  *
+  * @param {String} namespaces
+  * @api public
+  */
 
-	/**
-	* Enables a debug mode by namespaces. This can include modes
-	* separated by a colon and wildcards.
-	*
-	* @param {String} namespaces
-	* @api public
-	*/
-	function enable(namespaces) {
-		createDebug.save(namespaces);
 
-		createDebug.names = [];
-		createDebug.skips = [];
+  function enable(namespaces) {
+    createDebug.save(namespaces);
+    createDebug.names = [];
+    createDebug.skips = [];
+    var i;
+    var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+    var len = split.length;
 
-		let i;
-		const split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
-		const len = split.length;
+    for (i = 0; i < len; i++) {
+      if (!split[i]) {
+        // ignore empty strings
+        continue;
+      }
 
-		for (i = 0; i < len; i++) {
-			if (!split[i]) {
-				// ignore empty strings
-				continue;
-			}
+      namespaces = split[i].replace(/\*/g, '.*?');
 
-			namespaces = split[i].replace(/\*/g, '.*?');
+      if (namespaces[0] === '-') {
+        createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+      } else {
+        createDebug.names.push(new RegExp('^' + namespaces + '$'));
+      }
+    }
+  }
+  /**
+  * Disable debug output.
+  *
+  * @return {String} namespaces
+  * @api public
+  */
 
-			if (namespaces[0] === '-') {
-				createDebug.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
-			} else {
-				createDebug.names.push(new RegExp('^' + namespaces + '$'));
-			}
-		}
 
-		for (i = 0; i < createDebug.instances.length; i++) {
-			const instance = createDebug.instances[i];
-			instance.enabled = createDebug.enabled(instance.namespace);
-		}
-	}
+  function disable() {
+    var namespaces = [].concat(_toConsumableArray(createDebug.names.map(toNamespace)), _toConsumableArray(createDebug.skips.map(toNamespace).map(function (namespace) {
+      return '-' + namespace;
+    }))).join(',');
+    createDebug.enable('');
+    return namespaces;
+  }
+  /**
+  * Returns true if the given mode name is enabled, false otherwise.
+  *
+  * @param {String} name
+  * @return {Boolean}
+  * @api public
+  */
 
-	/**
-	* Disable debug output.
-	*
-	* @return {String} namespaces
-	* @api public
-	*/
-	function disable() {
-		const namespaces = [
-			...createDebug.names.map(toNamespace),
-			...createDebug.skips.map(toNamespace).map(namespace => '-' + namespace)
-		].join(',');
-		createDebug.enable('');
-		return namespaces;
-	}
 
-	/**
-	* Returns true if the given mode name is enabled, false otherwise.
-	*
-	* @param {String} name
-	* @return {Boolean}
-	* @api public
-	*/
-	function enabled(name) {
-		if (name[name.length - 1] === '*') {
-			return true;
-		}
+  function enabled(name) {
+    if (name[name.length - 1] === '*') {
+      return true;
+    }
 
-		let i;
-		let len;
+    var i;
+    var len;
 
-		for (i = 0, len = createDebug.skips.length; i < len; i++) {
-			if (createDebug.skips[i].test(name)) {
-				return false;
-			}
-		}
+    for (i = 0, len = createDebug.skips.length; i < len; i++) {
+      if (createDebug.skips[i].test(name)) {
+        return false;
+      }
+    }
 
-		for (i = 0, len = createDebug.names.length; i < len; i++) {
-			if (createDebug.names[i].test(name)) {
-				return true;
-			}
-		}
+    for (i = 0, len = createDebug.names.length; i < len; i++) {
+      if (createDebug.names[i].test(name)) {
+        return true;
+      }
+    }
 
-		return false;
-	}
+    return false;
+  }
+  /**
+  * Convert regexp to namespace
+  *
+  * @param {RegExp} regxep
+  * @return {String} namespace
+  * @api private
+  */
 
-	/**
-	* Convert regexp to namespace
-	*
-	* @param {RegExp} regxep
-	* @return {String} namespace
-	* @api private
-	*/
-	function toNamespace(regexp) {
-		return regexp.toString()
-			.substring(2, regexp.toString().length - 2)
-			.replace(/\.\*\?$/, '*');
-	}
 
-	/**
-	* Coerce `val`.
-	*
-	* @param {Mixed} val
-	* @return {Mixed}
-	* @api private
-	*/
-	function coerce(val) {
-		if (val instanceof Error) {
-			return val.stack || val.message;
-		}
-		return val;
-	}
+  function toNamespace(regexp) {
+    return regexp.toString().substring(2, regexp.toString().length - 2).replace(/\.\*\?$/, '*');
+  }
+  /**
+  * Coerce `val`.
+  *
+  * @param {Mixed} val
+  * @return {Mixed}
+  * @api private
+  */
 
-	createDebug.enable(createDebug.load());
 
-	return createDebug;
+  function coerce(val) {
+    if (val instanceof Error) {
+      return val.stack || val.message;
+    }
+
+    return val;
+  }
+  /**
+  * XXX DO NOT USE. This is a temporary stub function.
+  * XXX It WILL be removed in the next major release.
+  */
+
+
+  function destroy() {
+    console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+  }
+
+  createDebug.enable(createDebug.load());
+  return createDebug;
 }
 
 module.exports = setup;
-
 },{"ms":"../node_modules/ms/index.js"}],"../node_modules/socket.io-parser/node_modules/debug/src/browser.js":[function(require,module,exports) {
 var process = require("process");
 /* eslint-env browser */
@@ -65285,15 +65498,25 @@ var process = require("process");
 /**
  * This is the web browser implementation of `debug()`.
  */
-exports.log = log;
 exports.formatArgs = formatArgs;
 exports.save = save;
 exports.load = load;
 exports.useColors = useColors;
 exports.storage = localstorage();
+
+exports.destroy = function () {
+  var warned = false;
+  return function () {
+    if (!warned) {
+      warned = true;
+      console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+    }
+  };
+}();
 /**
  * Colors.
  */
+
 
 exports.colors = ['#0000CC', '#0000FF', '#0033CC', '#0033FF', '#0066CC', '#0066FF', '#0099CC', '#0099FF', '#00CC00', '#00CC33', '#00CC66', '#00CC99', '#00CCCC', '#00CCFF', '#3300CC', '#3300FF', '#3333CC', '#3333FF', '#3366CC', '#3366FF', '#3399CC', '#3399FF', '#33CC00', '#33CC33', '#33CC66', '#33CC99', '#33CCCC', '#33CCFF', '#6600CC', '#6600FF', '#6633CC', '#6633FF', '#66CC00', '#66CC33', '#9900CC', '#9900FF', '#9933CC', '#9933FF', '#99CC00', '#99CC33', '#CC0000', '#CC0033', '#CC0066', '#CC0099', '#CC00CC', '#CC00FF', '#CC3300', '#CC3333', '#CC3366', '#CC3399', '#CC33CC', '#CC33FF', '#CC6600', '#CC6633', '#CC9900', '#CC9933', '#CCCC00', '#CCCC33', '#FF0000', '#FF0033', '#FF0066', '#FF0099', '#FF00CC', '#FF00FF', '#FF3300', '#FF3333', '#FF3366', '#FF3399', '#FF33CC', '#FF33FF', '#FF6600', '#FF6633', '#FF9900', '#FF9933', '#FFCC00', '#FFCC33'];
 /**
@@ -65340,14 +65563,14 @@ function formatArgs(args) {
     return;
   }
 
-  const c = 'color: ' + this.color;
+  var c = 'color: ' + this.color;
   args.splice(1, 0, c, 'color: inherit'); // The final "%c" is somewhat tricky, because there could be other
   // arguments passed either before or after the %c, so we need to
   // figure out the correct index to insert the CSS into
 
-  let index = 0;
-  let lastC = 0;
-  args[0].replace(/%[a-zA-Z%]/g, match => {
+  var index = 0;
+  var lastC = 0;
+  args[0].replace(/%[a-zA-Z%]/g, function (match) {
     if (match === '%%') {
       return;
     }
@@ -65363,18 +65586,16 @@ function formatArgs(args) {
   args.splice(lastC, 0, c);
 }
 /**
- * Invokes `console.log()` when available.
- * No-op when `console.log` is not a "function".
+ * Invokes `console.debug()` when available.
+ * No-op when `console.debug` is not a "function".
+ * If `console.debug` is not available, falls back
+ * to `console.log`.
  *
  * @api public
  */
 
 
-function log(...args) {
-  // This hackery is required for IE8/9, where
-  // the `console.log` function doesn't have 'apply'
-  return typeof console === 'object' && console.log && console.log(...args);
-}
+exports.log = console.debug || console.log || function () {};
 /**
  * Save `namespaces`.
  *
@@ -65403,7 +65624,7 @@ function save(namespaces) {
 
 
 function load() {
-  let r;
+  var r;
 
   try {
     r = exports.storage.getItem('debug');
@@ -65441,8 +65662,8 @@ function localstorage() {
 }
 
 module.exports = require('./common')(exports);
-const {
-  formatters
+var {
+  formatters: formatters
 } = module.exports;
 /**
  * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
@@ -65474,7 +65695,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -65527,14 +65748,14 @@ var Encoder = /*#__PURE__*/function () {
 
   _createClass(Encoder, [{
     key: "encode",
-
+    value:
     /**
      * Encode a packet as a single string if non-binary, or as a
      * buffer sequence, depending on packet type.
      *
      * @param {Object} obj - packet object
      */
-    value: function encode(obj) {
+    function encode(obj) {
       debug("encoding packet %j", obj);
 
       if (obj.type === PacketType.EVENT || obj.type === PacketType.ACK) {
@@ -65747,11 +65968,11 @@ var Decoder = /*#__PURE__*/function (_Emitter) {
     }
   }, {
     key: "destroy",
-
+    value:
     /**
      * Deallocates a parser's resources
      */
-    value: function destroy() {
+    function destroy() {
       if (this.reconstructor) {
         this.reconstructor.finishedReconstruction();
       }
@@ -65771,7 +65992,7 @@ var Decoder = /*#__PURE__*/function (_Emitter) {
 
         case PacketType.EVENT:
         case PacketType.BINARY_EVENT:
-          return Array.isArray(payload) && typeof payload[0] === "string";
+          return Array.isArray(payload) && payload.length > 0;
 
         case PacketType.ACK:
         case PacketType.BINARY_ACK:
@@ -65858,39 +66079,12 @@ exports.on = void 0;
 
 function on(obj, ev, fn) {
   obj.on(ev, fn);
-  return {
-    destroy: function destroy() {
-      obj.removeListener(ev, fn);
-    }
+  return function subDestroy() {
+    obj.off(ev, fn);
   };
 }
 
 exports.on = on;
-},{}],"../node_modules/component-bind/index.js":[function(require,module,exports) {
-/**
- * Slice reference.
- */
-
-var slice = [].slice;
-
-/**
- * Bind `obj` to `fn`.
- *
- * @param {Object} obj
- * @param {Function|String} fn or string
- * @return {Function}
- * @api public
- */
-
-module.exports = function(obj, fn){
-  if ('string' == typeof fn) fn = obj[fn];
-  if ('function' != typeof fn) throw new Error('bind() requires a function');
-  var args = slice.call(arguments, 2);
-  return function(){
-    return fn.apply(obj, args.concat(slice.call(arguments)));
-  }
-};
-
 },{}],"../node_modules/socket.io-client/build/socket.js":[function(require,module,exports) {
 "use strict";
 
@@ -65922,7 +66116,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -65937,8 +66131,6 @@ var Emitter = require("component-emitter");
 
 var on_1 = require("./on");
 
-var bind = require("component-bind");
-
 var debug = require("debug")("socket.io-client:socket");
 /**
  * Internal events.
@@ -65946,7 +66138,7 @@ var debug = require("debug")("socket.io-client:socket");
  */
 
 
-var RESERVED_EVENTS = {
+var RESERVED_EVENTS = Object.freeze({
   connect: 1,
   connect_error: 1,
   disconnect: 1,
@@ -65954,7 +66146,7 @@ var RESERVED_EVENTS = {
   // EventEmitter reserved events: https://nodejs.org/api/events.html#events_event_newlistener
   newListener: 1,
   removeListener: 1
-};
+});
 
 var Socket = /*#__PURE__*/function (_Emitter) {
   _inherits(Socket, _Emitter);
@@ -65972,10 +66164,10 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     _classCallCheck(this, Socket);
 
     _this = _super.call(this);
-    _this.ids = 0;
-    _this.acks = {};
     _this.receiveBuffer = [];
     _this.sendBuffer = [];
+    _this.ids = 0;
+    _this.acks = {};
     _this.flags = {};
     _this.io = io;
     _this.nsp = nsp;
@@ -66006,7 +66198,16 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     value: function subEvents() {
       if (this.subs) return;
       var io = this.io;
-      this.subs = [on_1.on(io, "open", bind(this, "onopen")), on_1.on(io, "packet", bind(this, "onpacket")), on_1.on(io, "close", bind(this, "onclose"))];
+      this.subs = [on_1.on(io, "open", this.onopen.bind(this)), on_1.on(io, "packet", this.onpacket.bind(this)), on_1.on(io, "error", this.onerror.bind(this)), on_1.on(io, "close", this.onclose.bind(this))];
+    }
+    /**
+     * Whether the Socket will try to reconnect when its Manager connects or reconnects
+     */
+
+  }, {
+    key: "active",
+    get: function get() {
+      return !!this.subs;
     }
     /**
      * "Opens" the socket.
@@ -66019,7 +66220,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     value: function connect() {
       if (this.connected) return this;
       this.subEvents();
-      if (!this.io._reconnecting) this.io.open(); // ensure open
+      if (!this.io["_reconnecting"]) this.io.open(); // ensure open
 
       if ("open" === this.io._readyState) this.onopen();
       return this;
@@ -66036,7 +66237,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     /**
      * Sends a `message` event.
      *
-     * @return {Socket} self
+     * @return self
      * @public
      */
 
@@ -66055,8 +66256,8 @@ var Socket = /*#__PURE__*/function (_Emitter) {
      * Override `emit`.
      * If the event is in `events`, it's emitted normally.
      *
-     * @param {String} ev - event name
-     * @return {Socket} self
+     * @param ev - event name
+     * @return self
      * @public
      */
 
@@ -66102,7 +66303,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     /**
      * Sends a packet.
      *
-     * @param {Object} packet
+     * @param packet
      * @private
      */
 
@@ -66141,9 +66342,23 @@ var Socket = /*#__PURE__*/function (_Emitter) {
       }
     }
     /**
+     * Called upon engine or manager `error`.
+     *
+     * @param err
+     * @private
+     */
+
+  }, {
+    key: "onerror",
+    value: function onerror(err) {
+      if (!this.connected) {
+        _get(_getPrototypeOf(Socket.prototype), "emit", this).call(this, "connect_error", err);
+      }
+    }
+    /**
      * Called upon engine `close`.
      *
-     * @param {String} reason
+     * @param reason
      * @private
      */
 
@@ -66160,7 +66375,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     /**
      * Called with socket packet.
      *
-     * @param {Object} packet
+     * @param packet
      * @private
      */
 
@@ -66172,8 +66387,13 @@ var Socket = /*#__PURE__*/function (_Emitter) {
 
       switch (packet.type) {
         case socket_io_parser_1.PacketType.CONNECT:
-          var id = packet.data.sid;
-          this.onconnect(id);
+          if (packet.data && packet.data.sid) {
+            var id = packet.data.sid;
+            this.onconnect(id);
+          } else {
+            _get(_getPrototypeOf(Socket.prototype), "emit", this).call(this, "connect_error", new Error("It seems you are trying to reach a Socket.IO server in v2.x with a v3.x client, but they are not compatible (more information here: https://socket.io/docs/v3/migrating-from-2-x-to-3-0/)"));
+          }
+
           break;
 
         case socket_io_parser_1.PacketType.EVENT:
@@ -66209,7 +66429,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     /**
      * Called upon a server event.
      *
-     * @param {Object} packet
+     * @param packet
      * @private
      */
 
@@ -66227,7 +66447,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
       if (this.connected) {
         this.emitEvent(args);
       } else {
-        this.receiveBuffer.push(args);
+        this.receiveBuffer.push(Object.freeze(args));
       }
     }
   }, {
@@ -66284,7 +66504,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     /**
      * Called upon a server acknowlegement.
      *
-     * @param {Object} packet
+     * @param packet
      * @private
      */
 
@@ -66310,6 +66530,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "onconnect",
     value: function onconnect(id) {
+      debug("socket connected with id %s", id);
       this.id = id;
       this.connected = true;
       this.disconnected = false;
@@ -66327,16 +66548,15 @@ var Socket = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "emitBuffered",
     value: function emitBuffered() {
-      for (var i = 0; i < this.receiveBuffer.length; i++) {
-        this.emitEvent(this.receiveBuffer[i]);
-      }
+      var _this3 = this;
 
+      this.receiveBuffer.forEach(function (args) {
+        return _this3.emitEvent(args);
+      });
       this.receiveBuffer = [];
-
-      for (var _i = 0; _i < this.sendBuffer.length; _i++) {
-        this.packet(this.sendBuffer[_i]);
-      }
-
+      this.sendBuffer.forEach(function (packet) {
+        return _this3.packet(packet);
+      });
       this.sendBuffer = [];
     }
     /**
@@ -66365,19 +66585,18 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     value: function destroy() {
       if (this.subs) {
         // clean subscriptions to avoid reconnections
-        for (var i = 0; i < this.subs.length; i++) {
-          this.subs[i].destroy();
-        }
-
-        this.subs = null;
+        this.subs.forEach(function (subDestroy) {
+          return subDestroy();
+        });
+        this.subs = undefined;
       }
 
-      this.io._destroy(this);
+      this.io["_destroy"](this);
     }
     /**
      * Disconnects the socket manually.
      *
-     * @return {Socket} self
+     * @return self
      * @public
      */
 
@@ -66404,7 +66623,7 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     /**
      * Alias for disconnect()
      *
-     * @return {Socket} self
+     * @return self
      * @public
      */
 
@@ -66416,8 +66635,8 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     /**
      * Sets the compress flag.
      *
-     * @param {Boolean} compress - if `true`, compresses the sending data
-     * @return {Socket} self
+     * @param compress - if `true`, compresses the sending data
+     * @return self
      * @public
      */
 
@@ -66431,13 +66650,16 @@ var Socket = /*#__PURE__*/function (_Emitter) {
      * Sets a modifier for a subsequent event emission that the event message will be dropped when this socket is not
      * ready to send messages.
      *
-     * @returns {Socket} self
+     * @returns self
      * @public
      */
 
   }, {
-    key: "onAny",
-
+    key: "volatile",
+    get: function get() {
+      this.flags.volatile = true;
+      return this;
+    }
     /**
      * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
      * callback.
@@ -66445,6 +66667,9 @@ var Socket = /*#__PURE__*/function (_Emitter) {
      * @param listener
      * @public
      */
+
+  }, {
+    key: "onAny",
     value: function onAny(listener) {
       this._anyListeners = this._anyListeners || [];
 
@@ -66510,19 +66735,13 @@ var Socket = /*#__PURE__*/function (_Emitter) {
     value: function listenersAny() {
       return this._anyListeners || [];
     }
-  }, {
-    key: "volatile",
-    get: function get() {
-      this.flags.volatile = true;
-      return this;
-    }
   }]);
 
   return Socket;
 }(Emitter);
 
 exports.Socket = Socket;
-},{"socket.io-parser":"../node_modules/socket.io-parser/dist/index.js","component-emitter":"../node_modules/component-emitter/index.js","./on":"../node_modules/socket.io-client/build/on.js","component-bind":"../node_modules/component-bind/index.js","debug":"../node_modules/socket.io-client/node_modules/debug/src/browser.js"}],"../node_modules/backo2/index.js":[function(require,module,exports) {
+},{"socket.io-parser":"../node_modules/socket.io-parser/dist/index.js","component-emitter":"../node_modules/component-emitter/index.js","./on":"../node_modules/socket.io-client/build/on.js","debug":"../node_modules/socket.io-client/node_modules/debug/src/browser.js"}],"../node_modules/backo2/index.js":[function(require,module,exports) {
 
 /**
  * Expose `Backoff`.
@@ -66634,7 +66853,7 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -66653,8 +66872,6 @@ var parser = require("socket.io-parser");
 
 var on_1 = require("./on");
 
-var bind = require("component-bind");
-
 var Backoff = require("backo2");
 
 var debug = require("debug")("socket.io-client:manager");
@@ -66672,7 +66889,6 @@ var Manager = /*#__PURE__*/function (_Emitter) {
     _this = _super.call(this);
     _this.nsps = {};
     _this.subs = [];
-    _this.connecting = [];
 
     if (uri && "object" === _typeof(uri)) {
       opts = uri;
@@ -66730,25 +66946,31 @@ var Manager = /*#__PURE__*/function (_Emitter) {
   }, {
     key: "reconnectionDelay",
     value: function reconnectionDelay(v) {
+      var _a;
+
       if (v === undefined) return this._reconnectionDelay;
       this._reconnectionDelay = v;
-      this.backoff && this.backoff.setMin(v);
+      (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setMin(v);
       return this;
     }
   }, {
     key: "randomizationFactor",
     value: function randomizationFactor(v) {
+      var _a;
+
       if (v === undefined) return this._randomizationFactor;
       this._randomizationFactor = v;
-      this.backoff && this.backoff.setJitter(v);
+      (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setJitter(v);
       return this;
     }
   }, {
     key: "reconnectionDelayMax",
     value: function reconnectionDelayMax(v) {
+      var _a;
+
       if (v === undefined) return this._reconnectionDelayMax;
       this._reconnectionDelayMax = v;
-      this.backoff && this.backoff.setMax(v);
+      (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setMax(v);
       return this;
     }
   }, {
@@ -66778,7 +67000,7 @@ var Manager = /*#__PURE__*/function (_Emitter) {
      * Sets the current transport `socket`.
      *
      * @param {Function} fn - optional, callback
-     * @return {Manager} self
+     * @return self
      * @public
      */
 
@@ -66796,7 +67018,7 @@ var Manager = /*#__PURE__*/function (_Emitter) {
       this._readyState = "opening";
       this.skipReconnect = false; // emit `open`
 
-      var openSub = on_1.on(socket, "open", function () {
+      var openSubDestroy = on_1.on(socket, "open", function () {
         self.onopen();
         fn && fn();
       }); // emit `error`
@@ -66821,31 +67043,29 @@ var Manager = /*#__PURE__*/function (_Emitter) {
         debug("connect attempt will timeout after %d", timeout);
 
         if (timeout === 0) {
-          openSub.destroy(); // prevents a race condition with the 'open' event
+          openSubDestroy(); // prevents a race condition with the 'open' event
         } // set timer
 
 
         var timer = setTimeout(function () {
           debug("connect attempt timed out after %d", timeout);
-          openSub.destroy();
+          openSubDestroy();
           socket.close();
           socket.emit("error", new Error("timeout"));
         }, timeout);
-        this.subs.push({
-          destroy: function destroy() {
-            clearTimeout(timer);
-          }
+        this.subs.push(function subDestroy() {
+          clearTimeout(timer);
         });
       }
 
-      this.subs.push(openSub);
+      this.subs.push(openSubDestroy);
       this.subs.push(errorSub);
       return this;
     }
     /**
      * Alias for open()
      *
-     * @return {Manager} self
+     * @return self
      * @public
      */
 
@@ -66873,11 +67093,7 @@ var Manager = /*#__PURE__*/function (_Emitter) {
 
 
       var socket = this.engine;
-      this.subs.push(on_1.on(socket, "data", bind(this, "ondata")));
-      this.subs.push(on_1.on(socket, "ping", bind(this, "onping")));
-      this.subs.push(on_1.on(socket, "error", bind(this, "onerror")));
-      this.subs.push(on_1.on(socket, "close", bind(this, "onclose")));
-      this.subs.push(on_1.on(this.decoder, "decoded", bind(this, "ondecoded")));
+      this.subs.push(on_1.on(socket, "ping", this.onping.bind(this)), on_1.on(socket, "data", this.ondata.bind(this)), on_1.on(socket, "error", this.onerror.bind(this)), on_1.on(socket, "close", this.onclose.bind(this)), on_1.on(this.decoder, "decoded", this.ondecoded.bind(this)));
     }
     /**
      * Called upon a ping.
@@ -66940,19 +67156,6 @@ var Manager = /*#__PURE__*/function (_Emitter) {
       if (!socket) {
         socket = new socket_1.Socket(this, nsp, opts);
         this.nsps[nsp] = socket;
-        var self = this;
-        socket.on("connecting", onConnecting);
-
-        if (this._autoConnect) {
-          // manually call here since connecting event is fired before listening
-          onConnecting();
-        }
-      }
-
-      function onConnecting() {
-        if (!~self.connecting.indexOf(socket)) {
-          self.connecting.push(socket);
-        }
       }
 
       return socket;
@@ -66960,23 +67163,31 @@ var Manager = /*#__PURE__*/function (_Emitter) {
     /**
      * Called upon a socket close.
      *
-     * @param {Socket} socket
+     * @param socket
      * @private
      */
 
   }, {
     key: "_destroy",
     value: function _destroy(socket) {
-      var index = this.connecting.indexOf(socket);
-      if (~index) this.connecting.splice(index, 1);
-      if (this.connecting.length) return;
+      var nsps = Object.keys(this.nsps);
+
+      for (var _i = 0, _nsps = nsps; _i < _nsps.length; _i++) {
+        var nsp = _nsps[_i];
+        var _socket = this.nsps[nsp];
+
+        if (_socket.active) {
+          debug("socket %s is still active, skipping close", nsp);
+          return;
+        }
+      }
 
       this._close();
     }
     /**
      * Writes a packet.
      *
-     * @param {Object} packet
+     * @param packet
      * @private
      */
 
@@ -66984,7 +67195,6 @@ var Manager = /*#__PURE__*/function (_Emitter) {
     key: "_packet",
     value: function _packet(packet) {
       debug("writing packet %j", packet);
-      if (packet.query && packet.type === 0) packet.nsp += "?" + packet.query;
       var encodedPackets = this.encoder.encode(packet);
 
       for (var i = 0; i < encodedPackets.length; i++) {
@@ -67001,13 +67211,10 @@ var Manager = /*#__PURE__*/function (_Emitter) {
     key: "cleanup",
     value: function cleanup() {
       debug("cleanup");
-      var subsLength = this.subs.length;
-
-      for (var i = 0; i < subsLength; i++) {
-        var sub = this.subs.shift();
-        sub.destroy();
-      }
-
+      this.subs.forEach(function (subDestroy) {
+        return subDestroy();
+      });
+      this.subs.length = 0;
       this.decoder.destroy();
     }
     /**
@@ -67110,10 +67317,8 @@ var Manager = /*#__PURE__*/function (_Emitter) {
             }
           });
         }, delay);
-        this.subs.push({
-          destroy: function destroy() {
-            clearTimeout(timer);
-          }
+        this.subs.push(function subDestroy() {
+          clearTimeout(timer);
         });
       }
     }
@@ -67138,7 +67343,7 @@ var Manager = /*#__PURE__*/function (_Emitter) {
 }(Emitter);
 
 exports.Manager = Manager;
-},{"engine.io-client":"../node_modules/engine.io-client/lib/index.js","./socket":"../node_modules/socket.io-client/build/socket.js","component-emitter":"../node_modules/component-emitter/index.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js","./on":"../node_modules/socket.io-client/build/on.js","component-bind":"../node_modules/component-bind/index.js","backo2":"../node_modules/backo2/index.js","debug":"../node_modules/socket.io-client/node_modules/debug/src/browser.js"}],"../node_modules/socket.io-client/build/index.js":[function(require,module,exports) {
+},{"engine.io-client":"../node_modules/engine.io-client/lib/index.js","./socket":"../node_modules/socket.io-client/build/socket.js","component-emitter":"../node_modules/component-emitter/index.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js","./on":"../node_modules/socket.io-client/build/on.js","backo2":"../node_modules/backo2/index.js","debug":"../node_modules/socket.io-client/node_modules/debug/src/browser.js"}],"../node_modules/socket.io-client/build/index.js":[function(require,module,exports) {
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -67181,11 +67386,11 @@ function lookup(uri, opts) {
   }
 
   opts = opts || {};
-  var parsed = url_1.url(uri);
+  var parsed = url_1.url(uri, opts.path);
   var source = parsed.source;
   var id = parsed.id;
   var path = parsed.path;
-  var sameNamespace = cache[id] && path in cache[id].nsps;
+  var sameNamespace = cache[id] && path in cache[id]["nsps"];
   var newConnection = opts.forceNew || opts["force new connection"] || false === opts.multiplex || sameNamespace;
   var io;
 
@@ -67202,7 +67407,7 @@ function lookup(uri, opts) {
   }
 
   if (parsed.query && !opts.query) {
-    opts.query = parsed.query;
+    opts.query = parsed.queryKey;
   }
 
   return io.socket(parsed.path, opts);
@@ -67263,9 +67468,7 @@ var _reactRouterDom = require("react-router-dom");
 
 var _paperIcon = _interopRequireDefault(require("./butons/paper-icon"));
 
-var _reactRedux = require("react-redux");
-
-var _scoreRegular = _interopRequireDefault(require("../actions/score-regular"));
+var _scoreRegular = _interopRequireDefault(require("./../actions/score-regular"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -67274,6 +67477,8 @@ var _mongoose = require("mongoose");
 var _resultsRegular = _interopRequireDefault(require("./results-page/results-regular"));
 
 var _socket = _interopRequireDefault(require("socket.io-client"));
+
+var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67295,9 +67500,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Main(_ref) {
   var regular = _ref.regular;
-  var dispatch = (0, _reactRedux.useDispatch)();
 
-  var _useState = (0, _react.useState)(""),
+  var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       userChoice = _useState2[0],
       setUserChoice = _useState2[1];
@@ -67307,19 +67511,24 @@ function Main(_ref) {
       toggle = _useState4[0],
       setToggle = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(""),
+  var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
       computerChoice = _useState6[0],
       setComputerChoice = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(""),
+  var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       response = _useState8[0],
       setResponse = _useState8[1];
 
-  var ENDPOINT = 'http://127.0.0.1:5000';
-  var io = (0, _socket.default)(ENDPOINT);
-  window.history.replaceState(null, "Main", "/");
+  var _useState9 = (0, _react.useState)(0),
+      _useState10 = _slicedToArray(_useState9, 2),
+      t = _useState10[0],
+      setT = _useState10[1]; //const ENDPOINT = 'http://127.0.0.1:5000';
+  //const io = socketIOClient(ENDPOINT);
+
+
+  window.history.replaceState(null, 'Main', '/');
   window.addEventListener('popstate', function (event) {
     location.reload();
   });
@@ -67327,8 +67536,8 @@ function Main(_ref) {
   var display = {};
   (0, _react.useEffect)(function () {
     /*   io.on("hello", (arg) => {
-        console.log(arg); // world
-      }); */
+      console.log(arg); // world
+    }); */
     //setToggle(true);
   });
 
@@ -67342,7 +67551,7 @@ function Main(_ref) {
 
     function judge(play1, play2) {
       if (play1 === play2) {
-        return "tie";
+        return 'tie';
       }
 
       return training[play1][play2] === 1 ? 1 : 2;
@@ -67365,33 +67574,17 @@ function Main(_ref) {
   }
 
   var ref = referee();
-  ref.learn("rock", "scissors");
-  ref.learn("paper", "rock");
-  ref.learn("scissors", "paper");
-  var a;
+  ref.learn('rock', 'scissors');
+  ref.learn('paper', 'rock');
+  ref.learn('scissors', 'paper');
+  var dispatch = (0, _reactRedux.useDispatch)(); //	console.log(ref.judge(userChoice, computerChoice));
 
   function resultFunction() {
-    if (userChoice != "") {
-      //  console.log("User Choice: " + userChoice);
-      //   console.log("Computer Choice: " + computerChoice);  
+    if (userChoice != '') {
       var regularResult = ref.judge(userChoice, computerChoice);
 
       if (regularResult === 1) {
-        var authOptions = {
-          method: 'post',
-          url: 'http://localhost:5000/api/',
-          data: JSON.stringify({
-            "regular": 1
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          json: true
-        };
-        (0, _axios.default)(authOptions).then(function (response) {// console.log("response axios " + response.data);
-        }).catch(function (error) {
-          alert(error);
-        });
+        dispatch((0, _scoreRegular.default)());
       }
     }
   }
@@ -67407,11 +67600,11 @@ function Main(_ref) {
   var toggleFunction = function toggleFunction() {
     if (toggle) {
       return display = {
-        display: "block"
+        display: 'block'
       };
     } else {
       return display = {
-        display: "none"
+        display: 'none'
       };
     }
   };
@@ -67419,25 +67612,25 @@ function Main(_ref) {
   toggleFunction();
 
   vtps: return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "main"
+    className: 'main'
   }, /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
     style: display
   }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/regular",
+    to: '/regular',
     onClick: function onClick() {
       setToggle(function (state) {
         return !state;
       });
     }
-  }, "Regular")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/bonus",
+  }, 'Regular')), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: '/bonus',
     onClick: function onClick() {
       setToggle(function (state) {
         return !state;
       });
     }
-  }, "Bonus")))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    path: "/regular",
+  }, 'Bonus')))), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: '/regular',
     render: function render() {
       return /*#__PURE__*/_react.default.createElement(_regular.default, {
         setuserchoice: setUserChoice,
@@ -67450,7 +67643,7 @@ function Main(_ref) {
       });
     }
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    path: "/bonus",
+    path: '/bonus',
     render: function render() {
       return /*#__PURE__*/_react.default.createElement(_bonus.default, {
         toggle: toggle,
@@ -67460,20 +67653,9 @@ function Main(_ref) {
   })))));
 }
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    regular: state.score
-  };
-};
-
-var mapDispatchToProps = {
-  a: _scoreRegular.default
-};
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Main);
-
+var _default = Main;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./bonus":"components/bonus.js","./regular":"components/regular.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./butons/paper-icon":"components/butons/paper-icon.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/score-regular":"actions/score-regular.js","axios":"../node_modules/axios/index.js","mongoose":"../node_modules/mongoose/dist/browser.umd.js","./results-page/results-regular":"components/results-page/results-regular.js","socket.io-client":"../node_modules/socket.io-client/build/index.js"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./bonus":"components/bonus.js","./regular":"components/regular.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./butons/paper-icon":"components/butons/paper-icon.js","./../actions/score-regular":"actions/score-regular.js","axios":"../node_modules/axios/index.js","mongoose":"../node_modules/mongoose/dist/browser.umd.js","./results-page/results-regular":"components/results-page/results-regular.js","socket.io-client":"../node_modules/socket.io-client/build/index.js","react-redux":"../node_modules/react-redux/es/index.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67505,21 +67687,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var scoreRegular = function scoreRegular() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case "SCORE_REGULAR":
-      return _objectSpread(_objectSpread({}, state), {}, {
-        score: state + 1
-      });
+    case 'SCORE_REGULAR':
+      return state + 1;
 
     default:
       return state;
@@ -67583,7 +67757,7 @@ function Index() {
   }, /*#__PURE__*/_react.default.createElement(_app.default, null)));
 }
 
-_reactDom.default.render( /*#__PURE__*/_react.default.createElement(Index, null), document.querySelector("#app"));
+_reactDom.default.render( /*#__PURE__*/_react.default.createElement(Index, null), document.querySelector('#app'));
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./css/app.min.css":"css/app.min.css","./app.js":"app.js","redux":"../node_modules/redux/es/redux.js","./reducers/index":"reducers/index.js","react-redux":"../node_modules/react-redux/es/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -67612,7 +67786,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37019" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44937" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
