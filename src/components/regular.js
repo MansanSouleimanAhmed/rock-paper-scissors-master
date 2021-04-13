@@ -92,6 +92,7 @@ function Regular(props) {
 				<div className={'regular-result'} style={displayResult}>
 					<div className={'container-icons'}>
 						<div className={'user-choice'}>
+							<div className={'win-background-div loose-win-same'} />
 							<PaperIcon ref={paper} />
 							<RockIcon ref={rock} />
 							<ScissorsIcon ref={scissors} />
@@ -99,9 +100,9 @@ function Regular(props) {
 						<ResultsRegular computerchoice={props.computerchoice} />
 					</div>
 					<div className={'play-again'}>
-						<p>{'YOU WIN'}</p>
-						<p>{'YOU LOSE'}</p>
-						<p onClick={playAgain}>{'Play again'}</p>
+						{/* 	<p>{'YOU WIN'}</p>
+						<p>{'YOU LOSE'}</p> 
+	<p onClick={playAgain}>{'Play again'}</p>*/}
 					</div>
 				</div>
 				<ButonRegular />

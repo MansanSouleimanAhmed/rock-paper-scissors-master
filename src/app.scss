@@ -3,11 +3,13 @@ body {
 	margin: 0px;
 	font-size: 10px;
 	///Main-page
+
 	.main {
 		position: relative;
 		height: 100vh;
 		width: 100vw;
 		background-image: radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+		overflow: hidden;
 		#scissors {
 			background-image: radial-gradient(#fff 40px, hsl(39, 89%, 49%) 47px, hsl(40, 84%, 53%) 58px);
 		}
@@ -109,22 +111,50 @@ body {
 				}
 			}
 			.regular-result {
-				position: absolute;
+				position: relative;
 				top: 40%;
-				width: 90%;
 				height: 350px;
+				width: 288px;
 				display: flex;
 				text-align: center;
 				flex-direction: column;
 				font-size: 1.9em;
+
+				.loose-win-same {
+					position: absolute;
+					height: 250px;
+					width: 250px;
+					border-radius: 50%;
+					background: repeating-radial-gradient(rgba(255, 255, 255, 0.1) 30%, rgba(36, 21, 100, 0.1) 40%);
+				}
+				.loose-background-div {
+					position: absolute;
+					position: absolute;
+					top: 9px;
+					left: 100px;
+				}
+
+				.win-background-div {
+					display: none;
+					position: absolute;
+					top: 9px;
+					right: 100px;
+				}
 				.container-icons {
+					position: relative;
 					width: 100%;
-					height: 125px;
-					.results-regular {
-						position: absolute;
-						width: 125px;
-						height: 125px;
-						right: 0px;
+					height: 250px;
+
+					.icon {
+						top: 75px;
+					}
+
+					.computer-choice {
+						.icon {
+							top: 75px;
+							right: 0px;
+							z-index: 11;
+						}
 					}
 				}
 				.play-again {
@@ -145,7 +175,6 @@ body {
 				transform: translate(-50%, -97%);
 				border: solid 3px rgba(253, 253, 253, 0.3);
 				border-radius: 10px;
-				//padding-bottom: 10;
 				font-size: 1.5em;
 				text-align: center;
 				color: #fff;

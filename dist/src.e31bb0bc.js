@@ -32845,31 +32845,33 @@ function ResultsRegular(props) {
   var scissors;
 
   var returnPaper = function returnPaper() {
-    if (props.computerchoice === "paper") {
+    if (props.computerchoice === 'paper') {
       return paper = /*#__PURE__*/_react.default.createElement(_paperIcon.default, null);
-    } else if (props.computerchoice != "paper") {
+    } else if (props.computerchoice != 'paper') {
       return paper = null;
     }
   };
 
   var returnRock = function returnRock() {
-    if (props.computerchoice === "rock") {
+    if (props.computerchoice === 'rock') {
       return rock = /*#__PURE__*/_react.default.createElement(_rockIcon.default, null);
-    } else if (props.computerchoice != "paper") {
+    } else if (props.computerchoice != 'paper') {
       return rock = null;
     }
   };
 
   var returnScissors = function returnScissors() {
-    if (props.computerchoice === "scissors") {
+    if (props.computerchoice === 'scissors') {
       return scissors = /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, null);
-    } else if (props.computerchoice != "scissors") {
+    } else if (props.computerchoice != 'scissors') {
       return scissors = null;
     }
   };
 
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "results-regular"
+    className: 'loose-background-div loose-win-same'
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: 'computer-choice'
   }, returnPaper(), returnRock(), returnScissors()));
 }
 },{"react":"../node_modules/react/index.js","../butons/rock-icon":"components/butons/rock-icon.js","../butons/paper-icon":"components/butons/paper-icon.js","../butons/scissors-icon":"components/butons/scissors-icon.js"}],"../node_modules/react-redux/es/components/Context.js":[function(require,module,exports) {
@@ -35305,64 +35307,65 @@ Object.defineProperty(exports, "__esModule", {
 exports.style = void 0;
 var style = {
   MODAL_STYLE: {
-    position: "fixed",
-    top: "0%",
-    left: "0%",
-    width: "100%",
-    height: "100vh",
-    backgroundColor: "rgba(0, 0, 0,.6)"
+    position: 'fixed',
+    top: '0%',
+    left: '0%',
+    width: '100%',
+    height: '100vh',
+    zIndex: '10',
+    backgroundColor: 'rgba(0, 0, 0,.6)'
   },
   OVERLAY_STYLE: {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%,-50%)",
-    height: "70%",
-    width: "95%",
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%,-50%)',
+    height: '70%',
+    width: '95%',
     zIndex: 3,
-    textAlign: "center",
-    fontSize: "1.5rem",
-    backgroundColor: "#fff"
+    textAlign: 'center',
+    fontSize: '1.5rem',
+    backgroundColor: '#fff'
   },
   BUTTON_STYLE: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    top: "4%",
-    left: "10%",
-    height: "50px",
-    width: "50px",
-    backgroundColor: "#fff",
-    borderRadius: "10%"
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    top: '4%',
+    left: '10%',
+    height: '50px',
+    width: '50px',
+    backgroundColor: '#fff',
+    borderRadius: '10%'
   },
   P_STYLE: {
-    paddingLeft: "10%",
-    paddingRight: "10%"
+    paddingLeft: '10%',
+    paddingRight: '10%'
   },
   BUTTON_STYLE_ITEM: {
-    position: "relative",
-    paddingTop: "5",
-    height: "5px",
-    width: "70%",
-    left: "50%",
-    transform: "translate(-50%)",
-    borderRadius: "20%",
-    textAlign: "center",
-    backgroundColor: "black"
+    position: 'relative',
+    paddingTop: '5',
+    height: '5px',
+    width: '70%',
+    left: '50%',
+    transform: 'translate(-50%)',
+    borderRadius: '20%',
+    textAlign: 'center',
+    backgroundColor: 'black'
   },
   IMG_REGULAR_STYLE: {
-    position: "relative",
-    top: "15%"
+    position: 'relative',
+    top: '15%'
   },
   IMG_REGULAR_CROSS: {
-    position: "absolute",
-    bottom: "2%",
-    left: "50%",
-    transform: "translate(-50%,-2%)",
-    backgroundColor: "hsl(100, 6%, 45%)",
-    padding: "5px",
-    borderRadius: "50%"
+    position: 'absolute',
+    bottom: '2%',
+    left: '50%',
+    transform: 'translate(-50%,-2%)',
+    backgroundColor: 'hsl(100, 6%, 45%)',
+    padding: '5px',
+    borderRadius: '50%'
   }
 };
 exports.style = style;
@@ -35593,7 +35596,9 @@ function Regular(props) {
     className: 'container-icons'
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: 'user-choice'
-  }, /*#__PURE__*/_react.default.createElement(_paperIcon.default, {
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: 'win-background-div loose-win-same'
+  }), /*#__PURE__*/_react.default.createElement(_paperIcon.default, {
     ref: paper
   }), /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
     ref: rock
@@ -35603,9 +35608,7 @@ function Regular(props) {
     computerchoice: props.computerchoice
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: 'play-again'
-  }, /*#__PURE__*/_react.default.createElement("p", null, 'YOU WIN'), /*#__PURE__*/_react.default.createElement("p", null, 'YOU LOSE'), /*#__PURE__*/_react.default.createElement("p", {
-    onClick: playAgain
-  }, 'Play again'))), /*#__PURE__*/_react.default.createElement(_butonRegular.default, null), /*#__PURE__*/_react.default.createElement(_modalRegular.default, null)));
+  })), /*#__PURE__*/_react.default.createElement(_butonRegular.default, null), /*#__PURE__*/_react.default.createElement(_modalRegular.default, null)));
 }
 
 var _default = Regular;
@@ -67883,7 +67886,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34533" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41767" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
