@@ -15,9 +15,6 @@ function Main({ regular }) {
 	const [toggle, setToggle] = useState(true);
 	const [computerChoice, setComputerChoice] = useState('');
 	const [response, setResponse] = useState('');
-	const [t, setT] = useState(0);
-	//const ENDPOINT = 'http://127.0.0.1:5000';
-	//const io = socketIOClient(ENDPOINT);
 	window.history.replaceState(null, 'Main', '/');
 	window.addEventListener('popstate', (event) => {
 		location.reload();
@@ -25,13 +22,6 @@ function Main({ regular }) {
 
 	let result;
 	let display = {};
-
-	useEffect(() => {
-		/*   io.on("hello", (arg) => {
-    console.log(arg); // world
-  }); */
-		//setToggle(true);
-	});
 	function referee() {
 		var training = {};
 		function learn(winner, loser) {
@@ -73,7 +63,6 @@ function Main({ regular }) {
 	}
 
 	resultFunction();
-	// console.log('response ' +response)
 
 	const changeToggle = (e) => {
 		setToggle((state) => !state);

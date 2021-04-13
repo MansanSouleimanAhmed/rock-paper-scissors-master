@@ -32719,24 +32719,24 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var navDispear = {
-  display: "none"
+  display: 'none'
 };
 
 function Bonus(props) {
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
-    className: "common-style"
+    className: 'common-style'
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "logo-score"
+    className: 'logo-score'
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "logo"
+    className: 'logo'
   }, /*#__PURE__*/_react.default.createElement("a", {
-    href: "/"
+    href: '/'
   }, /*#__PURE__*/_react.default.createElement(_logoBonus.default, null))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "score"
+    className: 'score'
   })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "bg-pentagone"
+    className: 'bg-pentagone'
   }, /*#__PURE__*/_react.default.createElement(_bgPentagon.default, null), /*#__PURE__*/_react.default.createElement(_rockIcon.default, null), /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, null), /*#__PURE__*/_react.default.createElement(_paperIcon.default, null), /*#__PURE__*/_react.default.createElement(_lizardIcon.default, null), /*#__PURE__*/_react.default.createElement(_spockIcon.default, null))));
-}
+} //Do logic => later for now add a pop up
 },{"react":"../node_modules/react/index.js","./svg/logo-bonus":"components/svg/logo-bonus.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./svg/bg-pentagon":"components/svg/bg-pentagon.js","./butons/paper-icon":"components/butons/paper-icon.js","./butons/scissors-icon":"components/butons/scissors-icon.js","./butons/rock-icon":"components/butons/rock-icon.js","./butons/lizard-icon":"components/butons/lizard-icon.js","./butons/spock-icon":"components/butons/spock-icon.js"}],"components/svg/logo.js":[function(require,module,exports) {
 "use strict";
 
@@ -35530,7 +35530,7 @@ function Regular(props) {
     href: '/'
   }, /*#__PURE__*/_react.default.createElement(_logo.default, null))), /*#__PURE__*/_react.default.createElement("div", {
     className: 'score'
-  }, test)), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("p", null, test))), /*#__PURE__*/_react.default.createElement("div", {
     className: 'bg-triangle',
     style: displayTriangle
   }, /*#__PURE__*/_react.default.createElement(_bgTriangle.default, null), /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
@@ -67521,25 +67521,12 @@ function Main(_ref) {
       response = _useState8[0],
       setResponse = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(0),
-      _useState10 = _slicedToArray(_useState9, 2),
-      t = _useState10[0],
-      setT = _useState10[1]; //const ENDPOINT = 'http://127.0.0.1:5000';
-  //const io = socketIOClient(ENDPOINT);
-
-
   window.history.replaceState(null, 'Main', '/');
   window.addEventListener('popstate', function (event) {
     location.reload();
   });
   var result;
   var display = {};
-  (0, _react.useEffect)(function () {
-    /*   io.on("hello", (arg) => {
-      console.log(arg); // world
-    }); */
-    //setToggle(true);
-  });
 
   function referee() {
     var training = {};
@@ -67589,7 +67576,7 @@ function Main(_ref) {
     }
   }
 
-  resultFunction(); // console.log('response ' +response)
+  resultFunction();
 
   var changeToggle = function changeToggle(e) {
     setToggle(function (state) {
@@ -67786,7 +67773,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44937" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35083" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

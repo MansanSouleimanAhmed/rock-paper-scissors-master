@@ -79,7 +79,9 @@ function Regular(props) {
 							<Logo />
 						</a>
 					</div>
-					<div className={'score'}>{test}</div>
+					<div className={'score'}>
+						<p>{test}</p>
+					</div>
 				</div>
 				<div className={'bg-triangle'} style={displayTriangle}>
 					<BgTriangle />
