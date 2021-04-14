@@ -8,9 +8,10 @@ import RockIcon from './butons/rock-icon';
 import ScissorsIcon from './butons/scissors-icon';
 import PaperIcon from './butons/paper-icon';
 import ResultsRegular from './results-page/results-regular';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ButonRegular from './butons/buton-regular';
 import ModalRegular from './modals/modal-regular';
+import FALSE from '../actions/false';
 function Regular(props) {
 	const [toggleRegular, setToggleRegular] = useState(false);
 	const paper = useRef(null);
@@ -19,8 +20,9 @@ function Regular(props) {
 	let displayResult = {};
 	let displayTriangle = {};
 	let showResult = useSelector((state) => state.score);
-
+	const dispatch = useDispatch();
 	const playAgain = () => {
+		dispatch(FALSE());
 		setToggleRegular((state) => !state);
 	};
 	const computerPlay = () => {

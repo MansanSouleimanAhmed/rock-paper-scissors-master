@@ -62,6 +62,8 @@ function Main({ regular }) {
 			if (regularResult === 1) {
 				dispatch(scoreRegular());
 				dispatch(WIN_DISPLAY());
+			} else if (regularResult === 2) {
+				dispatch(LOOSE_DISPLAY());
 			}
 		}
 	}

@@ -98,16 +98,25 @@ body {
 				transform: translate(-50%, -50%);
 				text-align: center;
 				.paper-icon {
+					&:hover {
+						cursor: pointer;
+					}
 					bottom: 200px;
 					right: 190px;
 				}
 				.rock-icon {
 					top: 157px;
 					left: 90px;
+					&:hover {
+						cursor: pointer;
+					}
 				}
 				.scissors-icon {
 					bottom: 200px;
 					left: 191px;
+					&:hover {
+						cursor: pointer;
+					}
 				}
 			}
 			.regular-result {

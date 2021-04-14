@@ -35429,7 +35429,23 @@ function ModalRegular() {
 
 var _default = ModalRegular;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./style":"components/modals/style.js","../../mimified-img/image-rules.svg":"mimified-img/image-rules.svg","../../mimified-img/icon-close.svg":"mimified-img/icon-close.svg","react-redux":"../node_modules/react-redux/es/index.js","../../actions/modal-regular":"actions/modal-regular.js"}],"components/regular.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./style":"components/modals/style.js","../../mimified-img/image-rules.svg":"mimified-img/image-rules.svg","../../mimified-img/icon-close.svg":"mimified-img/icon-close.svg","react-redux":"../node_modules/react-redux/es/index.js","../../actions/modal-regular":"actions/modal-regular.js"}],"actions/false.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var FALSE = function FALSE() {
+  return {
+    type: 'FALSE'
+  };
+};
+
+var _default = FALSE;
+exports.default = _default;
+},{}],"components/regular.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35463,6 +35479,8 @@ var _butonRegular = _interopRequireDefault(require("./butons/buton-regular"));
 
 var _modalRegular = _interopRequireDefault(require("./modals/modal-regular"));
 
+var _false = _interopRequireDefault(require("../actions/false"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -35495,8 +35513,10 @@ function Regular(props) {
   var showResult = (0, _reactRedux.useSelector)(function (state) {
     return state.score;
   });
+  var dispatch = (0, _reactRedux.useDispatch)();
 
   var playAgain = function playAgain() {
+    dispatch((0, _false.default)());
     setToggleRegular(function (state) {
       return !state;
     });
@@ -35615,7 +35635,7 @@ function Regular(props) {
 
 var _default = Regular;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./svg/logo":"components/svg/logo.js","./svg/bg-triangle":"components/svg/bg-triangle.js","./svg/icon-rock":"components/svg/icon-rock.js","./svg/icon-scissors":"components/svg/icon-scissors.js","./svg/icon-paper":"components/svg/icon-paper.js","./butons/rock-icon":"components/butons/rock-icon.js","./butons/scissors-icon":"components/butons/scissors-icon.js","./butons/paper-icon":"components/butons/paper-icon.js","./results-page/results-regular":"components/results-page/results-regular.js","react-redux":"../node_modules/react-redux/es/index.js","./butons/buton-regular":"components/butons/buton-regular.js","./modals/modal-regular":"components/modals/modal-regular.js"}],"actions/score-regular.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./svg/logo":"components/svg/logo.js","./svg/bg-triangle":"components/svg/bg-triangle.js","./svg/icon-rock":"components/svg/icon-rock.js","./svg/icon-scissors":"components/svg/icon-scissors.js","./svg/icon-paper":"components/svg/icon-paper.js","./butons/rock-icon":"components/butons/rock-icon.js","./butons/scissors-icon":"components/butons/scissors-icon.js","./butons/paper-icon":"components/butons/paper-icon.js","./results-page/results-regular":"components/results-page/results-regular.js","react-redux":"../node_modules/react-redux/es/index.js","./butons/buton-regular":"components/butons/buton-regular.js","./modals/modal-regular":"components/modals/modal-regular.js","../actions/false":"actions/false.js"}],"actions/score-regular.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67660,6 +67680,8 @@ function Main(_ref) {
       if (regularResult === 1) {
         dispatch((0, _scoreRegular.default)());
         dispatch((0, _regularWin.default)());
+      } else if (regularResult === 2) {
+        dispatch((0, _regularLoose.default)());
       }
     }
   }
@@ -67768,7 +67790,10 @@ var winDisplay = function winDisplay() {
 
   switch (action.type) {
     case 'WIN_DISPLAY':
-      return !state;
+      return true;
+
+    case 'FALSE':
+      return false;
 
     default:
       return state;
@@ -67835,7 +67860,10 @@ var looseDiplay = function looseDiplay() {
 
   switch (action.type) {
     case 'LOOSE_DISPLAY':
-      return !state;
+      return true;
+
+    case 'FALSE':
+      return false;
 
     default:
       return state;
@@ -67936,7 +67964,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40003" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39809" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
