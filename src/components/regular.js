@@ -19,6 +19,7 @@ function Regular(props) {
 	let displayResult = {};
 	let displayTriangle = {};
 	let showResult = useSelector((state) => state.score);
+
 	const playAgain = () => {
 		setToggleRegular((state) => !state);
 	};
@@ -101,11 +102,12 @@ function Regular(props) {
 					</div>
 					<div className={'play-again'}>
 						{/* 	<p>{'YOU WIN'}</p>
-						<p>{'YOU LOSE'}</p> 
-	<p onClick={playAgain}>{'Play again'}</p>*/}
+						<p>{'YOU LOSE'}</p> */}
+						<p onClick={playAgain}>{'Play again'}</p>
 					</div>
+					<ButonRegular />
 				</div>
-				<ButonRegular />
+
 				<ModalRegular />
 			</section>
 		</Fragment>

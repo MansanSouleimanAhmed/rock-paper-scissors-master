@@ -9,6 +9,8 @@ import { set } from 'mongoose';
 import ResultsRegular from './results-page/results-regular';
 import socketIOClient from 'socket.io-client';
 import { useDispatch } from 'react-redux';
+import WIN_DISPLAY from '../actions/regular-win';
+import LOOSE_DISPLAY from '../actions/regular-loose';
 
 function Main({ regular }) {
 	const [userChoice, setUserChoice] = useState('');
@@ -53,11 +55,13 @@ function Main({ regular }) {
 	ref.learn('scissors', 'paper');
 	const dispatch = useDispatch();
 	//	console.log(ref.judge(userChoice, computerChoice));
+	const test = useDispatch();
 	function resultFunction() {
 		if (userChoice != '') {
 			let regularResult = ref.judge(userChoice, computerChoice);
 			if (regularResult === 1) {
 				dispatch(scoreRegular());
+				dispatch(WIN_DISPLAY());
 			}
 		}
 	}

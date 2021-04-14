@@ -35608,7 +35608,9 @@ function Regular(props) {
     computerchoice: props.computerchoice
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: 'play-again'
-  })), /*#__PURE__*/_react.default.createElement(_butonRegular.default, null), /*#__PURE__*/_react.default.createElement(_modalRegular.default, null)));
+  }, /*#__PURE__*/_react.default.createElement("p", {
+    onClick: playAgain
+  }, 'Play again')), /*#__PURE__*/_react.default.createElement(_butonRegular.default, null)), /*#__PURE__*/_react.default.createElement(_modalRegular.default, null)));
 }
 
 var _default = Regular;
@@ -67497,7 +67499,39 @@ Object.defineProperty(exports, "Manager", {
     return manager_2.Manager;
   }
 });
-},{"./url":"../node_modules/socket.io-client/build/url.js","./manager":"../node_modules/socket.io-client/build/manager.js","./socket":"../node_modules/socket.io-client/build/socket.js","debug":"../node_modules/socket.io-client/node_modules/debug/src/browser.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js"}],"components/main.js":[function(require,module,exports) {
+},{"./url":"../node_modules/socket.io-client/build/url.js","./manager":"../node_modules/socket.io-client/build/manager.js","./socket":"../node_modules/socket.io-client/build/socket.js","debug":"../node_modules/socket.io-client/node_modules/debug/src/browser.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js"}],"actions/regular-win.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var WIN_DISPLAY = function WIN_DISPLAY() {
+  return {
+    type: 'WIN_DISPLAY'
+  };
+};
+
+var _default = WIN_DISPLAY;
+exports.default = _default;
+},{}],"actions/regular-loose.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var LOOSE_DISPLAY = function LOOSE_DISPLAY() {
+  return {
+    type: 'LOOSE_DISPLAY'
+  };
+};
+
+var _default = LOOSE_DISPLAY;
+exports.default = _default;
+},{}],"components/main.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67526,6 +67560,10 @@ var _resultsRegular = _interopRequireDefault(require("./results-page/results-reg
 var _socket = _interopRequireDefault(require("socket.io-client"));
 
 var _reactRedux = require("react-redux");
+
+var _regularWin = _interopRequireDefault(require("../actions/regular-win"));
+
+var _regularLoose = _interopRequireDefault(require("../actions/regular-loose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67613,12 +67651,15 @@ function Main(_ref) {
   ref.learn('scissors', 'paper');
   var dispatch = (0, _reactRedux.useDispatch)(); //	console.log(ref.judge(userChoice, computerChoice));
 
+  var test = (0, _reactRedux.useDispatch)();
+
   function resultFunction() {
     if (userChoice != '') {
       var regularResult = ref.judge(userChoice, computerChoice);
 
       if (regularResult === 1) {
         dispatch((0, _scoreRegular.default)());
+        dispatch((0, _regularWin.default)());
       }
     }
   }
@@ -67689,7 +67730,7 @@ function Main(_ref) {
 
 var _default = Main;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./bonus":"components/bonus.js","./regular":"components/regular.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./butons/paper-icon":"components/butons/paper-icon.js","./../actions/score-regular":"actions/score-regular.js","axios":"../node_modules/axios/index.js","mongoose":"../node_modules/mongoose/dist/browser.umd.js","./results-page/results-regular":"components/results-page/results-regular.js","socket.io-client":"../node_modules/socket.io-client/build/index.js","react-redux":"../node_modules/react-redux/es/index.js"}],"app.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./bonus":"components/bonus.js","./regular":"components/regular.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./butons/paper-icon":"components/butons/paper-icon.js","./../actions/score-regular":"actions/score-regular.js","axios":"../node_modules/axios/index.js","mongoose":"../node_modules/mongoose/dist/browser.umd.js","./results-page/results-regular":"components/results-page/results-regular.js","socket.io-client":"../node_modules/socket.io-client/build/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/regular-win":"actions/regular-win.js","../actions/regular-loose":"actions/regular-loose.js"}],"app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67713,13 +67754,13 @@ function App() {
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./components/main":"components/main.js"}],"reducers/regular-display.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/main":"components/main.js"}],"reducers/win-regular.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.loseDisplay = exports.winDisplay = void 0;
+exports.winDisplay = void 0;
 
 var winDisplay = function winDisplay() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
@@ -67735,21 +67776,6 @@ var winDisplay = function winDisplay() {
 };
 
 exports.winDisplay = winDisplay;
-
-var loseDisplay = function loseDisplay() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case 'LOSE_DISPLAY':
-      return !state;
-
-    default:
-      return state;
-  }
-};
-
-exports.loseDisplay = loseDisplay;
 },{}],"reducers/modal-regular.js":[function(require,module,exports) {
 "use strict";
 
@@ -67795,6 +67821,28 @@ var scoreRegular = function scoreRegular() {
 
 var _default = scoreRegular;
 exports.default = _default;
+},{}],"reducers/loose-regular.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.looseDiplay = void 0;
+
+var looseDiplay = function looseDiplay() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'LOOSE_DISPLAY':
+      return !state;
+
+    default:
+      return state;
+  }
+};
+
+exports.looseDiplay = looseDiplay;
 },{}],"reducers/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -67805,23 +67853,25 @@ exports.default = void 0;
 
 var _redux = require("redux");
 
-var _regularDisplay = require("./regular-display");
+var _winRegular = require("./win-regular");
 
 var _modalRegular = require("./modal-regular");
 
 var _scoreRegular = _interopRequireDefault(require("./score-regular"));
 
+var _looseRegular = require("./loose-regular");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var allReducers = (0, _redux.combineReducers)({
   score: _scoreRegular.default,
-  regularWinDisplay: _regularDisplay.winDisplay,
-  regularLoseDisplay: _regularDisplay.loseDisplay,
+  regularWinDisplay: _winRegular.winDisplay,
+  regularLooseDisplay: _looseRegular.looseDiplay,
   regularModal: _modalRegular.regularModal
 });
 var _default = allReducers;
 exports.default = _default;
-},{"redux":"../node_modules/redux/es/redux.js","./regular-display":"reducers/regular-display.js","./modal-regular":"reducers/modal-regular.js","./score-regular":"reducers/score-regular.js"}],"index.js":[function(require,module,exports) {
+},{"redux":"../node_modules/redux/es/redux.js","./win-regular":"reducers/win-regular.js","./modal-regular":"reducers/modal-regular.js","./score-regular":"reducers/score-regular.js","./loose-regular":"reducers/loose-regular.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67886,7 +67936,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41767" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41511" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

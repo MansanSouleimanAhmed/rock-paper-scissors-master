@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 
-import { loseDisplay, winDisplay } from './regular-display';
+import { winDisplay } from './win-regular';
 import { regularModal } from './modal-regular';
 import scoreRegular from './score-regular';
+import { looseDiplay } from './loose-regular';
 const allReducers = combineReducers({
 	score: scoreRegular,
 	regularWinDisplay: winDisplay,
-	regularLoseDisplay: loseDisplay,
+	regularLooseDisplay: looseDiplay,
 	regularModal: regularModal,
 });
 export default allReducers;
