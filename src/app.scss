@@ -158,6 +158,9 @@ body {
 				.play-again {
 					display: inline-block;
 					text-align: center;
+					&:hover {
+						cursor: pointer;
+					}
 					p {
 						height: 40px;
 						width: 70px;
@@ -175,7 +178,9 @@ body {
 					transform: 'translateX(-31%)';
 					border: solid 3px rgba(253, 253, 253, 0.3);
 					border-radius: 10px;
-
+					&:hover {
+						cursor: pointer;
+					}
 					p {
 						text-align: center;
 						margin: 0px;
