@@ -251,7 +251,7 @@ body {
 	}
 }
 
-@media only screen and (min-width: 400px) and (max-width: 767px) {
+@media only screen and (min-width: 400px) and (max-width: 711px) {
 	/* body {
 	
 	} */
@@ -264,6 +264,9 @@ body {
 					left: 20%;
 					transform: 'translate(-40%)';
 					width: 300px;
+				}
+				.buton-regular {
+					left: 70%;
 				}
 			}
 		}
@@ -283,6 +286,9 @@ body {
 						.loose-background-div {
 							left: 320px;
 						}
+					}
+					.buton-regular {
+						left: 70%;
 					}
 				}
 			}
