@@ -32817,64 +32817,7 @@ function BgTriangle() {
     opacity: ".2"
   })));
 }
-},{"react":"../node_modules/react/index.js"}],"components/results-page/results-regular.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = ResultsRegular;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _rockIcon = _interopRequireDefault(require("../butons/rock-icon"));
-
-var _paperIcon = _interopRequireDefault(require("../butons/paper-icon"));
-
-var _scissorsIcon = _interopRequireDefault(require("../butons/scissors-icon"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ResultsRegular(props) {
-  var paper;
-  var rock;
-  var scissors;
-
-  var returnPaper = function returnPaper() {
-    if (props.computerchoice === 'paper') {
-      return paper = /*#__PURE__*/_react.default.createElement(_paperIcon.default, null);
-    } else if (props.computerchoice != 'paper') {
-      return paper = null;
-    }
-  };
-
-  var returnRock = function returnRock() {
-    if (props.computerchoice === 'rock') {
-      return rock = /*#__PURE__*/_react.default.createElement(_rockIcon.default, null);
-    } else if (props.computerchoice != 'paper') {
-      return rock = null;
-    }
-  };
-
-  var returnScissors = function returnScissors() {
-    if (props.computerchoice === 'scissors') {
-      return scissors = /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, null);
-    } else if (props.computerchoice != 'scissors') {
-      return scissors = null;
-    }
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: 'loose-background-div loose-win-same'
-  }), /*#__PURE__*/_react.default.createElement("div", {
-    className: 'computer-choice'
-  }, returnPaper(), returnRock(), returnScissors()));
-}
-},{"react":"../node_modules/react/index.js","../butons/rock-icon":"components/butons/rock-icon.js","../butons/paper-icon":"components/butons/paper-icon.js","../butons/scissors-icon":"components/butons/scissors-icon.js"}],"../node_modules/react-redux/es/components/Context.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../node_modules/react-redux/es/components/Context.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35246,7 +35189,85 @@ var _shallowEqual = _interopRequireDefault(require("./utils/shallowEqual"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _batch.setBatch)(_reactBatchedUpdates.unstable_batchedUpdates);
-},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"../node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"../node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"../node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"../node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"../node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"../node_modules/react-redux/es/utils/shallowEqual.js"}],"actions/modal-regular.js":[function(require,module,exports) {
+},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"../node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"../node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"../node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"../node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"../node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"../node_modules/react-redux/es/utils/shallowEqual.js"}],"components/results-page/results-regular.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = ResultsRegular;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _rockIcon = _interopRequireDefault(require("../butons/rock-icon"));
+
+var _paperIcon = _interopRequireDefault(require("../butons/paper-icon"));
+
+var _scissorsIcon = _interopRequireDefault(require("../butons/scissors-icon"));
+
+var _reactRedux = require("react-redux");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function ResultsRegular(props) {
+  var paper;
+  var rock;
+  var scissors;
+
+  var returnPaper = function returnPaper() {
+    if (props.computerchoice === 'paper') {
+      return paper = /*#__PURE__*/_react.default.createElement(_paperIcon.default, null);
+    } else if (props.computerchoice != 'paper') {
+      return paper = null;
+    }
+  };
+
+  var returnRock = function returnRock() {
+    if (props.computerchoice === 'rock') {
+      return rock = /*#__PURE__*/_react.default.createElement(_rockIcon.default, null);
+    } else if (props.computerchoice != 'paper') {
+      return rock = null;
+    }
+  };
+
+  var returnScissors = function returnScissors() {
+    if (props.computerchoice === 'scissors') {
+      return scissors = /*#__PURE__*/_react.default.createElement(_scissorsIcon.default, null);
+    } else if (props.computerchoice != 'scissors') {
+      return scissors = null;
+    }
+  };
+
+  var style = {};
+  var regularLooseDisplay = (0, _reactRedux.useSelector)(function (state) {
+    return state.regularLooseDisplay;
+  });
+
+  var styleFunction = function styleFunction() {
+    if (regularLooseDisplay == true) {
+      return style = {
+        display: 'block'
+      };
+    } else {
+      return style = {
+        display: 'none'
+      };
+    }
+  };
+
+  styleFunction();
+  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
+    style: style,
+    className: 'loose-background-div loose-win-same'
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    className: 'computer-choice'
+  }, returnPaper(), returnRock(), returnScissors()));
+}
+},{"react":"../node_modules/react/index.js","../butons/rock-icon":"components/butons/rock-icon.js","../butons/paper-icon":"components/butons/paper-icon.js","../butons/scissors-icon":"components/butons/scissors-icon.js","react-redux":"../node_modules/react-redux/es/index.js"}],"actions/modal-regular.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35587,6 +35608,24 @@ function Regular(props) {
   };
 
   resultFunction();
+  var style = {};
+  var regularWinDisplay = (0, _reactRedux.useSelector)(function (state) {
+    return state.regularWinDisplay;
+  });
+
+  var styleFunction = function styleFunction() {
+    if (regularWinDisplay == true) {
+      return style = {
+        display: 'block'
+      };
+    } else {
+      return style = {
+        display: 'none'
+      };
+    }
+  };
+
+  styleFunction();
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement("section", {
     className: 'common-style'
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -35617,7 +35656,8 @@ function Regular(props) {
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: 'user-choice'
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: 'win-background-div loose-win-same'
+    className: 'win-background-div loose-win-same',
+    style: style
   }), /*#__PURE__*/_react.default.createElement(_paperIcon.default, {
     ref: paper
   }), /*#__PURE__*/_react.default.createElement(_rockIcon.default, {
@@ -67964,7 +68004,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37649" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

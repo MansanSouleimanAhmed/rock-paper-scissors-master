@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import RockIcon from '../butons/rock-icon';
 import PaperIcon from '../butons/paper-icon';
 import ScissorsIcon from '../butons/scissors-icon';
+import { useSelector } from 'react-redux';
 
 export default function ResultsRegular(props) {
 	let paper;
@@ -28,9 +29,20 @@ export default function ResultsRegular(props) {
 			return (scissors = null);
 		}
 	};
+	let style = {};
+	let regularLooseDisplay = useSelector((state) => state.regularLooseDisplay);
+	let styleFunction = () => {
+		if (regularLooseDisplay == true) {
+			return (style = { display: 'block' });
+		} else {
+			return (style = { display: 'none' });
+		}
+	};
+
+	styleFunction();
 	return (
 		<Fragment>
-			<div className={'loose-background-div loose-win-same'} />
+			<div style={style} className={'loose-background-div loose-win-same'} />
 			<div className={'computer-choice'}>
 				{returnPaper()}
 				{returnRock()}

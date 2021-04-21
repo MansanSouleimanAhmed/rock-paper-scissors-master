@@ -72,7 +72,16 @@ function Regular(props) {
 	};
 
 	resultFunction();
-
+	let style = {};
+	let regularWinDisplay = useSelector((state) => state.regularWinDisplay);
+	let styleFunction = () => {
+		if (regularWinDisplay == true) {
+			return (style = { display: 'block' });
+		} else {
+			return (style = { display: 'none' });
+		}
+	};
+	styleFunction();
 	return (
 		<Fragment>
 			<section className={'common-style'}>
@@ -95,7 +104,7 @@ function Regular(props) {
 				<div className={'regular-result'} style={displayResult}>
 					<div className={'container-icons'}>
 						<div className={'user-choice'}>
-							<div className={'win-background-div loose-win-same'} />
+							<div className={'win-background-div loose-win-same'} style={style} />
 							<PaperIcon ref={paper} />
 							<RockIcon ref={rock} />
 							<ScissorsIcon ref={scissors} />
